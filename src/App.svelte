@@ -33,7 +33,7 @@
 </script>
 
 <main>
-  <div bind:this={canvas} on:click={(e) => { canvasInstance.saveCanvas(); }}></div>
+  <div bind:this={canvas} on:click={(e) => { canvasInstance.saveCanvas("image", "png"); }}></div>
 
   <div>
     <a href="https://vitejs.dev" target="_blank" rel="noreferrer">

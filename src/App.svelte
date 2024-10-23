@@ -5,11 +5,17 @@
     import   p5        from "p5";
     import { onMount } from "svelte";
 
+    import * as Beauty from "@deepar/beauty"
+    import * as deepar from "deepar";
+
+    const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
+    const DPR = window.devicePixelRatio || 1;
+
     const p5Logic = (p: p5) => {
         p.setup = () => {
-            p.createCanvas(500, 500, "webgl");
+            p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR), p.WEBGL);
             p.background(220);
-            p.imageMode("center");
+            p.imageMode(p.CENTER);
             p.frameRate(fps);
         };
 
@@ -27,8 +33,8 @@
         let     filterShader = (canvasInstance as any)
          .createFilterShader                         (imageFragmentShaderSourceCode);
         let imageRatio = 0.5;
-        canvasInstance.resizeCanvas(imageD.width * imageRatio, imageD.height * imageRatio);
-        imageD        .resize      (imageD.width * imageRatio, imageD.height * imageRatio);
+        canvasInstance.resizeCanvas(imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
+        imageD        .resize      (imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
         canvasInstance.       image(imageD, 0, 0);
         canvasInstance.filter(filterShader);
     };
@@ -50,7 +56,7 @@
             let startRecord: boolean = true;
             let ceaseRecord: boolean = false;
             console.log("Assign");
-            canvasInstance.resizeCanvas(500, 500);
+            canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR));
             canvasInstance.draw = () => {
                 if (startRecord /*&& !isNaN(video.duration())*/) {
                     startRecord = false;
@@ -67,7 +73,7 @@
                     downloadStream = cvv.captureStream(fps);
                     downloadStream.addTrack(aStream.getAudioTracks()[0])
                     const recordedChunks: BlobPart[] = [];
-                    const options = {mimeType: "video/webm; codecs=vp9",};
+                    const options = {mimeType: "video/mp4; codecs=avc1",};
                     mediaRecorder = new MediaRecorder(
                         downloadStream,
                         options,
@@ -91,7 +97,7 @@
                             document.body.appendChild(anchor);
                             // a.style = "display: none";
                             anchor.href = url;
-                            anchor.download = "test.webm";
+                            anchor.download = `test_video_${new Date().toLocaleString()}.mp4`;
                             anchor.click();
                             window.URL.revokeObjectURL(url);
                             //
@@ -203,6 +209,26 @@
             gl_FragColor = texture2D(tex0, warpedCoord);
         }
     `;
+
+// video/webm; codecs=vp9
+// video/mp4; codecs=avc1
+// video/mp4; codecs=hev1
+// video/mp4; codecs=hvc1
+// video/mp4; codecs=mp4v
+
+// image/png;
+// image/jpeg;
+// image/webp;
+// image/jpg;
+
+// DeepAR SDK
+// DeepAR Beauty
+
+    const shaderSetNecessaryUniforms = (shader: any) => {
+        shader.setUniform("time", canvasInstance.millis());
+        shader.setUniform("canvasSize", [canvasInstance.width, canvasInstance.height]);
+        shader.setUniform("texelSize", [1.0/(canvasInstance.width * canvasInstance.pixelDensity()), 1.0/(canvasInstance.height * canvasInstance.pixelDensity())]);
+    }
 </script>
 
 <main>

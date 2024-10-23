@@ -19,12 +19,15 @@
             p.frameRate(fps);
         };
 
-        p.draw = () => {};
+        p.draw = () => {
+            p.background(255);
+        };
     };
     let canvas: HTMLElement;
     let canvasInstance: p5;
     
     onMount(() => {
+        console.log("on mount");
         canvasInstance = new p5(p5Logic, canvas);
     });
 
@@ -42,7 +45,8 @@
     const failureCallback = (eventD:    Event): void => {
         if (canvas.children.length === 2)
     {
-        canvas.children[1].remove()
+        // canvas.children[1].remove()
+        if (video) video.remove(); // the same as the above line of code
     }
         if (input.files !== null) {
             if (videoFileBLOB !== null)
@@ -69,6 +73,7 @@
                     let aStream  = destination.stream;
                     let soucreNode = audioContext.createMediaElementSource(vid)
                     soucreNode.connect(destination);
+                    soucreNode.connect(audioContext.destination);
 
                     downloadStream = cvv.captureStream(fps);
                     downloadStream.addTrack(aStream.getAudioTracks()[0])
@@ -98,8 +103,10 @@
                             // a.style = "display: none";
                             anchor.href = url;
                             anchor.download = `test_video_${new Date().toLocaleString()}.mp4`;
+                            anchor.download = `test_video_${new Date().toLocaleString()}.webm`;
                             anchor.click();
                             window.URL.revokeObjectURL(url);
+                            anchor.remove();
                             //
                         }
                     };
@@ -136,6 +143,7 @@
                     console.log("STOP");
                     video.stop();
                     mediaRecorder.stop();
+                    mediaRecorder = null!;
                 }
             };
         }
@@ -162,9 +170,11 @@
 
     let fps: number = 120;
     let downloadStream: MediaStream = null!;
+    let downloadStreamWebCam: MediaStream = null!;
     let    videoStream: MediaStream = null!;
     let    audioStream: MediaStream = null!;
     let  mediaRecorder: MediaRecorder = null!;
+    let  mediaRecorderWebCam: MediaRecorder = null!;
     let  videoFileBLOB: string = null!;
     let  imageFileBLOB: string = null!;
     let video: p5.MediaElement = null!;
@@ -229,6 +239,77 @@
         shader.setUniform("canvasSize", [canvasInstance.width, canvasInstance.height]);
         shader.setUniform("texelSize", [1.0/(canvasInstance.width * canvasInstance.pixelDensity()), 1.0/(canvasInstance.height * canvasInstance.pixelDensity())]);
     }
+        let webcamCapture: p5.Element;
+    const startWebCam = (e: MouseEvent & {
+    currentTarget: EventTarget & HTMLButtonElement;}) => {
+        webcamCapture = canvasInstance.createCapture({
+            video: {
+             mandatory: {
+                 minWidth: 500,
+                 minHeight: 500
+            },
+            optional: [{ maxFrameRate: 120 }]
+        },
+            audio: true,
+        });
+        canvasInstance.resizeCanvas(500, 500);
+        webcamCapture.size(canvasInstance.width, canvasInstance.height);
+        webcamCapture.hide();
+
+        //
+        let cvv = canvas.children[0] as HTMLCanvasElement;
+        downloadStreamWebCam = cvv.captureStream(fps);
+        const recordedChunks: BlobPart[] = [];
+        const options = {mimeType: "video/webm; codecs=vp9",};
+        mediaRecorderWebCam = new MediaRecorder(downloadStreamWebCam, options);
+        mediaRecorderWebCam.ondataavailable = (ev) => {
+                        console.log("data available")
+                        if (ev.data.size > 0) {
+                            recordedChunks.push(ev.data);
+                            //
+                            const blob = new Blob(
+                                recordedChunks,
+                                {
+                                    type: "video/webm",
+                                },
+                            );
+                            const url =
+                                URL.createObjectURL(blob);
+                            const anchor:HTMLAnchorElement = document.createElement(
+                                "a",
+                            ) as HTMLAnchorElement;
+                            document.body.appendChild(anchor);
+                            // a.style = "display: none";
+                            anchor.href = url;
+                            anchor.download = `test_webcam_${new Date().toLocaleString()}.webm`;
+                            anchor.click();
+                            window.URL.revokeObjectURL(url);
+                            anchor.remove();
+                            //
+                        }
+                    };
+
+        mediaRecorderWebCam.start();
+        let filterShaderWebCam = (canvasInstance as any).createFilterShader(imageFragmentShaderSourceCode);
+        //
+
+
+        canvasInstance.draw = () => {
+            canvasInstance.image(webcamCapture, 0, 0);
+            canvasInstance.filter(filterShaderWebCam);
+        };
+    }
+
+    const stop_WebCam = (e: MouseEvent & {
+    currentTarget: EventTarget & HTMLButtonElement;}) => {
+        mediaRecorderWebCam.stop();
+        mediaRecorderWebCam = null!;
+        webcamCapture.remove();
+        webcamCapture = null!;
+        canvasInstance.draw = () => {
+            canvasInstance.background(255);
+        }
+    }
 </script>
 
 <main>
@@ -241,9 +322,11 @@
         />
         <button>LOAD IMAGE OR VIDEO</button>
     </form>
-    <div bind:this={canvas}></div>
-    <button on:click={(e) => { canvasInstance.saveCanvas("image", "png"); }}>SAVE IMAGE</button>
+    <div bind:this={canvas} on:change={()=>{console.log("change")}}></div>
+    <button on:click={(e) => { canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, "png"); }}>SAVE IMAGE</button>
     <button on:click={(e) => { mediaRecorder.stop(); }}>SAVE VIDEO</button>
+    <button on:click={startWebCam}>START WEB CAM</button>
+    <button on:click={stop_WebCam}>STOP@ WEB CAM</button>
 </main>
 
 <style>

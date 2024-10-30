@@ -1,10 +1,15 @@
+<!-- svelte-ignore a11y-label-has-associated-control -->
+
 <script lang="ts">
-    import "beercss";
+
+
+    import          "beercss"       ;
     import "material-dynamic-colors";
 
     import   p5        from "p5";
     import { onMount } from "svelte";
 
+    console.log(import.meta.env.VITE_KEY001);
     import * as Beauty from "@deepar/beauty"
     import * as deepar from "deepar";
 
@@ -12,24 +17,26 @@
     const DPR = window.devicePixelRatio || 1;
 
     const p5Logic = (p: p5) => {
-        p.setup = () => {
+          p.setup = (     ) => {
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR), p.WEBGL);
-            p.background(220);
+            p.background( 255 );
             p.imageMode(p.CENTER);
-            p.frameRate(fps);
+            p.frameRate(  fps   );
         };
 
         p.draw = () => {
-            p.background(255);
+            p.background( 255 );
         };
     };
-    let canvas: HTMLElement;
-    let canvasInstance: p5;
+
+    let canvas        : HTMLElement;
+    let canvasInstance:          p5;
     
-    onMount(() => {
-        console.log("on mount");
+    onMount(async ()  : Promise<void> => {
+    console.log("on mount");
         canvasInstance = new p5(p5Logic, canvas);
     });
+
 
     const successCallback = (imageD: p5.Image): void => {
         canvasInstance.draw  = () => {};
@@ -42,20 +49,19 @@
         canvasInstance.filter(filterShader);
     };
 
+
     const failureCallback = (eventD:    Event): void => {
-        if (canvas.children.length === 2)
-    {
-        // canvas.children[1].remove()
-        if (video) video.remove(); // the same as the above line of code
-    }
+        if (canvas.children   .length === 2) {
+//          canvas.children[1].remove();
+        if (video) {video.remove();} // the same as the above line of code
+        }
         if (input.files !== null) {
-            if (videoFileBLOB !== null)
-            { window.URL.revokeObjectURL(videoFileBLOB);}
-            videoFileBLOB = window.URL.createObjectURL(input.files[0]);
+            if (videoFileBLOB !== null) { window.URL.revokeObjectURL( videoFileBLOB); }
+                videoFileBLOB  =          window.URL.createObjectURL(input.files[0]);
             video = canvasInstance.createVideo(videoFileBLOB);
-            video.volume(1.0);
-            video.hide();
-            // video.loop();
+            video .volume(1.0);
+            video .hide  (   );
+//          video .loop  (   );
             let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
             let startRecord: boolean = true;
             let ceaseRecord: boolean = false;
@@ -65,33 +71,38 @@
                 if (startRecord /*&& !isNaN(video.duration())*/) {
                     startRecord = false;
                     console.log("START");
-                    let cvv = canvas.children[0] as HTMLCanvasElement;
-
-                    let vid = canvas.children[1] as HTMLVideoElement;
-                    let audioContext = new AudioContext()
-                    let destination = audioContext.createMediaStreamDestination();
-                    let aStream  = destination.stream;
-                    let soucreNode = audioContext.createMediaElementSource(vid)
-                    soucreNode.connect(destination);
-                    soucreNode.connect(audioContext.destination);
-
-                    downloadStream = cvv.captureStream(fps);
-                    downloadStream.addTrack(aStream.getAudioTracks()[0])
+                    let canvasElement = canvas.children[0]  as
+                    HTMLCanvasElement;
+                    let  videoElement = canvas.children[1]  as  HTMLVideoElement  ;
+                    let  audioContext =                         new AudioContext();
+                    let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
+                    let mediaStreamAudioDestination    : MediaStream                     =
+                        mediaStreamAudioDestinationNode.stream;
+                    let mediaElementAudioSourceNode:
+                        MediaElementAudioSourceNode
+                                                   =        audioContext.createMediaElementSource(videoElement);
+                        mediaElementAudioSourceNode.connect(
+                        mediaStreamAudioDestinationNode    );
+                        mediaElementAudioSourceNode.connect(audioContext.destination                          );
+                    downloadStream  = canvasElement.captureStream(fps);
+                    downloadStream  . addTrack                         (
+                        mediaStreamAudioDestination.getAudioTracks()[0]);
                     const recordedChunks: BlobPart[] = [];
-                    const options = {mimeType: "video/mp4; codecs=avc1",};
-                    mediaRecorder = new MediaRecorder(
-                        downloadStream,
-                        options,
-                    );
-                    mediaRecorder.ondataavailable = (ev) => {
-                        console.log("data available")
-                        if (ev.data.size > 0) {
-                            recordedChunks.push(ev.data);
+                    const options = { mimeType: videoFormats                      [
+                                                videoFormatSelection.selectedIndex]
+                                    . mimeType
+                                    };
+                    mediaRecorder =                                                new MediaRecorder( downloadStream , options , );
+                    mediaRecorder.     ondataavailable = (BLOBEvent: BlobEvent) => {
+                          console.log("vidataavailable");
+                        if (BLOBEvent.data.size > 0) {
+                            recordedChunks.push(BLOBEvent.data);
                             //
                             const blob = new Blob(
-                                recordedChunks,
+                            recordedChunks,
                                 {
-                                    type: "video/webm",
+                                    type: videoFormats[
+                                          videoFormatSelection.selectedIndex].blobType,
                                 },
                             );
                             const url =
@@ -102,8 +113,8 @@
                             document.body.appendChild(anchor);
                             // a.style = "display: none";
                             anchor.href = url;
-                            anchor.download = `test_video_${new Date().toLocaleString()}.mp4`;
-                            anchor.download = `test_video_${new Date().toLocaleString()}.webm`;
+                            anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+                            // anchor.download = `test_video_${new Date().toLocaleString()}.webm`;
                             anchor.click();
                             window.URL.revokeObjectURL(url);
                             anchor.remove();
@@ -114,10 +125,10 @@
                     video.play();
                 }
                 
-                // canvasInstance.background(255);
+//              canvasInstance.background(255);
                 canvasInstance.push();
                 canvasInstance.imageMode(canvasInstance.CENTER);
-                canvasInstance.image(
+                canvasInstance.image    (
                     video,
                     0,
                     0,
@@ -132,21 +143,19 @@
                 canvasInstance.pop();
                 canvasInstance.filter(warp);
                 
-                if (!ceaseRecord) {
+                if (!ceaseRecord)                       {
                 }
-                if (
-                    !ceaseRecord &&
-                    !isNaN(video.duration()) &&
-                    video.time() === video.duration()
-                ) {
-                    ceaseRecord = true;
-                    console.log("STOP");
-                    video.stop();
+                if (!ceaseRecord
+                &&  !isNaN           (video.duration())
+                &&   video.time() === video.duration()) {
+                     ceaseRecord = true;
+                   console.log ( "STOP" );
+                            video.stop();
                     mediaRecorder.stop();
                     mediaRecorder = null!;
-                }
+                };
             };
-        }
+        };
     };
 
 
@@ -158,6 +167,7 @@
                 canvasInstance.loadImage(reader.result  ,
                                         successCallback ,
                                         failureCallback);
+                                        // console.log(reader.result)
             }
         });
         let file                  ;
@@ -169,11 +179,11 @@
     };
 
     let fps: number = 120;
-    let downloadStream: MediaStream = null!;
+    let downloadStream      : MediaStream = null!;
     let downloadStreamWebCam: MediaStream = null!;
     let    videoStream: MediaStream = null!;
     let    audioStream: MediaStream = null!;
-    let  mediaRecorder: MediaRecorder = null!;
+    let  mediaRecorder      : MediaRecorder = null!;
     let  mediaRecorderWebCam: MediaRecorder = null!;
     let  videoFileBLOB: string = null!;
     let  imageFileBLOB: string = null!;
@@ -220,6 +230,22 @@
         }
     `;
 
+    
+    const videoFormats = [
+        { mimeType: "video/webm; codecs=vp9", extension: "webm", blobType: "video/webm", },
+        { mimeType: "video/mp4; codecs=avc1", extension: "mp4" , blobType: "video/mp4" , },
+        { mimeType: "video/mp4; codecs=hev1", extension: "mp4" , blobType: "video/mp4" , },
+        { mimeType: "video/mp4; codecs=hvc1", extension: "mp4" , blobType: "video/mp4" , },
+        { mimeType: "video/mp4; codecs=mp4v", extension: "mp4" , blobType: "video/mp4" , },
+    ] as const;
+    const imageFormats = [
+        { extension: "png" , blobType: "image/png" , },
+        { extension: "jpeg", blobType: "image/jpeg", },
+        { extension: "webp", blobType: "image/webp", },
+        { extension: "jpg" , blobType: "image/jpg" , },
+    ] as const;
+    type VideoFormat = typeof videoFormats[number];
+    type ImageFormat = typeof imageFormats[number];
 // video/webm; codecs=vp9
 // video/mp4; codecs=avc1
 // video/mp4; codecs=hev1
@@ -235,13 +261,13 @@
 // DeepAR Beauty
 
     const shaderSetNecessaryUniforms = (shader: any) => {
-        shader.setUniform("time", canvasInstance.millis());
-        shader.setUniform("canvasSize", [canvasInstance.width, canvasInstance.height]);
-        shader.setUniform("texelSize", [1.0/(canvasInstance.width * canvasInstance.pixelDensity()), 1.0/(canvasInstance.height * canvasInstance.pixelDensity())]);
+        shader.setUniform("time"                     ,         canvasInstance.millis()                                                                                               );
+        shader.setUniform(     "canvasSize"          , [       canvasInstance.width                                  ,        canvasInstance.height                                 ]);
+        shader.setUniform(                "texelSize", [1.0 / (canvasInstance.width * canvasInstance.pixelDensity()) , 1.0 / (canvasInstance.height * canvasInstance.pixelDensity())]);
     }
-        let webcamCapture: p5.Element;
-    const startWebCam = (e: MouseEvent & {
-    currentTarget: EventTarget & HTMLButtonElement;}) => {
+
+        
+    const startWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
         webcamCapture = canvasInstance.createCapture({
             video: {
              mandatory: {
@@ -252,64 +278,69 @@
         },
             audio: true,
         });
-        canvasInstance.resizeCanvas(500, 500);
-        webcamCapture.size(canvasInstance.width, canvasInstance.height);
-        webcamCapture.hide();
+        canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH, DEFAULT_CANVAS_SIZE.HEIGHT);
+        webcamCapture .size(canvasInstance.width, canvasInstance.height);
+        webcamCapture .hide(                                           );
 
-        //
-        let cvv = canvas.children[0] as HTMLCanvasElement;
-        downloadStreamWebCam = cvv.captureStream(fps);
+        let                    cve = canvas.children[0] as HTMLCanvasElement;
+        downloadStreamWebCam = cve.captureStream(fps);
         const recordedChunks: BlobPart[] = [];
-        const options = {mimeType: "video/webm; codecs=vp9",};
+        const options = { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType, };
         mediaRecorderWebCam = new MediaRecorder(downloadStreamWebCam, options);
-        mediaRecorderWebCam.ondataavailable = (ev) => {
-                        console.log("data available")
-                        if (ev.data.size > 0) {
-                            recordedChunks.push(ev.data);
-                            //
-                            const blob = new Blob(
-                                recordedChunks,
-                                {
-                                    type: "video/webm",
-                                },
-                            );
-                            const url =
-                                URL.createObjectURL(blob);
-                            const anchor:HTMLAnchorElement = document.createElement(
-                                "a",
-                            ) as HTMLAnchorElement;
-                            document.body.appendChild(anchor);
-                            // a.style = "display: none";
-                            anchor.href = url;
-                            anchor.download = `test_webcam_${new Date().toLocaleString()}.webm`;
-                            anchor.click();
-                            window.URL.revokeObjectURL(url);
-                            anchor.remove();
-                            //
-                        }
-                    };
+        mediaRecorderWebCam.ondataavailable = async(BLOBEvent:BlobEvent): Promise<void> => {
+            console.log("wcdataavailable");
+            if (BLOBEvent.data.size > 0) {
+                recordedChunks.push(BLOBEvent.data);
+                const blob = new Blob(
+                    recordedChunks,
+                    {
+                        type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+                    },
+                );
+                const url =URL.createObjectURL(blob);
+                const anchor:HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
+                document.body.appendChild(anchor);
+                anchor.href     =          url ;
+                anchor.download = `test_webcam_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+                anchor. click();
+                window.URL.revokeObjectURL(url);
+                anchor.remove();
+            };
+        };
 
         mediaRecorderWebCam.start();
         let filterShaderWebCam = (canvasInstance as any).createFilterShader(imageFragmentShaderSourceCode);
-        //
 
 
         canvasInstance.draw = () => {
-            canvasInstance.image(webcamCapture, 0, 0);
-            canvasInstance.filter(filterShaderWebCam);
+        canvasInstance. image(            webcamCapture, 0, 0);
+        canvasInstance.filter(filterShaderWebCam             );
         };
-    }
+    };
 
-    const stop_WebCam = (e: MouseEvent & {
-    currentTarget: EventTarget & HTMLButtonElement;}) => {
-        mediaRecorderWebCam.stop();
+    const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
+        mediaRecorderWebCam .   stop();
         mediaRecorderWebCam = null!;
-        webcamCapture.remove();
-        webcamCapture = null!;
+        webcamCapture       . remove();
+        webcamCapture       = null!;
         canvasInstance.draw = () => {
-            canvasInstance.background(255);
-        }
-    }
+        canvasInstance.background(255);
+        };
+    };
+
+    let webcamCapture: p5.Element;
+    let imageFormatSelection: HTMLSelectElement;
+    let videoFormatSelection: HTMLSelectElement;
+
+    let anch: HTMLAnchorElement;
+
+    const y = ()=> {
+    let canvasElement = canvas.children[0] as HTMLCanvasElement;
+    canvasElement.toBlob(b => {
+        anch.href=URL.createObjectURL(b as Blob)
+    });
+    // console.log(anch.href);
+}
 </script>
 
 <main>
@@ -323,14 +354,42 @@
         <button>LOAD IMAGE OR VIDEO</button>
     </form>
     <div bind:this={canvas} on:change={()=>{console.log("change")}}></div>
-    <button on:click={(e) => { canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, "png"); }}>SAVE IMAGE</button>
-    <button on:click={(e) => { mediaRecorder.stop(); }}>SAVE VIDEO</button>
+    <button on:click={async (e) => { canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension); }}>SAVE IMAGE</button>
+    <button on:click={async (e) => { mediaRecorder.stop(); }}>SAVE VIDEO</button>
     <button on:click={startWebCam}>START WEB CAM</button>
-    <button on:click={stop_WebCam}>STOP@ WEB CAM</button>
+    <button on:click={ceaseWebCam}>STOP@ WEB CAM</button>
+
+    <div class="field label suffix round border">
+        <select bind:this={imageFormatSelection}>
+          {#each imageFormats as imageFormat (imageFormat)}
+            <option>{imageFormat.extension}</option>
+          {/each}
+        </select>
+        <label>Image Format</label>
+        <i>arrow_drop_down</i>
+    </div>
+
+    <div class="field label suffix round border">
+        <select bind:this={videoFormatSelection}>
+          {#each videoFormats as videoFormat (videoFormat)}
+            <option>{videoFormat.mimeType}</option>            
+          {/each}
+        </select>
+        <label>Video Format</label>
+        <i>arrow_drop_down</i>
+    </div>
+
+<a bind:this={anch}>download</a>
+<button on:click={y}>noise</button>
+
 </main>
 
 <style>
     main {
         overflow-x: visible;
+        scroll-behavior: smooth;
     }
+    * {
+  scroll-behavior: smooth;
+}
 </style>

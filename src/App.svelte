@@ -13,19 +13,30 @@
     import * as Beauty from "@deepar/beauty"
     import * as deepar from "deepar";
 
+    // (async function() {
+    //   const deepAR = await deepar.initialize({
+    //     licenseKey: 'your_license_key_here',
+    //     previewElement: document.querySelector('#deepar-div'),
+    //     effect: 'https://cdn.jsdelivr.net/npm/deepar/effects/aviators'
+    //   });
+    // })();
+
     const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
     const DPR = window.devicePixelRatio || 1;
-
+let i: p5.Image;
     const p5Logic = (p: p5) => {
           p.setup = (     ) => {
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR), p.WEBGL);
             p.background( 255 );
             p.imageMode(p.CENTER);
             p.frameRate(  fps   );
+            i = p.loadImage(data.publicUrl);
+            
         };
 
         p.draw = () => {
             p.background( 255 );
+            p.image(i,0,0)
         };
     };
 
@@ -39,14 +50,20 @@
 
 
     const successCallback = (imageD: p5.Image): void => {
-        canvasInstance.draw  = () => {};
-        let     filterShader = (canvasInstance as any)
-         .createFilterShader                         (imageFragmentShaderSourceCode);
         let imageRatio = 0.5;
         canvasInstance.resizeCanvas(imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
         imageD        .resize      (imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
+        canvasInstance.draw  = () => {
+
+            let     filterShader = (canvasInstance as any)
+         .createFilterShader                         (imageFragmentShaderSourceCode);
+         shaderSetNecessaryUniforms(filterShader);
+        
         canvasInstance.       image(imageD, 0, 0);
         canvasInstance.filter(filterShader);
+            
+        };
+        
     };
 
 
@@ -56,14 +73,14 @@
         if (video) {video.remove();} // the same as the above line of code
         }
         if (input.files !== null) {
-            if (videoFileBLOB !== null) { window.URL.revokeObjectURL( videoFileBLOB); }
-                videoFileBLOB  =          window.URL.createObjectURL(input.files[0]);
+            if (videoFileBLOB !== null) { window.URL.revokeObjectURL(videoFileBLOB); }
+                videoFileBLOB  =          window.URL.createObjectURL(             input.files[0]);
             video = canvasInstance.createVideo(videoFileBLOB);
             video .volume(1.0);
             video .hide  (   );
 //          video .loop  (   );
             let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
-            let startRecord: boolean = true;
+            let startRecord: boolean = true ;
             let ceaseRecord: boolean = false;
             console.log("Assign");
             canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR));
@@ -129,18 +146,20 @@
                 canvasInstance.push();
                 canvasInstance.imageMode(canvasInstance.CENTER);
                 canvasInstance.image    (
-                    video,
+                                video,
                     0,
                     0,
-                    canvasInstance.width,
+                    canvasInstance.width ,
                     canvasInstance.height,
                     0,
                     0,
-                    video.width,
-                    video.height,
-                    canvasInstance.COVER,
+                             video.width ,
+                             video.height,
+                    canvasInstance.COVER ,
                 );
                 canvasInstance.pop();
+                let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
+                shaderSetNecessaryUniforms(warp);
                 canvasInstance.filter(warp);
                 
                 if (!ceaseRecord)                       {
@@ -213,21 +232,20 @@
             );
         }
     `;
-    let videoFragmentShaderSourceCode: string = `
-        precision highp float;
+    let videoFragmentShaderSourceCode: string = `#version 100
+precision highp float;
 
-        uniform sampler2D tex0;
-        varying vec2 vTexCoord;
+uniform sampler2D tex0;
+varying vec2 vTexCoord;
+uniform float time;
+uniform vec2 canvasSize;
+uniform vec2 texelSize;
 
-        void main() {
-            //   Offset        the input coordinate
-            vec2 warpedCoord = vTexCoord;
-            warpedCoord.x += 0.05 * sin(vTexCoord.y * 10.0);
-            warpedCoord.y += 0.05 * sin(vTexCoord.x * 10.0);
-
-            // Set the new color by looking up the warped coordinate
-            gl_FragColor = texture2D(tex0, warpedCoord);
-        }
+void main(){
+    vec2 pixelSize = vec2(4.0, 4.0);
+    vec2 uv = floor(vTexCoord * canvasSize / pixelSize) * pixelSize / canvasSize;
+    gl_FragColor = texture2D(tex0, uv);
+}
     `;
 
     
@@ -267,7 +285,7 @@
     }
 
         
-    const startWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
+    const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
         webcamCapture = canvasInstance.createCapture({
             video: {
              mandatory: {
@@ -314,8 +332,15 @@
 
         canvasInstance.draw = () => {
         canvasInstance. image(            webcamCapture, 0, 0);
+        shaderSetNecessaryUniforms(filterShaderWebCam);
         canvasInstance.filter(filterShaderWebCam             );
         };
+
+        const deepAR = await deepar.initialize({
+  licenseKey: 'd936878d07a3b05ef50fb9559398728d37f73663965c3754c84a998bc35e4ab18d1d6b164bbc6af4', 
+  canvas: canvas.children[0]  as HTMLCanvasElement,
+  effect: '../Pixel Heart Particles/8bitHearts.deepar',
+});
     };
 
     const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
@@ -341,6 +366,51 @@
     });
     // console.log(anch.href);
 }
+
+import { f } from "./a.i.effects";
+import { g } from "./a.i.effects";
+
+import { createClient } from '@supabase/supabase-js'
+const supabase = createClient(import.meta.env.VITE_SUPABASE_URL
+, import.meta.env.VITE_SUPABASE_KEY_PUB);
+
+const {data}=supabase.storage.from("noise_textures").getPublicUrl("sbs_-_noise_texture_pack_-_128x128/128x128/Cracks/Cracks 10 - 128x128.png")
+console.log(data);
+
+
+//sbs_-_noise_texture_pack_-_128x128
+//  128x128
+//sbs_-_noise_texture_pack_-_256x256
+//  256x256
+//sbs_-_noise_texture_pack_-_512x512
+//  512x512
+
+//Cracks       (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Craters      (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Gabor        (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Grainy       (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Manifold     (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Marble       (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Melt         (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Milky        (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Perlin       (128x128: 1 - 24) (256x256: 1 - 24) (512x512: 1 - 24) random
+//Spokes       (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Streak       (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Super Noise  (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Super Perlin (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Swirl        (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Techno       (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Turbulence   (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Vein         (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+//Voronoi      (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
+
+
+import A from "./lib/A.svelte";
+
+//GIF? (LATER IF THERE IS STILL TIME LEFT)
+//imgur video/image
+//Giphy? (LATER IF THERE IS STILL TIME LEFT)
+
 </script>
 
 <main>
@@ -381,6 +451,30 @@
 
 <a bind:this={anch}>download</a>
 <button on:click={y}>noise</button>
+
+<button on:click={async() => {
+const res = await f();
+console.log(await res.text())
+}}>AI 1</button>
+
+<button on:click={async() => {
+const res = await g();
+console.log(await res.text())
+}}>AI 2</button>
+
+<button on:click={async () => {
+    eval(`canvasInstance.draw = () => { canvasInstance.background(255,0,0); };`)
+}}>FUNC</button>
+
+<button on:click={async () => {
+    imageFragmentShaderSourceCode = videoFragmentShaderSourceCode;
+}}>CHANGE EFFECT IMAGE</button>
+
+<button on:click={async () => {
+    videoFragmentShaderSourceCode = imageFragmentShaderSourceCode;
+}}>CHANGE EFFECT VIDEO</button>
+
+<A/>
 
 </main>
 

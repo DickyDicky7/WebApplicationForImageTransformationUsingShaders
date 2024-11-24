@@ -1,15 +1,16 @@
-#version 100
+#version 300 es
 precision highp float;
 
 uniform sampler2D  tex0;
-varying vec2           vTexCoord;
+in      vec2           vTexCoord;
+out     vec4           fragColor;
 uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 
 const float alpha       =  0.5;
-const float scale       =  1.5;
+const float scale       =  1.0;
 const float border_mask =  2.0;
 const float strength    = 25.0;
 
@@ -20,11 +21,11 @@ void main() {
 	
     vec2 screen_pixel_size = 1.0 / canvasSize;
 
-	float r = texture2D(tex0, (uvss + vec2(screen_pixel_size  * strength) * mask), 0.0).r;
-	float g = texture2D(tex0, (uvss + vec2(screen_pixel_size)             * mask), 0.0).g;
-	float b = texture2D(tex0, (uvss + vec2(screen_pixel_size  * strength) * mask), 0.0).b;
+	float r = texture(tex0, (uvss + vec2(screen_pixel_size  * strength) * mask), 0.0).r;
+	float g = texture(tex0, (uvss + vec2(screen_pixel_size)             * mask), 0.0).g;
+	float b = texture(tex0, (uvss + vec2(screen_pixel_size  * strength) * mask), 0.0).b;
 	
-	gl_FragColor = vec4(r, g, b, alpha);
+	fragColor = vec4(r, g, b, alpha);
 }
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

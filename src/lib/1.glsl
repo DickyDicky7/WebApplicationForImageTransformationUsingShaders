@@ -1,8 +1,9 @@
-#version 100
+#version 300 es
 precision highp float;
 
 uniform sampler2D  tex0;
-varying vec2           vTexCoord;
+in      vec2           vTexCoord;
+out     vec4           fragColor;
 uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
@@ -41,7 +42,7 @@ vec3 fetch_pixel(vec2 uv, vec2 off) {
         return vec3(0.0, 0.0, 0.0);
     }
 
-    vec3   clr = texture2D(tex0, pos, -16.0).rgb + noise;
+    vec3   clr = texture(tex0, pos, -16.0).rgb + noise;
     return clr;
 }
 
@@ -178,8 +179,8 @@ void main() {
     if(    vignette_amount > 0.0    )
     clr *= vignette(pos);
 
-    gl_FragColor.rgb = clr;
-    gl_FragColor.a   = 1.0;
+    fragColor.rgb = clr;
+    fragColor.a   = 1.0;
 }
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

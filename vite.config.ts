@@ -1,5 +1,8 @@
 import { defineConfig, ViteDevServer } from "vite"
 import { svelte } from "@sveltejs/vite-plugin-svelte"
+import { nodePolyfills } from "vite-plugin-node-polyfills"
+import basicSsl from '@vitejs/plugin-basic-ssl'
+
 
 /** @type {import("vite").Plugin} */
 const viteServerConfig = () => ({
@@ -8,8 +11,8 @@ const viteServerConfig = () => ({
     server.middlewares.use((req, res, next) => {
       // res.setHeader("Access-Control-Allow-Origin", "*");
       // res.setHeader("Access-Control-Allow-Methods", "GET");
-      res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
-      res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
+      // res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+      // res.setHeader("Cross-Origin-Embedder-Policy", "require-corp");
       next();
     });
   }
@@ -17,5 +20,9 @@ const viteServerConfig = () => ({
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [svelte(), viteServerConfig()],
+  plugins: [svelte(), viteServerConfig(), nodePolyfills(),basicSsl(),],
+  server: {
+    "host": "192.168.1.133", //YOUR IP-V4
+  },
+  assetsInclude: ["**/*.glsl"]
 });

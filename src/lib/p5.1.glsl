@@ -1,7 +1,8 @@
-#version 100
+#version 300 es
 precision highp float;
-uniform sampler2D tex0;
-varying vec2 vTexCoord;
+uniform sampler2D   tex0;
+in        vec2 vTexCoord;
+out       vec4 fragColor;
 vec2 zoom(vec2 coord, float amount) {
           vec2 relativeToCenter  = coord - 0.5;
                relativeToCenter /= amount;      //     Zoom in
@@ -10,10 +11,19 @@ vec2 zoom(vec2 coord, float amount) {
 void main() {
     // Get each@ color channel@ using coordinates with@@@@ different amounts
     // of@ zooms to@@@ displace the@@ colors@@@@@ slightly
-    gl_FragColor = vec4(
-        texture2D(tex0,      vTexCoord       ).r,
-        texture2D(tex0, zoom(vTexCoord, 1.05)).g,
-        texture2D(tex0, zoom(vTexCoord, 1.10)).b,
-        texture2D(tex0,      vTexCoord       ).a
+    fragColor = vec4(
+        texture(tex0,      vTexCoord       ).r,
+        texture(tex0, zoom(vTexCoord, 1.05)).g,
+        texture(tex0, zoom(vTexCoord, 1.10)).b,
+        texture(tex0,      vTexCoord       ).a
     );
 }
+
+
+
+
+
+
+
+
+

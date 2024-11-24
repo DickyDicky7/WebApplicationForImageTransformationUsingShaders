@@ -1,8 +1,9 @@
-#version 100
+#version 300 es
 precision highp float;
 
 uniform sampler2D  tex0;
-varying vec2           vTexCoord;
+in      vec2           vTexCoord;
+out     vec4           fragColor;
 uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
@@ -28,13 +29,13 @@ float random( float seed )
 	return fract( 543.2543 * sin( dot( vec2( seed, seed ), vec2( 3525.46, -54.3415 ) ) ) );
 }
 
-float trunc(float x) {
-    if (x < 0.0) {
-        return ceil (x);
-    }       else {
-        return floor(x);
-    }
-}
+// float trunc(float x) {
+//     if (x < 0.0) {
+//         return ceil (x);
+//     }       else {
+//         return floor(x);
+//     }
+// }
 
 void main( )
 {
@@ -52,18 +53,18 @@ void main( )
 		) - 0.50
 	) * shake_power * enable_shift;
 
-	vec4 pixel_color = texture2DLod( tex0, fixed_uv, 0.0 );
+	vec4 pixel_color = textureLod( tex0, fixed_uv, 0.0 );
 	pixel_color.r = mix(
 		pixel_color.r
-	,	texture2DLod( tex0, fixed_uv + vec2(  shake_color_rate, 0.0 ), 0.0 ).r
+	,	textureLod( tex0, fixed_uv + vec2(  shake_color_rate, 0.0 ), 0.0 ).r
 	,	enable_shift
 	);
 	pixel_color.b = mix(
 		pixel_color.b
-	,	texture2DLod( tex0, fixed_uv + vec2( -shake_color_rate, 0.0 ), 0.0 ).b
+	,	textureLod( tex0, fixed_uv + vec2( -shake_color_rate, 0.0 ), 0.0 ).b
 	,	enable_shift
 	);
-	gl_FragColor = pixel_color;
+	fragColor = pixel_color;
 }
 
 

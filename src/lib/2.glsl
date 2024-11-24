@@ -1,17 +1,18 @@
-#version 100
+#version 300 es
 precision highp float;
 
 uniform sampler2D  tex0;
-varying vec2           vTexCoord;
+in      vec2           vTexCoord;
+out     vec4           fragColor;
 uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 
-const float wiggle         = 0.03;
-const float wiggle_speed   =   25;
-const float        smear   = 1.0 ;
-const int     blur_samples =   15;
+const float wiggle         = 00.03;
+const float wiggle_speed   = 25.00;
+const float        smear   = 01.00;
+const int     blur_samples =    15;
 
 
 float onOff(float a, float b, float c, float framecount) {
@@ -49,8 +50,8 @@ vec3 yiq2rgb(vec3 c) {
 
 vec3 Blur(vec2 uv, float d, int samples) {
     vec3  sum = vec3(0.0);
-    float   W = 1.0 / float(samples);
-    for(int i =   0 ; i  <  samples ; ++i) {
+    float   W = 1.0 / float(blur_samples);
+    for(int i =   0 ; i  <  blur_samples ; ++i) {
         float t = (sin(time * 5.0 + uv.y * 5.0)) / 10.0;
 
         t = 0.0;
@@ -59,11 +60,27 @@ vec3 Blur(vec2 uv, float d, int samples) {
         float Start = 2.00 / float(samples);
         vec2  Scale = 0.66 * 4.0 * 2.0 * PixelOffset.xy                       ;
 
-        vec3 N  =                                                             texture2D(tex0, uv + Circle(Start, float(samples), float(i)) * Scale).rgb;
+        vec3 N  =                                                             texture(tex0, uv + Circle(Start, float(samples), float(i)) * Scale).rgb;
            sum += N * W;
     }
     return sum;
 }
+
+// float round(float x) {
+//     return floor(x + 0.5);
+// }
+
+// vec2 round(vec2 v) {
+//     return vec2(round(v.x), round(v.y));
+// }
+
+// vec3 round(vec3 v) {
+//     return vec3(round(v.x), round(v.y), round(v.z));
+// }
+
+// vec4 round(vec4 v) {
+//     return vec4(round(v.x), round(v.y), round(v.z), round(v.w));
+// }
 
 void main() {
     vec2 uv = vTexCoord;
@@ -97,7 +114,7 @@ void main() {
     final.rgb = yiq2rgb(vec3(y, i, q)) - pow(s + e * 2.0, 3.0);
     final.a   = 1.0;
 
-    gl_FragColor = final;
+    fragColor = final;
 }
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

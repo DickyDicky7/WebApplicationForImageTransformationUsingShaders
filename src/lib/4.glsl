@@ -1,30 +1,34 @@
-#version 100
+#version 300 es
 precision highp float;
 
-uniform sampler2D  tex0;
-varying vec2           vTexCoord;
+uniform sampler2D  tex0; // mtexture
+uniform sampler2D  tex1; // gradient
+in      vec2           vTexCoord;
+out     vec4           fragColor;
 uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
-
+/*
 uniform sampler2D gradient;
+ */
 const float        depth   = 0.03;
-const   int line_thickness = 7   ;
+const float line_thickness = 7.00;
 
 void main() {
-    vec3 color = texture2D(tex0, vTexCoord).rgb;
+    vec3 color = texture(tex0, vTexCoord).rgb;
     float grayscale_value  = dot(color, vec3(0.299, 0.587, 0.114));
-    if(int(gl_FragCoord.x  +
-           gl_FragCoord.y) % (2 * line_thickness)
-                                < line_thickness) {
+    if(mod((gl_FragCoord.x  +
+            gl_FragCoord.y) , (2.0 * line_thickness))
+                                   < line_thickness) {
           grayscale_value -= depth;
     }
 
-    vec3 sampled_color = texture2D(gradient, vec2(grayscale_value, 0.0)).rgb;
+//  vec3 sampled_color = texture(gradient, vec2(grayscale_value, 0.0)).rgb;
+    vec3 sampled_color = texture(  tex1  , vec2(grayscale_value, 0.0)).rgb;
 
-    gl_FragColor.rgb = sampled_color;
-    gl_FragColor.a   = 1.0          ;
+    fragColor.rgb = sampled_color;
+    fragColor.a   = 1.0          ;
 }
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

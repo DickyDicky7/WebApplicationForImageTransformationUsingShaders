@@ -31,7 +31,14 @@ let i: p5.Image;
             p.imageMode(p.CENTER);
             p.frameRate(  fps   );
             i = p.loadImage(data.publicUrl);
-            
+             noiseT1 = p.loadImage("./src/noise.png");
+            noiseT2 = p.loadImage("./download.png");
+            gradient = p.loadImage("./sunset-red-8x.png");
+            ascii_tex = p.loadImage("./ascii.png");
+            tile = p.loadImage("./Texturelabs_MonitorPatterns_page_01.png");
+            bayer = p.loadImage("./bayer16tile8.png");
+            u_bgTexture = p.loadImage("./parchment.jpg");
+            u_patternTexture = p.loadImage("./pencil.jpg");
         };
 
         p.draw = () => {
@@ -46,24 +53,45 @@ let i: p5.Image;
     onMount(async ()  : Promise<void> => {
     console.log("on mount");
         canvasInstance = new p5(p5Logic, canvas);
+        await ui("theme", "#009688")
+        
     });
 
-
+    let noiseT1:p5.Image;
+    let noiseT2:p5.Image;
+    let gradient:p5.Image;
+    let ascii_tex:p5.Image;
+    let tile:p5.Image;
+    let bayer:p5.Image;
+    let u_bgTexture:p5.Image;
+    let u_patternTexture:p5.Image;
     const successCallback = (imageD: p5.Image): void => {
         let imageRatio = 0.5;
         canvasInstance.resizeCanvas(imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
         imageD        .resize      (imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
         canvasInstance.draw  = () => {
 
+            canvasInstance.textureWrap("repeat");
             let     filterShader = (canvasInstance as any)
          .createFilterShader                         (imageFragmentShaderSourceCode);
          shaderSetNecessaryUniforms(filterShader);
-        
+        filterShader.setUniform("tex1", noiseT1)
+        filterShader.setUniform("tex2", noiseT2)
+        filterShader.setUniform("gradient", gradient);
+        filterShader.setUniform("pallete0", gradient);
+        filterShader.setUniform("pallete0Size", [gradient.width, gradient.height]);
+        filterShader.setUniform("ascii_tex", ascii_tex);
+        filterShader.setUniform("tiledtexture", tile);
+        filterShader.setUniform("bayer", bayer);
+        filterShader.setUniform("bayer0", bayer);
+        filterShader.setUniform("bayer0Size", [bayer.width, bayer.height]);
+        filterShader.setUniform("u_bgTexture", u_bgTexture); //switchable
+        filterShader.setUniform("u_patternTexture", u_patternTexture); ////switchable
         canvasInstance.       image(imageD, 0, 0);
         canvasInstance.filter(filterShader);
             
         };
-        
+        mode = MODE.IMAGE;
     };
 
 
@@ -85,6 +113,7 @@ let i: p5.Image;
             console.log("Assign");
             canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR));
             canvasInstance.draw = () => {
+                canvasInstance.textureWrap("repeat");
                 if (startRecord /*&& !isNaN(video.duration())*/) {
                     startRecord = false;
                     console.log("START");
@@ -134,6 +163,7 @@ let i: p5.Image;
                             // anchor.download = `test_video_${new Date().toLocaleString()}.webm`;
                             anchor.click();
                             window.URL.revokeObjectURL(url);
+                            videoToShare = blob;
                             anchor.remove();
                             //
                         }
@@ -160,6 +190,16 @@ let i: p5.Image;
                 canvasInstance.pop();
                 let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
                 shaderSetNecessaryUniforms(warp);
+                warp.setUniform("tex1", noiseT1);
+                warp.setUniform("tex2", noiseT2);
+                warp.setUniform("gradient", gradient);
+                warp.setUniform("pallete0", gradient);
+                warp.setUniform("pallete0Size", [gradient.width, gradient.height]);
+                warp.setUniform("ascii_tex", ascii_tex);
+                warp.setUniform("tiledtexture", tile);
+                warp.setUniform("bayer",bayer);
+                warp.setUniform("bayer0",bayer);
+                warp.setUniform("bayer0Size", [bayer.width, bayer.height]);
                 canvasInstance.filter(warp);
                 
                 if (!ceaseRecord)                       {
@@ -174,6 +214,7 @@ let i: p5.Image;
                     mediaRecorder = null!;
                 };
             };
+            mode = MODE.VIDEO;
         };
     };
 
@@ -232,23 +273,21 @@ let i: p5.Image;
             );
         }
     `;
-    let videoFragmentShaderSourceCode: string = `#version 100
-precision highp float;
+    let videoFragmentShaderSourceCode: string = `
 
-uniform sampler2D tex0;
-varying vec2 vTexCoord;
-uniform float time;
-uniform vec2 canvasSize;
-uniform vec2 texelSize;
-
-void main(){
-    vec2 pixelSize = vec2(4.0, 4.0);
-    vec2 uv = floor(vTexCoord * canvasSize / pixelSize) * pixelSize / canvasSize;
-    gl_FragColor = texture2D(tex0, uv);
-}
     `;
+    /*
+#version 100
+    precision highp float;
+   // #include "lygia/color/tonemap/aces.glsl"
+        uniform sampler2D tex0;
+        varying vec2 vTexCoord;
+void main(){
+    gl_FragColor = tonemapACES(texture2D(tex0, vTexCoord));
+}
+    */
+// videoFragmentShaderSourceCode = resolveLygia(videoFragmentShaderSourceCode);
 
-    
     const videoFormats = [
         { mimeType: "video/webm; codecs=vp9", extension: "webm", blobType: "video/webm", },
         { mimeType: "video/mp4; codecs=avc1", extension: "mp4" , blobType: "video/mp4" , },
@@ -279,9 +318,13 @@ void main(){
 // DeepAR Beauty
 
     const shaderSetNecessaryUniforms = (shader: any) => {
-        shader.setUniform("time"                     ,         canvasInstance.millis()                                                                                               );
+        shader.setUniform("time"                     ,         canvasInstance.millis() / 1000                                                                                              );
         shader.setUniform(     "canvasSize"          , [       canvasInstance.width                                  ,        canvasInstance.height                                 ]);
         shader.setUniform(                "texelSize", [1.0 / (canvasInstance.width * canvasInstance.pixelDensity()) , 1.0 / (canvasInstance.height * canvasInstance.pixelDensity())]);
+    shader.setUniform("mousePosition", [0.0,0.0,0.0,0.0])
+    shader.setUniform("frameCount", canvasInstance.frameCount);
+    shader.setUniform("tex1Size", [noiseT1.width,noiseT1.height]);
+    shader.setUniform("tex2Size", [noiseT2.width,noiseT2.height]);
     }
 
         
@@ -336,11 +379,13 @@ void main(){
         canvasInstance.filter(filterShaderWebCam             );
         };
 
-        const deepAR = await deepar.initialize({
-  licenseKey: 'd936878d07a3b05ef50fb9559398728d37f73663965c3754c84a998bc35e4ab18d1d6b164bbc6af4', 
-  canvas: canvas.children[0]  as HTMLCanvasElement,
-  effect: '../Pixel Heart Particles/8bitHearts.deepar',
-});
+//         const deepAR = await deepar.initialize({
+//   licenseKey: 'd936878d07a3b05ef50fb9559398728d37f73663965c3754c84a998bc35e4ab18d1d6b164bbc6af4', 
+//   canvas: canvas.children[0]  as HTMLCanvasElement,
+//   effect: '../Pixel Heart Particles/8bitHearts.deepar',
+// });
+
+        mode = MODE.WEBCAM;
     };
 
     const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
@@ -363,7 +408,13 @@ void main(){
     let canvasElement = canvas.children[0] as HTMLCanvasElement;
     canvasElement.toBlob(b => {
         anch.href=URL.createObjectURL(b as Blob)
-    });
+        navigator.share({
+            title: "MDN",
+  text: "Learn web development on MDN!",
+  url: data.publicUrl,
+//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
+        })
+    }, "image/png", 1.0);
     // console.log(anch.href);
 }
 
@@ -411,9 +462,135 @@ import A from "./lib/A.svelte";
 //imgur video/image
 //Giphy? (LATER IF THERE IS STILL TIME LEFT)
 
+// import imgur from "imgur";
+// const client = new imgur({ clientId: import.meta.env.VITE_CLIENT_ID____ });
+import { ImgurClient } from 'imgur';
+
+const client = new ImgurClient({ clientId: import.meta.env.VITE_CLIENT_ID____ });
+
+const shareImage = async () => {
+    let canvasElement = canvas.children[0] as HTMLCanvasElement;
+    const res = await client.upload({
+        image: canvasElement.toDataURL("image/png",1.0).split(',')[1],
+        type: "base64",
+        name: "abc.png",
+        title: "hello",
+        description: "desc",
+        disable_audio: "1",
+    });
+    console.log(res.data);
+    window.navigator.share({
+            title: "MDN",
+  text: "Learn web development on MDN!",
+  url: res.data.link,
+//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
+        })
+}
+
+
+function blobToBase64(blob:Blob): Promise<string> {
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        
+        reader.onloadend = () => {
+            if (reader.result) {
+                // Split to remove the data URL prefix and get only the base64 part
+                resolve((reader.result as string).split(",")[1]);
+            } else {
+                reject(new Error("FileReader result is null"));
+            }
+        };
+
+        reader.onerror = () => reject(new Error("Failed to read the Blob as Data URL"));
+        reader.readAsDataURL(blob); // This will start reading the blob as a Data URL
+    });
+}
+
+let videoToShare: Blob;
+const shareVideo = async () => {
+    let canvasElement = canvas.children[0] as HTMLCanvasElement;
+    const res = await client.upload({
+        image: await blobToBase64(videoToShare),
+        type: "base64",
+        name: "abc",
+        title: "hello",
+        description: "desc",
+        disable_audio: "1",
+    });
+    console.log(res.data);
+    window.navigator.share({
+            title: "MDN",
+  text: "Learn web development on MDN!",
+  url: res.data.link,
+//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
+        })
+}
+
+const shareWebcam = async () => {
+
+}
+
+enum MODE
+{
+    IMAGE,
+    VIDEO,
+    WEBCAM,
+};
+
+let mode:MODE = MODE.IMAGE;
+
+//PREVIEW
+//IMAGE
+//VIDEO
+//GIF 
+
+for (let i: number = 1; i <= 7; i++)
+{
+    import(`./lib/${i}.glsl?raw`);
+}
+// import glslString from "./lib/1.glsl?raw";
+// console.log(glslString);
+
+const  loadAsset = async (assetPath: string): Promise<string> => {
+    const  asset = await import(assetPath);
+    return asset.default;
+}
+
+
+// https://www.npmjs.com/package/vite-plugin-glsl no need
+// https://www.npmjs.com/package/glsl-shader-name
+// https://www.npmjs.com/package/glsl-100-to-300
+// https://www.npmjs.com/package/lygia use
+// https://www.npmjs.com/package/@infra7/glsl use
+
+
+//#version 300 es
+
+import GLSLUniform from './GLSLUniform.svelte';
+import type { GLSLUniformValue,
+    GLSLUniforms,} from "./types";
+
+// Example uniforms
+let uniforms: GLSLUniforms = {
+    uTime: 1.0,
+    uBool: true,
+    uResolution: [800, 600],
+    uMouse: [0.5, 0.5],
+    uTransform: [1, 0, 0, 0, 1, 0, 0, 0, 1], // mat3 example
+    uSampler: data.publicUrl,
+    uIntensity: 5, // int
+    uColor: [1.0, 0.5, 0.2, 1.0], // vec4
+  };
+
+  // Handle updates to uniforms
+  const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
+    uniforms = updatedUniforms;
+    console.log("Updated uniforms:", uniforms);
+  };
+
 </script>
 
-<main>
+<main class="responsive">
     <form action="">
         <input
             bind:this={input}
@@ -474,7 +651,31 @@ console.log(await res.text())
     videoFragmentShaderSourceCode = imageFragmentShaderSourceCode;
 }}>CHANGE EFFECT VIDEO</button>
 
+<button on:click={shareImage} disabled={mode !== MODE.IMAGE}>SHARE IMAGE</button>
+<button on:click={shareVideo} disabled={mode !== MODE.VIDEO}>SHARE VIDEO</button>
+<button on:click={shareWebcam} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
+
 <A/>
+
+<div class="field label suffix round border">
+    <select on:change={async (e) => {
+        let assetPath=e.currentTarget.options[e.currentTarget.selectedIndex].value;
+        if (assetPath==="none") console.log("Choose nothing");
+        else {
+            console.log(assetPath)
+            const shaderSrc = await loadAsset(`./lib/${assetPath}`);
+            imageFragmentShaderSourceCode = shaderSrc;
+        }
+        }}>
+      {#each ["none", ... Array.from({ length: 7 }, (value, index) => `${index + 1}.glsl?raw`)] as index (index)}
+        <option>{index}</option>            
+      {/each}
+    </select>
+    <label>Choose your effects</label>
+    <i>arrow_drop_down</i>
+</div>
+
+<GLSLUniform uniforms={uniforms} onUpdate={handleUpdate} />
 
 </main>
 

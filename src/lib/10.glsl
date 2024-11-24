@@ -1,8 +1,9 @@
-#version 100
+#version 300 es
 precision highp float;
 
 uniform sampler2D  tex0;
-varying vec2           vTexCoord;
+in      vec2           vTexCoord;
+out     vec4           fragColor;
 uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
@@ -13,8 +14,8 @@ uniform vec2           texelSize;
 
 
 const float add  = 0.002;
-const float threshold  = 1.0;
-const float threshold2 = 1.0;
+const float threshold  = /*1.0*/ 0.1;
+const float threshold2 = /*1.0*/ 0.1;
 const vec4    edgeColour  = vec4(0.0, 0.0, 0.0, 1.0);
 const vec4    edgeColour2 = vec4(0.5, 0.5, 0.5, 1.0);
 const vec4 nonEdgeColour  = vec4(1.0, 1.0, 1.0, 1.0);
@@ -35,25 +36,25 @@ vec3 hsv2rgb(vec3 c) {
     return c.z * mix(K.xxx, clamp(p     - K.xxx,   0.0, 1.0), c.y  );
 }
 
-void fragment() {
-    vec3  up   = rgb2hsv((texture2D(tex0, vec2(vTexCoord.x      , vTexCoord.y + add))).rgb);
-    vec3  down = rgb2hsv((texture2D(tex0, vec2(vTexCoord.x      , vTexCoord.y - add))).rgb);
-    vec3  left = rgb2hsv((texture2D(tex0, vec2(vTexCoord.x - add, vTexCoord.y      ))).rgb);
-    vec3 right = rgb2hsv((texture2D(tex0, vec2(vTexCoord.x + add, vTexCoord.y      ))).rgb);
-    vec3  real = rgb2hsv((texture2D(tex0, vTexCoord)).rgb);
+void main() {
+    vec3  up   = rgb2hsv((texture(tex0, vec2(vTexCoord.x      , vTexCoord.y + add))).rgb);
+    vec3  down = rgb2hsv((texture(tex0, vec2(vTexCoord.x      , vTexCoord.y - add))).rgb);
+    vec3  left = rgb2hsv((texture(tex0, vec2(vTexCoord.x - add, vTexCoord.y      ))).rgb);
+    vec3 right = rgb2hsv((texture(tex0, vec2(vTexCoord.x + add, vTexCoord.y      ))).rgb);
+    vec3  real = rgb2hsv((texture(tex0, vTexCoord)).rgb);
 
     if (abs(real.z -    up.z) > threshold
     ||  abs(real.z -  down.z) > threshold
     ||  abs(real.z -  left.z) > threshold
     ||  abs(real.z - right.z) > threshold) {
-        gl_FragColor.rgb =    edgeColour .rgb;
+        fragColor.rgb =    edgeColour .rgb;
     } else if (abs(real.z -    up.z) > threshold2
            ||  abs(real.z -  down.z) > threshold2
            ||  abs(real.z -  left.z) > threshold2
            ||  abs(real.z - right.z) > threshold2) {
-        gl_FragColor.rgb =    edgeColour2.rgb;
+        fragColor.rgb =    edgeColour2.rgb;
     } else {
-        gl_FragColor.rgb = nonEdgeColour .rgb;
+        fragColor.rgb = nonEdgeColour .rgb;
     }
 }
 

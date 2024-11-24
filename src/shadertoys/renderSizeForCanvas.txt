@@ -1,0 +1,12 @@
+if render image => default size of image * 0.5
+if render video => default size of video * 0.5
+
+
+
+
+
+
+
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import resolveLygia from "https://lygia.xyz/resolve.esm.js"

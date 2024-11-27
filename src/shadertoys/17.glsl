@@ -71,10 +71,10 @@ void main()
     vec4 cTop = c2;
     
     // Sample texture at the@@@@@@@@ center of the tile
-    vec4           tileColor = texture(tex0, PCenter);
+    vec4           tileColor = texture(tex0 , PCenter);
     
     // Final@ color@@ @@ calculation @@@@@@ @@ @@@ @@@@
-    fragColor = tileColor + cTop - cBottom;
+       fragColor = tileColor +         cTop - cBottom ;
 }
 
 

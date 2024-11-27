@@ -11,16 +11,20 @@ uniform         vec4      mousePosition;
 
 void main(  )
 {
-    float inc = 2.0*mousePosition.x;
+    float inc = 2.0 * mousePosition.x;
     // Normalized pixel coordinates (from 0 to 1)
-    if (inc<.001) inc = (sin(time)*.5+.5)*canvasSize.x;
-    vec2 uv = 2.0*((mod(gl_FragCoord.xy,inc)+(ceil(gl_FragCoord.xy / inc)*inc/2.0)))/canvasSize.xy;
+    // Normalized pixel coordinates (from 0 to 1)
+    if (inc < 0.001)
+        inc =       ( sin(time)                 *                         0.5  + 0.5        ) * canvasSize.x ;
+    vec2 uv = 2.0 * ((mod(gl_FragCoord.xy, inc) + (ceil(gl_FragCoord.xy / inc) * inc / 2.0))) / canvasSize.xy;
 
     // Time varying pixel color
-    vec3 col = texture(tex0,uv).rgb;
+    // Time varying pixel color
+    vec3  col = texture(tex0, uv ).rgb;
 
     // Output to screen
-    fragColor = vec4(col,1.0);
+    // Output to screen
+    fragColor =    vec4(col , 1.0)    ;
 }
 
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@

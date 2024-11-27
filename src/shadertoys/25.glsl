@@ -9,42 +9,50 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#define RANGE .7
-#define SPEED .5
-#define STRENGTH 6.
+const float    RANGE = 0.7;
+const float    SPEED = 0.5;
+const float STRENGTH = 6.0;
 
 mat2 rotate(float a)
 {
     float s = sin(a);
     float c = cos(a);
-    return mat2(c,-s,s,c);
+    return mat2(c, -s, s, c);
 }
 
 void main() {
-    vec2 aspect = canvasSize.xy / canvasSize.y;
-    vec2 center = 0.5 * aspect;
+    vec2 aspect  = canvasSize.xy / canvasSize.y;
+    vec2 center  = 0.5           * aspect      ;
     
-    vec2 uv = vTexCoord * aspect;
-    uv -= center;
+    vec2     uv  = vTexCoord     * aspect      ;
+             uv -=                 center      ;
     
-    float d = length(uv);
-    float progress = sin(time * SPEED);
+    float d        = length(       uv   );
+    float progress =    sin(time * SPEED);
     
     //vortex
-    float cTime = STRENGTH * progress;
-    d = smoothstep(0., RANGE, RANGE - d) * cTime;
-    uv *= rotate(d);
+    float cTime  = STRENGTH
+                 * progress;
+          d      = smoothstep(0., RANGE, RANGE - d) * cTime;
+             uv *= rotate    (                   d)        ;
     
     //shrink
-    float edge = 1. * abs(progress);
-    uv = uv + normalize(uv) * edge;
+    float edge = 1. * abs(progress)       ;
+            uv = uv + normalize(uv) * edge;
     
     uv += center;
     uv /= aspect;
-    if (uv.x > 1. || uv.y > 1. || uv.x < 0. || uv.y < 0.) {
+    if (uv.x > 1.
+    ||  uv.y > 1.
+    ||  uv.x < 0.
+    ||  uv.y < 0.)
+    {
         fragColor = vec4(0., 0., 0., 0.);
-    } else {
-        fragColor = texture(tex0, uv);
+    }
+    else
+    {
+        fragColor =
+texture(tex0, uv);
     }
 } 
 

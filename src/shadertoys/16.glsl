@@ -28,7 +28,7 @@ void main() {
     // Convert@ to@ @1-bit@@@@@ using@@ noise@@@@@ @@ @@@ @@@@@@@@@@
     grey =        step(     grey , randF(uv + time / 1000.0));
     // @Output@ the @final@@@@@ color@@ @@@@@@@@@@ @@ @@@ @@@@@@@@@@
-    fragColor =vec4(vec3(grey), 1.0);
+    fragColor  =  vec4(vec3(grey), 1.0);
 }
 
 

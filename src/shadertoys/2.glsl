@@ -11,24 +11,29 @@ uniform         vec4      mousePosition;
 uniform         float        frameCount;
 
 // Enabling glitch effects
+// Enabling glitch effects
 #define ANALOG
 #define DIGITAL
-#define CRT
+#define     CRT
 
 // Duration of glitch loop and activation percentage
+// Duration of glitch loop and activation percentage
 #define DURATION 5.0
-#define AMT 0.5 
+#define AMT      0.5 
 
+// Smoothstep function
 // Smoothstep function
 #define SS(a, b, x) (smoothstep(a, b, x) * smoothstep(b, a, x))
 
 // Hash by David_Hoskins - adapted for GLSL ES
-vec3 hash33(vec3 p) {
-    p = fract(p * 0.1031);
-    p += dot(p, p.yzx + 19.19);
-    return fract((p.xxy + p.yzz) * p.zyx);
+// Hash by David_Hoskins - adapted for GLSL ES
+vec3 hash33(vec3  p) {
+    p  =   fract( p              * 00.1031 );
+    p +=   dot  ( p     , p.yzx  + 19.1900 );
+    return fract((p.xxy + p.yzz) *  p.zyx  );
 }
 
+// Gradient noise function by iq
 // Gradient noise function by iq
 float gnoise(vec3 x) {
     vec3 p = floor(x);
@@ -66,86 +71,101 @@ float gnoise(vec3 x) {
 }
 
 // Gradient noise in range [0, 1]
+// Gradient noise in range [0, 1]
 float gnoise01(vec3 x) {
     return 0.5 + 0.5 * gnoise(x);
 }
 
 // CRT warping
+// CRT warping
 vec2 crt(vec2 uv) {
-    float tht = atan(uv.y, uv.x);
-    float r = length(uv);
-    r /= (1.0 - 0.1 * r * r);
-    uv.x = r * cos(tht);
-    uv.y = r * sin(tht);
-    return 0.5 * (uv + 1.0);
+    float tht =   atan(uv.y, uv.x);
+    float   r = length(uv        );
+    r    /=    (1.0 - 0.1 * r * r);
+    uv.x  = r  * cos(tht);
+    uv.y  = r  * sin(tht);
+    return 0.5 *      (uv  +  1.0);
 }
 
+// Inputs
 // Inputs
 
 
 void main() {
-    vec2 uv = gl_FragCoord.xy / canvasSize.xy;
-    float t = time;
+    vec2  uv = gl_FragCoord.xy / canvasSize.xy;
+    float t  =    time                        ;
     
     // Glitch trigger timing
+    // Glitch trigger timing
     float glitchAmount = SS(DURATION * 0.001, DURATION * AMT, mod(t, DURATION));  
-    float displayNoise = 0.0;
-    vec3 col = vec3(0.0);
-    vec2 eps = vec2(5.0 / canvasSize.x, 0.0);
-    vec2 st = vec2(0.0);
+    float displayNoise =      0.0                     ;
+    vec3           col = vec3(0.0                    );
+    vec2           eps = vec2(5.0 / canvasSize.x, 0.0);
+    vec2           st  = vec2(0.0                    );
 
 #ifdef CRT
-    uv = crt(uv * 2.0 - 1.0);
-    displayNoise += 1.0;
+    uv            = crt(uv * 2.0 - 1.0);
+    displayNoise +=                1.0 ;
 #endif
 
     // Analog distortion
+    // Analog distortion
     float y = uv.y * canvasSize.y;
-    float distortion = gnoise(vec3(0.0, y * 0.01, t * 500.0)) * (glitchAmount * 4.0 + 0.1);
-    distortion *= gnoise(vec3(0.0, y * 0.02, t * 250.0)) * (glitchAmount * 2.0 + 0.025);
+    float distortion  = gnoise(vec3(0.0, y * 0.01, t * 500.0)) * (glitchAmount * 4.0 + 0.100);
+          distortion *= gnoise(vec3(0.0, y * 0.02, t * 250.0)) * (glitchAmount * 2.0 + 0.025);
 
 #ifdef ANALOG
     displayNoise += 1.0;
     distortion += smoothstep(0.999, 1.0, sin((uv.y + t * 1.6) * 2.0)) * 0.02;
-    distortion -= smoothstep(0.999, 1.0, sin((uv.y + t) * 2.0)) * 0.02;
+    distortion -= smoothstep(0.999, 1.0, sin((uv.y + t      ) * 2.0)) * 0.02;
     st = uv + vec2(distortion, 0.0);
     col.r += texture(tex0, st + eps + distortion).r;
-    col.g += texture(tex0, st).g;
+    col.g += texture(tex0, st                   ).g;
     col.b += texture(tex0, st - eps - distortion).b;
 #else
-    col += texture(tex0, uv).xyz;
+    col   += texture(tex0, uv).xyz;
 #endif
 
 #ifdef DIGITAL
     // Digital blocky distortion
+    // Digital blocky distortion
     float bt = floor(t * 30.0) * 300.0;
-    float blockGlitch = 0.2 + 0.9 * glitchAmount;
-    float blockNoiseX = step(gnoise01(vec3(0.0, uv.x * 3.0, bt)), blockGlitch);
+    float blockGlitch  = 00.2  + 000.9 * glitchAmount;
+    float blockNoiseX  = step(gnoise01(vec3(0.0, uv.x * 3.0, bt      )), blockGlitch);
     float blockNoiseX2 = step(gnoise01(vec3(0.0, uv.x * 1.5, bt * 1.2)), blockGlitch);
-    float blockNoiseY = step(gnoise01(vec3(0.0, uv.y * 4.0, bt)), blockGlitch);
+    float blockNoiseY  = step(gnoise01(vec3(0.0, uv.y * 4.0, bt      )), blockGlitch);
     float blockNoiseY2 = step(gnoise01(vec3(0.0, uv.y * 6.0, bt * 1.2)), blockGlitch);
-    float block = blockNoiseX2 * blockNoiseY2 + blockNoiseX * blockNoiseY;
-    st = vec2(uv.x + sin(bt) * hash33(vec3(uv, 0.5)).x, uv.y);
-    col *= 1.0 - block;
-    block *= 1.15;
+    float block        =
+          blockNoiseX2 *
+          blockNoiseY2 +
+          blockNoiseX  *
+          blockNoiseY  ;
+    st     = vec2(uv.x + sin(bt) * hash33(vec3(uv, 0.5)).x, uv.y);
+      col *= 1.00 - block;
+    block *= 1.15        ;
     col.r += texture(tex0, st + eps).r * block;
-    col.g += texture(tex0, st).g * block;
+    col.g += texture(tex0, st      ).g * block;
     col.b += texture(tex0, st - eps).b * block;
 #endif
 
     // White noise + scanlines
+    // White noise + scanlines
     displayNoise = clamp(displayNoise, 0.0, 1.0);
     col += (0.15 + 0.65 * glitchAmount) * (hash33(vec3(gl_FragCoord.xy, mod(float(frameCount), 1000.0))).r) * displayNoise;
-    col -= (0.25 + 0.75 * glitchAmount) * (sin(4.0 * t + uv.y * canvasSize.y * 1.75)) * displayNoise;
+    col -= (0.25 + 0.75 * glitchAmount) * (sin   (4.0    *   t + uv.y * canvasSize.y * 1.750)             ) * displayNoise;
 
 #ifdef CRT
     // CRT vignette effect
-    float vig = 8.0 * uv.x * uv.y * (1.0 - uv.x) * (1.0 - uv.y);
-    col *= vec3(pow(vig, 0.25)) * 1.5;
-    if (uv.x < 0.0 || uv.x > 1.0) col *= 0.0;
+    // CRT vignette effect
+    float vig  =  8.0 * uv.x * uv.y
+               * (1.0 - uv.x)
+               * (1.0 - uv.y);
+          col *= vec3(pow(vig, 0.25)) * 1.5;
+    if (uv.x < 0.0
+    ||  uv.x > 1.0)  col *= 0.0 ;
 #endif
 
-    fragColor = vec4(col, 1.0);
+    fragColor = vec4(col ,  1.0);
 }
 
 // https://www.shadertoy.com/view/wld3WN

@@ -29,7 +29,7 @@ vec4 sca(sampler2D tex, vec2 uv, float width)
 
 void main()
 {
-    vec2      uv =    vTexCoord                    ;
+    vec2      uv =    vTexCoord                 ;
     fragColor = sca(tex0, uv, 0.1 * uv.x * uv.x);
 }
 

@@ -9,15 +9,15 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#define redOffset vec2(-0.1, 0.0)
-#define greenOffset vec2(0.1, 0.0)
-#define blueOffset vec2(0.1, 0.0)
+const vec2   redOffset = vec2(-0.1, 0.0);
+const vec2 greenOffset = vec2( 0.1, 0.0);
+const vec2  blueOffset = vec2( 0.1, 0.0);
 
 
 
 void main() {
-    vec2 fragCoord = gl_FragCoord.xy;
-    vec2 uv = fragCoord / canvasSize.xy;
+    vec2      fragCoord = gl_FragCoord.xy;
+    vec2 uv = fragCoord /   canvasSize.xy;
 
     vec4 color;
     color.r = texture(tex0, uv +   redOffset).r;

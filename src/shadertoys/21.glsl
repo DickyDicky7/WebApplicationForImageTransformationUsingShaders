@@ -10,10 +10,10 @@ uniform vec2           texelSize;
 
 float getChannel(int channel, sampler2D tex, vec2 uv)
 {
-    return dot(texture(tex, uv), vec4(channel == 0,
-                                        channel == 1,
-                                        channel == 2,
-                                        channel == 3));
+    return       dot(texture           (tex,      uv), vec4(channel == 0,
+                                                            channel == 1,
+                                                            channel == 2,
+                                                            channel == 3));
 }
 
 void main()

@@ -66,7 +66,7 @@ void main() {
     int maxColors = 0;
     // int maxIndex = 0;
     // int maxIndex = 0;
-    float  colorMax;
+    float  colorMax  ;
     for(int i = 0; i < 9; i++) {
         if(colorsCount[i] > maxColors) {
                             maxColors = colorsCount[i];

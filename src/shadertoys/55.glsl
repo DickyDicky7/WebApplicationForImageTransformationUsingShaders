@@ -9,9 +9,9 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#define speed 4.0
-#define strength 40.0
-#define distortion 0.03
+const float    speed   = 04.00;
+const float strength   = 40.00;
+const float distortion = 00.03;
 
 void main(void)
 {
@@ -20,8 +20,8 @@ void main(void)
     float legsy = 1.0 - length((2.0 * gl_FragCoord.xy - canvasSize.xy) / canvasSize.y);
     
     vec4 tex = texture(tex0, uv + vec2(
-        sin((time * speed) + uv.y * strength) * (distortion * legsx), 
-        sin((time * speed) + uv.x * strength) * (distortion * legsy)
+        sin((time * speed) + uv.y * strength) * (distortion * legsx)
+    ,   sin((time * speed) + uv.x * strength) * (distortion * legsy)
     ));
     
     // tex.xyz *= 1.0 - length((2.0 * gl_FragCoord.xy - canvasSize.xy) / canvasSize.x);

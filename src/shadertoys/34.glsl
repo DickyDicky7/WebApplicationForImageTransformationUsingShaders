@@ -10,6 +10,7 @@ uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
 // color palette to use
+// color palette to use
 vec3 palette[10];
 
 
@@ -28,21 +29,27 @@ palette[7] =    vec3(0.67, 0.85, 0.99);
 palette[8] =    vec3(0.50, 0.72, 0.75);
 palette[9] =    vec3(0.20, 0.38, 0.51);
 
-    vec2 uv = gl_FragCoord.xy / canvasSize.xy; // Normalized coordinates
+    vec2 uv  = gl_FragCoord.xy / canvasSize.xy; 
+    // Normalized coordinates
+    // Normalized coordinates
     
     vec3 col = texture(tex0, uv).rgb;
     
     // loop through all the colors of the palette and see which one is closest to the texture color
+    // loop through all the colors of the palette and see which one is closest to the texture color
     float closest = 9999999.0;
     // int closeIndex = -1;
-     vec3 newcolor ;
+    // int closeIndex = -1;
+        vec3 newcolor     ;
     for (int i = 0; i < 10; i++) {
-        vec3 dCol = col - palette[i];
-        float d = length(dCol); // RGB distance
+        vec3  dCol = col - palette[i];
+        float d    = length(  dCol  ); 
+        // RGB distance
+        // RGB distance
         
-        if (d < closest) {
-            closest = d;
-            newcolor = palette[i];
+        if (  d < closest  ) {
+                  closest =         d ;
+                 newcolor = palette[i];
         }
     }
 

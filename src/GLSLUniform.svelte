@@ -6,7 +6,7 @@ import {onMount} from "svelte";
 
 
 
-  export let uniforms:                   GLSLUniforms  =  {  };
+  export let uniforms:                   GLSLUniforms  =  [  ];
   export let onUpdate: (updatedUniforms: GLSLUniforms) => void;
 
   import { createClient, SupabaseClient } from '@supabase/supabase-js'
@@ -94,6 +94,11 @@ import {onMount} from "svelte";
     return result;
   } 
 
+  let imageElement: HTMLImageElement;
+  let texturesNoise: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturesBayer: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturesPallete: Array<TextureForShader> = [{ name: "none", path: "none", }];
+
 onMount(async () => {
   const supabase = createClient(import.meta.env.VITE_SUPABASE_URL
 , import.meta.env.VITE_SUPABASE_KEY_PUB);
@@ -112,37 +117,41 @@ onMount(async () => {
   // console.dir(result.data, { depth: null, colors: true })
 
   console.dir(await fetchAllTextures_Palette(supabase), { depth: null, colors: true })
+
+  texturesNoise = [... texturesNoise, ... await fetchAllTextures_Noise()];
+  texturesBayer = [... texturesBayer, ... await fetchAllTextures_BayerMatrix()];
+  texturesPallete = [... texturesPallete, ... await fetchAllTextures_Palette(supabase)];
 });
 
-  const getType = (value: GLSLUniformValue): string => {
-    if (Array.isArray(value)) {
-      if (value.length ===  2) return "vec2";
-      if (value.length ===  3) return "vec3";
-      if (value.length ===  4) return "vec4";
-      if (value.length ===  9) return "mat3";
-      if (value.length === 16) return "mat4";
-    }
-    if (typeof value === "boolean") return "bool";
-    if (typeof value === "number" && !Number.isInteger(value)) return "float";
-    if (typeof value === "number" &&  Number.isInteger(value)) return       "int";
-    if (typeof value === "string"                            ) return "sampler2D";
-    return "unknown";
-  };
+  // const getType = (value: GLSLUniformValue): string => {
+  //   if (Array.isArray(value)) {
+  //     if (value.length ===  2) return "vec2";
+  //     if (value.length ===  3) return "vec3";
+  //     if (value.length ===  4) return "vec4";
+  //     if (value.length ===  9) return "mat3";
+  //     if (value.length === 16) return "mat4";
+  //   }
+  //   if (typeof value === "boolean") return "bool";
+  //   if (typeof value === "number" && !Number.isInteger(value)) return "float";
+  //   if (typeof value === "number" &&  Number.isInteger(value)) return       "int";
+  //   if (typeof value === "string"                            ) return "sampler2D";
+  //   return "unknown";
+  // };
 
   // Update uniforms when a value is changed
   const updateUniform = (
-    key: string,
+    key: number,
     index: number | null,
     newValue: number | boolean | string,
   ): void => {
-    const updatedUniforms: GLSLUniforms = { ...uniforms };
-    if (Array.isArray(updatedUniforms[key])) {
+    // const updatedUniforms: GLSLUniforms = { ...uniforms };
+    if (Array.isArray(uniforms[key].thisUniformDefaultValue)) {
       if (index !== null)
-        (updatedUniforms[key] as number[])[index] = newValue as number;
+        (uniforms[key].thisUniformDefaultValue as number[])[index] = newValue as number;
     } else {
-      updatedUniforms[key] = newValue;
+      uniforms[key].thisUniformDefaultValue = newValue;
     }
-    onUpdate?.(updatedUniforms); // Trigger callback
+    onUpdate?.(uniforms); // Trigger callback
   };
 
   function splitArrayIntoGroups(array: number[], groupSize:number): number[][] {
@@ -157,43 +166,78 @@ onMount(async () => {
 </script>
 
 <div>
-  {#each Object.entries(uniforms) as [key, value]}
+  {#each uniforms as {thisUniformName, thisUniformNameJustForDisplay, thisUniformType, thisUniformDefaultValue}, ii (thisUniformName)}
     <div>
-      <strong>{key} ({getType(value)}):</strong>
+      <strong>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</strong>
       <!-- Render inputs based on type -->
-      {#if (getType(value).startsWith("vec") || getType(value).startsWith("ivec")) && value instanceof Array}
+      {#if ((thisUniformType ?? "").startsWith("vec") || (thisUniformType ?? "").startsWith("ivec") || (thisUniformType ?? "").startsWith("uvec")) && thisUniformDefaultValue instanceof Array}
         <table class="center-align">
           <thead>
             <tr>
-              <th>x</th>
-              <th>y</th>
-              {#if value.length >= 3}
+              {#if thisUniformDefaultValue.length >= 2}
+                <th>x</th>
+                <th>y</th>
+              {/if}
+              {#if thisUniformDefaultValue.length >= 3}
                 <th>z</th>
               {/if}
-              {#if value.length >= 4}
+              {#if thisUniformDefaultValue.length >= 4}
                 <th>a</th>
               {/if}
             </tr>
           </thead>
           <tbody>
             <tr>
-              {#each value as v, i}
+              {#each thisUniformDefaultValue as v, i}
                 <td class="s2 field small border">
                   <input
                     type="number"
                     step="0.01"
                     value={v}
                     on:input={(e) =>
-                      updateUniform(key, i, parseFloat(e.currentTarget.value))}
+                      updateUniform(ii, i, parseFloat(e.currentTarget.value))}
                   />
                 </td>
               {/each}
             </tr>
           </tbody>
         </table>
-      {:else if getType(value).startsWith("mat") && value instanceof Array}
-        {#if value.length === 9}
-          {#each splitArrayIntoGroups(value,3) as r, ri }
+      {:else if (thisUniformType ?? "").startsWith("mat") && thisUniformDefaultValue instanceof Array}
+        {#if thisUniformDefaultValue.length === 4}
+          {#each splitArrayIntoGroups(thisUniformDefaultValue,2) as r, ri }
+            <table class="center-align">
+              <thead>
+                <tr>
+                  {#if ri === 0}
+                    <th>x0</th>
+                    <th>x1</th>
+                  {/if}
+                  {#if ri === 1}
+                    <th>y0</th>
+                    <th>y1</th>
+                  {/if}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {#each r as c, ci }
+                    <td class="s2 field small border">
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={c}
+                        on:input={(e) =>
+                        updateUniform(ii, ri * 2 + ci, parseFloat(e.currentTarget.value))}
+                      />
+                    </td>
+                  {/each}
+                </tr>
+              </tbody>
+            </table>
+          {/each}
+        {/if}
+        {#if thisUniformDefaultValue.length === 9}
+          {#each splitArrayIntoGroups(thisUniformDefaultValue,3) as r, ri }
             <table class="center-align">
               <thead>
                 <tr>
@@ -223,7 +267,7 @@ onMount(async () => {
                         step="0.01"
                         value={c}
                         on:input={(e) =>
-                        updateUniform(key, ri * 3 + ci, parseFloat(e.currentTarget.value))}
+                        updateUniform(ii, ri * 3 + ci, parseFloat(e.currentTarget.value))}
                       />
                     </td>
                   {/each}
@@ -232,43 +276,120 @@ onMount(async () => {
             </table>
           {/each}
         {/if}
-      {:else if getType(value) === "bool" && typeof value === "boolean"}
-        <label class="checkbox icon">
+        {#if thisUniformDefaultValue.length === 16}
+          {#each splitArrayIntoGroups(thisUniformDefaultValue,4) as r, ri }
+            <table>
+              <thead>
+                <tr>
+                  {#if ri === 0}
+                    <th>x0</th>
+                    <th>x1</th>
+                    <th>x2</th>
+                    <th>x3</th>
+                  {/if}
+                  {#if ri === 1}
+                    <th>y0</th>
+                    <th>y1</th>
+                    <th>y2</th>
+                    <th>y3</th>
+                  {/if}
+                  {#if ri === 2}
+                    <th>z0</th>
+                    <th>z1</th>
+                    <th>z2</th>
+                    <th>z3</th>
+                  {/if}
+                  {#if ri === 3}
+                    <th>a0</th>
+                    <th>a1</th>
+                    <th>a2</th>
+                    <th>a3</th>
+                  {/if}
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  {#each r as c, ci }
+                    <td class="s2 field small border">
+                      <input
+                        type="number"
+                        step="0.01"
+                        value={c}
+                        on:input={(e) =>
+                        updateUniform(ii, ri * 4 + ci, parseFloat(e.currentTarget.value))}
+                      />
+                    </td>
+                  {/each}
+                </tr>
+              </tbody>
+            </table>
+          {/each}
+        {/if}
+      {:else if (thisUniformType ?? "") === "bool" && typeof thisUniformDefaultValue === "boolean"}
+        <label class="switch">
           <input
             type="checkbox"
-            checked={value}
-            on:change={(e) => updateUniform(key, null, e.currentTarget.checked)}
+            checked={thisUniformDefaultValue}
+            on:change={(e) => updateUniform(ii, null, e.currentTarget.checked)}
           />
           <span>
-            <i>close</i>
-            <i>done</i>
+            <i></i>
+            <i></i>
           </span>
         </label>
-      {:else if getType(value) === "float" || getType(value) === "int"}
+      {:else if (thisUniformType ?? "") === "float" || (thisUniformType ?? "") === "int" || (thisUniformType ?? "") === "uint"}
         <div class="grid">
           <div class="s2 field small border">
             <input
               type="number"
               step="1"
-              {value}
+              value={thisUniformDefaultValue}
               on:input={(e) =>
                 updateUniform(
-                  key,
+                  ii,
                   null,
-                  getType(value) === "int"
-                    ? parseInt(e.currentTarget.value)
+                  (thisUniformType ?? "") === "int" || (thisUniformType ?? "") === "uint"
+                    ? parseInt  (e.currentTarget.value)
                     : parseFloat(e.currentTarget.value),
                 )}
             />
           </div>
         </div>
-      {:else if getType(value) === "sampler2D" && typeof value === "string"}
-        <span>sampler2D (not editable)</span>
-        <img class="small-width small-height" src={value} alt=""/>
+      {:else if ((thisUniformType ?? "") === "sampler2D" || (thisUniformType ?? "") === "sampler3D") && typeof thisUniformDefaultValue === "string"}
+        <!-- <span>sampler2D (not editable)</span> -->
+        <img class="small-width small-height" src={thisUniformDefaultValue} alt="" bind:this={imageElement}/>
+        <!-- {#if (thisUniformName ?? "").startsWith("noise")}
+          
+        {:else if (thisUniformName ?? "").startsWith("bayer")}
+        {:else if (thisUniformName ?? "").startsWith("pallete")}
+        {/if} -->
+        <div class="field label suffix round border">
+          <select on:change={async (e) => {
+            let chosen = e.currentTarget.options[e.currentTarget.selectedIndex].value;
+            if (chosen === "none") {
+              return;
+            }
+            imageElement.src = chosen;
+            updateUniform(ii, null, chosen);
+          }}>
+            {#each ((thisUniformName ?? "").startsWith("noise") ? texturesNoise : 
+                    (thisUniformName ?? "").startsWith("bayer") ? texturesBayer : 
+                    (thisUniformName ?? "").startsWith("pallete") ? texturesPallete : 
+                    [{ name: "none", path: "none", }]) as textureForShader (textureForShader)}
+              <option value={textureForShader.path}>{textureForShader.name}</option>            
+            {/each}
+          </select>
+          <!-- svelte-ignore a11y-label-has-associated-control -->
+          <label>Texture For Shader</label>
+          <i>arrow_drop_down</i>
+      </div>
+
       {:else}
         <span>Unsupported type</span>
       {/if}
     </div>
+    <div class="large-space"></div>
+    <div class="large-space"></div>
   {/each}
 </div>
 

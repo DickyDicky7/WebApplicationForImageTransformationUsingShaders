@@ -4,13 +4,21 @@ type GLSLUniformValue =
 | number[] //       VEC MAT
 | string;  // SAMPLER2D
 
-      interface    GLSLUniforms
+type GLSLUniform_     =
 {
-    [key: string]: GLSLUniformValue;
-};
+    thisUniformName              : string           | null,
+    thisUniformNameJustForDisplay: string           | null,
+    thisUniformType              : string           | null,
+    thisUniformDefaultValue      : GLSLUniformValue | null,
+}
+
+type GLSLUniforms     = Array<
+     GLSLUniform_            >;
 
 export type
 {
      GLSLUniformValue,
      GLSLUniforms    ,
+     GLSLUniform_    ,
 };
+

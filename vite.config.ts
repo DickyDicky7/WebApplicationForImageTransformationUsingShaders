@@ -22,7 +22,7 @@ const viteServerConfig = () => ({
 export default defineConfig({
   plugins: [svelte(), viteServerConfig(), nodePolyfills(),basicSsl(),],
   server: {
-    "host": "192.168.1.133", //YOUR IP-V4
+    "host": "192.168.6.150", //YOUR IP-V4
   },
   assetsInclude: ["**/*.glsl"]
 });

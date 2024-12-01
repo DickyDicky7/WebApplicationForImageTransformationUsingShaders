@@ -616,6 +616,18 @@ let uniforms: GLSLUniforms = [
     while ((match = uniformRegex.exec(glslCode)) !== null) {
         const [, type, name, , defaultValueRaw] = match;
 
+        //guard - filter
+        //not editable - auto set internal
+        if (name === "tex0"
+        ||  name === "vTexCoord"
+        ||  name === "fragColor"
+        ||  name === "time"
+        ||  name === "canvasSize"
+        ||  name === "texelSize"
+        ) {
+            continue;
+        }
+
         // Parse the default value based on type
         let parsedValue: GLSLUniformValue | null = null;
         if (defaultValueRaw) {
@@ -973,7 +985,11 @@ console.log(await res.text())
     <i>arrow_drop_down</i>
 </div>
 
+<h1 class="large">Test 1</h1>
 <GLSLUniform uniforms={uniforms} onUpdate={handleUpdate} />
+
+<h1 class="large">Test 2</h1>
+<GLSLUniform uniforms={result  } onUpdate={handleUpdate} />
 
 </main>
 

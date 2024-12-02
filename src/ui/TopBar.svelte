@@ -42,7 +42,7 @@
     }
 </script>
 <div class="row">
-    <button class="primary-container">
+    <button class="">
         <i>upload</i>
         <span>Upload Image Or Video</span>
         <slot></slot>
@@ -59,13 +59,13 @@
 </div>
 <div>
     <button 
-        class="primary-container"
+        class=""
         on:click={() => {isDialogShow = true;}}>
         <i>download</i>
         <span>Download</span>
     </button>
     <button 
-        class="primary-container"
+        class=""
         on:click={share}>
         <i>share</i>
         <span>Share</span>
@@ -97,12 +97,12 @@
             {/if}
             <div class="actions">
                 <button 
-                    class="responsive primary-container"
+                    class="responsive "
                     on:click={save}>
                     <span>Save</span>
                 </button>
                 <button 
-                    class="responsive primary-container"
+                    class="responsive "
                     on:click={() => {isDialogShow = false;}}>
                     <span>Cancel</span>
                 </button>

@@ -1,9 +1,7 @@
-<!-- <div class="header">
-    <h3>Header</h3>
-</div>
+<!-- <h3>Header</h3>
 <style>
-    .header {
-        width: 100%;
-        padding: 10px;
+    h3 {
+        font-family: 'Poppins', sans-serif;
+        color: #333; 
     }
 </style> -->

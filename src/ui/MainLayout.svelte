@@ -4,9 +4,7 @@
     import TopBar from "./TopBar.svelte";
     import SideBar from "./SideBar.svelte";
 
-
-
-    import          "beercss"       ;
+import          "beercss"       ;
     import "material-dynamic-colors";
 
     import   p5        from "p5";
@@ -24,7 +22,7 @@
     //   });
     // })();
 
-    const DEFAULT_CANVAS_SIZE = { WIDTH: 350, HEIGHT: 350 };
+    const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
     const DPR = window.devicePixelRatio || 1;
     let i: p5.Image;
     const p5Logic = (p: p5) => {
@@ -56,7 +54,7 @@
     onMount(async ()  : Promise<void> => {
     console.log("on mount");
         canvasInstance = new p5(p5Logic, canvas);
-        await ui("theme", "#006876")
+        await ui("theme", "#006a60")
         
     });
 
@@ -570,26 +568,336 @@ const  loadAsset = async (assetPath: string): Promise<string> => {
 //#version 300 es
 
 import type { GLSLUniformValue,
-    GLSLUniforms,} from "../types";
+    GLSLUniforms, GLSLUniform_} from "../types";
 
 // Example uniforms
-let uniforms: GLSLUniforms = {
-    uTime: 1.0,
-    uBool: true,
-    uResolution: [800, 600],
-    uMouse: [0.5, 0.5],
-    uTransform: [1, 0, 0, 0, 1, 0, 0, 0, 1], // mat3 example
-    uSampler: data.publicUrl,
-    uIntensity: 5, // int
-    uColor: [1.0, 0.5, 0.2, 1.0], // vec4
-  };
+let uniforms: GLSLUniforms = [
+    { thisUniformName: "a", thisUniformNameJustForDisplay: "a", thisUniformType: "float", thisUniformDefaultValue: 0.0   },
+    { thisUniformName: "b", thisUniformNameJustForDisplay: "b", thisUniformType: "int"  , thisUniformDefaultValue: 0     },
+    { thisUniformName: "c", thisUniformNameJustForDisplay: "c", thisUniformType: "bool" , thisUniformDefaultValue: false },    
+    
+    { thisUniformName: "d", thisUniformNameJustForDisplay: "d", thisUniformType: "vec2", thisUniformDefaultValue: [0.0, 0.0          ] },
+    { thisUniformName: "e", thisUniformNameJustForDisplay: "e", thisUniformType: "vec3", thisUniformDefaultValue: [0.0, 0.0, 0.0     ] },
+    { thisUniformName: "f", thisUniformNameJustForDisplay: "f", thisUniformType: "vec4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0] },
+    
+    { thisUniformName: "g", thisUniformNameJustForDisplay: "g", thisUniformType: "ivec2", thisUniformDefaultValue: [0, 0      ] },
+    { thisUniformName: "h", thisUniformNameJustForDisplay: "h", thisUniformType: "ivec3", thisUniformDefaultValue: [0, 0, 0   ] },
+    { thisUniformName: "i", thisUniformNameJustForDisplay: "i", thisUniformType: "ivec4", thisUniformDefaultValue: [0, 0, 0, 0] },
+    
+    { thisUniformName: "j", thisUniformNameJustForDisplay: "j", thisUniformType: "mat2", thisUniformDefaultValue: [0.0, 0.0,          
+                                                                                                                   0.0, 0.0            ] },
+    { thisUniformName: "k", thisUniformNameJustForDisplay: "k", thisUniformType: "mat3", thisUniformDefaultValue: [0.0, 0.0, 0.0,
+                                                                                                                   0.0, 0.0, 0.0,
+                                                                                                                   0.0, 0.0, 0.0       ] },
+    { thisUniformName: "l", thisUniformNameJustForDisplay: "l", thisUniformType: "mat4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0,
+                                                                                                                   0.0, 0.0, 0.0, 0.0, 
+                                                                                                                   0.0, 0.0, 0.0, 0.0,
+                                                                                                                   0.0, 0.0, 0.0, 0.0  ] },
+    
+   
+    { thisUniformName: "m", thisUniformNameJustForDisplay: "m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
+    { thisUniformName: "noise_m", thisUniformNameJustForDisplay: "noise_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
+    { thisUniformName: "bayer_m", thisUniformNameJustForDisplay: "bayer_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
+    { thisUniformName: "pallete_m", thisUniformNameJustForDisplay: "pallete_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
+];
 
   // Handle updates to uniforms
   const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
     uniforms = updatedUniforms;
     console.log("Updated uniforms:", uniforms);
   };
-    const saveImage = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
+
+
+  function parseGLSL(glslCode: string): GLSLUniforms {
+    const uniformRegex = /uniform\s+(\w+)\s+(\w+)\s*;\s*(\/\/\s*([\w.\-, ]+))?/g;
+    const uniforms: GLSLUniforms = [];
+    let match;
+
+    while ((match = uniformRegex.exec(glslCode)) !== null) {
+        const [, type, name, , defaultValueRaw] = match;
+
+        //guard - filter
+        //not editable - auto set internal
+        if (name === "tex0"
+        ||  name === "vTexCoord"
+        ||  name === "fragColor"
+        ||  name === "time"
+        ||  name === "canvasSize"
+        ||  name === "texelSize"
+        ) {
+            continue;
+        }
+
+        // Parse the default value based on type
+        let parsedValue: GLSLUniformValue | null = null;
+        if (defaultValueRaw) {
+            const cleanedValue = defaultValueRaw.replace(/\s+/g, ""); // Remove spaces
+
+            switch (type) {
+                case "float":
+                case "int":
+                case "uint":
+                    parsedValue = parseFloat(cleanedValue);
+                    break;
+                case "bool":
+                    parsedValue = cleanedValue === "true";
+                    break;
+                case "vec2":
+                case "vec3":
+                case "vec4":
+                case "ivec2":
+                case "ivec3":
+                case "ivec4":    
+                case "uvec2":
+                case "uvec3":
+                case "uvec4":    
+                case "mat2":
+                case "mat3":
+                case "mat4":
+                    parsedValue = cleanedValue.split(",").map(v => parseFloat(v));
+                    break;
+                case "sampler2D":
+                case "sampler3D":
+                // case "samplerCube":
+                    parsedValue = cleanedValue; // Use the raw string for sampler types
+                    break;
+                default:
+                    parsedValue = null; // Unsupported type
+                    // bvec2
+                    // bvec3
+                    // bvec4
+                    // mat2x3
+                    // mat2x4
+                    // mat3x2
+                    // mat3x4
+                    // mat4x2
+                    // mat4x3
+
+                    // samplerCube 
+                    // sampler2DArray 
+                    // sampler2DShadow 
+                    // samplerCubeShadow 
+                    // isampler2D 
+                    // isampler3D 
+                    // isamplerCube 
+                    // isampler2DArray 
+                    // usampler2D 
+                    // usampler3D 
+                    // usamplerCube 
+                    // usampler2DArray 
+                    // struct
+            }
+        }
+
+        uniforms.push({
+            thisUniformName: name,
+            thisUniformNameJustForDisplay: null,
+            thisUniformType: type,
+            thisUniformDefaultValue: parsedValue,
+        });
+    }
+
+    return uniforms;
+}
+
+// Example GLSL code
+const glslCode = `
+#version 300 es
+precision highp float;
+
+uniform sampler2D  tex0;
+in      vec2           vTexCoord;
+out     vec4           fragColor;
+uniform float      time;
+uniform vec2 canvasSize;
+uniform vec2           texelSize; // - 1.0  , 0.0
+
+uniform float    PI    ;                             // 3.14
+uniform float    scan_line_amount    ;//   1.0 
+uniform float         warp_amount    ;//   0.1 
+uniform float        noise_amount    ;//   0.03
+uniform float interference_amount    ;//   0.2 
+uniform float       grille_amount    ;//   0.1 
+uniform float       grille_size      ;//   1.0 
+uniform float     vignette_amount    ;//   0.6 
+uniform float     vignette_intensity ;//   0.4 
+uniform float    aberation_amount    ;//   0.5 
+uniform float    roll_line_amount    ;//   0.3 
+uniform float    roll_speed          ;//   1.0 
+uniform float    scan_line_strength  ;// - 8.0 
+uniform float        pixel_strength  ;// - 2.0 
+
+float random(vec2 uv) {
+    return fract(cos(uv.x * 83.4827
+                   + uv.y * 92.2842) * 43758.5453123);
+}
+
+vec3 fetch_pixel(vec2 uv, vec2 off) {
+    vec2 pos = floor(uv * canvasSize + off) / canvasSize + vec2(0.5) / canvasSize;
+
+    float noise        = 0.0;
+    if (  noise_amount > 0.0) {
+          noise        = random(pos + fract(time))
+       *  noise_amount;
+    }
+
+    if (max(abs(pos.x - 0.5),
+            abs(pos.y - 0.5)) > 0.5) {
+        return vec3(0.0, 0.0, 0.0);
+    }
+
+    vec3   clr = texture(tex0, pos, -16.0).rgb + noise;
+    return clr;
+}
+
+// Distance in emulated pixels to nearest texel @@@@.
+vec2 Dist(vec2 pos) {
+               pos =       pos   * canvasSize;
+    return - ((pos - floor(pos)) - vec2(0.5));
+}
+
+// 1D@@@@@@ @@ Gaussian @@@@@@ @@ @@@@@@@ @@@@@ @@@@.
+float Gaus(float pos, float scale) {
+    return
+      exp2(                 scale * pos
+                                  * pos);
+}
+
+// 3-tap@@@ @@ Gaussian filter @@ along@@ horz@ line.
+vec3 Horz3(vec2 pos, float off) {
+    vec3 b = fetch_pixel(pos, vec2(-1.0, off));
+    vec3 c = fetch_pixel(pos, vec2( 0.0, off));
+    vec3 d = fetch_pixel(pos, vec2( 1.0, off));
+    float dst = Dist(pos).x;
+
+    // Convert distance to weight.
+    float scale = pixel_strength;
+    float wb = Gaus(dst - 1.0, scale);
+    float wc = Gaus(dst + 0.0, scale);
+    float wd = Gaus(dst + 1.0, scale);
+
+    // Return@ filtered @@ sample.
+    return (b * wb + c * wc + d * wd) / (wb + wc + wd);
+}
+
+// Return scanline weight @@@@@ @@ @@@@@@ @@@@@.
+float Scan(vec2 pos, float off) {
+    float       dst = Dist(pos).y;
+
+    return Gaus(dst + off, scan_line_strength);
+}
+
+// Allow@ nearest@ three@ lines to effect pixel.
+vec3 Tri(vec2 pos) {
+    vec3 clr = fetch_pixel(pos, vec2(0.0));
+    if (scan_line_amount > 0.0) {
+        vec3 a = Horz3(pos, -1.0);
+        vec3 b = Horz3(pos,  0.0);
+        vec3 c = Horz3(pos,  1.0);
+
+        float wa = Scan(pos, -1.0);
+        float wb = Scan(pos,  0.0);
+        float wc = Scan(pos,  1.0);
+
+        vec3 scanlines = a * wa
+                       + b * wb
+                       + c * wc                       ;
+           clr = mix(clr, scanlines, scan_line_amount);
+    }
+    return clr;
+}
+
+// Takes in the UV and warps the edges, creating the spherized effect
+vec2 warp(vec2 uv) {
+    vec2  delta = uv - 0.5;
+    float delta2 = dot(delta.xy, delta.xy);
+    float delta4 =       delta2 *      delta2;
+    float delta_offset = delta4 * warp_amount;
+
+    vec2    warped = uv + delta *                     delta_offset;
+    return (warped - 0.5) / mix(1.0, 1.2, warp_amount / 5.0) + 0.5;
+}
+
+float vignette(vec2 uv) {
+                    uv *= 1.0 - uv.xy;
+    float      vignette = uv.x
+                        * uv.y
+                        * 15.0;
+    return pow(vignette, vignette_intensity * vignette_amount);
+}
+
+float floating_mod(float a
+,                  float b) {
+    return a - b * floor(
+           a / b        );
+}
+
+vec3 grille(vec2 uv) {
+    float  unit =         PI / 3.0        ;
+    float scale = 2.0 * unit / grille_size;
+    float r = smoothstep(0.5, 0.8, cos(uv.x * scale - unit));
+    float g = smoothstep(0.5, 0.8, cos(uv.x * scale + unit));
+    float b = smoothstep(0.5, 0.8, cos(uv.x * scale + 3.0 * unit));
+    return mix(vec3(1.0), vec3(r, g, b), grille_amount);
+}
+
+float roll_line(vec2 uv) {
+    float x =  uv.y  * 3.0 - time * roll_speed;
+    float f = cos(x) * cos(x * 2.35 + 1.1)
+                     * cos(x * 4.45 + 2.3);
+    float  roll_line = smoothstep(0.5, 0.9, f);
+    return roll_line *
+           roll_line_amount;
+}
+
+void main() {
+    vec2 pix =   gl_FragCoord.xy;
+    vec2 pos = warp(vTexCoord)  ;
+
+    float    line =        0.0  ;
+    if (roll_line_amount > 0.0) {
+             line =
+        roll_line(pos);
+    }
+
+    vec2 sq_pix = floor(pos * canvasSize) / canvasSize +   vec2(0.5)  / canvasSize  ;
+    if (                          interference_amount  + roll_line_amount > 0.0) {
+        float     interference =     random(sq_pix.yy  + fract(time));
+        pos.x += (interference * (interference_amount  + line * 6.0)) / canvasSize.x;
+    }
+
+    vec3 clr = Tri(pos);
+    if (aberation_amount > 0.0) {
+        float chromatic   = aberation_amount + line * 2.0;
+        vec2  chromatic_x = vec2(     chromatic , 0.0) / canvasSize.x;
+        vec2  chromatic_y = vec2(0.0, chromatic / 2.0) / canvasSize.y;
+        float r = Tri(pos - chromatic_x).r;
+        float g = Tri(pos + chromatic_y).g;
+        float b = Tri(pos + chromatic_x).b;
+        clr = vec3(r, g, b);
+    }
+
+    if (     grille_amount > 0.0    )
+    clr *=   grille(pix);
+    clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
+    if(    vignette_amount > 0.0    )
+    clr *= vignette(pos);
+
+    fragColor.rgb = clr;
+    fragColor.a   = 1.0;
+}
+
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+// https://godotshaders.com/shader/realistic-crt-shader/
+// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+
+
+    
+`;
+
+const result = parseGLSL(glslCode);
+console.log(result);
+const saveImage = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
         canvasInstance.saveCanvas(
             `test_image_${new Date().toLocaleString()}`,
             imageFormats[imageFormatSelection.selectedIndex].extension); 
@@ -597,14 +905,13 @@ let uniforms: GLSLUniforms = {
     const saveVideo = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
          mediaRecorder.stop(); 
     }
-
 </script>
 <main>
     <div class="container">
-        <div class="headerContainer">
+        <div class="headerContainer grey-border border">
             <Header/>
         </div>
-        <div class="topBarContainer">
+        <div class="topBarContainer amber7 grey-border border">
             <TopBar
                 imageFormatSelection={imageFormatSelection}
                 videoFormatSelection={videoFormatSelection}
@@ -624,16 +931,16 @@ let uniforms: GLSLUniforms = {
                     accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm"/>
             </TopBar>
         </div>
-        <div class="mainContainer">
-            <div class="sideBarContainer padding">
+        <div class="mainContainer grey-border border">
+            <div class="sideBarContainer grey-border border">
                 <SideBar 
                     uniforms={uniforms} onUpdate={handleUpdate}/>
             </div>
-            <div class="canvasContainer">
-                <div class="canvasTool">
+            <div class="canvasContainer grey-border border">
+                <div class="canvasTool grey-border border">
                     
                 </div>
-                <div class="canvas">
+                <div class="canvas grey-border border">
                     <div 
                         bind:this={canvas} 
                         on:change={()=>{console.log("change")}}>
@@ -641,7 +948,7 @@ let uniforms: GLSLUniforms = {
                 </div>
             </div>
         </div>
-        <div class="footerContainer">
+        <div class="footerContainer grey-border border">
             <Footer/>
         </div>
     </div>
@@ -674,29 +981,29 @@ let uniforms: GLSLUniforms = {
         flex-direction: row;
     }
     .sideBarContainer {
-        width: 30%;
+        width: 40%;
         height: 100%;
-        overflow-x: scroll;
     }
     .canvasContainer {
-        width: 70%;
+        width: 60%;
         height: 100%;
         display: flex;
         flex-direction: column;
     }
     .canvasTool {
         width: 100%;
-        height: 30%;
+        height: 20%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
     }
     .canvas {
         width: 100%;
-        height: 70%;
+        height: 80%;
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
+        overflow: scroll;
     }
 </style>

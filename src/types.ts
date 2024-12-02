@@ -14,3 +14,10 @@ export type
      GLSLUniformValue,
      GLSLUniforms    ,
 };
+
+export enum MODE
+{
+    IMAGE,
+    VIDEO,
+    WEBCAM,
+};

@@ -149,183 +149,140 @@
         return result;
     }, []);
     }
+    let activeTab = Object.keys(uniforms)[0];
+    const selectTab = (tab: string) => {
+        activeTab = tab;
+    }
+    
 </script>
-<div class="sidebar">
+<div class="grid">
     {#each Object.entries(uniforms) as [key, value]}
-    <div>
-    <strong>{key} ({getType(value)}):</strong>
-    <!-- Render inputs based on type -->
-        {#if (getType(value).startsWith("vec") || getType(value).startsWith("ivec")) && value instanceof Array}
-            <table class="center-align">
-                <thead>
-                    <tr>
-                        <th>x</th>
-                        <th>y</th>
-                        {#if value.length >= 3}
-                            <th>z</th>
-                        {/if}
-                        {#if value.length >= 4}
-                            <th>a</th>
-                        {/if}
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                    {#each value as v, i}
-                        <td class="s2 field small border">
-                        <input
-                            type="number"
-                            step="0.01"
-                            value={v}
-                            on:input={(e) =>
-                            updateUniform(key, i, parseFloat(e.currentTarget.value))}
-                        />
-                        </td>
-                    {/each}
-                    </tr>
-                </tbody>
-            </table>
-        {:else if getType(value).startsWith("mat") && value instanceof Array}
-            {#if value.length === 9}
-                {#each splitArrayIntoGroups(value,3) as r, ri }
-                    <!-- <table class="center-align">
-                    <thead>
-                        <tr>
-                        {#if ri === 0}
-                            <th>x0</th>
-                            <th>x1</th>
-                            <th>x2</th>
-                        {/if}
-                        {#if ri === 1}
-                            <th>y0</th>
-                            <th>y1</th>
-                            <th>y2</th>
-                        {/if}
-                        {#if ri ===2}
-                            <th>z0</th>
-                            <th>z1</th>
-                            <th>z2</th>
-                        {/if}
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                        {#each r as c, ci }
-                            <td class="s2 field small border">
-                            <input
-                                type="number"
-                                step="0.01"
-                                value={c}
-                                on:input={(e) =>
-                                updateUniform(key, ri * 3 + ci, parseFloat(e.currentTarget.value))}
-                            />
-                            </td>
-                        {/each}
-                        </tr>
-                    </tbody>
-                    </table> -->
-                {/each}
-            {/if}
-        {:else if getType(value) === "bool" && typeof value === "boolean"}
-            <!-- <label class="checkbox icon">
-            <input
-                type="checkbox"
-                checked={value}
-                on:change={(e) => updateUniform(key, null, e.currentTarget.checked)}
-            />
-            <span>
-                <i>close</i>
-                <i>done</i>
-            </span>
-            </label> -->
-        {:else if getType(value) === "float" || getType(value) === "int"}
-            <!-- <div class="grid">
-                <div class="s2 field small border">
-                    <input
-                    type="number"
-                    step="1"
-                    {value}
-                    on:input={(e) =>
-                        updateUniform(
-                        key,
-                        null,
-                        getType(value) === "int"
-                            ? parseInt(e.currentTarget.value)
-                            : parseFloat(e.currentTarget.value),
-                        )}
-                    />
-                </div>
-            </div> -->
-        {:else if getType(value) === "sampler2D" && typeof value === "string"}
-            <!-- <span>sampler2D (not editable)</span>
-            <img class="small-width small-height" src={value} alt=""/> -->
-        {:else}
-            <span>Unsupported type</span>
-        {/if}
-    </div>
+        <button
+            class="s12 m6 l3 {activeTab === key ? 'primary-container' : 'surface-dim'}"
+            on:click={() => selectTab(key)}>
+            <span>{key}</span>
+        </button>
     {/each}
 </div>
+
+
+{#each Object.entries(uniforms) as [key, value]}
+    {#if activeTab === key}
+        <div class="padding">
+            <strong>({getType(value)}):</strong>
+            <!-- Render inputs based on type -->
+                {#if (getType(value).startsWith("vec") || getType(value).startsWith("ivec")) && value instanceof Array}
+                    <table class="center-align">
+                        <thead>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                {#each value as v, i}
+                                    <td>
+                                        <div class="field label border round">
+                                            <input
+                                                type="number"
+                                                step="0.01"
+                                                value={v}
+                                                on:input={(e) =>
+                                                updateUniform(key, i, parseFloat(e.currentTarget.value))}
+                                            />
+                                            {#if i === 0}
+                                                <label>x</label>
+                                            {:else if i === 1}
+                                                <label>y</label>
+                                            {:else if i === 2}
+                                                <label>z</label>
+                                            {:else}
+                                                <label>a</label>
+                                            {/if}
+                                        </div>
+                                    </td>
+                                {/each}
+                            </tr>
+                        </tbody>
+                    </table>
+                {:else if getType(value).startsWith("mat") && value instanceof Array}
+                    {#if value.length === 9}
+                        {#each splitArrayIntoGroups(value,3) as r, ri }
+                            <table class="center-align">
+                            <thead>
+                                <tr>
+                                {#if ri === 0}
+                                    <th>x0</th>
+                                    <th>x1</th>
+                                    <th>x2</th>
+                                {/if}
+                                {#if ri === 1}
+                                    <th>y0</th>
+                                    <th>y1</th>
+                                    <th>y2</th>
+                                {/if}
+                                {#if ri ===2}
+                                    <th>z0</th>
+                                    <th>z1</th>
+                                    <th>z2</th>
+                                {/if}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                {#each r as c, ci }
+                                    <td class="s2 field small border">
+                                    <input
+                                        type="number"
+                                        step="0.01"
+                                        value={c}
+                                        on:input={(e) =>
+                                        updateUniform(key, ri * 3 + ci, parseFloat(e.currentTarget.value))}
+                                    />
+                                    </td>
+                                {/each}
+                                </tr>
+                            </tbody>
+                            </table>
+                        {/each}
+                    {/if}
+                {:else if getType(value) === "bool" && typeof value === "boolean"}
+                    <!-- <label class="checkbox icon">
+                    <input
+                        type="checkbox"
+                        checked={value}
+                        on:change={(e) => updateUniform(key, null, e.currentTarget.checked)}
+                    />
+                    <span>
+                        <i>close</i>
+                        <i>done</i>
+                    </span>
+                    </label> -->
+                {:else if getType(value) === "float" || getType(value) === "int"}
+                    <!-- <div class="grid">
+                        <div class="s2 field small border">
+                            <input
+                            type="number"
+                            step="1"
+                            {value}
+                            on:input={(e) =>
+                                updateUniform(
+                                key,
+                                null,
+                                getType(value) === "int"
+                                    ? parseInt(e.currentTarget.value)
+                                    : parseFloat(e.currentTarget.value),
+                                )}
+                            />
+                        </div>
+                    </div> -->
+                {:else if getType(value) === "sampler2D" && typeof value === "string"}
+                    <!-- <span>sampler2D (not editable)</span>
+                    <img class="small-width small-height" src={value} alt=""/> -->
+                {:else}
+                    <span>Unsupported type</span>
+                {/if}
+        </div>
+    {/if}
+{/each}
+
 <style>
-    .sidebar {
-        width: 100%;
-        height: 100%;
-        padding: 10px;
-        border: solid 1px;
-    }
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin: 10px 0;
-        font-size: 14px;
-        text-align: left;
-        background-color: #fff;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        overflow: hidden;
-    }
-    thead {
-        background-color: #007BFF; /* Màu xanh header */
-        color: #fff;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-
-    /* th, td {
-        padding: 10px;
-        border: 1px solid #ddd;
-        text-align: center;
-    } */
-
-    /* th {
-        font-size: 12px;
-        letter-spacing: 0.5px;
-    } */
-
-    /* tbody tr {
-        transition: background-color 0.2s ease-in-out;
-    } */
-
-    /* tbody tr:nth-child(even) {
-        background-color: #f2f2f2; 
-    } */
-
-    /* tbody tr:hover {
-        background-color: #e0f7fa;
-    } */
-
-    /* input[type="number"] {
-        width: 80%;
-        padding: 5px;
-        font-size: 14px;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        text-align: center;
-    } */
-
-    /* input[type="number"]:focus {
-        outline: none;
-        border-color: #007BFF;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
-    } */
 
 </style>

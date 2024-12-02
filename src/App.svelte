@@ -23,7 +23,7 @@
 
     const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
     const DPR = window.devicePixelRatio || 1;
-let i: p5.Image;
+    let i: p5.Image;
     const p5Logic = (p: p5) => {
           p.setup = (     ) => {
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR), p.WEBGL);

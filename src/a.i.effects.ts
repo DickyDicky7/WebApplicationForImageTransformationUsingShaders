@@ -4,6 +4,44 @@ import { streamText} from             "ai"             ;
 import type {LanguageModel} from "ai";
 const openRouter: OpenRouterProvider = createOpenRouter({ apiKey: import.meta.env.VITE_KEY001 });
 
+const newPrompt: string = `
+create a .glsl fragment shader that has Pixelated effect, return only the .glsl code, knowing the .glsl format is: 
+
+#version 300 es
+precision highp float;
+
+uniform         sampler2D          tex0;
+in              vec2          vTexCoord;
+out             vec4          fragColor;
+uniform         float              time;
+uniform         vec2         canvasSize;
+uniform         vec2          texelSize;
+uniform         vec4      mousePosition;
+
+uniform sampler2D   noise0;
+uniform sampler2D   noise1;
+uniform sampler2D   noise2;
+uniform sampler2D   bayer0;
+uniform sampler2D   bayer1;
+uniform sampler2D   bayer2;
+uniform sampler2D pallete0;
+uniform sampler2D pallete1;
+uniform sampler2D pallete2;
+uniform vec2        noise0Size;
+uniform vec2        noise1Size;
+uniform vec2        noise2Size;
+uniform vec2        bayer0Size;
+uniform vec2        bayer1Size;
+uniform vec2        bayer2Size;
+uniform vec2      pallete0Size;
+uniform vec2      pallete1Size;
+uniform vec2      pallete2Size;
+
+void main() {
+  //...
+}
+`;
+
 const f = async () => {
     const result = await streamText({
         model: openRouter("meta-llama/llama-3.1-70b-instruct:free") as LanguageModel,

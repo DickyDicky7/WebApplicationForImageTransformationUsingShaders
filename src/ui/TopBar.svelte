@@ -1,10 +1,6 @@
 <script lang="ts">
     import { MODE } from "../types";
 
-    export let imageFormatSelection;
-    export let videoFormatSelection;
-    export let imageFormats;
-    export let videoFormats;
     export let mode: MODE;
     export let shareImage: () => Promise<void>;
     export let shareVideo: () => Promise<void>;
@@ -15,21 +11,21 @@
 
     let isWebCamOn = false; 
     let isDialogShow = false;
-    function save(){
+    const save = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
         isDialogShow = false;
         if (mode === MODE.IMAGE){
-            saveImage;
+            saveImage(e);
         }
         else {
-            saveVideo;
+            saveVideo(e);
         }
     }
-    function share(){
+    const share = async() => {
         if (mode === MODE.IMAGE){
-            shareImage;
+            shareImage();
         }
         else {
-            shareVideo;
+            shareVideo();
         }
     }
     $: {
@@ -45,7 +41,7 @@
     <button class="">
         <i>upload</i>
         <span>Upload Image Or Video</span>
-        <slot></slot>
+        <slot name="file-input"></slot>
     </button>
     <div class="row middle-align center-align">
         <label class="switch icon">
@@ -75,25 +71,9 @@
     <div class="dialog">
         <div class="background padding absolute middle center round dialogContent">
             {#if mode === MODE.IMAGE}
-                <div class="field label suffix round border">
-                    <select bind:this={imageFormatSelection}>
-                    {#each imageFormats as imageFormat (imageFormat)}
-                        <option>{imageFormat.extension}</option>
-                    {/each}
-                    </select>
-                    <label>Image Format</label>
-                    <i>arrow_drop_down</i>
-                </div>
+                <slot name="image-format-selection"></slot>
             {:else if mode === MODE.VIDEO}
-                <div class="field label suffix round border">
-                    <select bind:this={videoFormatSelection}>
-                    {#each videoFormats as videoFormat (videoFormat)}
-                        <option>{videoFormat.mimeType}</option>            
-                    {/each}
-                    </select>
-                    <label>Video Format</label>
-                    <i>arrow_drop_down</i>
-                </div>
+                <slot name="video-format-selection"></slot>
             {/if}
             <div class="actions">
                 <button 

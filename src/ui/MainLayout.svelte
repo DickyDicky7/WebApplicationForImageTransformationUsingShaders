@@ -898,11 +898,12 @@ void main() {
 const result = parseGLSL(glslCode);
 console.log(result);
 const saveImage = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
+    console.log(imageFormatSelection)
         canvasInstance.saveCanvas(
             `test_image_${new Date().toLocaleString()}`,
             imageFormats[imageFormatSelection.selectedIndex].extension); 
     }
-    const saveVideo = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
+const saveVideo = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
          mediaRecorder.stop(); 
     }
 </script>
@@ -913,10 +914,6 @@ const saveImage = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButt
         </div>
         <div class="topBarContainer amber7 grey-border border">
             <TopBar
-                imageFormatSelection={imageFormatSelection}
-                videoFormatSelection={videoFormatSelection}
-                imageFormats={imageFormats}
-                videoFormats={videoFormats}
                 mode={mode}
                 shareImage={shareImage}
                 shareVideo={shareVideo}
@@ -925,10 +922,31 @@ const saveImage = async (e: MouseEvent & { currentTarget: EventTarget & HTMLButt
                 saveImage={saveImage}
                 saveVideo={saveVideo}>
                 <input
+                    slot="file-input"
                     bind:this={input}
                     on:change={onChange}
                     type="file"
                     accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm"/>
+                <div slot="image-format-selection"
+                    class="field label suffix round border">
+                    <select bind:this={imageFormatSelection}>
+                    {#each imageFormats as imageFormat (imageFormat)}
+                        <option>{imageFormat.extension}</option>
+                    {/each}
+                    </select>
+                    <label>Image Format</label>
+                    <i>arrow_drop_down</i>
+                </div>
+                <div slot="video-format-selection"
+                    class="field label suffix round border">
+                    <select bind:this={videoFormatSelection}>
+                    {#each videoFormats as videoFormat (videoFormat)}
+                        <option>{videoFormat.mimeType}</option>            
+                    {/each}
+                    </select>
+                    <label>Video Format</label>
+                    <i>arrow_drop_down</i>
+                </div>
             </TopBar>
         </div>
         <div class="mainContainer grey-border border">

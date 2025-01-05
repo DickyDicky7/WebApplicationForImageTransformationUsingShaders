@@ -11,8 +11,11 @@ uniform         vec4      mousePosition;
 
 // Number of tiles and fade speed
 // Number of tiles and fade speed
-const float numberOfTiles = 256.00;
-const float FadeSpeed     = 000.75;
+// const float numberOfTiles = 256.00;
+// const float FadeSpeed     = 000.75;
+
+uniform float numberOfTiles ; // 256.00
+uniform float FadeSpeed     ; // 000.75
 
 // Function to calculate modulo for vectors
 // Function to calculate modulo for vectors

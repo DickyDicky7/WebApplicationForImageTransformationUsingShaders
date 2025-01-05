@@ -1,8 +1,8 @@
 #version 300 es
 precision highp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //bayer
+uniform         sampler2D          tex0;
+uniform         sampler2D        bayer0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -10,10 +10,16 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#define H_STEPS 10.0
-#define S_STEPS 03.0
-#define V_STEPS 03.0
-#define DITHER_WIDTH 0.5
+// #define H_STEPS 10.0
+// #define S_STEPS 03.0
+// #define V_STEPS 03.0
+// #define DITHER_WIDTH 0.5
+// #define TIME (time * 0.2)
+
+uniform float H_STEPS      ; // 10.0
+uniform float S_STEPS      ; // 03.0
+uniform float V_STEPS      ; // 03.0
+uniform float DITHER_WIDTH ; // 00.5
 #define TIME (time * 0.2)
 
 
@@ -38,15 +44,15 @@ float orderedDither(float     value,
                     vec2  fragCoord, 
                     float     steps, 
                     float     width) {
-    float bayer  =  texture(tex1, (fragCoord / canvasSize.xy) * 0.1250).r;
+    float bayer  =  texture(bayer0, (fragCoord / canvasSize.xy) * 0.1250).r;
           value *=          steps ;
     float ditherMix = fract(value);
           ditherMix = smoothstep(0.5 - width * 0.5
-                    ,            0.5 + width * 0.5,  ditherMix        )  ;
+                    ,            0.5 + width * 0.5,  ditherMix          )  ;
     float  darkerColor = floor(value      ) / steps;
     float lighterColor = floor(value + 1.0) / steps;
     
-    return mix(darkerColor, lighterColor, 1.0 - step(ditherMix, bayer))  ;
+    return mix(darkerColor, lighterColor, 1.0 - step(ditherMix, bayer)  )  ;
 }
 
 void main() {

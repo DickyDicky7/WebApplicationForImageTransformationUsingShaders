@@ -9,6 +9,20 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
+// // MODES
+// // 0 - @@DEBUG@@
+// // 1 - @MULTIPLY
+// // 2 - @SCREEN@@
+// // 3 - SOFTLIGHT
+// // 4 - HARDLIGHT
+// // 5 - @OVERLAY@
+// const int  mode = 5;
+// const bool linearColorSpace = false;
+// const vec4 color1 =  vec4(1.0, 0.5, 0.8, 1.0);
+// const vec4 color2 =  vec4(0.4, 0.8, 1.0, 1.0);
+// const vec2 direction = vec2(1.0, 1.0);
+// const float  opacity =           0.5 ;
+
 // MODES
 // 0 - @@DEBUG@@
 // 1 - @MULTIPLY
@@ -16,12 +30,12 @@ uniform         vec4      mousePosition;
 // 3 - SOFTLIGHT
 // 4 - HARDLIGHT
 // 5 - @OVERLAY@
-const int  mode = 5;
-const bool linearColorSpace = false;
-const vec4 color1 =  vec4(1.0, 0.5, 0.8, 1.0);
-const vec4 color2 =  vec4(0.4, 0.8, 1.0, 1.0);
-const vec2 direction = vec2(1.0, 1.0);
-const float  opacity =           0.5 ;
+uniform int   mode             ; // 5
+uniform bool  linearColorSpace ; // false
+uniform vec4  color1           ; // 1.0, 0.5, 0.8, 1.0
+uniform vec4  color2           ; // 0.4, 0.8, 1.0, 1.0
+uniform vec2  direction        ; // 1.0, 1.0
+uniform float   opacity        ; // 0.5
 
  vec3 srgb_to_linear(vec3 c) {
     return c * (c * (c * 0.305306011

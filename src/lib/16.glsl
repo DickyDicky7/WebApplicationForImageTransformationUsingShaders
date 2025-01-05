@@ -25,7 +25,8 @@ uniform vec2           texelSize;
 //     return vec4(round(v.x), round(v.y), round(v.z), round(v.w));
 // }
 
-const float resolution = 32.0; // 4 - 16 - 32 - 64 - 128
+//const float resolution =    32.0; // 4 - 16 - 32 - 64 - 128
+uniform float resolution ; // 32.0
 void main() {
     fragColor = texture(tex0, round(vTexCoord * (resolution + 1.0) - (vTexCoord - 0.5)) / (resolution + 1.0));
 }

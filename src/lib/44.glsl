@@ -9,18 +9,31 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
+// // 振動の強さ
+// const float shake_powers     = 00.03;
+// // 振動ブロックサイズ
+// const float shake_block_size = 30.50;
+// // 色の分離率
+// const float             fade = 00.01;
+// // R方向
+// const vec2 direction_r = vec2(  1.0,  0.0 );
+// // G方向
+// const vec2 direction_g = vec2(  0.4,  1.0 );
+// // B方向
+// const vec2 direction_b = vec2( -0.7, -0.3 );
+
 // 振動の強さ
-const float shake_powers     = 00.03;
+uniform float shake_powers     ; // 00.03
 // 振動ブロックサイズ
-const float shake_block_size = 30.50;
+uniform float shake_block_size ; // 30.50
 // 色の分離率
-const float             fade = 00.01;
+uniform float             fade ; // 00.01
 // R方向
-const vec2 direction_r = vec2(  1.0,  0.0 );
+uniform vec2 direction_r ; //   1.0,  0.0 
 // G方向
-const vec2 direction_g = vec2(  0.4,  1.0 );
+uniform vec2 direction_g ; //   0.4,  1.0 
 // B方向
-const vec2 direction_b = vec2( -0.7, -0.3 );
+uniform vec2 direction_b ; //  -0.7, -0.3 
 
 // float trunc(float x) {
 //     if (x < 0.0) {

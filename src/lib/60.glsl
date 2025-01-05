@@ -9,11 +9,12 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-// const vec2 size = vec2( 64.0 , 48.0 ); //original size
-// const vec2 size = vec2( 32.0 , 24.0 );
-// const vec2 size = vec2( 16.0 , 12.0 );
-   const vec2 size = vec2( 08.0 , 06.0 );
-// const vec2 size = vec2( 04.0 , 03.0 );
+//const vec2 size = vec2( 64.0 , 48.0 ); //original size
+//const vec2 size = vec2( 32.0 , 24.0 );
+//const vec2 size = vec2( 16.0 , 12.0 );
+//const vec2 size = vec2( 08.0 , 06.0 );
+//const vec2 size = vec2( 04.0 , 03.0 );
+uniform vec2 size ; //    08.0 , 06.0
 
 void main( )
 {

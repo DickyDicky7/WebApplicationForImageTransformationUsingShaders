@@ -1,8 +1,8 @@
 #version 300 es
 precision highp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //noise
+uniform         sampler2D          tex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;

@@ -9,7 +9,9 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float gamma = 0.5; // 0.0 -> 2.0
+//const float gamma =    0.5; // 0.0 -> 2.0
+
+uniform float gamma ; // 0.5  // 0.0 -> 2.0
 
 void main() {
     vec4 color     = texture(tex0, vTexCoord                       );

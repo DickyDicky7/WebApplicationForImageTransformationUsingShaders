@@ -9,13 +9,21 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const vec3  color = vec3(1.0, 1.0, 1.0);
-const float speed = 1.0;
-const float density = 300.0;
-const float compression = 001.0;
-const float trail_size  = 100.0;
-const float brightness  = 100.0;
-const float PI = 3.14;
+// const vec3  color = vec3(1.0, 1.0, 1.0);
+// const float speed = 1.0;
+// const float density = 300.0;
+// const float compression = 001.0;
+// const float trail_size  = 100.0;
+// const float brightness  = 100.0;
+// const float PI = 3.14;
+
+uniform vec3  color       ; // 1.0, 1.0, 1.0
+uniform float speed       ; // 1.0
+uniform float density     ; // 300.0
+uniform float compression ; // 001.0
+uniform float trail_size  ; // 100.0
+uniform float brightness  ; // 100.0
+const   float PI = 3.14;
 
 void main() {
     vec2     uv =   -vTexCoord;

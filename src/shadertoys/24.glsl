@@ -9,9 +9,11 @@ uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 //    Define@ @@@@@@@@ the @@@ luminance weights
-vec3 W = vec3(0.2125,
-              0.7154,
-              0.0721);
+// vec3 W = vec3(0.2125,
+//               0.7154,
+//               0.0721);
+
+uniform vec3 W ; // 0.2125 , 0.7154 , 0.0721
 
 //    Checker function for the pattern@@ @@@@@@@
 float checker(vec2 uv, float scale, float angle)

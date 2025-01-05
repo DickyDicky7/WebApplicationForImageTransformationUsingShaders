@@ -10,7 +10,8 @@ uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
 
-const float strength = 2.0;
+//const float strength =    2.0;
+uniform float strength ; // 2.0
 
 void main() {
 	 vec4       outputt    = texture(tex0, vTexCoord);
@@ -24,3 +25,5 @@ void main() {
 }
 
 // https://godotshaders.com/shader/chromatic-abberation-with-offset/
+
+

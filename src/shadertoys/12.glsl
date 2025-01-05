@@ -8,14 +8,23 @@ uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
-vec3     darkest  = vec3(0.0588235, 0.219608, 0.0588235); 
-float lumDarkest  = 0.13921568627450980;
-vec3     darker   = vec3(0.1882350, 0.384314, 0.1882350); 
-float lumDarker   = 0.28627450980392155;
-vec3     lighter  = vec3(0.5450980, 0.674510, 0.0588235); 
-float lumLighter  = 0.36666666666666670;
-vec3     lightest = vec3(0.6078430, 0.737255, 0.0588235); 
-float lumLightest = 0.39803921568627454;
+// vec3     darkest  = vec3(0.0588235, 0.219608, 0.0588235); 
+// float lumDarkest  = 0.13921568627450980;
+// vec3     darker   = vec3(0.1882350, 0.384314, 0.1882350); 
+// float lumDarker   = 0.28627450980392155;
+// vec3     lighter  = vec3(0.5450980, 0.674510, 0.0588235); 
+// float lumLighter  = 0.36666666666666670;
+// vec3     lightest = vec3(0.6078430, 0.737255, 0.0588235); 
+// float lumLightest = 0.39803921568627454;
+
+uniform vec3     darkest  ; // 0.0588235, 0.219608, 0.0588235 
+uniform float lumDarkest  ; // 0.13921568627450980
+uniform vec3     darker   ; // 0.1882350, 0.384314, 0.1882350 
+uniform float lumDarker   ; // 0.28627450980392155
+uniform vec3     lighter  ; // 0.5450980, 0.674510, 0.0588235 
+uniform float lumLighter  ; // 0.36666666666666670
+uniform vec3     lightest ; // 0.6078430, 0.737255, 0.0588235 
+uniform float lumLightest ; // 0.39803921568627454
 
 float CalculateHue(vec4 color, float minCol, float maxCol)
 {

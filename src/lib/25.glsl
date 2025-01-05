@@ -9,11 +9,17 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const int resX = 32;
-const int resY = 32;
+// const int resX = 32;
+// const int resY = 32;
 
-// 0.100392156862 is the cube root of 255
-const vec3 rgb255 = vec3(0.100392156862, 0.100392156862, 0.100392156862);
+// // 0.100392156862 is the cube root of 255
+// const vec3 rgb255 = vec3(0.100392156862, 0.100392156862, 0.100392156862);
+
+uniform int resX ; // 32
+uniform int resY ; // 32
+
+                      // 0.100392156862 is the cube root of 255
+uniform vec3 rgb255 ; // 0.100392156862, 0.100392156862, 0.100392156862
 
 void main() {
     float uvX = vTexCoord.x - mod(vTexCoord.x * float(resX), 1.0) / float(resX);

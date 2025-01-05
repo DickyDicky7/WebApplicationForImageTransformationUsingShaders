@@ -9,22 +9,39 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-vec3 color0  = vec3(0.1098, 0.0314, 0.0627);
-vec3 color1  = vec3(0.3333, 0.0627, 0.0314);
-vec3 color2  = vec3(0.4902, 0.0941, 0.0941);
-vec3 color3  = vec3(0.4431, 0.2039, 0.0627);
-vec3 color4  = vec3(0.3961, 0.4431, 0.3137);
-vec3 color5  = vec3(0.6824, 0.2980, 0.1882);
-vec3 color6  = vec3(0.7137, 0.0627, 0.1882);
-vec3 color7  = vec3(0.7922, 0.4431, 0.2353);
-vec3 color8  = vec3(0.4431, 0.5843, 0.5529);
-vec3 color9  = vec3(0.8549, 0.6471, 0.4275);
-vec3 color10 = vec3(0.9176, 0.8392, 0.6667);
-vec3 color11 = vec3(0.6471, 0.7294, 0.6824);
-vec3 color12 = vec3(0.8863, 0.2510, 0.3137);
-vec3 color13 = vec3(0.9333, 0.4431, 0.4588);
-vec3 color14 = vec3(0.9647, 0.6157, 0.6157);
-vec3 color15 = vec3(1.0000, 1.0000, 0.9490);
+// vec3 color0  = vec3(0.1098, 0.0314, 0.0627);
+// vec3 color1  = vec3(0.3333, 0.0627, 0.0314);
+// vec3 color2  = vec3(0.4902, 0.0941, 0.0941);
+// vec3 color3  = vec3(0.4431, 0.2039, 0.0627);
+// vec3 color4  = vec3(0.3961, 0.4431, 0.3137);
+// vec3 color5  = vec3(0.6824, 0.2980, 0.1882);
+// vec3 color6  = vec3(0.7137, 0.0627, 0.1882);
+// vec3 color7  = vec3(0.7922, 0.4431, 0.2353);
+// vec3 color8  = vec3(0.4431, 0.5843, 0.5529);
+// vec3 color9  = vec3(0.8549, 0.6471, 0.4275);
+// vec3 color10 = vec3(0.9176, 0.8392, 0.6667);
+// vec3 color11 = vec3(0.6471, 0.7294, 0.6824);
+// vec3 color12 = vec3(0.8863, 0.2510, 0.3137);
+// vec3 color13 = vec3(0.9333, 0.4431, 0.4588);
+// vec3 color14 = vec3(0.9647, 0.6157, 0.6157);
+// vec3 color15 = vec3(1.0000, 1.0000, 0.9490);
+
+uniform vec3 color0  ; // 0.1098, 0.0314, 0.0627
+uniform vec3 color1  ; // 0.3333, 0.0627, 0.0314
+uniform vec3 color2  ; // 0.4902, 0.0941, 0.0941
+uniform vec3 color3  ; // 0.4431, 0.2039, 0.0627
+uniform vec3 color4  ; // 0.3961, 0.4431, 0.3137
+uniform vec3 color5  ; // 0.6824, 0.2980, 0.1882
+uniform vec3 color6  ; // 0.7137, 0.0627, 0.1882
+uniform vec3 color7  ; // 0.7922, 0.4431, 0.2353
+uniform vec3 color8  ; // 0.4431, 0.5843, 0.5529
+uniform vec3 color9  ; // 0.8549, 0.6471, 0.4275
+uniform vec3 color10 ; // 0.9176, 0.8392, 0.6667
+uniform vec3 color11 ; // 0.6471, 0.7294, 0.6824
+uniform vec3 color12 ; // 0.8863, 0.2510, 0.3137
+uniform vec3 color13 ; // 0.9333, 0.4431, 0.4588
+uniform vec3 color14 ; // 0.9647, 0.6157, 0.6157
+uniform vec3 color15 ; // 1.0000, 1.0000, 0.9490
 
 vec3 getColor(int index) {
     if (index == 0 ) return color0 ;

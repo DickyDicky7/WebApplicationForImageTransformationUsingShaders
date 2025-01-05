@@ -11,9 +11,13 @@ uniform         vec4      mousePosition;
 
 // Parameters
 // Parameters
-#define _Speed                    0.302
-#define          _Fading          1.000
-#define _LuminanceJitterThreshold 0.895
+// #define _Speed                    0.302
+// #define          _Fading          1.000
+// #define _LuminanceJitterThreshold 0.895
+
+uniform float _Speed                    ; // 0.302
+uniform float          _Fading          ; // 1.000
+uniform float _LuminanceJitterThreshold ; // 0.895
 
 // Random noise function
 // Random noise function

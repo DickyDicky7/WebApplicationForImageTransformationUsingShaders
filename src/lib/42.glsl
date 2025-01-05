@@ -9,7 +9,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float sort = 1.0;
+//const float sort =    1.0;
+uniform float sort ; // 1.0
 
 void main()
 {

@@ -9,10 +9,15 @@ uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 
-const float wiggle         = 00.03;
-const float wiggle_speed   = 25.00;
-const float        smear   = 01.00;
-const int     blur_samples =    15;
+// const float wiggle         = 00.03;
+// const float wiggle_speed   = 25.00;
+// const float        smear   = 01.00;
+// const int     blur_samples =    15;
+
+uniform float wiggle         ; // 00.03
+uniform float wiggle_speed   ; // 25.00
+uniform float        smear   ; // 01.00
+uniform int     blur_samples ; //    15
 
 
 float onOff(float a, float b, float c, float framecount) {

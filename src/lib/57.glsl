@@ -9,14 +9,22 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const vec3 MONOCHROME_SCALE = vec3( 0.298912, 0.586611, 0.114478 );
+// const vec3  MONOCHROME_SCALE = vec3( 0.298912, 0.586611, 0.114478 );
 
-uniform sampler2D ascii_tex ;
-   const vec2 ascii_size = vec2( 8.0, 16.0 );
-// const vec2 ascii_size = vec2( 4.0, 08.0 );
-const int available_columns = 10;
-const int       max_columns = 16;
-const bool          colored = true;
+// const  sampler2D  ascii_tex                     ;
+//       const vec2  ascii_size = vec2( 8.0, 16.0 );
+// //    const vec2  ascii_size = vec2( 4.0, 08.0 );
+// const int available_columns = 10;
+// const int       max_columns = 16;
+// const bool          colored = true;
+
+uniform     vec3  MONOCHROME_SCALE ; // 0.298912, 0.586611, 0.114478
+uniform sampler2D       ascii_tex  ; // null
+    uniform vec2        ascii_size ; // 8.0, 16.0
+//    const vec2        ascii_size ; // 4.0, 08.0
+uniform int available_columns ; // 10
+uniform int       max_columns ; // 16
+uniform bool          colored ; // true
 
 void main( )
 {

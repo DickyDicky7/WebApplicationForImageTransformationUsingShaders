@@ -9,14 +9,23 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float PI = 3.14;
-const int   lines  = 100;
-const vec4  color1 = vec4(0.0, 0.0, 1.0, 1.0);
-const vec4  color2 = vec4(1.0, 0.0, 0.0, 1.0);  
-const float  speed = 0.4;
-const float  alpha = 0.5; 
-const float  noise_amount = 0.05;
-const float effect_factor = 0.40;
+// const float PI = 3.14;
+// const int   lines  = 100;
+// const vec4  color1 = vec4(0.0, 0.0, 1.0, 1.0);
+// const vec4  color2 = vec4(1.0, 0.0, 0.0, 1.0);  
+// const float  speed = 0.4;
+// const float  alpha = 0.5; 
+// const float  noise_amount = 0.05;
+// const float effect_factor = 0.40;
+
+const   float PI = 3.14;
+uniform int   lines  ; // 100
+uniform vec4  color1 ; // 0.0, 0.0, 1.0, 1.0
+uniform vec4  color2 ; // 1.0, 0.0, 0.0, 1.0  
+uniform float  speed ; // 0.4
+uniform float  alpha ; // 0.5 
+uniform float  noise_amount ; // 0.05
+uniform float effect_factor ; // 0.40
 
 
 void noise(in vec2 uv, inout vec4 color) {

@@ -8,8 +8,11 @@ uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
-const vec2  tileSize = vec2(16.0, 16.0);
-const float                            threads = 4.0;
+//const vec2  tileSize = vec2(16.0, 16.0);
+//const float                            threads =    4.0;
+
+uniform vec2  tileSize ; //   16.0, 16.0
+uniform float                            threads ; // 4.0
 
 void main() 
 {

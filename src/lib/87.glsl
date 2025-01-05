@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const vec4  edge_color = vec4(0.0, 0.0, 0.0, 1.0);
-const float thresholds = 0.00;
-const float blend      = 0.01;
+// const vec4  edge_color = vec4(0.0, 0.0, 0.0, 1.0);
+// const float thresholds = 0.00;
+// const float blend      = 0.01;
+
+uniform vec4  edge_color ; // 0.0, 0.0, 0.0, 1.0
+uniform float thresholds ; // 0.00
+uniform float      blend ; // 0.01
 
 float getGrayScale(sampler2D sampler, vec2 coods) {
     vec4     color = texture(sampler,      coods) ;

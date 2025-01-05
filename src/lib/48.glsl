@@ -9,7 +9,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const int pixel_size = 16;
+//const int pixel_size =    16;
+uniform int pixel_size ; // 16
 
 void main() {
     vec2 pos = vTexCoord

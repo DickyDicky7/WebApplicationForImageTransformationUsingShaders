@@ -11,10 +11,15 @@ uniform         vec4      mousePosition;
 
 // Desired number of squares per row and column
 // @@@@@@@ @@@@@@ @@ @@@@@@@ @@@ @@@ @@@ @@@@@@
-const float pix_num = 50.00;
-const bool   custom = false;
-const int   cus_row_num = 30;
-const int   cus_col_num = 30;
+// const float pix_num = 50.00;
+// const bool   custom = false;
+// const int   cus_row_num = 30;
+// const int   cus_col_num = 30;
+
+uniform float pix_num ; // 50.00
+uniform bool   custom ; // false
+uniform int   cus_row_num ; // 30
+uniform int   cus_col_num ; // 30
 
 void main()
 {

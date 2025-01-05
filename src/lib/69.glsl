@@ -9,7 +9,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const bool colorOn = true;
+//const bool colorOn =    true;
+uniform bool colorOn ; // true
 
 bool is_white(float average, ivec2 pixel_pos) {
     bool pixel_bools[16] = bool[16](

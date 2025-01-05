@@ -8,9 +8,13 @@ uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
-vec3   EdgeColor = vec3(0.7);
-float  NumsTiles = 40.00;	
-float Threshhold = 00.15;
+// const vec3   EdgeColor = vec3(0.7);
+// const float  NumsTiles = 40.00;	
+// const float Threshhold = 00.15;
+
+uniform vec3   EdgeColor ; // 0.7, 0.7, 0.7
+uniform float  NumsTiles ; // 40.00	
+uniform float Threshhold ; // 00.15
 
 vec2 fmod(vec2 a, vec2 b)
 {

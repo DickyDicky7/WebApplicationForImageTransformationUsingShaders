@@ -2,7 +2,7 @@
 precision highp float;
 
 uniform         sampler2D          tex0;
-uniform         sampler2D      pallete0; // It can be whatever palette you want
+uniform         sampler2D      palette0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -10,7 +10,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const bool flip = false;
+//const bool flip =    false;
+uniform bool flip ; // false
 
 
 
@@ -21,7 +22,7 @@ void main()
           col.rgb, vec3(0.2126,
                         0.7152,
                         0.0722)); // luminance
-          col = texture(pallete0, vec2(abs(float(flip) - lum), 0));
+          col = texture(palette0, vec2(abs(float(flip) - lum), 0));
     fragColor = col;
 }
 

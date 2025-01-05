@@ -9,10 +9,15 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const int         size = 64 ;         // amount of@ @@@dots@@@
-const float   dot_size = 2.0;         // dots@@ are multiplied by@@@@ dot_size
-const float value_multiplier =  1.0 ; // reduce or@ @increase@ value, @useful@ when its too bright
-const bool            invert = false;
+// const int         size = 64 ;         // amount of@ @@@dots@@@
+// const float   dot_size = 2.0;         // dots@@ are multiplied by@@@@ dot_size
+// const float value_multiplier =  1.0 ; // reduce or@ @increase@ value, @useful@ when its too bright
+// const bool            invert = false;
+
+uniform int         size       ; // 64
+uniform float   dot_size       ; // 2.0
+uniform float value_multiplier ; // 1.0
+uniform bool            invert ; // false
 
 vec3 rgb2hsv(vec3 tex) {
     vec3 hsv;

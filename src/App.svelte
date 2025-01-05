@@ -624,6 +624,7 @@ let uniforms: GLSLUniforms = [
         ||  name === "time"
         ||  name === "canvasSize"
         ||  name === "texelSize"
+        ||  name === "mousePosition"
         ) {
             continue;
         }
@@ -640,7 +641,7 @@ let uniforms: GLSLUniforms = [
                     parsedValue = parseFloat(cleanedValue);
                     break;
                 case "bool":
-                    parsedValue = cleanedValue === "true";
+                    parsedValue = cleanedValue === "true" || cleanedValue === "!false";
                     break;
                 case "vec2":
                 case "vec3":

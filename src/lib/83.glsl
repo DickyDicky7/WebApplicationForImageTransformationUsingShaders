@@ -9,8 +9,11 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float strength = 0.05;
-const vec4     color = vec4(1.0);
+// const float strength = 0.05;
+// const vec4     color = vec4(1.0);
+
+uniform float strength ; // 0.05
+uniform vec4     color ; // 1.0, 1.0, 1.0, 1.0
 
 void main() {
     vec2                                                   SCREEN_PIXEL_SIZE  = 1.0 / canvasSize;

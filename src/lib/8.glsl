@@ -9,13 +9,21 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float  chaos = 4.0;
-const float radius = 2.0;
-const float attenuation = 8.0;
+// const float  chaos = 4.0;
+// const float radius = 2.0;
+// const float attenuation = 8.0;
 
 vec2 amount_r;
 vec2 amount_g;
 vec2 amount_b;
+
+uniform float  chaos      ; // 4.0
+uniform float radius      ; // 2.0
+uniform float attenuation ; // 8.0
+
+// const vec2 amount_r; // 1.0, 1.0
+// const vec2 amount_g; // 1.0, 1.0
+// const vec2 amount_b; // 1.0, 1.0
 
 float rand(vec2 co){
     return fract(sin(dot(co.xy ,vec2(12.9898,78.233))) * 43758.5453) - .5;

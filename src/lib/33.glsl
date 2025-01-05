@@ -10,8 +10,11 @@ uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
 
-const float lookupSize = 64.0;
-const float errorCarry = 00.3;
+// const float lookupSize = 64.0;
+// const float errorCarry = 00.3;
+
+uniform float lookupSize ; // 64.0
+uniform float errorCarry ; // 00.3
 
 
 float getGrayscale(vec2 coords, vec2 iResolution) {

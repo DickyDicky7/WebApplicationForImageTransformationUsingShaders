@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float  cellXCount = 200.0;
-const float smoothRange = 000.1;
-const float       gamma = 001.8;
+// const float  cellXCount = 200.0;
+// const float smoothRange = 000.1;
+// const float       gamma = 001.8;
+
+uniform float  cellXCount ; // 200.0
+uniform float smoothRange ; // 000.1
+uniform float       gamma ; // 001.8
 
 const mat2 cRot = mat2( 0.258819, -0.965926 , // 75 degrees
                         0.965926,  0.258810);

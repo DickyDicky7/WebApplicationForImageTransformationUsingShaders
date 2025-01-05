@@ -9,8 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float  MAX_ITERATION = 9.0000;
-const float LINE_THICKNESS = 0.0055;
+// const float  MAX_ITERATION = 9.0000;
+// const float LINE_THICKNESS = 0.0055;
+
+
+uniform float  MAX_ITERATION ; // 9.0000
+uniform float LINE_THICKNESS ; // 0.0055
+
 
 void main(void)
 {

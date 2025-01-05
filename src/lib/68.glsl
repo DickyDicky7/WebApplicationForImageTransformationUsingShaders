@@ -9,12 +9,19 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float     aspect = 1.0;
-const float distortion = 1.0;
-const float     radius = 1.0;
-const float alpha = 1.0;
-const float  crop = 1.0;
-const vec4   crop_color = vec4(0.0, 0.0, 0.0, 1.0);
+// const float     aspect = 1.0;
+// const float distortion = 1.0;
+// const float     radius = 1.0;
+// const float alpha = 1.0;
+// const float  crop = 1.0;
+// const vec4   crop_color = vec4(0.0, 0.0, 0.0, 1.0);
+
+uniform float     aspect ; // 1.0
+uniform float distortion ; // 1.0
+uniform float     radius ; // 1.0
+uniform float alpha ; // 1.0
+uniform float  crop ; // 1.0
+uniform vec4   crop_color ; // 0.0, 0.0, 0.0, 1.0
 
 vec2 distort(vec2 p)
 {

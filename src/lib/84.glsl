@@ -9,11 +9,17 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float       shake          = 000.015;
-const float       noiseQuality   = 250.000;
-const float       noiseIntensity = 000.001;
-const float      offsetIntensity = 000.050;
-const float colorOffsetIntensity = 000.500;
+// const float       shake          = 000.015;
+// const float       noiseQuality   = 250.000;
+// const float       noiseIntensity = 000.001;
+// const float      offsetIntensity = 000.050;
+// const float colorOffsetIntensity = 000.500;
+
+uniform float       shake          ; // 000.015
+uniform float       noiseQuality   ; // 250.000
+uniform float       noiseIntensity ; // 000.001
+uniform float      offsetIntensity ; // 000.050
+uniform float colorOffsetIntensity ; // 000.500
 
 float rand(vec2 co)
 {

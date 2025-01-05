@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#define THRESHOLD .5 // @@edge@@ threshold
-#define LEVELS    10 // @number@ @@@of@@@@ posterization levels
-#define RADIUS     5 // kuwahara @@@window 
+// #define THRESHOLD .5 // @@edge@@ threshold
+// #define LEVELS    10 // @number@ @@@of@@@@ posterization levels
+// #define RADIUS     5 // kuwahara @@@window 
+
+uniform float THRESHOLD ; // 0.5
+uniform int   LEVELS    ; // 10
+uniform int   RADIUS    ; // 05
 
 /*
  * Posterization is the result of reducing the number of colors 

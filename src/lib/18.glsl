@@ -9,10 +9,15 @@ uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 
-const float alpha       =  0.5;
-const float scale       =  1.0;
-const float border_mask =  2.0;
-const float strength    = 25.0;
+// const float alpha       =  0.5;
+// const float scale       =  1.0;
+// const float border_mask =  2.0;
+// const float strength    = 25.0;
+
+uniform float alpha       ; //  0.5
+uniform float scale       ; //  1.0
+uniform float border_mask ; //  2.0
+uniform float strength    ; // 25.0
 
 void main() {
 	float                   scale_reverse =      2.0 - scale              ;

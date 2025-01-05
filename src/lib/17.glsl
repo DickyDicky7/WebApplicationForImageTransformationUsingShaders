@@ -14,13 +14,21 @@ uniform vec2           texelSize;
 // @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
-const vec2 r_displacement = vec2( 3.0, 0.0);
-const vec2 g_displacement = vec2( 0.0, 0.0);
-const vec2 b_displacement = vec2(-3.0, 0.0);
+// const vec2 r_displacement = vec2( 3.0, 0.0);
+// const vec2 g_displacement = vec2( 0.0, 0.0);
+// const vec2 b_displacement = vec2(-3.0, 0.0);
 
-const float height = 0.7;
-const float widtht = 0.5;
-const float fade   = 0.7;
+// const float height = 0.7;
+// const float widtht = 0.5;
+// const float fade   = 0.7;
+
+uniform vec2 r_displacement ; //  3.0, 0.0
+uniform vec2 g_displacement ; //  0.0, 0.0
+uniform vec2 b_displacement ; // -3.0, 0.0
+
+uniform float height ; // 0.7
+uniform float widtht ; // 0.5
+uniform float fade   ; // 0.7
 
 void main() {
     float shrink_widtht = 2.0 / widtht;

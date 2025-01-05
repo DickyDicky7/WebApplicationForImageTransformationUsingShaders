@@ -9,8 +9,11 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float grain_amount = 0.05; // Adjust the amount of the grain //0.0 -> 01.0
-const float grain_size   = 3.00; // Adjust the @size@ of the grain //0.1 -> 10.0
+// const float grain_amount = 0.05; // Adjust the amount of the grain //0.0 -> 01.0
+// const float grain_size   = 3.00; // Adjust the @size@ of the grain //0.1 -> 10.0
+
+uniform float grain_amount ; // 0.05
+uniform float grain_size   ; // 3.00
 
 void main()
 {

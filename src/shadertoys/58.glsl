@@ -9,7 +9,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float hueFactor = 0.1; //[0.0, 1.0]
+//const float hueFactor =    0.1; //[0.0, 1.0]
+uniform float hueFactor ; // 0.1
 
 vec3 hueDegree(vec3 In, float Offset)
 {

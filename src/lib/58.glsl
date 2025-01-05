@@ -9,11 +9,17 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float max_blend       = 0.5;
-const float rotation_offset = 0.0;
-const float intensity       = 0.5;
-const bool           invert = false;
-const vec2  rel_rect_size   = vec2(1024, 600);
+// const float max_blend       = 0.5;
+// const float rotation_offset = 0.0;
+// const float intensity       = 0.5;
+// const bool           invert = false;
+// const vec2  rel_rect_size   = vec2(1024, 600);
+
+uniform float max_blend       ; // 0.5
+uniform float rotation_offset ; // 0.0
+uniform float intensity       ; // 0.5
+uniform bool           invert ; // false
+uniform vec2  rel_rect_size   ; // 1024, 600
 
 float      distFromCen(vec2 p) {
     return distance   (     p,vec2(0.5));

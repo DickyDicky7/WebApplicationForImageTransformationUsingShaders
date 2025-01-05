@@ -1,8 +1,8 @@
 #version 300 es
 precision highp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //noise
+uniform         sampler2D          tex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -11,8 +11,8 @@ uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
 void applyDistortion(inout vec2 uv, vec2 pos, float power) {
-    float noiseX = texture(tex1, pos.xy / 0768.0 + vec2(time * 0.01)).x;
-    float noiseY = texture(tex1, pos.xy / 4096.0 + vec2(time * 0.01)).x;
+    float noiseX = texture(noise0 , pos.xy  / 0768.0 + vec2(time * 0.01)).x;
+    float noiseY = texture(noise0 , pos.xy  / 4096.0 + vec2(time * 0.01)).x;
     uv += vec2((noiseX - 0.5) * power
         ,      (noiseY - 0.5) * power);   
 }

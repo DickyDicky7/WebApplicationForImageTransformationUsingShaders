@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float  seed = 81.00;
-const float power = 00.03;
-const float speed = 00.00;
+// const float  seed = 81.00;
+// const float power = 00.03;
+// const float speed = 00.00;
+
+uniform float  seed ; // 81.00
+uniform float power ; // 00.03
+uniform float speed ; // 00.00
 
 vec2 random( vec2 pos )
 { 

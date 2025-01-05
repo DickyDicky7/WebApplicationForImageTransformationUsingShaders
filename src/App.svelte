@@ -2,16 +2,18 @@
 
 <script lang="ts">
 
-
+import { promptShader } from "./a.i.effects";
     import          "beercss"       ;
     import "material-dynamic-colors";
-
+import { shareImage } from "./common";
+import { shareVideo } from "./common";
+import { shareWebcam } from "./common";
     import   p5        from "p5";
     import { onMount } from "svelte";
 
     console.log(import.meta.env.VITE_KEY001);
-    import * as Beauty from "@deepar/beauty"
-    import * as deepar from "deepar";
+    // import * as Beauty from "@deepar/beauty"
+    // import * as deepar from "deepar";
 
     // (async function() {
     //   const deepAR = await deepar.initialize({
@@ -75,18 +77,31 @@ let i: p5.Image;
             let     filterShader = (canvasInstance as any)
          .createFilterShader                         (imageFragmentShaderSourceCode);
          shaderSetNecessaryUniforms(filterShader);
-        filterShader.setUniform("tex1", noiseT1)
-        filterShader.setUniform("tex2", noiseT2)
-        filterShader.setUniform("gradient", gradient);
-        filterShader.setUniform("pallete0", gradient);
-        filterShader.setUniform("pallete0Size", [gradient.width, gradient.height]);
-        filterShader.setUniform("ascii_tex", ascii_tex);
-        filterShader.setUniform("tiledtexture", tile);
-        filterShader.setUniform("bayer", bayer);
-        filterShader.setUniform("bayer0", bayer);
-        filterShader.setUniform("bayer0Size", [bayer.width, bayer.height]);
-        filterShader.setUniform("u_bgTexture", u_bgTexture); //switchable
-        filterShader.setUniform("u_patternTexture", u_patternTexture); ////switchable
+        // filterShader.setUniform("tex1", noiseT1)
+        // filterShader.setUniform("tex2", noiseT2)
+        // filterShader.setUniform("gradient", gradient);
+        // filterShader.setUniform("palette0", gradient);
+        // filterShader.setUniform("palette0Size", [gradient.width, gradient.height]);
+        // filterShader.setUniform("ascii_tex", ascii_tex);
+        // filterShader.setUniform("tiledtexture", tile);
+        // filterShader.setUniform("bayer", bayer);
+        // filterShader.setUniform("bayer0", bayer);
+        // filterShader.setUniform("bayer0Size", [bayer.width, bayer.height]);
+        // filterShader.setUniform("u_bgTexture", u_bgTexture); //switchable
+        // filterShader.setUniform("u_patternTexture", u_patternTexture); ////switchable
+
+        if (currentGLSLUniforms) {
+            for (let glslUniform of currentGLSLUniforms) {
+                if (glslUniform.thisUniformType === "sampler2D") {
+                    if (glslUniform.thisUniformSampler2DImg) {
+                        filterShader.setUniform(glslUniform.thisUniformName, glslUniform.thisUniformSampler2DImg);
+                    }
+                } else {
+                    filterShader.setUniform(glslUniform.thisUniformName, glslUniform.thisUniformDefaultValue);
+                }
+            }
+        }
+
         canvasInstance.       image(imageD, 0, 0);
         canvasInstance.filter(filterShader);
             
@@ -190,16 +205,29 @@ let i: p5.Image;
                 canvasInstance.pop();
                 let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
                 shaderSetNecessaryUniforms(warp);
-                warp.setUniform("tex1", noiseT1);
-                warp.setUniform("tex2", noiseT2);
-                warp.setUniform("gradient", gradient);
-                warp.setUniform("pallete0", gradient);
-                warp.setUniform("pallete0Size", [gradient.width, gradient.height]);
-                warp.setUniform("ascii_tex", ascii_tex);
-                warp.setUniform("tiledtexture", tile);
-                warp.setUniform("bayer",bayer);
-                warp.setUniform("bayer0",bayer);
-                warp.setUniform("bayer0Size", [bayer.width, bayer.height]);
+                // warp.setUniform("tex1", noiseT1);
+                // warp.setUniform("tex2", noiseT2);
+                // warp.setUniform("gradient", gradient);
+                // warp.setUniform("palette0", gradient);
+                // warp.setUniform("palette0Size", [gradient.width, gradient.height]);
+                // warp.setUniform("ascii_tex", ascii_tex);
+                // warp.setUniform("tiledtexture", tile);
+                // warp.setUniform("bayer",bayer);
+                // warp.setUniform("bayer0",bayer);
+                // warp.setUniform("bayer0Size", [bayer.width, bayer.height]);
+
+        if (currentGLSLUniforms) {
+            for (let glslUniform of currentGLSLUniforms) {
+                if (glslUniform.thisUniformType === "sampler2D") {
+                    if (glslUniform.thisUniformSampler2DImg) {
+                        warp.setUniform(glslUniform.thisUniformName, glslUniform.thisUniformSampler2DImg);
+                    }
+                } else {
+                    warp.setUniform(glslUniform.thisUniformName, glslUniform.thisUniformDefaultValue);
+                }
+            }
+        }                
+
                 canvasInstance.filter(warp);
                 
                 if (!ceaseRecord)                       {
@@ -402,24 +430,12 @@ void main(){
     let imageFormatSelection: HTMLSelectElement;
     let videoFormatSelection: HTMLSelectElement;
 
-    let anch: HTMLAnchorElement;
 
-    const y = ()=> {
-    let canvasElement = canvas.children[0] as HTMLCanvasElement;
-    canvasElement.toBlob(b => {
-        anch.href=URL.createObjectURL(b as Blob)
-        navigator.share({
-            title: "MDN",
-  text: "Learn web development on MDN!",
-  url: data.publicUrl,
-//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
-        })
-    }, "image/png", 1.0);
-    // console.log(anch.href);
-}
 
-import { f } from "./a.i.effects";
-import { g } from "./a.i.effects";
+
+
+
+
 
 import { createClient } from '@supabase/supabase-js'
 const supabase = createClient(import.meta.env.VITE_SUPABASE_URL
@@ -468,74 +484,21 @@ import { ImgurClient } from 'imgur';
 
 const client = new ImgurClient({ clientId: import.meta.env.VITE_CLIENT_ID____ });
 
-const shareImage = async () => {
-    let canvasElement = canvas.children[0] as HTMLCanvasElement;
-    const res = await client.upload({
-        image: canvasElement.toDataURL("image/png",1.0).split(',')[1],
-        type: "base64",
-        name: "abc.png",
-        title: "hello",
-        description: "desc",
-        disable_audio: "1",
-    });
-    console.log(res.data);
-    window.navigator.share({
-            title: "MDN",
-  text: "Learn web development on MDN!",
-  url: res.data.link,
-//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
-        })
-}
 
 
-function blobToBase64(blob:Blob): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        
-        reader.onloadend = () => {
-            if (reader.result) {
-                // Split to remove the data URL prefix and get only the base64 part
-                resolve((reader.result as string).split(",")[1]);
-            } else {
-                reject(new Error("FileReader result is null"));
-            }
-        };
 
-        reader.onerror = () => reject(new Error("Failed to read the Blob as Data URL"));
-        reader.readAsDataURL(blob); // This will start reading the blob as a Data URL
-    });
-}
+
 
 let videoToShare: Blob;
-const shareVideo = async () => {
-    let canvasElement = canvas.children[0] as HTMLCanvasElement;
-    const res = await client.upload({
-        image: await blobToBase64(videoToShare),
-        type: "base64",
-        name: "abc",
-        title: "hello",
-        description: "desc",
-        disable_audio: "1",
-    });
-    console.log(res.data);
-    window.navigator.share({
-            title: "MDN",
-  text: "Learn web development on MDN!",
-  url: res.data.link,
-//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
-        })
-}
 
-const shareWebcam = async () => {
 
-}
+// enum MODE
+// {
+//     IMAGE,
+//     VIDEO,
+//     WEBCAM,
+// };
 
-enum MODE
-{
-    IMAGE,
-    VIDEO,
-    WEBCAM,
-};
 
 let mode:MODE = MODE.IMAGE;
 
@@ -544,10 +507,19 @@ let mode:MODE = MODE.IMAGE;
 //VIDEO
 //GIF 
 
-for (let i: number = 1; i <= 7; i++)
+import { Shaders, type ShaderName, type ShaderPath } from "./common";
+for (let i: number = 1; i <= 88; ++i)
 {
     import(`./lib/${i}.glsl?raw`);
 }
+for (let i: number = 1; i <= 93; ++i)
+{
+    import(`./shadertoys/${i}.glsl?raw`);
+}
+import(`./lib/${"p5.1"}.glsl?raw`);
+import(`./lib/${"p5.2"}.glsl?raw`);
+// import(`./lib/${77}.glsl?raw`);
+// import(`./lib/${57}.glsl?raw`);
 // import glslString from "./lib/1.glsl?raw";
 // console.log(glslString);
 
@@ -567,44 +539,17 @@ const  loadAsset = async (assetPath: string): Promise<string> => {
 //#version 300 es
 
 import GLSLUniform from './GLSLUniform.svelte';
+import {MODE} from "./types";
 import type { GLSLUniformValue,
     GLSLUniforms, GLSLUniform_} from "./types";
+    import GlslUniform from "./GLSLUniform.svelte";
 
-// Example uniforms
-let uniforms: GLSLUniforms = [
-    { thisUniformName: "a", thisUniformNameJustForDisplay: "a", thisUniformType: "float", thisUniformDefaultValue: 0.0   },
-    { thisUniformName: "b", thisUniformNameJustForDisplay: "b", thisUniformType: "int"  , thisUniformDefaultValue: 0     },
-    { thisUniformName: "c", thisUniformNameJustForDisplay: "c", thisUniformType: "bool" , thisUniformDefaultValue: false },    
-    
-    { thisUniformName: "d", thisUniformNameJustForDisplay: "d", thisUniformType: "vec2", thisUniformDefaultValue: [0.0, 0.0          ] },
-    { thisUniformName: "e", thisUniformNameJustForDisplay: "e", thisUniformType: "vec3", thisUniformDefaultValue: [0.0, 0.0, 0.0     ] },
-    { thisUniformName: "f", thisUniformNameJustForDisplay: "f", thisUniformType: "vec4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0] },
-    
-    { thisUniformName: "g", thisUniformNameJustForDisplay: "g", thisUniformType: "ivec2", thisUniformDefaultValue: [0, 0      ] },
-    { thisUniformName: "h", thisUniformNameJustForDisplay: "h", thisUniformType: "ivec3", thisUniformDefaultValue: [0, 0, 0   ] },
-    { thisUniformName: "i", thisUniformNameJustForDisplay: "i", thisUniformType: "ivec4", thisUniformDefaultValue: [0, 0, 0, 0] },
-    
-    { thisUniformName: "j", thisUniformNameJustForDisplay: "j", thisUniformType: "mat2", thisUniformDefaultValue: [0.0, 0.0,          
-                                                                                                                   0.0, 0.0            ] },
-    { thisUniformName: "k", thisUniformNameJustForDisplay: "k", thisUniformType: "mat3", thisUniformDefaultValue: [0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0       ] },
-    { thisUniformName: "l", thisUniformNameJustForDisplay: "l", thisUniformType: "mat4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0, 0.0, 
-                                                                                                                   0.0, 0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0, 0.0  ] },
-    
-   
-    { thisUniformName: "m", thisUniformNameJustForDisplay: "m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-    { thisUniformName: "noise_m", thisUniformNameJustForDisplay: "noise_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-    { thisUniformName: "bayer_m", thisUniformNameJustForDisplay: "bayer_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-    { thisUniformName: "pallete_m", thisUniformNameJustForDisplay: "pallete_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-];
+
 
   // Handle updates to uniforms
   const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
-    uniforms = updatedUniforms;
-    console.log("Updated uniforms:", uniforms);
+    // uniforms = updatedUniforms;
+    console.log("Updated uniforms:", updatedUniforms);
   };
 
 
@@ -692,212 +637,21 @@ let uniforms: GLSLUniforms = [
 
         uniforms.push({
             thisUniformName: name,
-            thisUniformNameJustForDisplay: null,
+            thisUniformNameJustForDisplay: null!,
             thisUniformType: type,
             thisUniformDefaultValue: parsedValue,
+            thisUniformSampler2DImg:       null!,
         });
     }
 
     return uniforms;
 }
 
-// Example GLSL code
-const glslCode = `
-#version 300 es
-precision highp float;
-
-uniform sampler2D  tex0;
-in      vec2           vTexCoord;
-out     vec4           fragColor;
-uniform float      time;
-uniform vec2 canvasSize;
-uniform vec2           texelSize; // - 1.0  , 0.0
-
-uniform float    PI    ;                             // 3.14
-uniform float    scan_line_amount    ;//   1.0 
-uniform float         warp_amount    ;//   0.1 
-uniform float        noise_amount    ;//   0.03
-uniform float interference_amount    ;//   0.2 
-uniform float       grille_amount    ;//   0.1 
-uniform float       grille_size      ;//   1.0 
-uniform float     vignette_amount    ;//   0.6 
-uniform float     vignette_intensity ;//   0.4 
-uniform float    aberation_amount    ;//   0.5 
-uniform float    roll_line_amount    ;//   0.3 
-uniform float    roll_speed          ;//   1.0 
-uniform float    scan_line_strength  ;// - 8.0 
-uniform float        pixel_strength  ;// - 2.0 
-
-float random(vec2 uv) {
-    return fract(cos(uv.x * 83.4827
-                   + uv.y * 92.2842) * 43758.5453123);
-}
-
-vec3 fetch_pixel(vec2 uv, vec2 off) {
-    vec2 pos = floor(uv * canvasSize + off) / canvasSize + vec2(0.5) / canvasSize;
-
-    float noise        = 0.0;
-    if (  noise_amount > 0.0) {
-          noise        = random(pos + fract(time))
-       *  noise_amount;
-    }
-
-    if (max(abs(pos.x - 0.5),
-            abs(pos.y - 0.5)) > 0.5) {
-        return vec3(0.0, 0.0, 0.0);
-    }
-
-    vec3   clr = texture(tex0, pos, -16.0).rgb + noise;
-    return clr;
-}
-
-// Distance in emulated pixels to nearest texel @@@@.
-vec2 Dist(vec2 pos) {
-               pos =       pos   * canvasSize;
-    return - ((pos - floor(pos)) - vec2(0.5));
-}
-
-// 1D@@@@@@ @@ Gaussian @@@@@@ @@ @@@@@@@ @@@@@ @@@@.
-float Gaus(float pos, float scale) {
-    return
-      exp2(                 scale * pos
-                                  * pos);
-}
-
-// 3-tap@@@ @@ Gaussian filter @@ along@@ horz@ line.
-vec3 Horz3(vec2 pos, float off) {
-    vec3 b = fetch_pixel(pos, vec2(-1.0, off));
-    vec3 c = fetch_pixel(pos, vec2( 0.0, off));
-    vec3 d = fetch_pixel(pos, vec2( 1.0, off));
-    float dst = Dist(pos).x;
-
-    // Convert distance to weight.
-    float scale = pixel_strength;
-    float wb = Gaus(dst - 1.0, scale);
-    float wc = Gaus(dst + 0.0, scale);
-    float wd = Gaus(dst + 1.0, scale);
-
-    // Return@ filtered @@ sample.
-    return (b * wb + c * wc + d * wd) / (wb + wc + wd);
-}
-
-// Return scanline weight @@@@@ @@ @@@@@@ @@@@@.
-float Scan(vec2 pos, float off) {
-    float       dst = Dist(pos).y;
-
-    return Gaus(dst + off, scan_line_strength);
-}
-
-// Allow@ nearest@ three@ lines to effect pixel.
-vec3 Tri(vec2 pos) {
-    vec3 clr = fetch_pixel(pos, vec2(0.0));
-    if (scan_line_amount > 0.0) {
-        vec3 a = Horz3(pos, -1.0);
-        vec3 b = Horz3(pos,  0.0);
-        vec3 c = Horz3(pos,  1.0);
-
-        float wa = Scan(pos, -1.0);
-        float wb = Scan(pos,  0.0);
-        float wc = Scan(pos,  1.0);
-
-        vec3 scanlines = a * wa
-                       + b * wb
-                       + c * wc                       ;
-           clr = mix(clr, scanlines, scan_line_amount);
-    }
-    return clr;
-}
-
-// Takes in the UV and warps the edges, creating the spherized effect
-vec2 warp(vec2 uv) {
-    vec2  delta = uv - 0.5;
-    float delta2 = dot(delta.xy, delta.xy);
-    float delta4 =       delta2 *      delta2;
-    float delta_offset = delta4 * warp_amount;
-
-    vec2    warped = uv + delta *                     delta_offset;
-    return (warped - 0.5) / mix(1.0, 1.2, warp_amount / 5.0) + 0.5;
-}
-
-float vignette(vec2 uv) {
-                    uv *= 1.0 - uv.xy;
-    float      vignette = uv.x
-                        * uv.y
-                        * 15.0;
-    return pow(vignette, vignette_intensity * vignette_amount);
-}
-
-float floating_mod(float a
-,                  float b) {
-    return a - b * floor(
-           a / b        );
-}
-
-vec3 grille(vec2 uv) {
-    float  unit =         PI / 3.0        ;
-    float scale = 2.0 * unit / grille_size;
-    float r = smoothstep(0.5, 0.8, cos(uv.x * scale - unit));
-    float g = smoothstep(0.5, 0.8, cos(uv.x * scale + unit));
-    float b = smoothstep(0.5, 0.8, cos(uv.x * scale + 3.0 * unit));
-    return mix(vec3(1.0), vec3(r, g, b), grille_amount);
-}
-
-float roll_line(vec2 uv) {
-    float x =  uv.y  * 3.0 - time * roll_speed;
-    float f = cos(x) * cos(x * 2.35 + 1.1)
-                     * cos(x * 4.45 + 2.3);
-    float  roll_line = smoothstep(0.5, 0.9, f);
-    return roll_line *
-           roll_line_amount;
-}
-
-void main() {
-    vec2 pix =   gl_FragCoord.xy;
-    vec2 pos = warp(vTexCoord)  ;
-
-    float    line =        0.0  ;
-    if (roll_line_amount > 0.0) {
-             line =
-        roll_line(pos);
-    }
-
-    vec2 sq_pix = floor(pos * canvasSize) / canvasSize +   vec2(0.5)  / canvasSize  ;
-    if (                          interference_amount  + roll_line_amount > 0.0) {
-        float     interference =     random(sq_pix.yy  + fract(time));
-        pos.x += (interference * (interference_amount  + line * 6.0)) / canvasSize.x;
-    }
-
-    vec3 clr = Tri(pos);
-    if (aberation_amount > 0.0) {
-        float chromatic   = aberation_amount + line * 2.0;
-        vec2  chromatic_x = vec2(     chromatic , 0.0) / canvasSize.x;
-        vec2  chromatic_y = vec2(0.0, chromatic / 2.0) / canvasSize.y;
-        float r = Tri(pos - chromatic_x).r;
-        float g = Tri(pos + chromatic_y).g;
-        float b = Tri(pos + chromatic_x).b;
-        clr = vec3(r, g, b);
-    }
-
-    if (     grille_amount > 0.0    )
-    clr *=   grille(pix);
-    clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
-    if(    vignette_amount > 0.0    )
-    clr *= vignette(pos);
-
-    fragColor.rgb = clr;
-    fragColor.a   = 1.0;
-}
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// https://godotshaders.com/shader/realistic-crt-shader/
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 
 
+let currentGLSLUniforms: GLSLUniforms;
 
-`;
 
-const result = parseGLSL(glslCode);
-console.log(result);
 
 </script>
 
@@ -937,69 +691,48 @@ console.log(result);
         <i>arrow_drop_down</i>
     </div>
 
-<a bind:this={anch}>download</a>
-<button on:click={y}>noise</button>
 
-<button on:click={async() => {
-const res = await f();
-console.log(await res.text())
-}}>AI 1</button>
 
-<button on:click={async() => {
-const res = await g();
-console.log(await res.text())
-}}>AI 2</button>
+    <button on:click={async() => {
+    const   res = await promptShader();
+    console.log(  await res.text()   );
+    }}>AI</button>
+    <button on:click={async () => { await shareImage (              canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.IMAGE }>SHARE IMAGE </button>
+    <button on:click={async () => { await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.VIDEO }>SHARE VIDEO </button>
+    <button on:click={async () => { await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
 
-<button on:click={async () => {
-    eval(`canvasInstance.draw = () => { canvasInstance.background(255,0,0); };`)
-}}>FUNC</button>
 
-<button on:click={async () => {
-    imageFragmentShaderSourceCode = videoFragmentShaderSourceCode;
-}}>CHANGE EFFECT IMAGE</button>
-
-<button on:click={async () => {
-    videoFragmentShaderSourceCode = imageFragmentShaderSourceCode;
-}}>CHANGE EFFECT VIDEO</button>
-
-<button on:click={shareImage} disabled={mode !== MODE.IMAGE}>SHARE IMAGE</button>
-<button on:click={shareVideo} disabled={mode !== MODE.VIDEO}>SHARE VIDEO</button>
-<button on:click={shareWebcam} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
-
-<A/>
 
 <div class="field label suffix round border">
     <select on:change={async (e) => {
-        let assetPath=e.currentTarget.options[e.currentTarget.selectedIndex].value;
-        if (assetPath==="none") console.log("Choose nothing");
+        let shaderName=e.currentTarget.options[e.currentTarget.selectedIndex].value;
+        if (shaderName==="none") console.log("Choose nothing");
         else {
-            console.log(assetPath)
-            const shaderSrc = await loadAsset(`./lib/${assetPath}`);
+            console.log(shaderName);
+            let shaderPath = Shaders.get(shaderName);
+            if (!shaderPath) {
+                console.log("fail");
+                return;
+            }
+            const shaderSrc = await loadAsset(shaderPath);
             imageFragmentShaderSourceCode = shaderSrc;
+            currentGLSLUniforms = parseGLSL(imageFragmentShaderSourceCode);
+            console.log(currentGLSLUniforms);
         }
         }}>
-      {#each ["none", ... Array.from({ length: 7 }, (value, index) => `${index + 1}.glsl?raw`)] as index (index)}
-        <option>{index}</option>            
+      {#each ["none", ... Shaders.keys()] as shaderName, shaderNameIndex (shaderName)}
+        <option>{shaderName}</option>            
       {/each}
     </select>
     <label>Choose your effects</label>
     <i>arrow_drop_down</i>
 </div>
 
-<h1 class="large">Test 1</h1>
-<GLSLUniform uniforms={uniforms} onUpdate={handleUpdate} />
-
-<h1 class="large">Test 2</h1>
-<GLSLUniform uniforms={result  } onUpdate={handleUpdate} />
+<GlslUniform uniforms={currentGLSLUniforms} onUpdate={handleUpdate} canvasInstance={canvasInstance}></GlslUniform>
 
 </main>
 
 <style>
-    main {
-        overflow-x: visible;
-        scroll-behavior: smooth;
-    }
-    * {
-  scroll-behavior: smooth;
-}
+    main { overflow-x: visible; scroll-behavior: smooth; }
+    *    {                      scroll-behavior: smooth; }
 </style>

@@ -1,11 +1,12 @@
 <script lang="ts">
+  import p5 from "p5";
   import          "beercss"       ;
   import "material-dynamic-colors";
   import type { GLSLUniformValue, GLSLUniforms } from "./types";
 import {onMount} from "svelte";
 
 
-
+  export let canvasInstance: p5 = null!;
   export let uniforms:                   GLSLUniforms  =  [  ];
   export let onUpdate: (updatedUniforms: GLSLUniforms) => void;
 
@@ -86,6 +87,9 @@ import {onMount} from "svelte";
     let {data,error} = await supabase.storage.from("palette_textures").list("lospec");
     let result: TextureForShader[] = [];
     for (let item of data ?? []) {
+      if (item.name === ".emptyFolderPlaceholder") {
+        continue;
+      }
       result.push({
         name: `${item.name}`,
         path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/palette_textures/lospec/${item.name}`,
@@ -94,10 +98,74 @@ import {onMount} from "svelte";
     return result;
   } 
 
+  const fetchAllTextures_Pencil = async (supabase: SupabaseClient): Promise<TextureForShader[]> => {
+    let {data, error} = await supabase.storage.from("pencil_textures").list("godot");
+    let result: TextureForShader[] = [];
+    for (let item of data ?? []) {
+      if (item.name === ".emptyFolderPlaceholder") {
+        continue;
+      }
+      result.push({
+        name: `Pencil ${item.name}`,
+        path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/${item.name}`,
+      });
+    }
+    return result;
+  }
+
+  const fetchAllTextures_ASCII = async (supabase: SupabaseClient): Promise<TextureForShader[]> => {
+    let {data, error} = await supabase.storage.from("ascii_textures").list("godot");
+    let result: TextureForShader[] = [];
+    for (let item of data ?? []) {
+      if (item.name === ".emptyFolderPlaceholder") {
+        continue;
+      }
+      result.push({
+        name: `ASCII ${item.name}`,
+        path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/ascii_textures/godot/${item.name}`,
+      });
+    }
+    return result;
+  }
+
+  const fetchAllTextures_Tiled = async (supabase: SupabaseClient): Promise<TextureForShader[]> => {
+    let {data, error} = await supabase.storage.from("tiled_textures").list("godot");
+    let result: TextureForShader[] = [];
+    for (let item of data ?? []) {
+      if (item.name === ".emptyFolderPlaceholder") {
+        continue;
+      }
+      result.push({
+        name: `Tiled ${item.name}`,
+        path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/tiled_textures/godot/${item.name}`,
+      });
+    }
+    return result;
+  }
+
+  const fetchAllTextures_ShaderToy = async (supabase: SupabaseClient): Promise<TextureForShader[]> => {
+    let {data, error} = await supabase.storage.from("shader_toy_textures").list("shader_toy");
+    let result: TextureForShader[] = [];
+    for (let item of data ?? []) {
+      if (item.name === ".emptyFolderPlaceholder") {
+        continue;
+      }
+      result.push({
+        name: `Shader Toy ${item.name}`,
+        path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/shader_toy_textures/shader_toy/${item.name}`,
+      });
+    }
+    return result;
+  }
+
   let imageElement: HTMLImageElement;
   let texturesNoise: Array<TextureForShader> = [{ name: "none", path: "none", }];
   let texturesBayer: Array<TextureForShader> = [{ name: "none", path: "none", }];
-  let texturesPallete: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturespalette: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturesPencil: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturesASCII: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturesTiled: Array<TextureForShader> = [{ name: "none", path: "none", }];
+  let texturesShaderToy: Array<TextureForShader> = [{ name: "none", path: "none", }];
 
 onMount(async () => {
   const supabase = createClient(import.meta.env.VITE_SUPABASE_URL
@@ -120,7 +188,11 @@ onMount(async () => {
 
   texturesNoise = [... texturesNoise, ... await fetchAllTextures_Noise()];
   texturesBayer = [... texturesBayer, ... await fetchAllTextures_BayerMatrix()];
-  texturesPallete = [... texturesPallete, ... await fetchAllTextures_Palette(supabase)];
+  texturespalette = [... texturespalette, ... await fetchAllTextures_Palette(supabase)];
+  texturesPencil = [... texturesPencil, ... await fetchAllTextures_Pencil(supabase)];
+  texturesASCII = [... texturesASCII, ... await fetchAllTextures_ASCII(supabase)];
+  texturesTiled = [... texturesTiled, ... await fetchAllTextures_Tiled(supabase)];
+  texturesShaderToy = [... texturesShaderToy, ... await fetchAllTextures_ShaderToy(supabase)];
 });
 
   // const getType = (value: GLSLUniformValue): string => {
@@ -150,6 +222,9 @@ onMount(async () => {
         (uniforms[key].thisUniformDefaultValue as number[])[index] = newValue as number;
     } else {
       uniforms[key].thisUniformDefaultValue = newValue;
+    }
+    if (canvasInstance && uniforms[key].thisUniformType === "sampler2D") {
+      uniforms[key].thisUniformSampler2DImg = canvasInstance.loadImage(uniforms[key].thisUniformDefaultValue as string);
     }
     onUpdate?.(uniforms); // Trigger callback
   };
@@ -361,12 +436,14 @@ onMount(async () => {
         <!-- {#if (thisUniformName ?? "").startsWith("noise")}
           
         {:else if (thisUniformName ?? "").startsWith("bayer")}
-        {:else if (thisUniformName ?? "").startsWith("pallete")}
+        {:else if (thisUniformName ?? "").startsWith("palette")}
         {/if} -->
         <div class="field label suffix round border">
           <select on:change={async (e) => {
             let chosen = e.currentTarget.options[e.currentTarget.selectedIndex].value;
             if (chosen === "none") {
+              uniforms[ii].thisUniformDefaultValue = null;
+              uniforms[ii].thisUniformSampler2DImg = null;
               return;
             }
             imageElement.src = chosen;
@@ -374,7 +451,11 @@ onMount(async () => {
           }}>
             {#each ((thisUniformName ?? "").startsWith("noise") ? texturesNoise : 
                     (thisUniformName ?? "").startsWith("bayer") ? texturesBayer : 
-                    (thisUniformName ?? "").startsWith("pallete") ? texturesPallete : 
+                    (thisUniformName ?? "").startsWith("palette") ? texturespalette : 
+                    (thisUniformName ?? "").startsWith("pencil") ? texturesPencil :
+                    (thisUniformName ?? "").startsWith("ascii") ? texturesASCII :
+                    (thisUniformName ?? "").startsWith("tiled") ? texturesTiled :
+                    (thisUniformName ?? "").startsWith("shaderToy") ? texturesShaderToy :
                     [{ name: "none", path: "none", }]) as textureForShader (textureForShader)}
               <option value={textureForShader.path}>{textureForShader.name}</option>            
             {/each}

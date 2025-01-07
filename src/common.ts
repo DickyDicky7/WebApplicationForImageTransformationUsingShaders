@@ -1010,3 +1010,111 @@ export let exampleGLSLUniforms: GLSLUniforms = [
     { thisUniformName:   "bayer_m", thisUniformNameJustForDisplay:   "bayer_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, },
     { thisUniformName: "palette_m", thisUniformNameJustForDisplay: "palette_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, },
 ];
+
+
+
+export function parseGLSL(glslCode: string): GLSLUniforms {
+    const           uniformRegex  : RegExp = /uniform\s+(\w+)\s+(\w+)\s*;\s*(\/\/\s*([\w.\-, ]+))?/g;
+    const           uniforms               : GLSLUniforms = []                                      ;
+    let     match                 : RegExpExecArray| null                                           ;
+
+    while ((match = uniformRegex.exec(glslCode)) !== null) {
+        const [
+              , type
+              , name
+              ,
+              , defaultValueRaw
+              ]   =    match    ;
+
+        // guard - filter
+        // guard - filter
+        // not editable - auto set internal
+        // not editable - auto set internal
+        if (name === "tex0"
+        ||  name === "vTexCoord"
+        ||  name === "fragColor"
+        ||  name === "time"
+        ||  name === "canvasSize"
+        ||  name ===            "texelSize"
+        ||  name ===                      "mousePosition"
+           )
+        {
+            continue;
+        }
+
+        // Parse the default value based on type
+        // Parse the default value based on type
+        let         parsedValue: GLSLUniformValue | null = null;
+        if (                         defaultValueRaw) {
+            const  cleanedValue =    defaultValueRaw.replace(/\s+/g, ""); // Remove spaces
+
+            switch (type) {
+                case "float"         :
+                case       "int"     :
+                case           "uint":
+                    parsedValue = parseFloat(
+                   cleanedValue             );
+                    break;
+                case "bool":
+                    parsedValue =           (
+                   cleanedValue ===  "true" ||
+                   cleanedValue === "!false");
+                    break;
+                case  "vec2":
+                case  "vec3":
+                case  "vec4":
+                case "ivec2":
+                case "ivec3":
+                case "ivec4":
+                case "uvec2":
+                case "uvec3":
+                case "uvec4":
+                case  "mat2":
+                case  "mat3":
+                case  "mat4":
+                    parsedValue = cleanedValue.split(",").map(v => parseFloat(v));
+                    break;
+                case "sampler2D"  :
+                case "sampler3D"  :
+                case "samplerCube":
+                    parsedValue = cleanedValue                                   ; // ########### #### Use the raw string for sampler types
+                    break;
+                default:
+                    parsedValue =        null!                                   ; // Unsupported type ### ### ### ###### ### ####### #####
+                // bvec2
+                // bvec3
+                // bvec4
+                // mat2x3
+                // mat2x4
+                // mat3x2
+                // mat3x4
+                // mat4x2
+                // mat4x3
+
+                // samplerCube 
+                // sampler2D@@Array@ 
+                // sampler2D@@Shadow 
+                // samplerCubeShadow 
+                // isampler2D 
+                // isampler3D 
+                // isamplerCube 
+                // isampler2DArray 
+                // usampler2D 
+                // usampler3D 
+                // usamplerCube 
+                // usampler2DArray 
+                // struct
+            }
+        }
+
+        uniforms.push({
+            thisUniformName              :       name ,
+            thisUniformNameJustForDisplay:       null!,
+            thisUniformType              :       type ,
+            thisUniformDefaultValue      : parsedValue,
+            thisUniformSampler2DImg      :       null!,
+        });
+    }
+
+    return uniforms;
+};

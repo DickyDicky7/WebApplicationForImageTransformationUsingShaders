@@ -8,44 +8,28 @@ import { promptShader } from "./a.i.effects";
 import { shareImage } from "./common";
 import { shareVideo } from "./common";
 import { shareWebcam } from "./common";
+import { parseGLSL } from "./common";
     import   p5        from "p5";
     import { onMount } from "svelte";
 
     console.log(import.meta.env.VITE_KEY001);
-    // import * as Beauty from "@deepar/beauty"
-    // import * as deepar from "deepar";
 
-    // (async function() {
-    //   const deepAR = await deepar.initialize({
-    //     licenseKey: 'your_license_key_here',
-    //     previewElement: document.querySelector('#deepar-div'),
-    //     effect: 'https://cdn.jsdelivr.net/npm/deepar/effects/aviators'
-    //   });
-    // })();
 
     const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
     const DPR = window.devicePixelRatio || 1;
-let i: p5.Image;
+
     const p5Logic = (p: p5) => {
           p.setup = (     ) => {
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR), p.WEBGL);
             p.background( 255 );
             p.imageMode(p.CENTER);
             p.frameRate(  fps   );
-            i = p.loadImage(data.publicUrl);
-             noiseT1 = p.loadImage("./src/noise.png");
-            noiseT2 = p.loadImage("./download.png");
-            gradient = p.loadImage("./sunset-red-8x.png");
-            ascii_tex = p.loadImage("./ascii.png");
-            tile = p.loadImage("./Texturelabs_MonitorPatterns_page_01.png");
-            bayer = p.loadImage("./bayer16tile8.png");
-            u_bgTexture = p.loadImage("./parchment.jpg");
-            u_patternTexture = p.loadImage("./pencil.jpg");
+            
         };
 
         p.draw = () => {
             p.background( 255 );
-            p.image(i,0,0)
+            
         };
     };
 
@@ -59,14 +43,6 @@ let i: p5.Image;
         
     });
 
-    let noiseT1:p5.Image;
-    let noiseT2:p5.Image;
-    let gradient:p5.Image;
-    let ascii_tex:p5.Image;
-    let tile:p5.Image;
-    let bayer:p5.Image;
-    let u_bgTexture:p5.Image;
-    let u_patternTexture:p5.Image;
     const successCallback = (imageD: p5.Image): void => {
         let imageRatio = 0.5;
         canvasInstance.resizeCanvas(imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
@@ -77,18 +53,6 @@ let i: p5.Image;
             let     filterShader = (canvasInstance as any)
          .createFilterShader                         (imageFragmentShaderSourceCode);
          shaderSetNecessaryUniforms(filterShader);
-        // filterShader.setUniform("tex1", noiseT1)
-        // filterShader.setUniform("tex2", noiseT2)
-        // filterShader.setUniform("gradient", gradient);
-        // filterShader.setUniform("palette0", gradient);
-        // filterShader.setUniform("palette0Size", [gradient.width, gradient.height]);
-        // filterShader.setUniform("ascii_tex", ascii_tex);
-        // filterShader.setUniform("tiledtexture", tile);
-        // filterShader.setUniform("bayer", bayer);
-        // filterShader.setUniform("bayer0", bayer);
-        // filterShader.setUniform("bayer0Size", [bayer.width, bayer.height]);
-        // filterShader.setUniform("u_bgTexture", u_bgTexture); //switchable
-        // filterShader.setUniform("u_patternTexture", u_patternTexture); ////switchable
 
         if (currentGLSLUniforms) {
             for (let glslUniform of currentGLSLUniforms) {
@@ -205,16 +169,6 @@ let i: p5.Image;
                 canvasInstance.pop();
                 let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
                 shaderSetNecessaryUniforms(warp);
-                // warp.setUniform("tex1", noiseT1);
-                // warp.setUniform("tex2", noiseT2);
-                // warp.setUniform("gradient", gradient);
-                // warp.setUniform("palette0", gradient);
-                // warp.setUniform("palette0Size", [gradient.width, gradient.height]);
-                // warp.setUniform("ascii_tex", ascii_tex);
-                // warp.setUniform("tiledtexture", tile);
-                // warp.setUniform("bayer",bayer);
-                // warp.setUniform("bayer0",bayer);
-                // warp.setUniform("bayer0Size", [bayer.width, bayer.height]);
 
         if (currentGLSLUniforms) {
             for (let glslUniform of currentGLSLUniforms) {
@@ -279,27 +233,14 @@ let i: p5.Image;
     let image: p5.MediaElement = null!;
 
     let imageFragmentShaderSourceCode: string = `
-        precision highp float;
-
+#version 100
+    precision highp float;
+   #include "lygia/color/vibrance.glsl"
         uniform sampler2D tex0;
         varying vec2 vTexCoord;
-
-        vec2 zoom(vec2 coord, float amount) {
-                  vec2 relativeToCenter  = coord - 0.5;
-                       relativeToCenter /= amount;      //     Zoom in
-            return     relativeToCenter          + 0.5; // Put back into absolute coordinates
-        }
-
-        void main() {
-            // Get each@ color channel@ using coordinates with@@@@ different amounts
-            // of@ zooms to@@@ displace the@@ colors@@@@@ slightly
-            gl_FragColor = vec4(
-                texture2D(tex0,      vTexCoord       ).r,
-                texture2D(tex0, zoom(vTexCoord, 1.05)).g,
-                texture2D(tex0, zoom(vTexCoord, 1.10)).b,
-                texture2D(tex0,      vTexCoord       ).a
-            );
-        }
+void main(){
+    gl_FragColor = vibrance(texture2D(tex0, vTexCoord), 2.0);
+}
     `;
     let videoFragmentShaderSourceCode: string = `
 
@@ -315,6 +256,12 @@ void main(){
 }
     */
 // videoFragmentShaderSourceCode = resolveLygia(videoFragmentShaderSourceCode);
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import resolveLygiaAsync from "https://lygia.xyz/resolve.esm.js"
+(async()=>{
+    imageFragmentShaderSourceCode = await resolveLygiaAsync(imageFragmentShaderSourceCode)
+})()
 
     const videoFormats = [
         { mimeType: "video/webm; codecs=vp9", extension: "webm", blobType: "video/webm", },
@@ -351,8 +298,7 @@ void main(){
         shader.setUniform(                "texelSize", [1.0 / (canvasInstance.width * canvasInstance.pixelDensity()) , 1.0 / (canvasInstance.height * canvasInstance.pixelDensity())]);
     shader.setUniform("mousePosition", [0.0,0.0,0.0,0.0])
     shader.setUniform("frameCount", canvasInstance.frameCount);
-    shader.setUniform("tex1Size", [noiseT1.width,noiseT1.height]);
-    shader.setUniform("tex2Size", [noiseT2.width,noiseT2.height]);
+
     }
 
         
@@ -407,11 +353,6 @@ void main(){
         canvasInstance.filter(filterShaderWebCam             );
         };
 
-//         const deepAR = await deepar.initialize({
-//   licenseKey: 'd936878d07a3b05ef50fb9559398728d37f73663965c3754c84a998bc35e4ab18d1d6b164bbc6af4', 
-//   canvas: canvas.children[0]  as HTMLCanvasElement,
-//   effect: '../Pixel Heart Particles/8bitHearts.deepar',
-// });
 
         mode = MODE.WEBCAM;
     };
@@ -437,12 +378,7 @@ void main(){
 
 
 
-import { createClient } from '@supabase/supabase-js'
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL
-, import.meta.env.VITE_SUPABASE_KEY_PUB);
 
-const {data}=supabase.storage.from("noise_textures").getPublicUrl("sbs_-_noise_texture_pack_-_128x128/128x128/Cracks/Cracks 10 - 128x128.png")
-console.log(data);
 
 
 //sbs_-_noise_texture_pack_-_128x128
@@ -478,11 +414,6 @@ import A from "./lib/A.svelte";
 //imgur video/image
 //Giphy? (LATER IF THERE IS STILL TIME LEFT)
 
-// import imgur from "imgur";
-// const client = new imgur({ clientId: import.meta.env.VITE_CLIENT_ID____ });
-import { ImgurClient } from 'imgur';
-
-const client = new ImgurClient({ clientId: import.meta.env.VITE_CLIENT_ID____ });
 
 
 
@@ -518,10 +449,6 @@ for (let i: number = 1; i <= 93; ++i)
 }
 import(`./lib/${"p5.1"}.glsl?raw`);
 import(`./lib/${"p5.2"}.glsl?raw`);
-// import(`./lib/${77}.glsl?raw`);
-// import(`./lib/${57}.glsl?raw`);
-// import glslString from "./lib/1.glsl?raw";
-// console.log(glslString);
 
 const  loadAsset = async (assetPath: string): Promise<string> => {
     const  asset = await import(assetPath);
@@ -553,99 +480,6 @@ import type { GLSLUniformValue,
   };
 
 
-  function parseGLSL(glslCode: string): GLSLUniforms {
-    const uniformRegex = /uniform\s+(\w+)\s+(\w+)\s*;\s*(\/\/\s*([\w.\-, ]+))?/g;
-    const uniforms: GLSLUniforms = [];
-    let match;
-
-    while ((match = uniformRegex.exec(glslCode)) !== null) {
-        const [, type, name, , defaultValueRaw] = match;
-
-        //guard - filter
-        //not editable - auto set internal
-        if (name === "tex0"
-        ||  name === "vTexCoord"
-        ||  name === "fragColor"
-        ||  name === "time"
-        ||  name === "canvasSize"
-        ||  name === "texelSize"
-        ||  name === "mousePosition"
-        ) {
-            continue;
-        }
-
-        // Parse the default value based on type
-        let parsedValue: GLSLUniformValue | null = null;
-        if (defaultValueRaw) {
-            const cleanedValue = defaultValueRaw.replace(/\s+/g, ""); // Remove spaces
-
-            switch (type) {
-                case "float":
-                case "int":
-                case "uint":
-                    parsedValue = parseFloat(cleanedValue);
-                    break;
-                case "bool":
-                    parsedValue = cleanedValue === "true" || cleanedValue === "!false";
-                    break;
-                case "vec2":
-                case "vec3":
-                case "vec4":
-                case "ivec2":
-                case "ivec3":
-                case "ivec4":    
-                case "uvec2":
-                case "uvec3":
-                case "uvec4":    
-                case "mat2":
-                case "mat3":
-                case "mat4":
-                    parsedValue = cleanedValue.split(",").map(v => parseFloat(v));
-                    break;
-                case "sampler2D":
-                case "sampler3D":
-                // case "samplerCube":
-                    parsedValue = cleanedValue; // Use the raw string for sampler types
-                    break;
-                default:
-                    parsedValue = null; // Unsupported type
-                    // bvec2
-                    // bvec3
-                    // bvec4
-                    // mat2x3
-                    // mat2x4
-                    // mat3x2
-                    // mat3x4
-                    // mat4x2
-                    // mat4x3
-
-                    // samplerCube 
-                    // sampler2DArray 
-                    // sampler2DShadow 
-                    // samplerCubeShadow 
-                    // isampler2D 
-                    // isampler3D 
-                    // isamplerCube 
-                    // isampler2DArray 
-                    // usampler2D 
-                    // usampler3D 
-                    // usamplerCube 
-                    // usampler2DArray 
-                    // struct
-            }
-        }
-
-        uniforms.push({
-            thisUniformName: name,
-            thisUniformNameJustForDisplay: null!,
-            thisUniformType: type,
-            thisUniformDefaultValue: parsedValue,
-            thisUniformSampler2DImg:       null!,
-        });
-    }
-
-    return uniforms;
-}
 
 
 

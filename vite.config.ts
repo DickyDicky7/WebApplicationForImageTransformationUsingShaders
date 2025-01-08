@@ -32,7 +32,7 @@ export default defineConfig({
               , ]
               ,
 server        : {
-        "host": "192.168.1.227"
+        "host": "192.168.1.108"
               , //YOUR IPV4ADRR
                 }
               ,

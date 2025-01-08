@@ -11,12 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/edge.glsl"
 
-uniform vec2 pixels_scale; // 0.0, 0.0
-
+uniform vec2 offset    ; // 0.0, 0.0
+//const int  kernelSize; // 0.0
 
 void main()
 {
-    fragColor = edge(tex0, vTexCoord, pixels_scale) * texture(tex0, vTexCoord);
+    fragColor = edge(tex0, vTexCoord, offset) * texture(tex0, vTexCoord);
 }
 
+// https://lygia.xyz/filter/edge
+// https://lygia.xyz/filter/edge
 // https://lygia.xyz/filter/edge

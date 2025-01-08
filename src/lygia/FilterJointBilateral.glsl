@@ -9,14 +9,16 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/filter/bilateralBlur.glsl"
+#include "lygia/filter/jointBilateral.glsl"
 
-uniform vec2 pixel_offset; // 0.0, 0.0
-
+uniform vec2 offset    ; // 0.0, 0.0
+uniform int  kernelSize; // 0.0
 
 void main()
 {
-    fragColor = bilateralBlur(tex0, vTexCoord, pixel_offset);
+    fragColor = jointBilateral(tex0, vTexCoord, offset, kernelSize);
 }
 
+// https://lygia.xyz/filter/jointBilateral
+// https://lygia.xyz/filter/jointBilateral
 // https://lygia.xyz/filter/jointBilateral

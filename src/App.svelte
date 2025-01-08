@@ -512,7 +512,7 @@ let currentGLSLUniforms: GLSLUniforms;
           {/each}
         </select>
         <label>Image Format</label>
-        <i>arrow_drop_down</i>
+        <i class="fa-solid fa-chevron-down"></i>
     </div>
 
     <div class="field label suffix round border">
@@ -522,7 +522,7 @@ let currentGLSLUniforms: GLSLUniforms;
           {/each}
         </select>
         <label>Video Format</label>
-        <i>arrow_drop_down</i>
+        <i class="fa-solid fa-chevron-down"></i>
     </div>
 
 
@@ -559,7 +559,7 @@ let currentGLSLUniforms: GLSLUniforms;
       {/each}
     </select>
     <label>Choose your effects</label>
-    <i>arrow_drop_down</i>
+    <i class="fa-solid fa-chevron-down"></i>
 </div>
 
 <GlslUniform uniforms={currentGLSLUniforms} onUpdate={handleUpdate} canvasInstance={canvasInstance}></GlslUniform>
@@ -569,4 +569,14 @@ let currentGLSLUniforms: GLSLUniforms;
 <style>
     main { overflow-x: visible; scroll-behavior: smooth; }
     *    {                      scroll-behavior: smooth; }
+    @font-face {
+     font-family:            'SF Mono Regular'                                       ;
+     font-weight: normal;
+     font-style : normal;
+     src: url('./assets/fonts/SF-Mono-Regular.otf') format('opentype')               ;
+    }
+
+    *    {
+     font-family:            'SF Mono Regular'                        , 'fontawesome';
+    }
 </style>

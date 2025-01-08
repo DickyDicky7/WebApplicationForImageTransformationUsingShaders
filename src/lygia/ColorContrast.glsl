@@ -11,7 +11,7 @@ uniform         vec4      mousePosition;
 
 #include "lygia/color/contrast"
 
-
+//const float contrastValues; // 0.0
 uniform float contrastAmount; // 0.0
 
 void main()
@@ -19,4 +19,6 @@ void main()
     fragColor = contrast(texture(tex0, vTexCoord), contrastAmount);
 }
 
+// https://lygia.xyz/color/contrast
+// https://lygia.xyz/color/contrast
 // https://lygia.xyz/color/contrast

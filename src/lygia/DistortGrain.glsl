@@ -11,7 +11,7 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/grain.glsl"
 
-uniform float  t; // 0.0
+uniform float t         ; // 0.0
 uniform float multiplier; // 0.0
 
 void main()
@@ -19,4 +19,6 @@ void main()
     fragColor = vec4(grain(tex0, vTexCoord, canvasSize, t, multiplier), texture(tex0, vTexCoord).a);
 }
 
+// https://lygia.xyz/distort/grain
+// https://lygia.xyz/distort/grain
 // https://lygia.xyz/distort/grain

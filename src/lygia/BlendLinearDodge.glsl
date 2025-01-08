@@ -16,10 +16,12 @@ uniform float opacity; // 0.0
 
 void main()
 {
-    vec4 currColor     =          texture(         tex0, vTexCoord     );
+    vec4 currColor     =          texture(tex0         ,
+                                          vTexCoord                    );
          currColor.rgb = blendLinearDodge(currColor.rgb, blend, opacity);
          fragColor     =                  currColor                     ;
 }
 
-
+// https://lygia.xyz/color/blend/linearDodge
+// https://lygia.xyz/color/blend/linearDodge
 // https://lygia.xyz/color/blend/linearDodge

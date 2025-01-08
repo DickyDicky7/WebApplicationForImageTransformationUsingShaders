@@ -11,12 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/fibonacciBokeh.glsl"
 
-uniform vec2  pixel ; // 0.0, 0.0
+uniform vec2  pixels; // 0.0, 0.0
 uniform float amount; // 0.0
 
 void main()
 {
-    fragColor = fibonacciBokeh(tex0, vTexCoord, pixel, amount);
+    fragColor = fibonacciBokeh(tex0, vTexCoord, pixels, amount);
 }
 
+// https://lygia.xyz/filter/fibonacciBokeh
+// https://lygia.xyz/filter/fibonacciBokeh
 // https://lygia.xyz/filter/fibonacciBokeh

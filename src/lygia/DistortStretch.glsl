@@ -11,12 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/distort/stretch.glsl"
 
-uniform vec2 direction    ; // 0.0, 0.0
-uniform int  samples; // 0.0
+uniform vec2 direction; // 0.0, 0.0
+uniform int  samplings; // 0.0
 
 void main()
 {
-    fragColor = stretch(tex0, vTexCoord, direction, samples);
+    fragColor = stretch(tex0, vTexCoord, direction, samplings);
 }
 
+// https://lygia.xyz/distort/stretch
+// https://lygia.xyz/distort/stretch
 // https://lygia.xyz/distort/stretch

@@ -11,11 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/barrel.glsl"
 
-uniform float distances; // 0.0
+uniform vec2 sdf; // 0.0, 0.0
+//const vec2 pct; // 0.0, 0.0
 
 void main()
 {
-    fragColor = vec4(barrel(tex0, vTexCoord, distances), texture(tex0, vTexCoord).a);
+    fragColor = vec4(barrel(tex0, vTexCoord, sdf), texture(tex0, vTexCoord).a);
 }
 
+// https://lygia.xyz/distort/barrel
+// https://lygia.xyz/distort/barrel
 // https://lygia.xyz/distort/barrel

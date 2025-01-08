@@ -19,3 +19,5 @@ void main()
 }
 
 // https://lygia.xyz/color/tonemap/linear
+// https://lygia.xyz/color/tonemap/linear
+// https://lygia.xyz/color/tonemap/linear

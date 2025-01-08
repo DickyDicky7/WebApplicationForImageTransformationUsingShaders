@@ -21,3 +21,5 @@ void main()
 
 
 // https://lygia.xyz/color/dither/bayer
+// https://lygia.xyz/color/dither/bayer
+// https://lygia.xyz/color/dither/bayer

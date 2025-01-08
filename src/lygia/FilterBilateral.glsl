@@ -20,3 +20,5 @@ void main()
 }
 
 // https://lygia.xyz/filter/bilateral
+// https://lygia.xyz/filter/bilateral
+// https://lygia.xyz/filter/bilateral

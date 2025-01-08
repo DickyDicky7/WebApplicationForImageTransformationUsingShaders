@@ -19,5 +19,6 @@ void main()
     fragColor = laplacian(tex0, vTexCoord, pixels_scaling, pixels_padding);
 }
 
-
+// https://lygia.xyz/filter/laplacian
+// https://lygia.xyz/filter/laplacian
 // https://lygia.xyz/filter/laplacian

@@ -21,3 +21,5 @@ void main()
 
 
 // https://lygia.xyz/color/dither/triangleNoise
+// https://lygia.xyz/color/dither/triangleNoise
+// https://lygia.xyz/color/dither/triangleNoise

@@ -11,7 +11,7 @@ uniform         vec4      mousePosition;
 
 #include "lygia/color/desaturate"
 
-
+//const float desaturateValues; // 0.0
 uniform float desaturateAmount; // 0.0
 
 void main()
@@ -19,4 +19,6 @@ void main()
     fragColor = desaturate(texture(tex0, vTexCoord), desaturateAmount);
 }
 
+// https://lygia.xyz/color/desaturate
+// https://lygia.xyz/color/desaturate
 // https://lygia.xyz/color/desaturate

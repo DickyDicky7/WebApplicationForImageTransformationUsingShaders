@@ -15,14 +15,16 @@ uniform         vec4      mousePosition;
 
 
 uniform float amountWhiteBalanceTemperature;
-uniform float amountWhiteBalanceTint       ;
+uniform float amountWhiteBalanceTintColours;
 
 
 
 void main()
 {
-    fragColor = whiteBalance(texture(tex0,vTexCoord), amountWhiteBalanceTemperature, amountWhiteBalanceTint);
+    fragColor = whiteBalance(texture(tex0, vTexCoord), amountWhiteBalanceTemperature, amountWhiteBalanceTintColours);
 
 }
 
+// https://lygia.xyz/color/whiteBalance
+// https://lygia.xyz/color/whiteBalance
 // https://lygia.xyz/color/whiteBalance

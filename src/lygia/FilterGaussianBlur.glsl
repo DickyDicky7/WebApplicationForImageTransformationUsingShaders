@@ -11,12 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/gaussianBlur.glsl"
 
-uniform vec2 pixel_direction    ; // 0.0, 0.0
+uniform vec2 offset    ; // 0.0, 0.0
 uniform int  kernelSize; // 0.0
 
 void main()
 {
-    fragColor = gaussianBlur(tex0, vTexCoord, pixel_direction, kernelSize);
+    fragColor = gaussianBlur(tex0, vTexCoord, offset, kernelSize);
 }
 
+// https://lygia.xyz/filter/gaussianBlur
+// https://lygia.xyz/filter/gaussianBlur
 // https://lygia.xyz/filter/gaussianBlur

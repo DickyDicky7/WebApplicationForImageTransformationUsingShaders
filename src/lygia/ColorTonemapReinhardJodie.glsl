@@ -19,3 +19,5 @@ void main()
 }
 
 // https://lygia.xyz/color/tonemap/reinhardJodie
+// https://lygia.xyz/color/tonemap/reinhardJodie
+// https://lygia.xyz/color/tonemap/reinhardJodie

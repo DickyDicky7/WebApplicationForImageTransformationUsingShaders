@@ -12,15 +12,17 @@ uniform         vec4      mousePosition;
 #include "lygia/color/vibrance.glsl"
 
 
-
-uniform float amountVibrance;
+//const float amountVibrance; // 0.0
+uniform float amountVibrance; // 0.0
 
 
 void main()
 {
  
-    fragColor = vibrance(texture(tex0. vTexCoord), amountVibrance);
+    fragColor = vibrance(texture(tex0, vTexCoord), amountVibrance);
 
 }
 
+// https://lygia.xyz/color/vibrance
+// https://lygia.xyz/color/vibrance
 // https://lygia.xyz/color/vibrance

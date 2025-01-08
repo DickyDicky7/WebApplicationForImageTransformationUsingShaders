@@ -11,12 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/mean.glsl"
 
-uniform vec2 pixel_offset; // 0.0, 0.0
-
+uniform vec2 offset    ; // 0.0, 0.0
+//const int  kernelSize; // 0.0
 
 void main()
 {
-    fragColor = mean(tex0, vTexCoord, pixel_offset);
+    fragColor = mean(tex0, vTexCoord, offset);
 }
 
+// https://lygia.xyz/filter/mean
+// https://lygia.xyz/filter/mean
 // https://lygia.xyz/filter/mean

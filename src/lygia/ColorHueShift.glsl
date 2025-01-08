@@ -11,7 +11,7 @@ uniform         vec4      mousePosition;
 
 #include "lygia/color/hueShift"
 
-
+//const float angle; // 0.0
 uniform float angle; // 0.0
 
 void main()
@@ -19,4 +19,6 @@ void main()
     fragColor = hueShift(texture(tex0, vTexCoord), angle);
 }
 
+// https://lygia.xyz/color/hueShift
+// https://lygia.xyz/color/hueShift
 // https://lygia.xyz/color/hueShift

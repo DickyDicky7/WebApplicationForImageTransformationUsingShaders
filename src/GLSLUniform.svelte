@@ -238,6 +238,8 @@ onMount(async () => {
     return result;
   }, []);
 }
+
+  let interval:NodeJS.Timeout;
 </script>
 
 <div>
@@ -429,6 +431,21 @@ onMount(async () => {
                 )}
             />
           </div>
+          <div      class="center center-align">
+            <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
+            <button class="circle        small"
+            on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
+            on:mouseout  ={async (e) => { clearInterval(interval); }}
+            on:mouseup   ={async (e) => { clearInterval(interval); }}
+            on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-left "></i></button >
+            <div class="space"></div>
+            <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
+            <button class="circle        small"
+            on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue + 0.00001); } }, 75); }}
+            on:mouseout  ={async (e) => { clearInterval(interval); }}
+            on:mouseup   ={async (e) => { clearInterval(interval); }}
+            on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-right"></i></button >
+          </div>
         </div>
       {:else if ((thisUniformType ?? "") === "sampler2D" || (thisUniformType ?? "") === "sampler3D") && typeof thisUniformDefaultValue === "string"}
         <!-- <span>sampler2D (not editable)</span> -->
@@ -462,7 +479,7 @@ onMount(async () => {
           </select>
           <!-- svelte-ignore a11y-label-has-associated-control -->
           <label>Texture For Shader</label>
-          <i>arrow_drop_down</i>
+          <i class="fa-solid fa-chevron-down"></i>
       </div>
 
       {:else}

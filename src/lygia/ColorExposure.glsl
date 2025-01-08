@@ -1,4 +1,4 @@
-#version 300 es
+-#version 300 es
 precision highp float;
 
 uniform         sampler2D          tex0;
@@ -11,7 +11,7 @@ uniform         vec4      mousePosition;
 
 #include "lygia/color/exposure"
 
-
+//const float exposureValues; // 0.0
 uniform float exposureAmount; // 0.0
 
 void main()
@@ -19,4 +19,6 @@ void main()
     fragColor = exposure(texture(tex0, vTexCoord), exposureAmount);
 }
 
+// https://lygia.xyz/color/exposure
+// https://lygia.xyz/color/exposure
 // https://lygia.xyz/color/exposure

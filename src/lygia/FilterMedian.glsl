@@ -11,12 +11,14 @@ uniform         vec4      mousePosition;
 
 #include "lygia/filter/median.glsl"
 
-uniform vec2 pixel_offset; // 0.0, 0.0
-
+uniform vec2 offset    ; // 0.0, 0.0
+//const int  kernelSize; // 0.0
 
 void main()
 {
-    fragColor = median(tex0, vTexCoord, pixel_offset);
+    fragColor = median(tex0, vTexCoord, offset);
 }
 
+// https://lygia.xyz/filter/median
+// https://lygia.xyz/filter/median
 // https://lygia.xyz/filter/median

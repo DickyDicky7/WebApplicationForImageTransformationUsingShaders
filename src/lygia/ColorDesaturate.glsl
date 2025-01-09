@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/color/desaturate"
+#include "lygia/color/desaturate.glsl"
 
 //const float desaturateValues; // 0.0
 uniform float desaturateAmount; // 0.0

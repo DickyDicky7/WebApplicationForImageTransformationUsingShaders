@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/color/brightnessContrast"
+#include "lygia/color/brightnessContrast.glsl"
 
 uniform float brightness; // 0.0
 uniform float contrast__; // 0.0

@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/color/hueShift"
+#include "lygia/color/hueShift.glsl"
 
 //const float angle; // 0.0
 uniform float angle; // 0.0

@@ -1,4 +1,4 @@
--#version 300 es
+#version 300 es
 precision highp float;
 
 uniform         sampler2D          tex0;
@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/color/exposure"
+#include "lygia/color/exposure.glsl"
 
 //const float exposureValues; // 0.0
 uniform float exposureAmount; // 0.0

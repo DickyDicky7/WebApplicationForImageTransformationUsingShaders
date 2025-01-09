@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/color/tonemap/reinhard"
+#include "lygia/color/tonemap/reinhard.glsl"
 
 
 

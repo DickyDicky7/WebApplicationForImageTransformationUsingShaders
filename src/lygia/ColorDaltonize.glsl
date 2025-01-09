@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/color/daltonize"
+#include "lygia/color/daltonize.glsl"
 
 uniform bool onProtanopees; // false
 uniform bool onProtanopias; // false

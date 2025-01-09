@@ -12,7 +12,7 @@ import { parseGLSL } from "./common";
     import   p5        from "p5";
     import { onMount } from "svelte";
 
-    console.log(import.meta.env.VITE_KEY001);
+    
 
 
     const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
@@ -37,7 +37,7 @@ import { parseGLSL } from "./common";
     let canvasInstance:          p5;
     
     onMount(async ()  : Promise<void> => {
-    console.log("on mount");
+    
         canvasInstance = new p5(p5Logic, canvas);
         await ui("theme", "#009688")
         
@@ -258,7 +258,10 @@ void main(){
 // videoFragmentShaderSourceCode = resolveLygia(videoFragmentShaderSourceCode);
     // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
-import resolveLygiaAsync from "https://lygia.xyz/resolve.esm.js"
+import {resolveLygiaAsync} from "./lygia"
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
+import {resolveLygia} from "./lygia"
 (async()=>{
     imageFragmentShaderSourceCode = await resolveLygiaAsync(imageFragmentShaderSourceCode)
 })()
@@ -414,8 +417,35 @@ import A from "./lib/A.svelte";
 //imgur video/image
 //Giphy? (LATER IF THERE IS STILL TIME LEFT)
 
+import { supabase } from "./global";
+import { fetchAllTextures_Noise } from "./common";
+import { fetchAllTextures_BayerMatrix } from "./common";
+import { fetchAllTextures_Palette } from "./common";
+import { fetchAllTextures_Pencil } from "./common";
+import { fetchAllTextures_ASCII } from "./common";
+import { fetchAllTextures_Tiled } from "./common";
+import { fetchAllTextures_ShaderToy } from "./common";
+import { texturesNoise } from "./global";
+import { texturesBayer } from "./global";
+import { texturesPalette } from "./global";
+import { texturesPencil } from "./global";
+import { texturesASCII } from "./global";
+import { texturesTiled } from "./global";
+import { texturesShaderToy } from "./global";
+
+onMount(async () => {
 
 
+
+
+  $texturesNoise = [... $texturesNoise, ... await fetchAllTextures_Noise()];
+  $texturesBayer = [... $texturesBayer, ... await fetchAllTextures_BayerMatrix()];
+  $texturesPalette = [... $texturesPalette, ... await fetchAllTextures_Palette(supabase)];
+  $texturesPencil = [... $texturesPencil, ... await fetchAllTextures_Pencil(supabase)];
+  $texturesASCII = [... $texturesASCII, ... await fetchAllTextures_ASCII(supabase)];
+  $texturesTiled = [... $texturesTiled, ... await fetchAllTextures_Tiled(supabase)];
+  $texturesShaderToy = [... $texturesShaderToy, ... await fetchAllTextures_ShaderToy(supabase)];
+});
 
 
 
@@ -439,16 +469,31 @@ let mode:MODE = MODE.IMAGE;
 //GIF 
 
 import { Shaders, type ShaderName, type ShaderPath } from "./common";
-for (let i: number = 1; i <= 88; ++i)
-{
-    import(`./lib/${i}.glsl?raw`);
-}
-for (let i: number = 1; i <= 93; ++i)
-{
-    import(`./shadertoys/${i}.glsl?raw`);
-}
-import(`./lib/${"p5.1"}.glsl?raw`);
-import(`./lib/${"p5.2"}.glsl?raw`);
+// for (let i: number = 1; i <= 88; ++i)
+// {
+//     import(`./lib/${i}.glsl?raw`);
+// }
+// for (let i: number = 1; i <= 93; ++i)
+// {
+//     import(`./shadertoys/${i}.glsl?raw`);
+// }
+// import(`./lib/${"p5.1"}.glsl?raw`);
+// import(`./lib/${"p5.2"}.glsl?raw`);
+onMount(async() => {
+    for(let shaderPath of Shaders.values()) {
+        if (shaderPath.includes("./lib/")) {
+            await import(`./lib/${shaderPath.replace("./lib/", "").replace(".glsl?raw", "")}.glsl?raw`);
+        }
+        else
+        if (shaderPath.includes("./shadertoys/")) {
+            await import(`./shadertoys/${shaderPath.replace("./shadertoys/", "").replace(".glsl?raw", "")}.glsl?raw`);
+        }
+        else
+        if (shaderPath.includes("./lygia/")) {
+            await import(`./lygia/${shaderPath.replace("./lygia/", "").replace(".glsl?raw", "")}.glsl?raw`);
+        }
+    }
+});
 
 const  loadAsset = async (assetPath: string): Promise<string> => {
     const  asset = await import(assetPath);
@@ -549,7 +594,14 @@ let currentGLSLUniforms: GLSLUniforms;
                 return;
             }
             const shaderSrc = await loadAsset(shaderPath);
-            imageFragmentShaderSourceCode = shaderSrc;
+            if (shaderName.toLowerCase().trim().includes("lygia"))
+            {imageFragmentShaderSourceCode = await resolveLygiaAsync(shaderSrc);}
+            else
+            {imageFragmentShaderSourceCode = shaderSrc;}
+            if (imageFragmentShaderSourceCode.charAt(0) === "-") {
+                imageFragmentShaderSourceCode = imageFragmentShaderSourceCode.substring(1);
+            }
+            console.log(imageFragmentShaderSourceCode)
             currentGLSLUniforms = parseGLSL(imageFragmentShaderSourceCode);
             console.log(currentGLSLUniforms);
         }

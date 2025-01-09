@@ -711,106 +711,366 @@ export const Shaders: Map<ShaderName, ShaderPath> = new Map([
         `./shadertoys/${ 93}.glsl?raw`,
     ]
     ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
-    // [
-    //     "",
-    //     `./shadertoys/${1}.glsl?raw`,
-    // ]
-    // ,
+    [
+        "  LYGIA BlendAdd         ",
+        `./lygia/BlendAdd.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendAverage         ",
+        `./lygia/BlendAverage.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendColor         ",
+        `./lygia/BlendColor.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendColorBurn         ",
+        `./lygia/BlendColorBurn.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendColorDodge         ",
+        `./lygia/BlendColorDodge.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendDarken         ",
+        `./lygia/BlendDarken.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendDifference         ",
+        `./lygia/BlendDifference.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendExclusion         ",
+        `./lygia/BlendExclusion.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendGlow         ",
+        `./lygia/BlendGlow.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendHardLight         ",
+        `./lygia/BlendHardLight.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendHardMix         ",
+        `./lygia/BlendHardMix.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendHue         ",
+        `./lygia/BlendHue.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendLighten         ",
+        `./lygia/BlendLighten.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendLinearBurn         ",
+        `./lygia/BlendLinearBurn.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendLinearDodge         ",
+        `./lygia/BlendLinearDodge.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendLinearLight         ",
+        `./lygia/BlendLinearLight.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendLuminosity         ",
+        `./lygia/BlendLuminosity.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendMultiply         ",
+        `./lygia/BlendMultiply.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendNegation         ",
+        `./lygia/BlendNegation.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendOverlay         ",
+        `./lygia/BlendOverlay.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendPhoenix         ",
+        `./lygia/BlendPhoenix.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendPinLight         ",
+        `./lygia/BlendPinLight.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendReflect         ",
+        `./lygia/BlendReflect.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendSaturation         ",
+        `./lygia/BlendSaturation.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendScreen         ",
+        `./lygia/BlendScreen.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendSoftLight         ",
+        `./lygia/BlendSoftLight.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendSubstract         ",
+        `./lygia/BlendSubstract.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA BlendVividLight         ",
+        `./lygia/BlendVividLight.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorBrightnessContrast         ",
+        `./lygia/ColorBrightnessContrast.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorContrast         ",
+        `./lygia/ColorContrast.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDaltonize         ",
+        `./lygia/ColorDaltonize.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDesaturate         ",
+        `./lygia/ColorDesaturate.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDitherBayer         ",
+        `./lygia/ColorDitherBayer.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDitherBlueNoise         ",
+        `./lygia/ColorDitherBlueNoise.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDitherInterleavedGradientNoise         ",
+        `./lygia/ColorDitherInterleavedGradientNoise.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDitherShift         ",
+        `./lygia/ColorDitherShift.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDitherTriangleNoise         ",
+        `./lygia/ColorDitherTriangleNoise.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorDitherVlachos         ",
+        `./lygia/ColorDitherVlachos.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorExposure         ",
+        `./lygia/ColorExposure.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorHueShift         ",
+        `./lygia/ColorHueShift.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorLevels         ",
+        `./lygia/ColorLevels.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapACES         ",
+        `./lygia/ColorTonemapACES.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapDebug         ",
+        `./lygia/ColorTonemapDebug.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapFilmic         ",
+        `./lygia/ColorTonemapFilmic.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapLinear         ",
+        `./lygia/ColorTonemapLinear.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapReinhard         ",
+        `./lygia/ColorTonemapReinhard.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapReinhardJodie         ",
+        `./lygia/ColorTonemapReinhardJodie.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapUncharted         ",
+        `./lygia/ColorTonemapUncharted.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapUncharted2         ",
+        `./lygia/ColorTonemapUncharted2.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorTonemapUnreal         ",
+        `./lygia/ColorTonemapUnreal.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorVibrance         ",
+        `./lygia/ColorVibrance.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA ColorWhiteBalance         ",
+        `./lygia/ColorWhiteBalance.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA DistortBarrel         ",
+        `./lygia/DistortBarrel.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA DistortChromaAB         ",
+        `./lygia/DistortChromaAB.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA DistortGrain         ",
+        `./lygia/DistortGrain.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA DistortPincushion         ",
+        `./lygia/DistortPincushion.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA DistortStretch         ",
+        `./lygia/DistortStretch.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterBilateral         ",
+        `./lygia/FilterBilateral.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterBilinear         ",
+        `./lygia/FilterBilinear.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterBoxBlur         ",
+        `./lygia/FilterBoxBlur.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterEdge         ",
+        `./lygia/FilterEdge.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterFibonacciBokeh         ",
+        `./lygia/FilterFibonacciBokeh.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterGaussianBlur         ",
+        `./lygia/FilterGaussianBlur.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterJointBilateral         ",
+        `./lygia/FilterJointBilateral.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterKuwahara         ",
+        `./lygia/FilterKuwahara.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterLaplacian         ",
+        `./lygia/FilterLaplacian.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterMean         ",
+        `./lygia/FilterMean.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterMedian         ",
+        `./lygia/FilterMedian.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterNoiseBlur         ",
+        `./lygia/FilterNoiseBlur.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterRadialBlur         ",
+        `./lygia/FilterRadialBlur.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterSharpen         ",
+        `./lygia/FilterSharpen.glsl?raw`,
+    ]
+    ,
+    [
+        "  LYGIA FilterSmartDeNoise         ",
+        `./lygia/FilterSmartDeNoise.glsl?raw`,
+    ]
+    ,
 
 ]);
 
@@ -982,33 +1242,33 @@ import type {     GLSLUniformValue,
                   GLSLUniform_    ,
             } from "./types";
 export let exampleGLSLUniforms: GLSLUniforms = [
-    { thisUniformName: "a", thisUniformNameJustForDisplay: "a", thisUniformType: "float", thisUniformDefaultValue: 0.0  , thisUniformSampler2DImg: null, },
-    { thisUniformName: "b", thisUniformNameJustForDisplay: "b", thisUniformType: "int"  , thisUniformDefaultValue: 0    , thisUniformSampler2DImg: null, },
-    { thisUniformName: "c", thisUniformNameJustForDisplay: "c", thisUniformType: "bool" , thisUniformDefaultValue: false, thisUniformSampler2DImg: null, },    
+    { thisUniformName: "a", thisUniformNameJustForDisplay: "a", thisUniformType: "float", thisUniformDefaultValue: 0.0  , thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "b", thisUniformNameJustForDisplay: "b", thisUniformType: "int"  , thisUniformDefaultValue: 0    , thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "c", thisUniformNameJustForDisplay: "c", thisUniformType: "bool" , thisUniformDefaultValue: false, thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },    
     
-    { thisUniformName: "d", thisUniformNameJustForDisplay: "d", thisUniformType: "vec2", thisUniformDefaultValue: [0.0, 0.0          ], thisUniformSampler2DImg: null, },
-    { thisUniformName: "e", thisUniformNameJustForDisplay: "e", thisUniformType: "vec3", thisUniformDefaultValue: [0.0, 0.0, 0.0     ], thisUniformSampler2DImg: null, },
-    { thisUniformName: "f", thisUniformNameJustForDisplay: "f", thisUniformType: "vec4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0], thisUniformSampler2DImg: null, },
+    { thisUniformName: "d", thisUniformNameJustForDisplay: "d", thisUniformType: "vec2", thisUniformDefaultValue: [0.0, 0.0          ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "e", thisUniformNameJustForDisplay: "e", thisUniformType: "vec3", thisUniformDefaultValue: [0.0, 0.0, 0.0     ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "f", thisUniformNameJustForDisplay: "f", thisUniformType: "vec4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
     
-    { thisUniformName: "g", thisUniformNameJustForDisplay: "g", thisUniformType: "ivec2", thisUniformDefaultValue: [0, 0      ], thisUniformSampler2DImg: null, },
-    { thisUniformName: "h", thisUniformNameJustForDisplay: "h", thisUniformType: "ivec3", thisUniformDefaultValue: [0, 0, 0   ], thisUniformSampler2DImg: null, },
-    { thisUniformName: "i", thisUniformNameJustForDisplay: "i", thisUniformType: "ivec4", thisUniformDefaultValue: [0, 0, 0, 0], thisUniformSampler2DImg: null, },
+    { thisUniformName: "g", thisUniformNameJustForDisplay: "g", thisUniformType: "ivec2", thisUniformDefaultValue: [0, 0      ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "h", thisUniformNameJustForDisplay: "h", thisUniformType: "ivec3", thisUniformDefaultValue: [0, 0, 0   ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "i", thisUniformNameJustForDisplay: "i", thisUniformType: "ivec4", thisUniformDefaultValue: [0, 0, 0, 0], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
     
     { thisUniformName: "j", thisUniformNameJustForDisplay: "j", thisUniformType: "mat2", thisUniformDefaultValue: [0.0, 0.0,          
-                                                                                                                   0.0, 0.0            ], thisUniformSampler2DImg: null, },
+                                                                                                                   0.0, 0.0            ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
     { thisUniformName: "k", thisUniformNameJustForDisplay: "k", thisUniformType: "mat3", thisUniformDefaultValue: [0.0, 0.0, 0.0,
                                                                                                                    0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0       ], thisUniformSampler2DImg: null, },
+                                                                                                                   0.0, 0.0, 0.0       ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
     { thisUniformName: "l", thisUniformNameJustForDisplay: "l", thisUniformType: "mat4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0,
                                                                                                                    0.0, 0.0, 0.0, 0.0, 
                                                                                                                    0.0, 0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0, 0.0  ], thisUniformSampler2DImg: null, },
+                                                                                                                   0.0, 0.0, 0.0, 0.0  ], thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
     
    
-    { thisUniformName:         "m", thisUniformNameJustForDisplay:         "m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, },
-    { thisUniformName:   "noise_m", thisUniformNameJustForDisplay:   "noise_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, },
-    { thisUniformName:   "bayer_m", thisUniformNameJustForDisplay:   "bayer_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, },
-    { thisUniformName: "palette_m", thisUniformNameJustForDisplay: "palette_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, },
+    { thisUniformName:         "m", thisUniformNameJustForDisplay:         "m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName:   "noise_m", thisUniformNameJustForDisplay:   "noise_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName:   "bayer_m", thisUniformNameJustForDisplay:   "bayer_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
+    { thisUniformName: "palette_m", thisUniformNameJustForDisplay: "palette_m", thisUniformType: "sampler2D", thisUniformDefaultValue: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/1.jpg`, thisUniformSampler2DImg: null, thisUniformSampler2DEle: null, },
 ];
 
 
@@ -1113,8 +1373,176 @@ export function parseGLSL(glslCode: string): GLSLUniforms {
             thisUniformType              :       type ,
             thisUniformDefaultValue      : parsedValue,
             thisUniformSampler2DImg      :       null!,
+            thisUniformSampler2DEle      :       null!,
         });
     }
 
     return uniforms;
+};
+
+
+
+export function splitArrayIntoGroups(
+           array    : number[]
+,          groupSize: number        ): number[][] {
+    return array.reduce((      result: number[][]
+                ,               value: number
+                ,               index: number) => {
+        if (index % groupSize  === 0) {
+                               result.push([]);
+        }
+                               result[result.length - 1].push(value);
+    return                     result                               ;
+    }
+, []);
+};
+
+
+
+import type { TextureForShader } from "./types"              ;
+import type { SupabaseClient   } from "@supabase/supabase-js";
+
+export const fetchAllTextures_BayerMatrix = (): TextureForShader[] => {
+    let ns    :           number[] = [2, 4, 8, 16];
+    let result: TextureForShader[] = [           ];
+    ns.forEach(n1 => {
+        result.push(
+            {
+                name:                                                                                                 `bayer${n1}.png`,
+                path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/bayer_matrix_textures/tromero/bayer${n1}.png`,
+            }
+        );
+    ns.forEach(n2 => {
+        result.push(
+            {
+                name:                                                                                                 `bayer${n1}tile${n2}.png`,
+                path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/bayer_matrix_textures/tromero/bayer${n1}tile${n2}.png`,
+            }
+        );
+    });
+    });
+    return result;
+};
+
+export const fetchAllTextures_Noise = (): TextureForShader[] => {
+    let pathsA: { path1: string,
+                  path2: string,
+                } [] = [
+        { path1: "sbs_-_noise_texture_pack_-_128x128", path2: "128x128", },
+        { path1: "sbs_-_noise_texture_pack_-_256x256", path2: "256x256", },
+        { path1: "sbs_-_noise_texture_pack_-_512x512", path2: "512x512", },
+    ];
+    let pathsB: { path3: string,
+                    min: number,
+                    max: number,
+                } [] = [
+        { path3: "Super Perlin"                           , min: 1, max: 14, },
+        { path3: "Melt"                                   , min: 1, max: 14, },
+        { path3: "Vein"                                   , min: 1, max: 14, },
+        { path3: "Gabor"                                  , min: 1, max: 14, },
+        { path3: "Milky"                                  , min: 1, max: 14, },
+        { path3: "Swirl"                                  , min: 1, max: 14, },
+        { path3: "Cracks"                                 , min: 1, max: 14, },
+        { path3: "Grainy"                                 , min: 1, max: 14, },
+        { path3: "Marble"                                 , min: 1, max: 14, },
+        { path3: "Perlin"                                 , min: 1, max: 24, },
+        { path3: "Spokes"                                 , min: 1, max: 14, },
+        { path3: "Streak"                                 , min: 1, max: 14, },
+        { path3: "Techno"                                 , min: 1, max: 14, },
+        { path3: "Craters"                                , min: 1, max: 14, },
+        { path3: "Voronoi"                                , min: 1, max: 14, },
+        { path3:         "Manifold"                       , min: 1, max: 14, },
+        { path3:                  "Turbulence"            , min: 1, max: 14, },
+        { path3:                             "Super Noise", min: 1, max: 14, },
+    ];
+    let result: TextureForShader[] = []           ;
+    for     (let pathA of pathsA) {
+        for (let pathB of pathsB) {
+            for (let n = pathB.min; n <= pathB.max; ++n) {
+                result.push(
+                    {
+                        name:                                                                                                                               `${pathB.path3} ${n} - ${pathA.path2}.png`,
+                        path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/noise_textures/${pathA.path1}/${pathA.path2}/${pathB.path3}/${pathB.path3} ${n} - ${pathA.path2}.png`,
+                    }
+                );
+            }
+        }
+    }
+    return result;
+};
+
+
+export const fetchAllTextures_Palette = async (supabase:               SupabaseClient  ): Promise<TextureForShader[]> => {
+    let {            data        }    = await  supabase.storage.from("palette_textures"). list("lospec");
+    let result: TextureForShader[]    = []                                                              ;
+    for (let item of data ?? []) {
+        if ( item .  name === ".emptyFolderPlaceholder" ) {
+            continue;
+        }
+        result.push({
+            name:                                                                                           `${item.name}`,
+            path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/palette_textures/lospec/${item.name}`,
+        });
+    }
+    return result;
+};
+
+export const fetchAllTextures_Pencil = async (supabase:              SupabaseClient  ): Promise<TextureForShader[]> => {
+    let {            data        }   = await  supabase.storage.from("pencil_textures"). list("godot");
+    let result: TextureForShader[]   = []                                                            ;
+    for (let item of data ?? []) {
+        if ( item .  name === ".emptyFolderPlaceholder" ) {
+            continue;
+        }
+        result.push({
+            name:                                                                                  `Pencil ${item.name}`,
+            path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/pencil_textures/godot/${item.name}`,
+        });
+    }
+    return result;
+};
+
+export const fetchAllTextures_ASCII = async (supabase:              SupabaseClient ): Promise<TextureForShader[]> => {
+    let {            data        }  = await  supabase.storage.from("ascii_textures"). list("godot");
+    let result: TextureForShader[]  = []                                                           ;
+    for (let item of data ?? []) {
+        if ( item .  name === ".emptyFolderPlaceholder" ) {
+            continue;
+        }
+        result.push({
+            name:                                                                                  `ASCII ${item.name}`,
+            path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/ascii_textures/godot/${item.name}`,
+        });
+    }
+    return result;
+};
+
+export const fetchAllTextures_Tiled = async (supabase:              SupabaseClient ): Promise<TextureForShader[]> => {
+    let {            data        }  = await  supabase.storage.from("tiled_textures"). list("godot");
+    let result: TextureForShader[]  = []                                                           ;
+    for (let item of data ?? []) {
+        if ( item .  name === ".emptyFolderPlaceholder" ) {
+            continue;
+        }
+        result.push({
+            name:                                                                                  `Tiled ${item.name}`,
+            path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/tiled_textures/godot/${item.name}`,
+        });
+    }
+    return result;
+};
+
+export const fetchAllTextures_ShaderToy = async (supabase        :      SupabaseClient      ):     Promise<TextureForShader[]> => {
+    let {            data        } =      await  supabase.storage.from("shader_toy_textures").list("shader_toy");
+    let result: TextureForShader[] = []                                                                         ;
+    for (let item of data ?? []) {
+        if ( item .  name === ".emptyFolderPlaceholder" ) {
+            continue;
+        }
+        result.push({
+            name:                                                                                       `Shader Toy ${item.name}`,
+            path: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/shader_toy_textures/shader_toy/${item.name}`,
+        });
+    }
+    return result;
 };

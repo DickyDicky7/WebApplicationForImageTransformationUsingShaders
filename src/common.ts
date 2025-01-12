@@ -342,6 +342,31 @@ export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     ]
     ,
     [
+        "VHS XXX              ",
+        `./lib/${ 21}.glsl?raw`,
+    ]
+    ,
+    [
+        "PIXEL ART GRADIENT   ",
+        `./lib/${ 78}.glsl?raw`,
+    ]
+    ,
+    [
+        "DITHER 1-BIT         ",
+        `./lib/${ 85}.glsl?raw`,
+    ]
+    ,
+    [
+        "GAMEBOYS OVERLAYS    ",
+        `./lib/${ 89}.glsl?raw`,
+    ]
+    ,
+    [
+        "GRADIENT BLENDING    ",
+        `./lib/${ 90}.glsl?raw`,
+    ]
+    ,
+    [
         "CHROMATIC #007          ",
         `./lib/${"p5.1"}.glsl?raw`,
     ]
@@ -1297,6 +1322,7 @@ export function parseGLSL(glslCode: string): GLSLUniforms {
         ||  name === "canvasSize"
         ||  name ===            "texelSize"
         ||  name ===                      "mousePosition"
+        ||  name === "frameCount"
            )
         {
             continue;
@@ -1402,9 +1428,9 @@ export function splitArrayIntoGroups(
 import type { TextureForShader } from "./types"              ;
 import type { SupabaseClient   } from "@supabase/supabase-js";
 
-export const fetchAllTextures_BayerMatrix = (): TextureForShader[] => {
-    let ns    :           number[] = [2, 4, 8, 16];
-    let result: TextureForShader[] = [           ];
+export const fetchAllTextures_Bayer = (): TextureForShader[] => {
+    let ns    :           number[]  = [2, 4, 8, 16];
+    let result: TextureForShader[]  = [           ];
     ns.forEach(n1 => {
         result.push(
             {
@@ -1487,9 +1513,9 @@ export const fetchAllTextures_Palette = async (supabase:               SupabaseC
     return result;
 };
 
-export const fetchAllTextures_Pencil = async (supabase:              SupabaseClient  ): Promise<TextureForShader[]> => {
-    let {            data        }   = await  supabase.storage.from("pencil_textures"). list("godot");
-    let result: TextureForShader[]   = []                                                            ;
+export const fetchAllTextures_Pencil_ = async (supabase:              SupabaseClient  ): Promise<TextureForShader[]> => {
+    let {            data        }    = await  supabase.storage.from("pencil_textures"). list("godot");
+    let result: TextureForShader[]    = []                                                            ;
     for (let item of data ?? []) {
         if ( item .  name === ".emptyFolderPlaceholder" ) {
             continue;

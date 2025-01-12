@@ -29,35 +29,35 @@ uniform int   RADIUS    ; // 05
  * http://www.cs.umb.edu/~jreyes/csit114-fall-2007/project4/filters.html#posterize
  * http://www.cs.umb.edu/~jreyes/csit114-fall-2007/project4/filters.html#posterize
  */
-vec3 posterize(vec3 c)
-{
-    // Split up each of the color channels into ranges
-    // Split up each of the color channels into ranges
-    float range = 1. /float(LEVELS);
-    float            colors[LEVELS];
+// vec3 posterize(vec3 c)
+// {
+//     // Split up each of the color channels into ranges
+//     // Split up each of the color channels into ranges
+//     float range = 1. /float(LEVELS);
+//     float            colors[LEVELS];
     
-    // Assign each range to a specified value 
-    // Assign each range to a specified value 
-    // For now set it to the mean
-    // For now set it to the mean
-    for (int   i  = 0; i < LEVELS; i++) {
-        colors[i] = ((float(i    ) * range) 
-                  +  (float(i + 1) * range)) / 2.;
-    }
+//     // Assign each range to a specified value 
+//     // Assign each range to a specified value 
+//     // For now set it to the mean
+//     // For now set it to the mean
+//     for (int   i  = 0; i < LEVELS; i++) {
+//         colors[i] = ((float(i    ) * range) 
+//                   +  (float(i + 1) * range)) / 2.;
+//     }
     
-    ivec3 v = ivec3(int(floor(c.r / range)),
-                    int(floor(c.g / range)),
-                    int(floor(c.b / range)));
+//     ivec3 v = ivec3(int(floor(c.r / range)),
+//                     int(floor(c.g / range)),
+//                     int(floor(c.b / range)));
     
     
-    c.r = colors[v.x];
-    c.g = colors[v.y];
-    c.b = colors[v.z];
+//     c.r = colors[v.x];
+//     c.g = colors[v.y];
+//     c.b = colors[v.z];
     
-    c   = floor(c * float(LEVELS)) / float(LEVELS);;
+//     c   = floor(c * float(LEVELS)) / float(LEVELS);;
   
-    return c; 
-}
+//     return c; 
+// }
 
 /*
  * Sobel operator:

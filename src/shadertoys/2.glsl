@@ -8,7 +8,7 @@ uniform         float              time;
 uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
-uniform         float        frameCount;
+uniform         float        frameCount; // 0.0
 
 // Enabling glitch effects
 // Enabling glitch effects

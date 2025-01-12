@@ -13,7 +13,7 @@
   import { texturesNoise     } from "./global";
   import { texturesBayer     } from "./global";
   import { texturesPalette   } from "./global";
-  import { texturesPencil    } from "./global";
+  import { texturesPencil_   } from "./global";
   import { texturesASCII     } from "./global";
   import { texturesTiled     } from "./global";
   import { texturesShaderToy } from "./global";
@@ -289,7 +289,7 @@
           <select on:change={async (e) => {
             let chosen =            e.currentTarget.options[e.currentTarget.selectedIndex].value;
             if (chosen === "none") {
-              uniforms[ii].thisUniformDefaultValue = null;
+//            uniforms[ii].thisUniformDefaultValue = null;
               uniforms[ii].thisUniformSampler2DImg = null;
               return;
             }
@@ -301,7 +301,7 @@
             {#each ((thisUniformName ?? "").startsWith("noise"    ) ? $texturesNoise     : 
                     (thisUniformName ?? "").startsWith("bayer"    ) ? $texturesBayer     : 
                     (thisUniformName ?? "").startsWith("palette"  ) ? $texturesPalette   : 
-                    (thisUniformName ?? "").startsWith("pencil"   ) ? $texturesPencil    :
+                    (thisUniformName ?? "").startsWith("pencil"   ) ? $texturesPencil_   :
                     (thisUniformName ?? "").startsWith("ascii"    ) ? $texturesASCII     :
                     (thisUniformName ?? "").startsWith("tiled"    ) ? $texturesTiled     :
                     (thisUniformName ?? "").startsWith("shaderToy") ? $texturesShaderToy :

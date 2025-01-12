@@ -39,6 +39,23 @@ export type
      GLSLUniform_    ,
 };
 
+export
+enum MODE_CAPTURE_IMAGE {
+     AS_IMAGE,
+//   AS_VIDEO_FULLSHOT,
+     AS_VIDEO_SNAPSHOT,
+};
+
+export
+enum MODE_CAPTURE_VIDEO {
+     AS_IMAGE,
+     AS_VIDEO_FULLSHOT,
+     AS_VIDEO_SNAPSHOT,
+};
+
+
+
+
 
 
 

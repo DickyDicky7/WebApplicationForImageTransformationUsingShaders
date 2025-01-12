@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/filter/grain.glsl"
+#include "lygia/distort/grain.glsl"
 
 uniform float t         ; // 0.0
 uniform float multiplier; // 0.0

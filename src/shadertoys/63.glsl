@@ -33,8 +33,8 @@ uniform float u_threshold4 ; // 0.05
 uniform vec2 u_bgTiling      ; // 1.0, 1.0
 uniform vec2 u_patternTiling ; // 1.0, 1.0
 
-uniform sampler2D pencil1;
-uniform sampler2D pencil2;
+uniform sampler2D pencil1; // null
+uniform sampler2D pencil2; // null
 
 const float   C2_SQRT2 = 0.707106781;
 const mat2   ROT_45    = mat2( vec2( C2_SQRT2, -C2_SQRT2 )

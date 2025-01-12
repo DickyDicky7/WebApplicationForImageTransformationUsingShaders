@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/filter/barrel.glsl"
+#include "lygia/distort/barrel.glsl"
 
 uniform vec2 sdf; // 0.0, 0.0
 //const vec2 pct; // 0.0, 0.0

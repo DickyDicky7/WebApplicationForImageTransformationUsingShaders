@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/filter/chromaAB.glsl"
+#include "lygia/distort/chromaAB.glsl"
 
 uniform vec2  sdf; // 0.0, 0.0
 uniform float pct; // 0.0

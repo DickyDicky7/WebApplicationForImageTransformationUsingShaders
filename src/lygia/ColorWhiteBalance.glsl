@@ -14,8 +14,8 @@ uniform         vec4      mousePosition;
 
 
 
-uniform float amountWhiteBalanceTemperature;
-uniform float amountWhiteBalanceTintColours;
+uniform float amountWhiteBalanceTemperature; // 0.0
+uniform float amountWhiteBalanceTintColours; // 0.0
 
 
 

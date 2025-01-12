@@ -9,7 +9,7 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-#include "lygia/filter/pincushion.glsl"
+#include "lygia/distort/pincushion.glsl"
 
 uniform vec2  pixels; // 0.0, 0.0
 uniform float amount; // 0.0

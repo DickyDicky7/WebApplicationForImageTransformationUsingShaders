@@ -15,7 +15,7 @@ const promptShader = async (keywords: string[] = ["Pixelated Like Pixel Games Wi
 create a glsl shader that has ${keywords.join(", ")} effect(s); please return only the .glsl code, knowing that p5.js only supports GLSL ES 3.0/WebGL2.0 ("#version 300 es"); and the glsl format is: 
 
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;

@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 // Uniiform@s
 uniform sampler2D  tex0;

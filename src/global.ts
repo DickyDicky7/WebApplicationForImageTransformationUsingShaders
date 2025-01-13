@@ -32,7 +32,7 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
                                                    }>> = writable(
                                                    [
                                                    {
-                                                     fragmentShaderSourceType________:                null,
+                                                     fragmentShaderSourceType________:                "NI",
                                                      fragmentShaderSourceCode________:                null,
                                                      fragmentShader______GLSLUniforms:                null,
                                                      fragmentShaderFiltering_Instance:                null,

@@ -506,6 +506,9 @@ import { resolveLygia      } from "./lygia";
         webcamCapture .hide(                                                              );
         canvasInstance.draw = () => {
 //------------------------------//
+        canvasInstance.textureWrap("repeat");
+//      canvasInstance.textureWrap("mirror");        
+//      canvasInstance.textureWrap("repeat");
         canvasInstance.
            image(      webcamCapture
                       , 0.0
@@ -756,47 +759,47 @@ let AIInputPrompts: HTMLInputElement;
     <div class="space"></div>
 
     <div>
-        <button class="slow-ripple extend square" on:click={async (e) => {
-            if (!videoIsPlaying) {
-                 video?.play();
-            } else               {
-                 video?.pause();
-            }
-            videoIsPlaying = !videoIsPlaying;
+        <button class="slow-ripple extend square" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
+                                                                                videoIsPlaying =
+                                                                               !videoIsPlaying ;
         }}>
             {#if videoIsPlaying}
-            <i class="fa-solid fa-pause"></i>
+                <i class="fa-solid fa-pause"></i>
                 <span>Pause</span>
             {:else}
-            <i class="fa-solid fa-play"></i>
-                <span>Play</span>
-                
+                <i class="fa-solid fa-play "></i>
+                <span>Play!</span>
             {/if}
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="slow-ripple extend  square" on:click={async (e) => {
-            video?.time(video?.time() - 10);
+        <button class="slow-ripple extend square" on:click={async (e) => {
+                video?.time(video?.time() - 10);
+//              video?.time(video?.time() - 10);
         }}>
-            <i class="fa-solid fa-backward"></i>
+            <i  class="fa-solid fa-backward"></i>
             <span>Backward</span>
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="slow-ripple extend  square" on:click={async (e) => {
-            video?.time(video?.time() + 10);
+        <button class="slow-ripple extend square" on:click={async (e) => {
+                video?.time(video?.time() + 10);
+//              video?.time(video?.time() + 10);
         }}>
-            <i class="fa-solid fa-forward"></i>
-            <span>Forward</span>
+            <i  class="fa-solid fa-forward "></i>
+            <span>Forward!</span>
         </button>
-        <nav class="no-space">
+        <nav   class="no-space                            ">
             <i class="fa-solid fa-volume-high padding-tiny"></i>
-            <label class="slider medium">
-              <input type="range" value="1.0" min="0.0" max="1.0" step="0.01" on:input={async (e) => {
-                video?.volume(e.currentTarget.valueAsNumber);
+            <label                class="slider
+                                         medium           ">
+              <input type="range" value="1.0" min="0.0"
+                                              max="1.0"
+                     step="0.010" on:input={async (e) => {
+                                     video?.volume(e.currentTarget.valueAsNumber);
+//                                   video?.volume(e.currentTarget.valueAsNumber);
               }}>
-              <span></span>
-              <div class="tooltip"></div>
+              <span class="       "></span>
+              <div  class="tooltip"></div >
             </label>
-            
           </nav>
         <progress value="0" max="100" class="light-green-text" bind:this={videoProgressSlider_}></progress>
     </div>
@@ -804,9 +807,12 @@ let AIInputPrompts: HTMLInputElement;
 
     <div class="field label suffix round border">
         <select bind:this={imageFormatSelection}>
-          {#each imageFormats as imageFormat (imageFormat)}
-            <option>{imageFormat.extension}</option>
-          {/each}
+            {#each         imageFormats as
+                           imageFormat
+                          (imageFormat)
+            }
+                  <option>{imageFormat.extension}</option>
+            {/each}
         </select>
         <label>Image Format</label>
         <i class="fa-solid fa-chevron-down"></i>
@@ -814,9 +820,12 @@ let AIInputPrompts: HTMLInputElement;
 
     <div class="field label suffix round border">
         <select bind:this={videoFormatSelection}>
-          {#each videoFormats as videoFormat (videoFormat)}
-            <option>{videoFormat.mimeType}</option>            
-          {/each}
+            {#each         videoFormats as
+                           videoFormat
+                          (videoFormat)
+            }
+                  <option>{videoFormat.mimeType }</option>
+            {/each}
         </select>
         <label>Video Format</label>
         <i class="fa-solid fa-chevron-down"></i>
@@ -824,13 +833,13 @@ let AIInputPrompts: HTMLInputElement;
 
 
     <div>
-        <button on:click={async() => {
+        <button class="slow-ripple" on:click={async() => {
         const   res = await promptShader();
         console.log(  await res.text()   );
         }}>AI</button>
-        <button on:click={async () => { await shareImage (              canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.IMAGE }>SHARE IMAGE </button>
-        <button on:click={async () => { await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.VIDEO }>SHARE VIDEO </button>
-        <button on:click={async () => { await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
+        <button class="slow-ripple" on:click={async () => { await shareImage (              canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.IMAGE }>SHARE IMAGE </button>
+        <button class="slow-ripple" on:click={async () => { await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.VIDEO }>SHARE VIDEO </button>
+        <button class="slow-ripple" on:click={async () => { await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
     </div>
     <div class="space"></div>
 
@@ -926,5 +935,19 @@ let AIInputPrompts: HTMLInputElement;
      font-family:            'SF Mono Regular'                        , 'fontawesome';
     }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

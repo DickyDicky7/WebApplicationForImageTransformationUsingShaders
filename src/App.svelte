@@ -650,37 +650,55 @@ let modeCAptureVideo: MODE_CAPTURE_VIDEO = MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT;
 import {      Shaders    } from "./common";
 import { type ShaderName } from "./common";
 import { type ShaderPath } from "./common";
+const shaderMaps: Map<string, any> = new Map();
 onMount(    async () => {
     for(let shaderPath of Shaders.values()) {
         if (shaderPath
                 .includes("./lib/")) {
+            const moduleGLSL =
             await import (`./lib/${shaderPath
                 .replace ("./lib/"   , "")
                 .replace (".glsl?raw", "")
                           }.glsl?raw`);
+            shaderMaps.set(
+            shaderPath,
+            moduleGLSL.
+            default   ,   );
         }
         else
         if (shaderPath
                 .includes("./shadertoys/")) {
+            const moduleGLSL =
             await import (`./shadertoys/${shaderPath
                 .replace ("./shadertoys/", "")
                 .replace (".glsl?raw"    , "")
                           }.glsl?raw`);
+            shaderMaps.set(
+            shaderPath,
+            moduleGLSL.
+            default   ,   );
         }
         else
         if (shaderPath
                 .includes("./lygia/")) {
+            const moduleGLSL =
             await import (`./lygia/${shaderPath
                 .replace ("./lygia/" , "")
                 .replace (".glsl?raw", "")
                           }.glsl?raw`);
+            shaderMaps.set(
+            shaderPath,
+            moduleGLSL.
+            default   ,   );
         }
     }
 });
 
 const  loadAsset = async       (assetPath: string): Promise<string> => {
-    const  asset = await import(assetPath        );
-    return asset.default;
+//  const  asset = await import(assetPath        );
+//  return asset.default                          ;
+    return shaderMaps.get(assetPath);
+//  return shaderMaps.get(assetPath);
 }
 
 

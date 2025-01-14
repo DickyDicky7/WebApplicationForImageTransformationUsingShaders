@@ -11,26 +11,34 @@ uniform         vec4      mousePosition;
 
 // https://www.shadertoy.com/view/4XjfDG
 
-float NUM = 100.0;
-float DIST = 0.01;
+float NUMBERSS ; // 100.00
+float DISTANCE ; // 000.01
 
 const float pi = 3.14159265358;
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
     // Normalized pixel coordinates (from 0 to 1)
-    vec2 uv = fragCoord/iResolution.xy;
+    // Normalized pixel coordinates (from 0 to 1)
+    vec2 uv = vTexCoord;
     
-    vec3 col = vec3(0.0);
-    float place = 0.0;
+    vec3    col = vec3(0.0);
+    float
+    place       =      0.0 ;
     
-    for (float i=1.0; i<=NUM; i++) {
-        place = ((2.0*pi)/(NUM/i))+(pi/2.0);
-        col += texture(iChannel0, uv+DIST*vec2(cos(place)*(iResolution.y/iResolution.x),sin(place))).rgb;
+    for (float i = 1.0; i <= NUMBERSS; i++) { place = ((2.0 * pi) / (NUMBERSS / i)) + (pi / 2.0); col += texture(tex0, uv + DISTANCE * vec2(cos(place) * (canvasSize.y / canvasSize.x), sin(place))).rgb;
     }
     
-    col /= NUM;
+    col /= NUMBERSS;
+//  col /= NUMBERSS;
     
     // Output to screen
-    fragColor = vec4(col,1.0);
+    // Output to screen
+    fragColor = vec4(col, 1.0);
+//  fragColor = vec4(col, 1.0);
 }
+
+
+
+
+

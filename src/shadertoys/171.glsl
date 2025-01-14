@@ -11,14 +11,19 @@ uniform         vec4      mousePosition;
 
 // https://www.shadertoy.com/view/MfGBDz
 
-#define S 0.05
+uniform float strengths   ; // 0.05
+uniform bool  animateOn   ; // true
+uniform float animateSpeed; // 1.00
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
-    vec2 uv = fragCoord/iResolution.xy;
-    vec2 P = vec2(0.5, 0.5)*vec2(iResolution.x/iResolution.y, 1.);
-    float z = -S/length(uv*vec2(iResolution.x/iResolution.y, 1.)-P);
-    vec2 dir = normalize(P-uv*vec2(iResolution.x/iResolution.y, 1.));
-    uv -= dir*z;
-    fragColor = texture(iChannel0, uv);
+    vec2 uv = vTexCoord; vec2 P = vec2(0.5, 0.5) * vec2(canvasSize.x / canvasSize.y, 1.); float z = - strengths * float(animateOn) * animateSpeed * time / length(uv * vec2(canvasSize.x / canvasSize.y, 1.) - P); vec2 dir = normalize(P - uv * vec2(canvasSize.x / canvasSize.y, 1.)); uv -= dir * z; fragColor = texture(tex0, uv);
+//  vec2 uv = vTexCoord; vec2 P = vec2(0.5, 0.5) * vec2(canvasSize.x / canvasSize.y, 1.); float z = - strengths * float(animateOn) * animateSpeed * time / length(uv * vec2(canvasSize.x / canvasSize.y, 1.) - P); vec2 dir = normalize(P - uv * vec2(canvasSize.x / canvasSize.y, 1.)); uv -= dir * z; fragColor = texture(tex0, uv);
 }
+
+
+
+
+
+
+

@@ -14,23 +14,16 @@ uniform         vec4      mousePosition;
 #define pi 3.14159265359
 
 
-const float speed = 0.3;
-const float density = 4.0;
+uniform float speed   ; // 0.3
+uniform float density ; // 4.0
 
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
-
-    vec2 uv = fragCoord/iResolution.xy;
-    vec3 original_col = texture(iChannel0, uv).rgb;
-        
-    vec3 col = vec3(length(original_col) / sqrt(3.0));
-    
-    col *= density;
-    col += speed * iTime;
-    col = mod(col, 1.0);
-    
-    col = 0.5 * sin(col * 2.0 * pi) + 0.5;
-
-    fragColor = vec4(col,1.0);
+    vec2 uv = vTexCoord; vec3 original_col = texture(tex0, uv).rgb; vec3 col = vec3(length(original_col) / sqrt(3.0)); col *= density; col += speed * time; col = mod(col, 1.0); col = 0.5 * sin(col * 2.0 * pi) + 0.5; fragColor = vec4(col, 1.0);
+//  vec2 uv = vTexCoord; vec3 original_col = texture(tex0, uv).rgb; vec3 col = vec3(length(original_col) / sqrt(3.0)); col *= density; col += speed * time; col = mod(col, 1.0); col = 0.5 * sin(col * 2.0 * pi) + 0.5; fragColor = vec4(col, 1.0);
 }
+
+
+
+

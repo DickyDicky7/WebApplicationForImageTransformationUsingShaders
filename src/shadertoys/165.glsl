@@ -11,16 +11,16 @@ uniform         vec4      mousePosition;
 
 // https://www.shadertoy.com/view/WsVcR3
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
     /////////////////////////
     
-    float ratio = 4.5 * (sin(5. * iTime)+1.5)/2.;
+    float ratio = 4.5 * (sin(5. * time) + 1.5) / 2.;
     
     /////////////////////////
     
     
-	vec2 uv = fragCoord.xy / iResolution.xy;
+    vec2 uv = vTexCoord;
     vec3 col;
     
     mat3 sobelX = mat3(-2.0, -3.0, -2.0,
@@ -36,21 +36,24 @@ void mainImage( out vec4 fragColor, in vec2 fragCoord )
     
     float current_val;
     
-    for(int i = -1; i <= 1; i++) {
-        for(int j = -1; j <= 1; j++) {
-            float x = (fragCoord.x + float(i))/iResolution.x;	
-    		float y =  (fragCoord.y + float(j))/iResolution.y;
+    for (int i = -1; i <= 1; i++) {
+    for (int j = -1; j <= 1; j++) {
+            float x = (gl_FragCoord.x + float(i)) / canvasSize.x;	
+            float y = (gl_FragCoord.y + float(j)) / canvasSize.y;
             
-            current_val = length(texture(iChannel0, vec2(x, y)).xyz);
+            current_val = length(texture(tex0, vec2(x, y)).xyz);
             
-            sumX += current_val * float(sobelX[1+i][1+j]);
-            sumY += current_val * float(sobelY[1+i][1+j]);
+            sumX += current_val * float(sobelX[1 + i][1 + j]);
+            sumY += current_val * float(sobelY[1 + i][1 + j]);
         }
     }
-    col = vec3(abs(sumX)+abs(sumY));
+    col  = vec3(abs(sumX)
+        +       abs(sumY)
+               );
     col *= ratio;
-    col = 1. - smoothstep(0.3, 1., col);
+    col  = 1. - smoothstep(0.3, 1., col);
     
     
-	fragColor.xyz = col;
+    fragColor.xyz = col;
 }
+

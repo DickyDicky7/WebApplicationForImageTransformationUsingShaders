@@ -12,63 +12,68 @@ uniform         vec4      mousePosition;
 // https://www.shadertoy.com/view/l3dcD2
 
 // Simple Perlin Noise
-vec2 n22 (vec2 p)
-{
-    vec3 a = fract(p.xyx * vec3(123.34, 234.34, 345.65));
-    a += dot(a, a + 34.45);
-    return fract(vec2(a.x * a.y, a.y * a.z));
+// Simple Perlin Noise
+    vec2 n22(vec2 p) { vec3 a = fract(p.xyx * vec3(123.34f, 234.34f, 345.65f)); a += dot(a, a + 34.45f); return fract(vec2(a.x * a.y, a.y * a.z)); }
+//  vec2 n22(vec2 p) { vec3 a = fract(p.xyx * vec3(123.34f, 234.34f, 345.65f)); a += dot(a, a + 34.45f); return fract(vec2(a.x * a.y, a.y * a.z)); }
+
+    vec2 get_gradient(vec2 pos) { float twoPi = 6.283185f; float angle = n22(pos).x * twoPi; return vec2(cos(angle), sin(angle)); }
+//  vec2 get_gradient(vec2 pos) { float twoPi = 6.283185f; float angle = n22(pos).x * twoPi; return vec2(cos(angle), sin(angle)); }
+
+float perlin_noise(vec2 uv, float cells_count) {
+    vec2       pos_in_grid = uv * cells_count  ;
+    vec2  cell_pos_in_grid = floor(pos_in_grid);
+    vec2 local_pos_in_cell =      (pos_in_grid - cell_pos_in_grid);
+    vec2 blend =
+         local_pos_in_cell *
+         local_pos_in_cell * (3.0f - 2.0f *
+         local_pos_in_cell                );
+
+    vec2 lt = cell_pos_in_grid + vec2(0, 1);
+    vec2 rt = cell_pos_in_grid + vec2(1, 1);
+    vec2 lb = cell_pos_in_grid + vec2(0, 0);
+    vec2 rb = cell_pos_in_grid + vec2(1, 0);
+
+    float ltd = dot(pos_in_grid - lt, get_gradient(lt));
+    float rtd = dot(pos_in_grid - rt, get_gradient(rt));
+    float lbd = dot(pos_in_grid - lb, get_gradient(lb));
+    float rbd = dot(pos_in_grid - rb, get_gradient(rb));
+
+    float noise_value = mix(mix(lbd, rbd, blend.x)
+                      ,     mix(ltd, rtd, blend.x)
+                      ,                   blend.y);
+
+    return (0.5f + 0.5f * (noise_value / 0.7f));
 }
 
-vec2 get_gradient(vec2 pos)
-{
-    float twoPi = 6.283185;
-    float angle = n22(pos).x * twoPi;
-    return vec2(cos(angle), sin(angle));
-}
-
-float perlin_noise(vec2 uv, float cells_count)
-{
-    vec2 pos_in_grid = uv * cells_count;
-    vec2 cell_pos_in_grid =  floor(pos_in_grid);
-    vec2 local_pos_in_cell = (pos_in_grid - cell_pos_in_grid);
-    vec2 blend = local_pos_in_cell * local_pos_in_cell * (3.0f - 2.0f * local_pos_in_cell);
-    
-    vec2 left_top = cell_pos_in_grid + vec2(0, 1);
-    vec2 right_top = cell_pos_in_grid + vec2(1, 1);
-    vec2 left_bottom = cell_pos_in_grid + vec2(0, 0);
-    vec2 right_bottom = cell_pos_in_grid + vec2(1, 0);
-    
-    float left_top_dot = dot(pos_in_grid - left_top, get_gradient(left_top));
-    float right_top_dot = dot(pos_in_grid - right_top,  get_gradient(right_top));
-    float left_bottom_dot = dot(pos_in_grid - left_bottom, get_gradient(left_bottom));
-    float right_bottom_dot = dot(pos_in_grid - right_bottom, get_gradient(right_bottom));
-    
-    float noise_value = mix(
-                            mix(left_bottom_dot, right_bottom_dot, blend.x), 
-                            mix(left_top_dot, right_top_dot, blend.x), 
-                            blend.y);
-   
-    
-    return (0.5 + 0.5 * (noise_value / 0.7));
-}
-
-
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{
+void main() {
 // Parametri
-float time = iTime;
-vec2 uv = (gl_FragCoord.xy / iResolution.xy) + 1.; // Coordinate UV normali
-float waveAmplitude = 0.05; // Ampiezza delle onde
-float waveFrequency = 20.0; // Frequenza delle onde
+// Parametri
+    float remapTime = time;
+    vec2  uv        = (vTexCoord) + 1.f; // Coordinate UV normali
+    float waveAmplitude = 0.05f;         // Ampiezzaaa delle onde
+    float waveFrequency = 20.0f;         // Frequenzaa delle onde
 
 // Distorsione per l'effetto onde
-vec2 offset = vec2(perlin_noise(uv * waveFrequency + time * 1.,1.), perlin_noise(uv * waveFrequency + time * 1.,1.))* waveAmplitude;
-vec2 distortedUv = uv+offset;
+// Distorsione per l'effetto onde
+    vec2 offset = vec2(perlin_noise(uv * waveFrequency + remapTime * 1.f, 1.f)
+                ,      perlin_noise(uv * waveFrequency + remapTime * 1.f, 1.f)
+                      )                * waveAmplitude ;
+    vec2 distortedUv = uv + offset;
 
 // Carica la texture
-vec3 color = texture(iChannel0, distortedUv).rgb; // Texture dell'acqua
-color *= uv.x; 
+// Carica la texture
+    vec3 color  = texture(tex0, distortedUv).rgb; // Texture dell'acqua
+         color *=
+         uv.x;
 
-fragColor = vec4(color, 1.0);
-
+    fragColor = vec4(color, 1.0f);
+//  fragColor = vec4(color, 1.0f);
 }
+
+
+
+
+
+
+
+

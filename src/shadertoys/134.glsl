@@ -11,50 +11,57 @@ uniform         vec4      mousePosition;
 
 // https://www.shadertoy.com/view/sdlXRr
 
-const float shake_speed = 30.;
-
-const float shake_power = 0.3;
-const float zoom_power = 0.4;
-
-const float motion_blur_power = 0.005;
-const float motion_blur_iter = 10.;
+uniform float       shake_speed ; // 30.000
+uniform float       shake_power ; // 00.300
+uniform float        zoom_power ; // 00.400
+uniform float motion_blur_power ; // 00.005
+uniform float motion_blur_iters ; // 10.000
 
 
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
+void main()
 {
-    float time = mod(iTime, 1.);
-    float ratio = pow(1. - time, 2.);
-    ratio *= -tanh(5. * (time - 0.5)) * 0.5 + 0.5;
-    
-    vec2 uv = fragCoord/iResolution.xy;
-    
+    float timee = mod(time, 1.0f); float ratio = pow(1.0f - timee, 2.0f); ratio *= -tanh(5.0f * (timee - 0.5f)) * 0.5f + 0.5f;
+//  float timee = mod(time, 1.0f); float ratio = pow(1.0f - timee, 2.0f); ratio *= -tanh(5.0f * (timee - 0.5f)) * 0.5f + 0.5f;
+
+    vec2 uv = vTexCoord;
+//  vec2 uv = vTexCoord;
+
     ///////////////
     //   Shake   //
     ///////////////
     uv -= 0.5;
-    uv += shake_power * ratio * vec2(sin(shake_speed * time), 
-                                     cos(shake_speed * time));
-    uv *= 1. - zoom_power * ratio;
+    uv +=  shake_power * ratio
+* vec2(sin(shake_speed * timee)
+,      cos(shake_speed * timee));
+    uv *= 1.0
+       -    zoom_power * ratio  ;
     uv += 0.5;
     
-    uv = abs(uv);
-    uv = step(1., uv) * 2. + sign(1.-uv) * uv;
+    uv =                  abs(uv);
+    uv = step(1.0 , uv) * 2.0
+       + sign(1.0 - uv) *     uv ;
 
     /////////////////////
     //   Motion blur   //
     /////////////////////
-    vec3 col = vec3(0.);
+    vec3 col = vec3(0.0);
     vec2 hold_uv;
-    for (float i = -motion_blur_iter/2.; i < motion_blur_iter/2.; ++i) {
-        hold_uv = vec2(uv.x + ratio * motion_blur_power * i, 
-                       uv.y + ratio * motion_blur_power * i);
-        col += texture(iChannel0, hold_uv).rgb;
+    for (float i = - motion_blur_iters / 2.0;
+               i   < motion_blur_iters / 2.0;
+             ++i
+        ) {
+         hold_uv = vec2(uv.x + ratio * motion_blur_power * i
+                 ,      uv.y + ratio * motion_blur_power * i);
+         col += texture(tex0 , hold_uv).rgb;
+//       col += texture(tex0 , hold_uv).rgb;
     }
-    col /= motion_blur_iter;
-    col += pow(ratio, 2.) * col;
+    col /= motion_blur_iters;
+//  col /= motion_blur_iters;
+    col += pow(ratio, 2.0) * col;
+//  col += pow(ratio, 2.0) * col;    
     
-    
-    fragColor = vec4(col,1.0);
+    fragColor = vec4(col, 1.0);
+//  fragColor = vec4(col, 1.0);
 }
 
 

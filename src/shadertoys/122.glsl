@@ -2,6 +2,7 @@
 precision  lowp float;
 
 uniform         sampler2D          tex0;
+uniform         sampler2D    uploadTex0;
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -13,62 +14,46 @@ uniform         vec4      mousePosition;
 
 #define pi 3.14159265359
 
-const float speed = 3.;
-const float side = 0.19;
-const vec2 move = vec2(-0.12, 0.1);
+uniform float          speed ; //  3.00
+uniform float     side       ; //  0.19
+uniform vec2      move       ; // -0.12, 0.1
+uniform float rotation_count ; //  1.00
+uniform float     zoom_ratio ; //  2.00
 
-const float rotation_count = 1.;
-const float zoom_ratio = 2.;
+void main() {
+    float remapTime = mod(speed * time, 2.f * pi) - pi; remapTime *= step(0.f, remapTime);
+//  float remapTime = mod(speed * time, 2.f * pi) - pi; remapTime *= step(0.f, remapTime);
 
-
-
-void mainImage( out vec4 fragColor, in vec2 fragCoord )
-{
-    float time = mod(speed * iTime, 2.*pi) - pi;
-    time *= step(0., time);
-    
     ////////////////////////
     ///   Zoom formula   ///
     ////////////////////////
-    float zoom = zoom_ratio * sign(time-pi/2.) * ( 1.-abs(cos(time)) );
-    
+    float zoom = zoom_ratio * sign(remapTime - pi / 2.f) * (1.f - abs(cos(remapTime)));
+//  float zoom = zoom_ratio * sign(remapTime - pi / 2.f) * (1.f - abs(cos(remapTime)));
+
     //////////////////////////////
     ///   Getting the center   ///
     //////////////////////////////
-    vec2 uv = fragCoord/iResolution.x;
-    vec2 center = side * round((uv + move)/side);
-    center -= move;
-    center.y = center.y * iResolution.x / iResolution.y;
-    uv = fragCoord/iResolution.xy;
-    
+    vec2 uv = gl_FragCoord / canvasSize.x; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y; uv = gl_FragCoord / canvasSize.xy;
+//  vec2 uv = gl_FragCoord / canvasSize.x; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y; uv = gl_FragCoord / canvasSize.xy;
+
     /////////////////////////////
     ///   Applying the zoom   ///
     /////////////////////////////
-    uv -= zoom * (center-vec2(0.5, 0.5));
-    
+    uv -= zoom * (center - vec2(0.5f, 0.5f));
+//  uv -= zoom * (center - vec2(0.5f, 0.5f));
+
     //////////////////
     ///   Mirror   ///
     //////////////////
-    uv = abs(uv);
-    uv = step(1., uv) * 2. + sign(1.-uv) * uv;
-    
+    uv = abs(uv); uv = step(1.f, uv) * 2.f + sign(1.f - uv) * uv;
+//  uv = abs(uv); uv = step(1.f, uv) * 2.f + sign(1.f - uv) * uv;
+
     ////////////////////////
     ///   Scene change   ///
     ////////////////////////
-    bool change_scene = int((speed*iTime+pi/2.)/(2.*pi)) % 2 == 0;
-    vec3 col = (change_scene) 
-        ? texture(iChannel0, uv).rgb 
-        : texture(iChannel1, uv).rgb;    
-    
-    
-    fragColor = vec4(col,1.0);
+    bool change_scene = int((speed * time + pi / 2.f) / (2.f * pi)) % 2 == 0; vec3 col = (change_scene) ? texture(tex0, uv).rgb : texture(uploadTex0, uv).rgb; fragColor = vec4(col, 1.0f);
+//  bool change_scene = int((speed * time + pi / 2.f) / (2.f * pi)) % 2 == 0; vec3 col = (change_scene) ? texture(tex0, uv).rgb : texture(uploadTex0, uv).rgb; fragColor = vec4(col, 1.0f);
 }
-
-
-
-
-
-
 
 
 

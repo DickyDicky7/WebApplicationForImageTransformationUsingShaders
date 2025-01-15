@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,15 +9,27 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float cloudscale = 1.10;
-const float speed      = 0.03;
-const float clouddark  = 0.50;
-const float cloudlight = 0.30;
-const float cloudcover = 0.20;
-const float cloudalpha = 8.00;
-const float skytint    = 0.50;
-const vec3  skycolour1 = vec3(0.2, 0.4, 0.6);
-const vec3  skycolour2 = vec3(0.4, 0.7, 1.0);
+// const float cloudscale = 1.10;
+// const float speed      = 0.03;
+// const float clouddark  = 0.50;
+// const float cloudlight = 0.30;
+// const float cloudcover = 0.20;
+// const float cloudalpha = 8.00;
+// const float skytint    = 0.50;
+// const vec3  skycolour1 = vec3(0.2, 0.4, 0.6);
+// const vec3  skycolour2 = vec3(0.4, 0.7, 1.0);
+
+
+uniform float cloudscale ; // 1.10
+uniform float speed      ; // 0.03
+uniform float clouddark  ; // 0.50
+uniform float cloudlight ; // 0.30
+uniform float cloudcover ; // 0.20
+uniform float cloudalpha ; // 8.00
+uniform float skytint    ; // 0.50
+uniform vec3  skycolour1 ; // 0.2, 0.4, 0.6
+uniform vec3  skycolour2 ; // 0.4, 0.7, 1.0
+
 
 const mat2 m = mat2( 1.6, 1.2, -1.2, 1.6 );
 

@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float h = 0.5;
-const float s = 0.5;
-const float v = 0.5;
+// const float h = 0.5;
+// const float s = 0.5;
+// const float v = 0.5;
+
+uniform float h ; // 0.5
+uniform float s ; // 0.5
+uniform float v ; // 0.5
 
 vec3 rgb2hsv(vec3 c) {
     vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);

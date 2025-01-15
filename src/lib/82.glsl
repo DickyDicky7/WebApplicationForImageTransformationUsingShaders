@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,8 +9,11 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float colors = 08.0; // 01.0 -> 16.0
-const float dither = 02.0; // 00.0 -> 00.5
+// const float colors = 08.0; // 01.0 -> 16.0
+// const float dither = 02.0; // 00.0 -> 00.5
+
+uniform float colors ; // 08.0
+uniform float dither ; // 02.0
 
 void main()
 {

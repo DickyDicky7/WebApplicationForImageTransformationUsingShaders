@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -11,8 +11,11 @@ uniform         vec4      mousePosition;
 
 #define PI 3.14159265359
 
-const   int  samples = 4;
-uniform bool colorOn    ;
+// const   int  samples = 4;
+// const   bool colorOn    ;
+
+uniform int  samples ; // 4
+uniform bool colorOn ; // false
 
 
 float aux ;

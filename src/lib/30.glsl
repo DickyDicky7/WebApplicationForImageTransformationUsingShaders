@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,8 +9,11 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float speedScale   = 16.0;
-const float clipPosition = 00.2;
+// const float speedScale   = 16.0;
+// const float clipPosition = 00.2;
+
+uniform float speedScale   ; // 16.0
+uniform float clipPosition ; // 00.2
 
 // float round(float x) {
 //     return floor(x + 0.5);

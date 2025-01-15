@@ -1,7 +1,7 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-// Uniform@s
+// Uniiform@s
 uniform sampler2D  tex0;
 in      vec2           vTexCoord;
 out     vec4           fragColor;
@@ -10,10 +10,13 @@ uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 // Constants
-const vec4    c   = vec4(0.2124,
-                         0.7153,
-                         0.0722, 0.0);
-const float scale =              2.0 ;
+// const vec4    c   = vec4(0.2124,
+//                          0.7153,
+//                          0.0722, 0.0);
+// const float scale =              2.0 ;
+
+uniform vec4  c     ; // 0.2124, 0.7153, 0.0722, 0.0
+uniform float scale ; //                         2.0
 
 vec4 bleach(vec4 p, vec4 m, vec4 s) 
 {

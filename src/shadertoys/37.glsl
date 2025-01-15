@@ -1,8 +1,8 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //noise
+uniform         sampler2D          tex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -40,8 +40,8 @@ vec2 colorShift(vec2 uv) {
 }
 
 float noise(vec2 uv) {
-    return clamp(texture(tex1, uv.xy + time * 6.0).r +
-                 texture(tex1, uv.xy - time * 4.0).g, 0.96, 1.0);
+    return clamp(texture(noise0, uv.xy + time * 6.0).r +
+                 texture(noise0, uv.xy - time * 4.0).g, 0.96, 1.0);
 }
 
 // from https://www.shadertoy.com/view/4sf3Dr
@@ -79,7 +79,7 @@ vec2 scandistort(vec2 uv) {
     float scan2 = clamp(cos(uv.y * 2.0 + time + 4.0) * 10.0, 0.0, 1.0);
     float amount = scan1 * scan2 * uv.x; 
     
-    uv.x -= 0.05 * mix(texture(tex1, vec2(uv.x, amount)).r * amount, amount, 0.9);
+    uv.x -= 0.05 * mix(texture(noise0, vec2(uv.x, amount)).r * amount, amount, 0.9);
 
     return uv;
 }
@@ -93,7 +93,7 @@ void main(void) {
     vec2  sd_uv = scandistort(uv);
     vec2 crt_uv = crt(sd_uv, 2.0);
     
-    vec4 rand = texture(tex1, vec2(time * 0.01, time * 0.02));
+    vec4 rand = texture(noise0, vec2(time * 0.01, time * 0.02));
     
     color.r = 0.0;
     color.g = texture(tex0, crt(colorshift(sd_uv, 0.010, rand.g), 2.0)).g;

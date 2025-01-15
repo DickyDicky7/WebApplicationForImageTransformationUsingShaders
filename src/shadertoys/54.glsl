@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -10,10 +10,15 @@ uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
 // VIGNETTE RANGE
-const vec2 rt = vec2( 0.00,  0.20);
-const vec2 rb = vec2( 0.00,  0.30);
-const vec2 rl = vec2(-0.10,  0.10);
-const vec2 rr = vec2( 0.00,  0.05);
+// const vec2 rt = vec2( 0.00,  0.20);
+// const vec2 rb = vec2( 0.00,  0.30);
+// const vec2 rl = vec2(-0.10,  0.10);
+// const vec2 rr = vec2( 0.00,  0.05);
+
+uniform vec2 rt ; //  0.00,  0.20
+uniform vec2 rb ; //  0.00,  0.30
+uniform vec2 rl ; // -0.10,  0.10
+uniform vec2 rr ; //  0.00,  0.05
 
 void main(void)
 {

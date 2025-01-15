@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform sampler2D  tex0;
 in      vec2           vTexCoord;
@@ -13,12 +13,19 @@ uniform vec2           texelSize;
 // You can@@@ also detect edges@@@@@ by@@@@ hue@@@ or@ saturation by@@@@@ changing all@@@@ .z@@@ @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ in line 37@@ and 39 to .x or .y
 
 
-const float add  = 0.002;
-const float threshold  = /*1.0*/ 0.1;
-const float threshold2 = /*1.0*/ 0.1;
-const vec4    edgeColour  = vec4(0.0, 0.0, 0.0, 1.0);
-const vec4    edgeColour2 = vec4(0.5, 0.5, 0.5, 1.0);
-const vec4 nonEdgeColour  = vec4(1.0, 1.0, 1.0, 1.0);
+// const float add  = 0.002;
+// const float threshold  = /*1.0*/ 0.1;
+// const float threshold2 = /*1.0*/ 0.1;
+// const vec4    edgeColour  = vec4(0.0, 0.0, 0.0, 1.0);
+// const vec4    edgeColour2 = vec4(0.5, 0.5, 0.5, 1.0);
+// const vec4 nonEdgeColour  = vec4(1.0, 1.0, 1.0, 1.0);
+
+uniform float add           ; // 0.002
+uniform float threshold     ; // 0.1
+uniform float threshold2    ; // 0.1
+uniform vec4    edgeColour  ; // 0.0, 0.0, 0.0, 1.0
+uniform vec4    edgeColour2 ; // 0.5, 0.5, 0.5, 1.0
+uniform vec4 nonEdgeColour  ; // 1.0, 1.0, 1.0, 1.0
 
 vec3 rgb2hsv(vec3 c) {
     vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);

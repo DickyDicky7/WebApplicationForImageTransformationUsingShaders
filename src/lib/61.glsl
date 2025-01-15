@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,17 +9,26 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-uniform sampler2D   bayer0;
-uniform sampler2D pallete0;
-uniform vec2        bayer0Size;
-uniform vec2      pallete0Size;
+uniform sampler2D   bayer0; // null
+uniform sampler2D palette0; // null
+/*
+const vec2        bayer0Size;
+const vec2      palette0Size;
+*/
 
-const int   u_bitttt_depth = 32;
-const float u_contrast = 1.0;
-const float u_offsettt = 0.0;
-const int   u_dither_sizee = 02;
-const bool  u_repeat_off   = false;
-const float u_repeat_value = 10.00; 
+// const int   u_bitttt_depth = 32;
+// const float u_contrast = 1.0;
+// const float u_offsettt = 0.0;
+// const int   u_dither_sizee = 02;
+// const bool  u_repeat_off   = false;
+// const float u_repeat_value = 10.00;
+
+uniform int   u_bitttt_depth ; // 32
+uniform float u_contrast ; // 1.0
+uniform float u_offsettt ; // 0.0
+uniform int   u_dither_sizee ; // 02
+uniform bool  u_repeat_off   ; // false
+uniform float u_repeat_value ; // 10.00
 
 void main() 
 {
@@ -52,7 +61,8 @@ void main()
     // lower colour@
     
     // get the palette texture size mapped so it is 1px high (so the x value however many colour bands there are)
-    vec2 col_size  = pallete0Size;
+    vec2 col_size  = vec2(textureSize(palette0
+                   ,                         0)) /* palette0Size */;
          col_size /=
          col_size.y;
     
@@ -67,7 +77,8 @@ void main()
     // @map@@@@ the@@@@ dither texture onto@ the@@@ screen@ there are@@ better ways of@ @doing@ this that@ makes@ the@@@@ dither pattern 'stick' @@
     // with@@@@ objects in@@@@ the@@@@ 3D@@@ world@ instead of@@@ being mapped onto the screen@ see@ lucas pope's details posts@ on@@@@@ @@how@@ he 
     // achieved this@@@ in@@@@ Obra@@@ Dinn: https://forums.tigsource.com/index.php?topic=40832.msg1363742#msg1363742
-    vec2     noise_size = bayer0Size;
+    vec2     noise_size = vec2(textureSize(bayer0
+                        ,                       0)) /* bayer0Size */;
     vec2 inv_noise_size = vec2(1.0 / float(noise_size.x),
                                1.0 / float(noise_size.y));
     vec2     noise_uv   = vTexCoord  * inv_noise_size * vec2(float(screen_size.x),
@@ -93,8 +104,8 @@ void main()
     // @@@@@@ @@ @@@ @@@@@ @@@@@ @@@@@@ @@ @@@@@@@@ @@ @@@ @@ @@@@@ @@@@@ @@@@@@ @@ @@@
     float col_sample = mix( lum_lower,
                             lum_upper,
-                           ramp_val );
-    vec3               final_col = texture(pallete0, vec2(col_sample, 0.5)).rgb;
+                     ramp_val          );
+    vec3            final_col = texture(palette0, vec2(col_sample, 0.5)).rgb;
     
     // return the final colour!
     fragColor.rgb = final_col ;

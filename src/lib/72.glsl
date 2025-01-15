@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float  zoom =  300.0;
-const bool   pDir =  false;
-const bool noWrap = !false;
+// const float  zoom =  300.0;
+// const bool   pDir =  false;
+// const bool noWrap = !false;
+
+uniform float  zoom ; //  300.0
+uniform bool   pDir ; //  false
+uniform bool noWrap ; // !false
 
 
 void main()

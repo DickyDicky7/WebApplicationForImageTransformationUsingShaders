@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const vec2   redOffset = vec2(-0.1, 0.0);
-const vec2 greenOffset = vec2( 0.1, 0.0);
-const vec2  blueOffset = vec2( 0.1, 0.0);
+// const vec2   redOffset = vec2(-0.1, 0.0);
+// const vec2 greenOffset = vec2( 0.1, 0.0);
+// const vec2  blueOffset = vec2( 0.1, 0.0);
+
+uniform vec2   redOffset ; // -0.1, 0.0
+uniform vec2 greenOffset ; //  0.1, 0.0
+uniform vec2  blueOffset ; //  0.1, 0.0
 
 
 

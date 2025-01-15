@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,11 +9,17 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float range = 0.05;
-const float  noiseQuality = 250.0;
-const float  noiseIntensity = 0.0088;
-const float offsetIntensity = 0.0300;
-const float colorOffsetIntensity  = 1.3;
+// const float range = 0.05;
+// const float  noiseQuality = 250.0;
+// const float  noiseIntensity = 0.0088;
+// const float offsetIntensity = 0.0300;
+// const float colorOffsetIntensity  = 1.3;
+
+uniform float       range          ; // 000.0500
+uniform float       noiseQuality   ; // 250.0000
+uniform float       noiseIntensity ; // 000.0088
+uniform float      offsetIntensity ; // 000.0300
+uniform float colorOffsetIntensity ; // 001.3000
 
 float rand(vec2 co)
 {
@@ -29,7 +35,8 @@ float verticalBar(float pos, float UVY, float offset)
            x -= smoothstep( pos , edge1, UVY) * offset;
     return x;
 }
-const float saturation = 0.2;
+//const float saturation =    0.2;
+uniform float saturation ; // 0.2
 void main()
 {
     vec2 uv = vTexCoord;
@@ -39,7 +46,7 @@ void main()
     {
          float d =  mod(time * i, 1.7);
          float o =  sin(1.00 - tan(time * 0.24 * i));
-    	       o *=                offsetIntensity  ;
+               o *=                offsetIntensity  ;
                                                     uv.x += verticalBar(d, vTexCoord.y, o);
     }
     

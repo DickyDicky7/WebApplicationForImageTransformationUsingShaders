@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -17,7 +17,8 @@ uniform         vec4      mousePosition;
 //  1 = Stretched VGA style shadow mask (same as prior shaders)
 //  2 = VGA style shadow mask
 //  2 = VGA style shadow mask
-const int  mask_type = 0;
+//const int  mask_type =    0;
+uniform int  mask_type ; // 0
 
 // Bloom Type
 // Bloom Type
@@ -27,7 +28,8 @@ const int  mask_type = 0;
 //  1 = Aditive bloom
 //  2 = No Bloom
 //  2 = No Bloom
-const int bloom_type = 1;
+//const int bloom_type =    1;
+uniform int bloom_type ; // 1
 
 // Hardness of scanline.
 // Hardness of scanline.
@@ -35,7 +37,8 @@ const int bloom_type = 1;
 //  -8.0 = soft
 // -16.0 = medium
 // -16.0 = medium
-const float hardScan = -8.0;
+//const float hardScan =    -8.0;
+uniform float hardScan ; // -8.0
 
 // Hardness of pixels in scanline.
 // Hardness of pixels in scanline.
@@ -43,7 +46,8 @@ const float hardScan = -8.0;
 // -2.0 = soft
 // -4.0 = hard
 // -4.0 = hard
-const float hardPix  = -2.0;
+//const float hardPix  =    -2.0;
+uniform float hardPix  ; // -2.0
 
 // Hardness of short vertical bloom.
 // Hardness of short vertical bloom.
@@ -53,7 +57,8 @@ const float hardPix  = -2.0;
 //  -1.5 = wide
 //  -4.0 = not very wide at all
 //  -4.0 = not very wide at all
-const float hardBloomScan = -2.0;
+//const float hardBloomScan =    -2.0;
+uniform float hardBloomScan ; // -2.0
 
 // Hardness of short horizontal bloom.
 // Hardness of short horizontal bloom.
@@ -63,7 +68,8 @@ const float hardBloomScan = -2.0;
 //  -1.0 = wide
 //  -2.0 = not very wide at all
 //  -2.0 = not very wide at all
-const float hardBloomPix  = -1.5;
+//const float hardBloomPix  =    -1.5;
+uniform float hardBloomPix  ; // -1.5
 
 // Amount of small bloom effect.
 // Amount of small bloom effect.
@@ -73,7 +79,8 @@ const float hardBloomPix  = -1.5;
 //  1.0/16.0 = what I think is a good amount of small bloom
 //  0.0     = no bloom
 //  0.0     = no bloom
-const float bloomAmount  = 16.0;
+//const float bloomAmount  =    16.0;
+uniform float bloomAmount  ; // 16.0
 
 // Display warp.
 // Display warp.
@@ -81,12 +88,16 @@ const float bloomAmount  = 16.0;
 // 0.0 = none
 // 1.0/8.0 = extreme
 // 1.0/8.0 = extreme
-const vec2 warp = vec2(64.0, 24.0); 
+//const vec2 warp =    vec2(64.0, 24.0);
+uniform vec2 warp ; //      64.0, 24.0
 
 // Amount of shadow mask.
 // Amount of shadow mask.
-const float maskDarkk = 0.5;
-const float maskLight = 1.5;
+//const float maskDarkk =    0.5;
+//const float maskLight =    1.5;
+uniform float maskDarkk ; // 0.5
+uniform float maskLight ; // 1.5
+
 
 //------------------------------------------------------------------------
 
@@ -306,7 +317,7 @@ vec3 Mask(vec2 pos) {
     
         return mask;
     }
-  }    
+}    
 
 // Draw dividing bars.
 // Draw dividing bars.

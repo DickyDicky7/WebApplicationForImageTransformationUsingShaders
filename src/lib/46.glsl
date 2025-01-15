@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float wave_speed = 03.0; //wave @@@@@@@@ loop speed
-const float wave_freq  = 10.0; //wave vertical freq @@@@@
-const float wave_width = 01.0; //wave @@@@@@@@ @@@@ width 
+// const float wave_speed = 03.0; //wave @@@@@@@@ loop speed
+// const float wave_freq  = 10.0; //wave vertical freq @@@@@
+// const float wave_width = 01.0; //wave @@@@@@@@ @@@@ width 
+
+uniform float wave_speed ; // 03.0
+uniform float wave_freq  ; // 10.0
+uniform float wave_width ; // 01.0
 
 void main()
 {

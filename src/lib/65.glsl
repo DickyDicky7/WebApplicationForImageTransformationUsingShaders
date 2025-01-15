@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,6 +9,76 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
+
+
+// //*** IMPORTANT! ***/ 
+// //*** IMPORTANT! ***/ 
+// // - If you are using this shader to affect the node it is applied to set 'overlay' to false (unchecked in the instepctor).
+// // - If you are using this shader to affect the node it is applied to set 'overlay' to false (unchecked in the instepctor).
+// // - If you are using this shader as an overlay, and want the shader to affect the nodes below in the Scene hierarchy,
+// // - If you are using this shader as an overlay, and want the shader to affect the nodes below in the Scene hierarchy,
+// //   set 'overlay' to true (checked in the inspector).
+// //   set 'overlay' to true (checked in the inspector).
+// // On Mac there is potentially a bug causing this to not work properly. If that is the case and you want to use the shader as an overlay
+// // On Mac there is potentially a bug causing this to not work properly. If that is the case and you want to use the shader as an overlay
+// // change all "overlay ? SCREEN_TEXTURE : TEXTURE" to only "SCREEN_TEXTURE" on lines 129-140, and "vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV);"
+// // change all "overlay ? SCREEN_TEXTURE : TEXTURE" to only "SCREEN_TEXTURE" on lines 129-140, and "vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV);"
+// // to "vec2 uv = warp(SCREEN_UV);" on line 98.
+// // to "vec2 uv = warp(SCREEN_UV);" on line 98.
+// const bool overlay = false;
+
+// const float scanlines_opacity = 0.40;
+// const float scanlines_width   = 0.25;
+// const float    grille_opacity = 0.30;
+// const vec2 resolution         = vec2(640.0, 480.0);
+// // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
+// // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
+
+// const bool pixelate = true;
+// // Fill each square ("pixel") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
+// // Fill each square ("pixel") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
+
+// const bool     roll           = true;
+// const float    roll_speed     = 08.00;
+// // Positive values are down, negative are up
+// // Positive values are down, negative are up
+// const float    roll_size      = 15.00;
+// const float    roll_variation = 01.80;
+// // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
+// // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
+// const float distort_intensity = 00.05;
+// // The distortion created by the rolling effect.
+// // The distortion created by the rolling effect.
+
+// const float noise_opacity = 0.4;
+// const float noise_speed   = 5.0;
+// // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
+// // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
+
+// const float static_noise_intensity = 0.06;
+
+// const float aberration = 0.03;
+// // Chromatic aberration, a distortion on each color channel.
+// // Chromatic aberration, a distortion on each color channel.
+// const float brightness = 1.40;
+// // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
+// // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
+// const bool    discolor = true;
+// // Add a discolor effect simulating a VHS
+// // Add a discolor effect simulating a VHS
+
+// const float warp_amount = 01.00;
+// // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
+// // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
+// const bool  clip_warp   = false;
+
+// const float vignette_intensity = 0.4;
+// // Size of the vignette, how far towards the middle it should go.
+// // Size of the vignette, how far towards the middle it should go.
+// const float vignette_opacity   = 0.5;
+
+
+
 //*** IMPORTANT! ***/ 
 //*** IMPORTANT! ***/ 
 // - If you are using this shader to affect the node it is applied to set 'overlay' to false (unchecked in the instepctor).
@@ -23,57 +93,59 @@ uniform         vec4      mousePosition;
 // change all "overlay ? SCREEN_TEXTURE : TEXTURE" to only "SCREEN_TEXTURE" on lines 129-140, and "vec2 uv = overlay ? warp(SCREEN_UV) : warp(UV);"
 // to "vec2 uv = warp(SCREEN_UV);" on line 98.
 // to "vec2 uv = warp(SCREEN_UV);" on line 98.
-const bool overlay = false;
+uniform bool overlay ; // false
 
-const float scanlines_opacity = 0.40;
-const float scanlines_width   = 0.25;
-const float    grille_opacity = 0.30;
-const vec2 resolution         = vec2(640.0, 480.0);
+uniform float scanlines_opacity ; // 0.40
+uniform float scanlines_width   ; // 0.25
+uniform float    grille_opacity ; // 0.30
+uniform vec2 resolution         ; // 640.0, 480.0
 // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
 // Set the number of rows and columns the texture will be divided in. Scanlines and grille will make a square based on these values
 
-const bool pixelate = true;
+uniform bool pixelate ; // true
 // Fill each square ("pixel") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
 // Fill each square ("pixel") with a sampled color, creating a pixel look and a more accurate representation of how a CRT monitor would work.
 
-const bool     roll           = true;
-const float    roll_speed     = 08.00;
+uniform bool     roll           ; // true
+uniform float    roll_speed     ; // 08.00
 // Positive values are down, negative are up
 // Positive values are down, negative are up
-const float    roll_size      = 15.00;
-const float    roll_variation = 01.80;
+uniform float    roll_size      ; // 15.00
+uniform float    roll_variation ; // 01.80
 // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
 // This valie is not an exact science. You have to play around with the value to find a look you like. How this works is explained in the code below.
-const float distort_intensity = 00.05;
+uniform float distort_intensity ; // 00.05
 // The distortion created by the rolling effect.
 // The distortion created by the rolling effect.
 
-const float noise_opacity = 0.4;
-const float noise_speed   = 5.0;
+uniform float noise_opacity ; // 0.4
+uniform float noise_speed   ; // 5.0
 // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
 // There is a movement in the noise pattern that can be hard to see first. This sets the speed of that movement.
 
-const float static_noise_intensity = 0.06;
+uniform float static_noise_intensity ; // 0.06
 
-const float aberration = 0.03;
+uniform float aberration ; // 0.03
 // Chromatic aberration, a distortion on each color channel.
 // Chromatic aberration, a distortion on each color channel.
-const float brightness = 1.40;
+uniform float brightness ; // 1.40
 // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
 // When adding scanline gaps and grille the image can get very dark. Brightness tries to compensate for that.
-const bool    discolor = true;
+uniform bool    discolor ; // true
 // Add a discolor effect simulating a VHS
 // Add a discolor effect simulating a VHS
 
-const float warp_amount = 01.00;
+uniform float warp_amount ; // 01.00
 // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
 // Warp the texture edges simulating the curved glass of a CRT monitor or old TV.
-const bool  clip_warp   = false;
+uniform bool  clip_warp   ; // false
 
-const float vignette_intensity = 0.4;
+uniform float vignette_intensity ; // 0.4
 // Size of the vignette, how far towards the middle it should go.
 // Size of the vignette, how far towards the middle it should go.
-const float vignette_opacity   = 0.5;
+uniform float vignette_opacity   ; // 0.5
+
+
 
 // Used by the noise functin to generate a pseudo random value between 0.0 and 1.0
 // Used by the noise functin to generate a pseudo random value between 0.0 and 1.0

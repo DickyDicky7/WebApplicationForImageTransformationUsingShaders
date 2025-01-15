@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,8 +9,11 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float stepH = 1.0;
-const float stepV = 1.0;
+// const float stepH = 1.0;
+// const float stepV = 1.0;
+
+uniform float stepH ; // 1.0
+uniform float stepV ; // 1.0
 
 float rgbToGray(vec4 rgba) {
     const vec3 W = vec3(0.2125

@@ -1,8 +1,8 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //diffuse
+uniform         sampler2D          tex0;
+uniform         sampler2D    shaderToy0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -13,7 +13,7 @@ uniform         vec4      mousePosition;
 // Function to calculate the channel based on phase
 vec4 calcChannel(float phase)
 {
-    return texture(tex1, vec2(0.5 + 0.5 * sin(phase * 3.14159), 0.5));
+    return texture(shaderToy0, vec2(0.5 + 0.5 * sin(phase * 3.14159), 0.5));
 }
 
 void main(void)

@@ -1,8 +1,8 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //noise
+uniform         sampler2D          tex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -22,18 +22,18 @@ void main() {
     
     // Get the offset value from the second texture channel based on time
     // Get the offset value from the second texture channel based on time
-    float offset = texture(tex1, vec2(time * 0.1, 0.0)).g;
+    float offset = texture(noise0, vec2(time * 0.1, 0.0)).g;
           offset =   floor(
           offset *   8.0  )
                  /   8.0  ;
     
     // Fetch noise data from the second texture channel
     // Fetch noise data from the second texture channel
-    vec3        noiseBase = texture(tex1, vec2(uv.y * resScale, offset)).rgb;
+    vec3        noiseBase = texture(noise0, vec2(uv.y * resScale, offset)).rgb;
     
     // Fetch static noise from the second texture channel
     // Fetch static noise from the second texture channel
-    float staticNoise     = texture(tex1,      uv   * 1.3              ).r  ;
+    float staticNoise     = texture(noise0,      uv   * 1.3              ).r  ;
     
     // Apply quantization to the noise values
     float noiseR = floor(noiseBase.r * stepVal) / stepVal;
@@ -42,7 +42,7 @@ void main() {
     
     // Get time-dependent noise value
     // Get time-dependent noise value
-    float timeNoise = texture(tex1, vec2(time * 0.1, 0.0)).r * 0.7;
+    float timeNoise = texture(noise0, vec2(time * 0.1, 0.0)).r * 0.7;
     if (  timeNoise < 0.4  ) {
           timeNoise = 0.0;
     }

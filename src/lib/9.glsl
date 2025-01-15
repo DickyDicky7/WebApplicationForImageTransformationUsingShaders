@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform sampler2D  tex0;
 in      vec2           vTexCoord;
@@ -9,8 +9,11 @@ uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 
-const float threshold = 0.5;
-const float delta     = 0.2;
+// const float threshold = 0.5;
+// const float delta     = 0.2;
+
+uniform float threshold ; // 0.5
+uniform float delta     ; // 0.2
 
 void main() {
     vec4 screen_color = texture(tex0, vTexCoord); // Get the color from the screen texture

@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,7 +9,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float scanline_count = 50.0;
+//const float scanline_count =    50.0;
+uniform float scanline_count ; // 50.0
 
 vec2 uv_curve(vec2 uv)
 {

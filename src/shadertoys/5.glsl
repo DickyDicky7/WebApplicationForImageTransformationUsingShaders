@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform sampler2D  tex0;
 in      vec2           vTexCoord;
@@ -9,9 +9,13 @@ uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
 // Control@@@ Variables
-float uPower     = 0.2;  // Barrel@@@ @@ distortion power (0-1 works well)
-float uSpeed     = 5.0;  // Speed@@@@ of distortion @@@@@ @@@@@@@@@@@@@@@@
-float uFrequency = 5.0;  // Frequency of distortion @@@@@ @@@@@@@@@@@@@@@@
+// float uPower     = 0.2;  // Barrel@@@ @@ distortion power (0-1 works well)
+// float uSpeed     = 5.0;  // Speed@@@@ of distortion @@@@@ @@@@@@@@@@@@@@@@
+// float uFrequency = 5.0;  // Frequency of distortion @@@@@ @@@@@@@@@@@@@@@@
+
+uniform float uPower     ; // 0.2
+uniform float uSpeed     ; // 5.0
+uniform float uFrequency ; // 5.0
 
 // Distortion function
 vec2 Distort(vec2 p, float power, float speed, float freq) {

@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float strength = 1.0;
-const float    speed = 1.0;
-const vec2 disp = vec2(1.0, 1.0);
+// const float strength = 1.0;
+// const float    speed = 1.0;
+// const vec2 disp = vec2(1.0, 1.0);
+
+uniform float strength ; // 1.0
+uniform float    speed ; // 1.0
+uniform vec2  disp     ; // 1.0, 1.0
 
 
 vec2 GetGradient(vec2 intPos, float t) {

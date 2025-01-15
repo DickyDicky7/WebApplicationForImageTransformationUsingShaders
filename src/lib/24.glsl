@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,10 +9,14 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float mask_softness  = 1.4; // negative values result in mask being inverted
-const float mask_threshold = 0.6;
+// const float mask_softness  = 1.4; // negative values result in mask being inverted
+// const float mask_threshold = 0.6;
 
-const float sort = 1.0;
+// const float sort = 1.0;
+
+uniform float mask_softness  ; // 1.4
+uniform float mask_threshold ; // 0.6
+uniform float sort           ; // 1.0
 
 void main() {
     vec2  uv = vTexCoord;

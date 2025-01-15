@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float    RANGE = 0.7;
-const float    SPEED = 0.5;
-const float STRENGTH = 6.0;
+// const float    RANGE = 0.7;
+// const float    SPEED = 0.5;
+// const float STRENGTH = 6.0;
+
+uniform float    RANGE ; // 0.7
+uniform float    SPEED ; // 0.5
+uniform float STRENGTH ; // 6.0
 
 mat2 rotate(float a)
 {

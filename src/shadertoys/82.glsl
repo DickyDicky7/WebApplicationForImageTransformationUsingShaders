@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,20 +9,36 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float iterations = 17.00;
-const float formuparam = 00.53;
+// const float iterations = 17.00;
+// const float formuparam = 00.53;
 
-const float volsteps = 20.0;
-const float stepsize = 00.1;
+// const float volsteps = 20.0;
+// const float stepsize = 00.1;
 
-const float zoom  = 0.800;
-const float tile  = 0.850;
-const float speed = 0.010;
+// const float zoom  = 0.800;
+// const float tile  = 0.850;
+// const float speed = 0.010;
 
-const float brightness = 0.0015;
-const float darkmatter = 0.3000;
-const float distfading = 0.7300;
-const float saturation = 0.8500;
+// const float brightness = 0.0015;
+// const float darkmatter = 0.3000;
+// const float distfading = 0.7300;
+// const float saturation = 0.8500;
+
+
+uniform float iterations ; // 17.00
+uniform float formuparam ; // 00.53
+
+uniform float volsteps ; // 20.0
+uniform float stepsize ; // 00.1
+
+uniform float zoom  ; // 0.800
+uniform float tile  ; // 0.850
+uniform float speed ; // 0.010
+
+uniform float brightness ; // 0.0015
+uniform float darkmatter ; // 0.3000
+uniform float distfading ; // 0.7300
+uniform float saturation ; // 0.8500
 
 
 void main(  )

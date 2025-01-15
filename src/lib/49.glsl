@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,12 +9,19 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float  radius_c =  000.200;
-const float  radius_m = -000.300;
-const float  radius_y =  000.000;
-const float  radius_k =  000.785;
+// const float  radius_c =  000.200;
+// const float  radius_m = -000.300;
+// const float  radius_y =  000.000;
+// const float  radius_k =  000.785;
 
-const float frequency =  400.000;
+// const float frequency =  400.000;
+
+uniform float  radius_c ; //  000.200
+uniform float  radius_m ; // -000.300
+uniform float  radius_y ; //  000.000
+uniform float  radius_k ; //  000.785
+
+uniform float frequency ; //  400.000
 
 mat2 rotate( float r )
 {

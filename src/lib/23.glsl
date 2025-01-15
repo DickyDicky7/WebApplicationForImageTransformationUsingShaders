@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,7 +9,9 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float fisheye_strength = 1.0; // Adjust this to control the fisheye effect strength
+//const float fisheye_strength =    1.0; // Adjust this to control the fisheye effect strength
+
+uniform float fisheye_strength ; // 1.0
 
 vec2 fisheye(vec2 uv) {
     vec2  d = uv - 0.5f;

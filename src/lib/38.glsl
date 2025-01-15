@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,8 +9,11 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const int   levels = 3   ;
-const float spread = 0.01;
+// const int   levels = 3   ;
+// const float spread = 0.01;
+
+uniform int   levels ; // 3   
+uniform float spread ; // 0.01
 
 vec3 chromatic_slice(float t) {
     vec3       res = vec3(1.0 - t, 1.0 - abs(t - 1.0), t - 1.0);

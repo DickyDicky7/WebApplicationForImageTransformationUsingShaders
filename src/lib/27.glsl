@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,17 +9,29 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float aspect     = 1.00;
-const float distortion = 1.00;
-const float radius     = 1.07;
-const float      alpha = 1.00;
-const float crop            = 0.943;
-const vec4  crop_color      = vec4(0,0,0,1);
-const float crop_feathering = 0.100;
+// const float aspect     = 1.00;
+// const float distortion = 1.00;
+// const float radius     = 1.07;
+// const float      alpha = 1.00;
+// const float crop            = 0.943;
+// const vec4  crop_color      = vec4(0,0,0,1);
+// const float crop_feathering = 0.100;
 
-const float base_distortion                             = 0.990; 
-const float                channel_offset               = 0.005; 
-const float                              noise_strength = 5.000;
+// const float base_distortion                             = 0.990; 
+// const float                channel_offset               = 0.005; 
+// const float                              noise_strength = 5.000;
+
+uniform float aspect     ; // 1.00
+uniform float distortion ; // 1.00
+uniform float radius     ; // 1.07
+uniform float      alpha ; // 1.00
+uniform float crop            ; // 0.943
+uniform vec4  crop_color      ; // 0,0,0,1
+uniform float crop_feathering ; // 0.100
+
+uniform float base_distortion                             ; // 0.990 
+uniform float                channel_offset               ; // 0.005 
+uniform float                              noise_strength ; // 5.000
 
 vec2 distort(vec2 p)
 {

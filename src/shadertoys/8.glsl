@@ -1,15 +1,16 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //bayer
-uniform         vec2           tex1Size; //bayer size
+uniform         sampler2D          tex0;
+uniform         sampler2D        bayer0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
 uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
+
+uniform bool less ; // true
 
 // Control constants
 // Control constants
@@ -48,9 +49,10 @@ vec3 ValveScreenSpaceDither(vec2 vScreenPos, float colorDepth) {
 }
 
 vec3 TextureDither(vec2 vScreenPos, float colorDepth) {
-    float x = mod(vScreenPos.x / tex1Size.x, float(canvasSize.x));
-    float y = mod(vScreenPos.y / tex1Size.y, float(canvasSize.y));
-    vec3 vDither = texture(tex1, vec2(x, y) / RESOLUTIONFACTOR).rrr;
+    vec2 bayer0Size = vec2(textureSize(bayer0, 0));
+    float x = mod(vScreenPos.x / bayer0Size.x, float(canvasSize.x));
+    float y = mod(vScreenPos.y / bayer0Size.y, float(canvasSize.y));
+    vec3 vDither = texture(bayer0 , vec2(x, y) / RESOLUTIONFACTOR).rrr;
     
     return (0.5 - vDither);
 }
@@ -70,7 +72,8 @@ void main() {
     #endif
 
     #if defined(DITHER)
-    if ( fragCoord.x < 0.5 * canvasSize.x )
+//  if ( fragCoord.x < 0.5 * canvasSize.x )
+    if (!less                             )
         finalColor += ValveScreenSpaceDither(fragCoord, colorDepth);
     else
         finalColor +=          TextureDither(fragCoord, colorDepth);

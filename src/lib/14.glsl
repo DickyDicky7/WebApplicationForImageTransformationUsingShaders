@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform sampler2D  tex0;
 in      vec2           vTexCoord;
@@ -17,11 +17,17 @@ uniform vec2           texelSize;
 
 
 
-const float shake_power = 0.03;
-const float shake_rate  = 0.20;
-const float shake_speed = 5.00;
-const float shake_block_size = 30.50;
-const float shake_color_rate = 00.01;
+// const float shake_power = 0.03;
+// const float shake_rate  = 0.20;
+// const float shake_speed = 5.00;
+// const float shake_block_size = 30.50;
+// const float shake_color_rate = 00.01;
+
+uniform float shake_power ; // 0.03
+uniform float shake_rate  ; // 0.20
+uniform float shake_speed ; // 5.00
+uniform float shake_block_size ; // 30.50
+uniform float shake_color_rate ; // 00.01
 
 
 float random( float seed )

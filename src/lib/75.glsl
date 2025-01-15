@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,26 +9,35 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const bool keep_luminance  = false;
-const vec4 color_start     = vec4(0.0, 0.0, 0.0, 1.0);
-const float      start_pos = 0.00;
-const vec4 color_mid       = vec4(0.5, 0.5, 0.5, 1.0);
-const float      mid_pos   = 0.50;
-const vec4 color_end       = vec4(1.0, 1.0, 1.0, 1.0);
-const float      end_pos   = 0.99;
-const bool midpos_enabled  = false;
+// const bool   keep_luminance = false;
+// const vec4  color_start     = vec4(0.0, 0.0, 0.0, 1.0);
+// const float       start_pos = 0.000;
+// const vec4  color_mid       = vec4(0.5, 0.5, 0.5, 1.0);
+// const float       mid_pos   = 0.500;
+// const vec4  color_end       = vec4(1.0, 1.0, 1.0, 1.0);
+// const float       end_pos   = 0.990;
+// const bool  midpos_enabled  = false;
+// const float effect_filling  = 1.000;
 
-const float effect_filling = 1.0;
+uniform bool   keep_luminance ; // false
+uniform vec4  color_start     ; // 0.0, 0.0, 0.0, 1.0
+uniform float       start_pos ; // 0.000
+uniform vec4  color_mid       ; // 0.5, 0.5, 0.5, 1.0
+uniform float       mid_pos   ; // 0.500
+uniform vec4  color_end       ; // 1.0, 1.0, 1.0, 1.0
+uniform float       end_pos   ; // 0.990
+uniform bool  midpos_enabled  ; // false
+uniform float effect_filling  ; // 1.000
 
 vec3 rgb2hsv(vec3 c)
 {
     vec4 K = vec4(0.0, -1.0 / 3.0, 2.0 / 3.0, -1.0);
-    vec4 p = mix(vec4(c.bg, K.wz), vec4(c.gb, K.xy), step(c.b, c.g));
-    vec4 q = mix(vec4(p.xyw, c.r), vec4(c.r, p.yzx), step(p.x, c.r));
+    vec4 p = mix(vec4(c.bg , K.wz ), vec4(c.gb , K.xy ), step(c.b, c.g));
+    vec4 q = mix(vec4(p.xyw, c.r  ), vec4(c.r  , p.yzx), step(p.x, c.r));
 
-    float d = q.x - min(q.w, q.y);
-    float e = 1.0e-10;
-    return vec3(abs(q.z + (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
+    float d =       q.x - min(q.w , q.y);
+    float e =                    1.0e-10;
+    return vec3(abs(q.z +    (q.w - q.y) / (6.0 * d + e)), d / (q.x + e), q.x);
 }
 
 // All components are in the range [0…1], including hue.

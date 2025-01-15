@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,23 +9,39 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-// ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
-// ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
-const float crt_curve            = 0.020;
-// 走査線の濃さ
-// 走査線の濃さ
-const float crt_scan_line_color  = 0.347;
-// 光量
-// 光量
-const float aperture_grille_rate = 0.400;
-// RFスイッチ的ブラー
-// RFスイッチ的ブラー
-const float rf_switch_esque_blur = 1.000;
-// 白色ノイズ
-// 白色ノイズ
-const float     white_noise_rate = 0.000;
+// // ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
+// // ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
+// const float crt_curve            = 0.020;
+// // 走査線の濃さ
+// // 走査線の濃さ
+// const float crt_scan_line_color  = 0.347;
+// // 光量
+// // 光量
+// const float aperture_grille_rate = 0.400;
+// // RFスイッチ的ブラー
+// // RFスイッチ的ブラー
+// const float rf_switch_esque_blur = 1.000;
+// // 白色ノイズ
+// // 白色ノイズ
+// const float     white_noise_rate = 0.000;
 
-const float PI = 3.14;
+// ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
+// ブラウン管のガラスの曲がり具合（フラットなやつは0.0でいいかな）
+uniform float crt_curve            ; //   0.020
+// 走査線の濃さ
+// 走査線の濃さ
+uniform float crt_scan_line_color  ; //   0.347
+// 光量
+// 光量
+uniform float aperture_grille_rate ; //   0.400
+// RFスイッチ的ブラー
+// RFスイッチ的ブラー
+uniform float rf_switch_esque_blur ; //   1.000
+// 白色ノイズ
+// 白色ノイズ
+uniform float     white_noise_rate ; //   0.000
+
+const   float PI = 3.14;
 
 float random( vec2 pos )
 { 

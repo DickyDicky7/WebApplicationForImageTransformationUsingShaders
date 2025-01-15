@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform sampler2D  tex0;
 in      vec2           vTexCoord;
@@ -8,20 +8,35 @@ uniform float      time;
 uniform vec2 canvasSize;
 uniform vec2           texelSize;
 
+// const float PI = 3.14;
+// const float    scan_line_amount    =   1.0 ;
+// const float         warp_amount    =   0.1 ;
+// const float        noise_amount    =   0.03;
+// const float interference_amount    =   0.2 ;
+// const float       grille_amount    =   0.1 ;
+// const float       grille_size      =   1.0 ;
+// const float     vignette_amount    =   0.6 ;
+// const float     vignette_intensity =   0.4 ;
+// const float    aberation_amount    =   0.5 ;
+// const float    roll_line_amount    =   0.3 ;
+// const float    roll_speed          =   1.0 ;
+// const float    scan_line_strength  = - 8.0 ;
+// const float        pixel_strength  = - 2.0 ;
+
 const float PI = 3.14;
-const float    scan_line_amount    =   1.0 ;
-const float         warp_amount    =   0.1 ;
-const float        noise_amount    =   0.03;
-const float interference_amount    =   0.2 ;
-const float       grille_amount    =   0.1 ;
-const float       grille_size      =   1.0 ;
-const float     vignette_amount    =   0.6 ;
-const float     vignette_intensity =   0.4 ;
-const float    aberation_amount    =   0.5 ;
-const float    roll_line_amount    =   0.3 ;
-const float    roll_speed          =   1.0 ;
-const float    scan_line_strength  = - 8.0 ;
-const float        pixel_strength  = - 2.0 ;
+uniform float    scan_line_amount    ; //   1.0 
+uniform float         warp_amount    ; //   0.1 
+uniform float        noise_amount    ; //   0.03
+uniform float interference_amount    ; //   0.2 
+uniform float       grille_amount    ; //   0.1 
+uniform float       grille_size      ; //   1.0 
+uniform float     vignette_amount    ; //   0.6 
+uniform float     vignette_intensity ; //   0.4 
+uniform float    aberation_amount    ; //   0.5 
+uniform float    roll_line_amount    ; //   0.3 
+uniform float    roll_speed          ; //   1.0 
+uniform float    scan_line_strength  ; // - 8.0 
+uniform float        pixel_strength  ; // - 2.0 
 
 float random(vec2 uv) {
     return fract(cos(uv.x * 83.4827

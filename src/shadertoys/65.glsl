@@ -1,8 +1,8 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //noise
+uniform         sampler2D          tex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -10,11 +10,19 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float GAMMA      = 0.65;
-const float REGIONS    = 5.00;
-const float LINES      = 0.50;
-const float BASE       = 2.50;
-const float GREEN_BIAS = 0.90;
+// const float GAMMA      = 0.65;
+// const float REGIONS    = 5.00;
+// const float LINES      = 0.50;
+// const float BASE       = 2.50;
+// const float GREEN_BIAS = 0.90;
+
+
+uniform float GAMMA      ; // 0.65
+uniform float REGIONS    ; // 5.00
+uniform float LINES      ; // 0.50
+uniform float BASE       ; // 2.50
+uniform float GREEN_BIAS ; // 0.90
+
 
 // Hash function for noise generation
 // Hash function for noise generation
@@ -47,16 +55,16 @@ vec3 OutlineWhyCantIPassASampler(vec2 fragCoord) {
 
     lines.rgb = lines.rgb * LINES * 1.5;
 
-    float s11 = dot(texture(tex1, uv + vec2(-1.0 / canvasSize.x, -1.0 / canvasSize.y)), lines); // @LEFT@
-    float s12 = dot(texture(tex1, uv + vec2( 0.0               , -1.0 / canvasSize.y)), lines); // MIDDLE
-    float s13 = dot(texture(tex1, uv + vec2( 1.0 / canvasSize.x, -1.0 / canvasSize.y)), lines); // RIGHT@
+    float s11 = dot(texture(noise0, uv + vec2(-1.0 / canvasSize.x, -1.0 / canvasSize.y)), lines); // @LEFT@
+    float s12 = dot(texture(noise0, uv + vec2( 0.0               , -1.0 / canvasSize.y)), lines); // MIDDLE
+    float s13 = dot(texture(noise0, uv + vec2( 1.0 / canvasSize.x, -1.0 / canvasSize.y)), lines); // RIGHT@
 
-    float s21 = dot(texture(tex1, uv + vec2(-1.0 / canvasSize.x,  0.0               )), lines); // @LEFT@
-    float s23 = dot(texture(tex1, uv + vec2( 1.0 / canvasSize.x,  0.0               )), lines); // RIGHT@
+    float s21 = dot(texture(noise0, uv + vec2(-1.0 / canvasSize.x,  0.0               )), lines); // @LEFT@
+    float s23 = dot(texture(noise0, uv + vec2( 1.0 / canvasSize.x,  0.0               )), lines); // RIGHT@
 
-    float s31 = dot(texture(tex1, uv + vec2(-1.0 / canvasSize.x,  1.0 / canvasSize.y)), lines); // @LEFT@
-    float s32 = dot(texture(tex1, uv + vec2( 0.0               ,  1.0 / canvasSize.y)), lines); // MIDDLE
-    float s33 = dot(texture(tex1, uv + vec2( 1.0 / canvasSize.x,  1.0 / canvasSize.y)), lines); // RIGHT@
+    float s31 = dot(texture(noise0, uv + vec2(-1.0 / canvasSize.x,  1.0 / canvasSize.y)), lines); // @LEFT@
+    float s32 = dot(texture(noise0, uv + vec2( 0.0               ,  1.0 / canvasSize.y)), lines); // MIDDLE
+    float s33 = dot(texture(noise0, uv + vec2( 1.0 / canvasSize.x,  1.0 / canvasSize.y)), lines); // RIGHT@
 
     float t1 = s13 + s33 + (2.0 * s23) - s11 -       (2.0 * s21) - s31;
     float t2 = s31 +       (2.0 * s32) + s33 - s11 - (2.0 * s12) - s13;
@@ -120,7 +128,7 @@ vec3 Posterize(vec3 color) {
 // Replace background color
 // Replace background color
 vec3 ReplaceBackground(vec3 color, vec2 uv, vec2 fragCoord) {
-    color.r =  texture(tex1, vec2(uv.x, 1.0 - uv.y)).r - 0.6;
+    color.r =  texture(noise0, vec2(uv.x, 1.0 - uv.y)).r - 0.6;
     color.r = (
                0.5
             -  0.5

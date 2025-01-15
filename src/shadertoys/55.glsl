@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,9 +9,13 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float    speed   = 04.00;
-const float strength   = 40.00;
-const float distortion = 00.03;
+// const float    speed   = 04.00;
+// const float strength   = 40.00;
+// const float distortion = 00.03;
+
+uniform float    speed   ; // 04.00
+uniform float strength   ; // 40.00
+uniform float distortion ; // 00.03
 
 void main(void)
 {

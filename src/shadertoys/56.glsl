@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,7 +9,8 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const float VINGETTE = 0.2;
+//const float VINGETTE =    0.2;
+uniform float VINGETTE ; // 0.2
 
 void main(void)
 {

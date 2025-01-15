@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -8,7 +8,7 @@ uniform         float              time;
 uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
-uniform         float        frameCount;
+uniform         float        frameCount; // 0.0
 
 // Enabling glitch effects
 // Enabling glitch effects
@@ -25,12 +25,27 @@ uniform         float        frameCount;
 // Smoothstep function
 #define SS(a, b, x) (smoothstep(a, b, x) * smoothstep(b, a, x))
 
+#define UI0 1597334673U
+#define UI1 3812015801U
+#define UI2 uvec2(UI0, UI1)
+#define UI3 uvec3(UI0, UI1, 2798796415U)
+#define UIF (1. / float(0xffffffffU))
+
 // Hash by David_Hoskins - adapted for GLSL ES
 // Hash by David_Hoskins - adapted for GLSL ES
-vec3 hash33(vec3  p) {
-    p  =   fract( p              * 00.1031 );
-    p +=   dot  ( p     , p.yzx  + 19.1900 );
-    return fract((p.xxy + p.yzz) *  p.zyx  );
+// vec3 hash33(vec3  p) {
+//     p  =   fract( p              * 00.1031 );
+//     p +=   dot  ( p     , p.yzx  + 19.1900 );
+//     return fract((p.xxy + p.yzz) *  p.zyx  );
+// }
+
+vec3 hash33(vec3 p)
+{
+    uvec3 q = uvec3( ivec3(p)) * UI3;
+          q = (q.x
+            ^  q.y
+            ^  q.z)            * UI3;
+    return -1. + 2. * vec3(q)  * UIF;
 }
 
 // Gradient noise function by iq

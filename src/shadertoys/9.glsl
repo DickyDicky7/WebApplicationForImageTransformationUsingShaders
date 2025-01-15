@@ -1,8 +1,8 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
-uniform         sampler2D          tex0; //texture
-uniform         sampler2D          tex1; //noise
+uniform         sampler2D          tex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -11,13 +11,24 @@ uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
 // Constants
-const float SPEED = 0.290;
-const float TURBULENCE = 0.16;
-const float  ADVECTION = 0.30;
-const float DEPTH = 0.023;
-const vec3  LIGHT = normalize(vec3(-0.5, 1.0, 0.25)); // Match the ref texture
-const vec3  COLOR_SUN = vec3(1.1, 1.00, 1.0) * 9.0;
-const vec3  COLOR_SKY = vec3(0.1, 0.14, 0.2) * 0.9;
+// const float SPEED = 0.290;
+// const float TURBULENCE = 0.16;
+// const float  ADVECTION = 0.30;
+// const float DEPTH = 0.023;
+// const vec3  LIGHT = normalize(vec3(-0.5, 1.0, 0.25)); // Match the ref texture
+// const vec3  COLOR_SUN = vec3(1.1, 1.00, 1.0) * 9.0;
+// const vec3  COLOR_SKY = vec3(0.1, 0.14, 0.2) * 0.9;
+
+uniform float SPEED           ; // 0.290
+uniform float TURBULENCE      ; // 0.160
+uniform float  ADVECTION      ; // 0.300
+uniform float DEPTH           ; // 0.023
+uniform vec3  INPUT_LIGHT     ; // -0.50, 1.00, 0.25
+uniform vec3  INPUT_COLOR_SUN ; //  1.10, 1.00, 1.00
+uniform vec2  INPUT_COLOR_SKY ; //  0.10, 0.14, 0.20
+vec3  LIGHT = normalize(INPUT_LIGHT);
+vec3  COLOR_SUN = INPUT_COLOR_SUN * 9.0;
+vec3  COLOR_SKY = INPUT_COLOR_SKY * 0.9;
 
 // #define DEBUG_NORMAL
 // #define DEBUG_LIGHT@
@@ -46,11 +57,11 @@ float wave(float x) {
 }
 
 float depthf(vec2 p) {
-    float bottom   = lum(texture(tex0, p             ).rgb)             ; // luminance@ approximates depth
-    vec2    flow   =             vec2 ( 0.0, time * SPEED )             ;
-    p +=    flow                                                        ;
-    p +=  bottom   *    ADVECTION                                       ; // divergence @@@@@@@@@@@@ @@@@@
-    float  surface = lum(texture(tex1, p * TURBULENCE).rgb) * TURBULENCE;
+    float bottom   = lum(texture(tex0  , p             ).rgb)             ; // luminance@ approximates depth
+    vec2    flow   =             vec2 ( 0.0, time * SPEED   )             ;
+    p +=    flow                                                          ;
+    p +=  bottom   *    ADVECTION                                         ; // divergence @@@@@@@@@@@@ @@@@@
+    float  surface = lum(texture(noise0, p * TURBULENCE).rgb) * TURBULENCE;
     return surface * DEPTH;
 }
 

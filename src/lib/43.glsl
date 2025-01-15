@@ -1,5 +1,5 @@
 #version 300 es
-precision highp float;
+precision  lowp float;
 
 uniform         sampler2D          tex0;
 in              vec2          vTexCoord;
@@ -9,8 +9,12 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
-const int  radius =    5     ;
-const vec3 offset = vec3(0.0);
+// const int  radius =    5     ;
+// const vec3 offset = vec3(0.0);
+
+uniform int  radius ; //             5
+uniform vec3 offset ; // 0.0, 0.0, 0.0
+
 void main() 
  {
      vec2 src_size = vec2 ( (1.0 / canvasSize).x,  (1.0 / canvasSize).y);

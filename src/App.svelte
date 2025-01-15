@@ -1,241 +1,242 @@
 <!-- svelte-ignore a11y-label-has-associated-control -->
-
+<!-- svelte-ignore a11y-label-has-associated-control -->
 <script lang="ts">
 
+import { promptShader } from "./a.i.effects";
+import { /*--------*/ } from "./a.i.effects";
+import          "beercss"       ;
+import "material-dynamic-colors";
+import { shareImage  } from "./common";
+import { shareVideo  } from "./common";
+import { shareWebcam } from "./common";
+import { parseGLSL   } from "./common";
+import   p5            from   "p5"    ;
+import {   onMount   } from   "svelte";
 
-    import          "beercss"       ;
-    import "material-dynamic-colors";
+    
 
-    import   p5        from "p5";
-    import { onMount } from "svelte";
 
-    console.log(import.meta.env.VITE_KEY001);
-    import * as Beauty from "@deepar/beauty"
-    import * as deepar from "deepar";
+    const DEFAULT_CANVAS_SIZE = { WIDTH_: 500,
+                                  HEIGHT: 500,
+                                }            ;
+    const DPR = window.devicePixelRatio || 1 ;
+//  const DPR = window.devicePixelRatio || 2 ;
 
-    // (async function() {
-    //   const deepAR = await deepar.initialize({
-    //     licenseKey: 'your_license_key_here',
-    //     previewElement: document.querySelector('#deepar-div'),
-    //     effect: 'https://cdn.jsdelivr.net/npm/deepar/effects/aviators'
-    //   });
-    // })();
-
-    const DEFAULT_CANVAS_SIZE = { WIDTH: 500, HEIGHT: 500 };
-    const DPR = window.devicePixelRatio || 1;
-    let i: p5.Image;
     const p5Logic = (p: p5) => {
           p.setup = (     ) => {
-            p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR), p.WEBGL);
-            p.background( 255 );
-            p.imageMode(p.CENTER);
-            p.frameRate(  fps   );
-            i = p.loadImage(data.publicUrl);
-             noiseT1 = p.loadImage("./src/noise.png");
-            noiseT2 = p.loadImage("./download.png");
-            gradient = p.loadImage("./sunset-red-8x.png");
-            ascii_tex = p.loadImage("./ascii.png");
-            tile = p.loadImage("./Texturelabs_MonitorPatterns_page_01.png");
-            bayer = p.loadImage("./bayer16tile8.png");
-            u_bgTexture = p.loadImage("./parchment.jpg");
-            u_patternTexture = p.loadImage("./pencil.jpg");
+            p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+                           Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+                              p.WEBGL);
+            p.background(  255   );
+            p.imageMode (p.CENTER);
+            p.frameRate (  fps   );
+            p.disableFriendlyErrors = true;
+//          p.disableFriendlyErrors = true;
+
         };
 
         p.draw = () => {
-            p.background( 255 );
-            p.image(i,0,0)
+        p.background( 255 );
+            
         };
     };
 
     let canvas        : HTMLElement;
-    let canvasInstance:          p5;
+    let canvasInstance: p5         ;
+    let bufferInstance: p5.Graphics;
     
     onMount(async ()  : Promise<void> => {
-    console.log("on mount");
+    
         canvasInstance = new p5(p5Logic, canvas);
-        await ui("theme", "#009688")
-        
+//      bufferInstance =
+//      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+//                                    Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+//      canvasInstance.WEBGL,        );
+            await ui("theme", "#009688");
+            await ui("theme", "#009688");
     });
 
-    let noiseT1:p5.Image;
-    let noiseT2:p5.Image;
-    let gradient:p5.Image;
-    let ascii_tex:p5.Image;
-    let tile:p5.Image;
-    let bayer:p5.Image;
-    let u_bgTexture:p5.Image;
-    let u_patternTexture:p5.Image;
-    const successCallback = (imageD: p5.Image): void => {
-        let imageRatio = 0.5;
-        canvasInstance.resizeCanvas(imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
-        imageD        .resize      (imageD.width * imageRatio * DPR, imageD.height * imageRatio * DPR);
-        canvasInstance.draw  = () => {
-
+    const successCallback = (image_Instance: p5.Image): void => {
+        let imageRatio    = 1.0                       ;
+        canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
+        image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
+        canvasInstance.  draw = () => {
+//------------------------------//
             canvasInstance.textureWrap("repeat");
-            let     filterShader = (canvasInstance as any)
-         .createFilterShader                         (imageFragmentShaderSourceCode);
-         shaderSetNecessaryUniforms(filterShader);
-        filterShader.setUniform("tex1", noiseT1)
-        filterShader.setUniform("tex2", noiseT2)
-        filterShader.setUniform("gradient", gradient);
-        filterShader.setUniform("pallete0", gradient);
-        filterShader.setUniform("pallete0Size", [gradient.width, gradient.height]);
-        filterShader.setUniform("ascii_tex", ascii_tex);
-        filterShader.setUniform("tiledtexture", tile);
-        filterShader.setUniform("bayer", bayer);
-        filterShader.setUniform("bayer0", bayer);
-        filterShader.setUniform("bayer0Size", [bayer.width, bayer.height]);
-        filterShader.setUniform("u_bgTexture", u_bgTexture); //switchable
-        filterShader.setUniform("u_patternTexture", u_patternTexture); ////switchable
-        canvasInstance.       image(imageD, 0, 0);
-        canvasInstance.filter(filterShader);
-            
+            canvasInstance.
+            image                   (
+            image_Instance, 0.0, 0.0)           ;
+
+
+            for (let { fragmentShaderSourceCode________,
+                       fragmentShader______GLSLUniforms,
+                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceCode________) continue;
+                if   (!fragmentShader______GLSLUniforms) continue;
+                if   (!fragmentShaderFiltering_Instance) continue;
+                       shaderSetNecessaryUniforms      (
+                       fragmentShaderFiltering_Instance);
+
+                if   (                      fragmentShader______GLSLUniforms) {
+                    for (let glslUniform of fragmentShader______GLSLUniforms) {
+                         if (glslUniform.thisUniformType === "sampler2D"
+                         ||  glslUniform.thisUniformType === "sampler3D")     {
+                            if
+                            (glslUniform.thisUniformSampler2DImg) {
+                                fragmentShaderFiltering_Instance.setUniform(
+                             glslUniform.thisUniformName        ,
+                             glslUniform.thisUniformSampler2DImg,          );
+                            }
+                        } else                                                {
+                                fragmentShaderFiltering_Instance.setUniform(
+                             glslUniform.thisUniformName        ,
+                             glslUniform.thisUniformDefaultValue,          );
+                        }
+                    }
+                }
+                canvasInstance.filter(fragmentShaderFiltering_Instance);
+            }
+//------------------------------//
         };
+        mode = MODE.IMAGE;
         mode = MODE.IMAGE;
     };
 
 
-    const failureCallback = (eventD:    Event): void => {
+    const failureCallback = (event_Instance:    Event): void => {
         if (canvas.children   .length === 2) {
 //          canvas.children[1].remove();
-        if (video) {video.remove();} // the same as the above line of code
+//          canvas.children[2].remove();
+//      if (video) { video.remove(); } // the same as the above line of code
+        if (video) { video.remove(); } // the same as the above line of code
+//      if (video) { video.remove(); } // the same as the above line of code
         }
-        if (input.files !== null) {
-            if (videoFileBLOB !== null) { window.URL.revokeObjectURL(videoFileBLOB); }
-                videoFileBLOB  =          window.URL.createObjectURL(             input.files[0]);
-            video = canvasInstance.createVideo(videoFileBLOB);
-            video .volume(1.0);
-            video .hide  (   );
-//          video .loop  (   );
-            let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
-            let startRecord: boolean = true ;
-            let ceaseRecord: boolean = false;
-            console.log("Assign");
-            canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH * DPR), Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR));
+        if (    input.files    !== null) {
+            if (video_FileBLOB !== null) { window.URL.revokeObjectURL(video_FileBLOB); }
+                video_FileBLOB  =          window.URL.createObjectURL(input.files[0]);
+            video = canvasInstance.createVideo(video_FileBLOB);
+//          video = canvasInstance.createVideo(video_FileBLOB);
+            video?.volume(1.0);
+            video?.hide  (   );
+            video?.loop  (   );
+//          video?.play  (   );
+            videoIsPlaying = true;
+            imageIsPlaying = true;
+            catchFirstTime =  false;
+            startRecord    = !false;
+            ceaseRecord    =  false;
+            canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+                                        Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+                                       );
             canvasInstance.draw = () => {
-                canvasInstance.textureWrap("repeat");
-                if (startRecord /*&& !isNaN(video.duration())*/) {
-                    startRecord = false;
-                    console.log("START");
-                    let canvasElement = canvas.children[0]  as
-                    HTMLCanvasElement;
-                    let  videoElement = canvas.children[1]  as  HTMLVideoElement  ;
-                    let  audioContext =                         new AudioContext();
-                    let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
-                    let mediaStreamAudioDestination    : MediaStream                     =
-                        mediaStreamAudioDestinationNode.stream;
-                    let mediaElementAudioSourceNode:
-                        MediaElementAudioSourceNode
-                                                   =        audioContext.createMediaElementSource(videoElement);
-                        mediaElementAudioSourceNode.connect(
-                        mediaStreamAudioDestinationNode    );
-                        mediaElementAudioSourceNode.connect(audioContext.destination                          );
-                    downloadStream  = canvasElement.captureStream(fps);
-                    downloadStream  . addTrack                         (
-                        mediaStreamAudioDestination.getAudioTracks()[0]);
-                    const recordedChunks: BlobPart[] = [];
-                    const options = { mimeType: videoFormats                      [
-                                                videoFormatSelection.selectedIndex]
-                                    . mimeType
-                                    };
-                    mediaRecorder =                                                new MediaRecorder( downloadStream , options , );
-                    mediaRecorder.     ondataavailable = (BLOBEvent: BlobEvent) => {
-                          console.log("vidataavailable");
-                        if (BLOBEvent.data.size > 0) {
-                            recordedChunks.push(BLOBEvent.data);
-                            //
-                            const blob = new Blob(
-                            recordedChunks,
-                                {
-                                    type: videoFormats[
-                                          videoFormatSelection.selectedIndex].blobType,
-                                },
-                            );
-                            const url =
-                                URL.createObjectURL(blob);
-                            const anchor:HTMLAnchorElement = document.createElement(
-                                "a",
-                            ) as HTMLAnchorElement;
-                            document.body.appendChild(anchor);
-                            // a.style = "display: none";
-                            anchor.href = url;
-                            anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
-                            // anchor.download = `test_video_${new Date().toLocaleString()}.webm`;
-                            anchor.click();
-                            window.URL.revokeObjectURL(url);
-                            videoToShare = blob;
-                            anchor.remove();
-                            //
-                        }
-                    };
-                    mediaRecorder.start();
-                    video.play();
+//------------------------------//
+                if (!      catchFirstTime
+                &&  !isNaN(video.duration()))
+                {
+                           videoProgressSlider_.max =
+                           video.duration()         ; 
+                           catchFirstTime = true    ;
+//                         catchFirstTime = true    ;
                 }
-                
+
+                canvasInstance.textureWrap("repeat");
+//              canvasInstance.textureWrap("repeat");
+//              canvasInstance.background(255);
 //              canvasInstance.background(255);
                 canvasInstance.push();
                 canvasInstance.imageMode(canvasInstance.CENTER);
                 canvasInstance.image    (
-                                video,
-                    0,
-                    0,
+                               video     ,
+                    0.0,
+                    0.0,
                     canvasInstance.width ,
                     canvasInstance.height,
-                    0,
-                    0,
+                    0.0,
+                    0.0,
                              video.width ,
                              video.height,
                     canvasInstance.COVER ,
                 );
                 canvasInstance.pop();
-                let warp = (canvasInstance as any).createFilterShader(videoFragmentShaderSourceCode);
-                shaderSetNecessaryUniforms(warp);
-                warp.setUniform("tex1", noiseT1);
-                warp.setUniform("tex2", noiseT2);
-                warp.setUniform("gradient", gradient);
-                warp.setUniform("pallete0", gradient);
-                warp.setUniform("pallete0Size", [gradient.width, gradient.height]);
-                warp.setUniform("ascii_tex", ascii_tex);
-                warp.setUniform("tiledtexture", tile);
-                warp.setUniform("bayer",bayer);
-                warp.setUniform("bayer0",bayer);
-                warp.setUniform("bayer0Size", [bayer.width, bayer.height]);
-                canvasInstance.filter(warp);
-                
-                if (!ceaseRecord)                       {
+
+                videoProgressSlider_.value = video.time();
+//              videoProgressSlider_.value = video.time();
+//              videoProgressSlider_.value = video.time();
+
+            for (let { fragmentShaderSourceCode________,
+                       fragmentShader______GLSLUniforms,
+                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceCode________) continue;
+                if   (!fragmentShader______GLSLUniforms) continue;
+                if   (!fragmentShaderFiltering_Instance) continue;
+                       shaderSetNecessaryUniforms      (
+                       fragmentShaderFiltering_Instance);
+
+                if   (                      fragmentShader______GLSLUniforms) {
+                    for (let glslUniform of fragmentShader______GLSLUniforms) {
+                         if (glslUniform.thisUniformType === "sampler2D"
+                         ||  glslUniform.thisUniformType === "sampler3D")     {
+                            if
+                            (glslUniform.thisUniformSampler2DImg) {
+                                fragmentShaderFiltering_Instance.setUniform(
+                             glslUniform.thisUniformName        ,
+                             glslUniform.thisUniformSampler2DImg,          );
+                            }
+                        } else                                                {
+                                fragmentShaderFiltering_Instance.setUniform(
+                             glslUniform.thisUniformName        ,
+                             glslUniform.thisUniformDefaultValue,          );
+                        }
+                    }
                 }
+                canvasInstance.filter(fragmentShaderFiltering_Instance);
+            }
+
+
                 if (!ceaseRecord
+                &&   fshotRecord
                 &&  !isNaN           (video.duration())
                 &&   video.time() === video.duration()) {
                      ceaseRecord = true;
-                   console.log ( "STOP" );
-                            video.stop();
-                    mediaRecorder.stop();
-                    mediaRecorder = null!;
+                     fshotRecord = true;
+                     ceaseCaptureAsVideoFullshot();
                 };
+//------------------------------//
             };
+            mode = MODE.VIDEO;
             mode = MODE.VIDEO;
         };
     };
 
 
     let input: HTMLInputElement;
+//  let input: HTMLInputElement;
     const onChange = () => {
         const reader = new FileReader();
               reader.addEventListener("load", () => {
-            if (                  typeof reader.result === "string") {
-                canvasInstance.loadImage(reader.result  ,
-                                        successCallback ,
-                                        failureCallback);
-                                        // console.log(reader.result)
-            }
-        });
+                    if (               typeof    reader.result === "string"               ) {
+                        canvasInstance.loadImage(reader.result
+                                      ,                       successCallback
+                                      ,                       failureCallback
+                                      ,         );
+                        // console.log(reader.result);
+                        // console.log(reader.result);
+                    }
+              });
+              reader.addEventListener("abort", () => {
+              });
+              reader.addEventListener("error", () => {
+              });
         let file                  ;
+//      let file                  ;
         if (        input.files)
+//      if (        input.files)
         {
             file  = input.files[0];
+//          file  = input.files[0];
         }
         if (file != null) { reader.readAsDataURL(file); }
+//      if (file != null) { reader.readAsDataURL(file); }
     };
 
     let fps: number = 120;
@@ -245,48 +246,20 @@
     let    audioStream: MediaStream = null!;
     let  mediaRecorder      : MediaRecorder = null!;
     let  mediaRecorderWebCam: MediaRecorder = null!;
-    let  videoFileBLOB: string = null!;
-    let  imageFileBLOB: string = null!;
+    let video_FileBLOB: string = null!;
+    let image_FileBLOB: string = null!;
     let video: p5.MediaElement = null!;
     let image: p5.MediaElement = null!;
+    let catchFirstTime: boolean =  false;
+    let startRecord   : boolean = !false;
+    let ceaseRecord   : boolean =  false;
+    let fshotRecord   : boolean =  false;
+    let sshotRecord   : boolean =  false;
+    let graphicsObj   : p5.Graphics     ;
 
-    let imageFragmentShaderSourceCode: string = `
-        precision highp float;
+import { resolveLygiaAsync } from "./lygia";
+import { resolveLygia      } from "./lygia";
 
-        uniform sampler2D tex0;
-        varying vec2 vTexCoord;
-
-        vec2 zoom(vec2 coord, float amount) {
-                  vec2 relativeToCenter  = coord - 0.5;
-                       relativeToCenter /= amount;      //     Zoom in
-            return     relativeToCenter          + 0.5; // Put back into absolute coordinates
-        }
-
-        void main() {
-            // Get each@ color channel@ using coordinates with@@@@ different amounts
-            // of@ zooms to@@@ displace the@@ colors@@@@@ slightly
-            gl_FragColor = vec4(
-                texture2D(tex0,      vTexCoord       ).r,
-                texture2D(tex0, zoom(vTexCoord, 1.05)).g,
-                texture2D(tex0, zoom(vTexCoord, 1.10)).b,
-                texture2D(tex0,      vTexCoord       ).a
-            );
-        }
-    `;
-    let videoFragmentShaderSourceCode: string = `
-
-    `;
-    /*
-#version 100
-    precision highp float;
-   // #include "lygia/color/tonemap/aces.glsl"
-        uniform sampler2D tex0;
-        varying vec2 vTexCoord;
-void main(){
-    gl_FragColor = tonemapACES(texture2D(tex0, vTexCoord));
-}
-    */
-// videoFragmentShaderSourceCode = resolveLygia(videoFragmentShaderSourceCode);
 
     const videoFormats = [
         { mimeType: "video/webm; codecs=vp9", extension: "webm", blobType: "video/webm", },
@@ -314,82 +287,273 @@ void main(){
 // image/webp;
 // image/jpg;
 
-// DeepAR SDK
+// DeepAR SDK@@@
 // DeepAR Beauty
 
-    const shaderSetNecessaryUniforms = (shader: any) => {
-        shader.setUniform("time"                     ,         canvasInstance.millis() / 1000                                                                                              );
-        shader.setUniform(     "canvasSize"          , [       canvasInstance.width                                  ,        canvasInstance.height                                 ]);
-        shader.setUniform(                "texelSize", [1.0 / (canvasInstance.width * canvasInstance.pixelDensity()) , 1.0 / (canvasInstance.height * canvasInstance.pixelDensity())]);
-    shader.setUniform("mousePosition", [0.0,0.0,0.0,0.0])
-    shader.setUniform("frameCount", canvasInstance.frameCount);
-    shader.setUniform("tex1Size", [noiseT1.width,noiseT1.height]);
-    shader.setUniform("tex2Size", [noiseT2.width,noiseT2.height]);
-    }
+    const shaderSetNecessaryUniforms = (
+          shader: any                  ) => {
+          shader.setUniform("time", canvasInstance.millis() / 1000);
+//        shader.setUniform("time", canvasInstance.millis() / 1000);
+          shader.setUniform("canvasSize", [ canvasInstance.width, canvasInstance.height ]);
+//        shader.setUniform("canvasSize", [ canvasInstance.width, canvasInstance.height ]);
+          shader.setUniform("texelSize", [ 1.0 / (canvasInstance.width * canvasInstance.pixelDensity()), 1.0 / (canvasInstance.height * canvasInstance.pixelDensity()) ]);
+//        shader.setUniform("texelSize", [ 1.0 / (canvasInstance.width * canvasInstance.pixelDensity()), 1.0 / (canvasInstance.height * canvasInstance.pixelDensity()) ]);
+//        shader.setUniform("mousePosition", [ 0.0, 0.0, 0.0, 0.0 ]);
+//        shader.setUniform("mousePosition", [ 0.0, 0.0, 0.0, 0.0 ]);
+          shader.setUniform("mousePosition", [ canvasInstance.mouseX, canvasInstance.mouseY, canvasInstance.mouseIsPressed ? 1.0 : 0.0, canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
+//        shader.setUniform("mousePosition", [ canvasInstance.mouseX, canvasInstance.mouseY, canvasInstance.mouseIsPressed ? 1.0 : 0.0, canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
+          shader.setUniform("frameCount", canvasInstance.frameCount);
+//        shader.setUniform("frameCount", canvasInstance.frameCount);
+    };
 
-        
-    const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
-        webcamCapture = canvasInstance.createCapture({
-            video: {
-             mandatory: {
-                 minWidth: 500,
-                 minHeight: 500
-            },
-            optional: [{ maxFrameRate: 120 }]
-        },
-            audio: true,
-        });
-        canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH, DEFAULT_CANVAS_SIZE.HEIGHT);
-        webcamCapture .size(canvasInstance.width, canvasInstance.height);
-        webcamCapture .hide(                                           );
+    const startCaptureAsVideoFullshot = async() => { // VIDEO: Y | IMAGE: N | WEBCAM: N
+        fshotRecord = !false;
+        sshotRecord =  false;
+        if (video) {
+            video.  stop(   );
+            video.noLoop(   );
+            video.volume(1.0);
+            video.  play(   );
+        }
+        let htmlCanvasElement:
+            HTMLCanvasElement                   = canvas.children[0] as
+            HTMLCanvasElement;
 
-        let                    cve = canvas.children[0] as HTMLCanvasElement;
-        downloadStreamWebCam = cve.captureStream(fps);
-        const recordedChunks: BlobPart[] = [];
-        const options = { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType, };
-        mediaRecorderWebCam = new MediaRecorder(downloadStreamWebCam, options);
-        mediaRecorderWebCam.ondataavailable = async(BLOBEvent:BlobEvent): Promise<void> => {
-            console.log("wcdataavailable");
-            if (BLOBEvent.data.size > 0) {
-                recordedChunks.push(BLOBEvent.data);
-                const blob = new Blob(
-                    recordedChunks,
+        let      videoElement: HTMLVideoElement = canvas.children[1] as 
+                               HTMLVideoElement  ;
+        let      audioContext:     AudioContext =
+        new                        AudioContext();
+        let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
+        let mediaStreamAudioDestination    : MediaStream                     =
+            mediaStreamAudioDestinationNode.      stream                                                                  ;
+        if (mode === MODE.VIDEO) {
+        let mediaElementAudioSourceNode:
+            MediaElementAudioSourceNode=        audioContext.createMediaElementSource(videoElement);
+            mediaElementAudioSourceNode.connect(
+            mediaStreamAudioDestinationNode    );
+            mediaElementAudioSourceNode.connect(audioContext.destination/************************/);
+        }
+
+
+        downloadStream = null!                  ;
+        downloadStream =
+            htmlCanvasElement.captureStream(fps);
+        if (mode === MODE.VIDEO) {
+        downloadStream       .addTrack     (mediaStreamAudioDestination.getAudioTracks()[0]);
+//      downloadStream       .addTrack     (mediaStreamAudioDestination.getAudioTracks()[0]);
+//      downloadStream       .addTrack     (mediaStreamAudioDestination.getAudioTracks()[0]);
+        }
+        const recordedChunkes:     BlobPart[   ]
+                             =             [   ];
+        const recordedOptions= { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+//                               mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+//                               mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+                               };
+        mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
+//      mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
+        mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+//      mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+            if (                     blobEvent.data.size > 0) {
+                recordedChunkes.push(blobEvent.data         ) ;
+                const                blob    =  new Blob    (
+                recordedChunkes
+                ,
                     {
+//                      type: videoFormats[videoFormatSelection.selectedIndex].blobType,
                         type: videoFormats[videoFormatSelection.selectedIndex].blobType,
-                    },
+//                      type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+                    }
+                ,
                 );
-                const url =URL.createObjectURL(blob);
-                const anchor:HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
+                const url = URL.createObjectURL(blob);
+//              const url = URL.createObjectURL(blob);
+                const anchor: HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
+//              const anchor: HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
                 document.body.appendChild(anchor);
-                anchor.href     =          url ;
-                anchor.download = `test_webcam_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
-                anchor. click();
+//              document.body.appendChild(anchor);
+                anchor.href     = url;
+//              anchor.href     = url;
+                anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+//              anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+                anchor.click();
+//              anchor.click();
                 window.URL.revokeObjectURL(url);
-                anchor.remove();
+//              window.URL.revokeObjectURL(url);
+                videoToShare = blob;
+//              videoToShare = blob;
+                anchor.          remove   (   );
+//              anchor.          remove   (   );
             };
         };
+        mediaRecorder.start();
+//      mediaRecorder.start();
+    };
+    const startCaptureAsVideoSnapshot = async() => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
+        fshotRecord =  false;
+        sshotRecord = !false;
+        if (video) {
+//          video.  stop(   );
+//          video.noLoop(   );
+            video.  loop(   );
+            video.volume(1.0);
+            video.  play(   );
+        }
+        let htmlCanvasElement:
+            HTMLCanvasElement                   = canvas.children[0] as
+            HTMLCanvasElement;
 
-        mediaRecorderWebCam.start();
-        let filterShaderWebCam = (canvasInstance as any).createFilterShader(imageFragmentShaderSourceCode);
+        let      videoElement: HTMLVideoElement = canvas.children[1] as 
+                               HTMLVideoElement  ;
+        let      audioContext:     AudioContext =
+        new                        AudioContext();
+        let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
+        let mediaStreamAudioDestination    : MediaStream                     =
+            mediaStreamAudioDestinationNode.      stream                                                                  ;
+        if (mode === MODE.VIDEO) {
+        let mediaElementAudioSourceNode:
+            MediaElementAudioSourceNode=        audioContext.createMediaElementSource(videoElement);
+            mediaElementAudioSourceNode.connect(
+            mediaStreamAudioDestinationNode    );
+            mediaElementAudioSourceNode.connect(audioContext.destination/************************/);
+        }
 
 
-        canvasInstance.draw = () => {
-        canvasInstance. image(            webcamCapture, 0, 0);
-        shaderSetNecessaryUniforms(filterShaderWebCam);
-        canvasInstance.filter(filterShaderWebCam             );
+        downloadStream = null!                  ;
+        downloadStream =
+            htmlCanvasElement.captureStream(fps);
+        if (mode === MODE.VIDEO) {
+        downloadStream       .addTrack     (mediaStreamAudioDestination.getAudioTracks()[0]);
+//      downloadStream       .addTrack     (mediaStreamAudioDestination.getAudioTracks()[0]);
+//      downloadStream       .addTrack     (mediaStreamAudioDestination.getAudioTracks()[0]);
+        }
+        const recordedChunkes:     BlobPart[   ]
+                             =             [   ];
+        const recordedOptions= { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+//                               mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+//                               mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+                               };
+        mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
+//      mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
+        mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+//      mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+            if (                     blobEvent.data.size > 0) {
+                recordedChunkes.push(blobEvent.data         ) ;
+                const                blob    =  new Blob    (
+                recordedChunkes
+                ,
+                    {
+//                      type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+                        type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+//                      type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+                    }
+                ,
+                );
+                const url = URL.createObjectURL(blob);
+//              const url = URL.createObjectURL(blob);
+                const anchor: HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
+//              const anchor: HTMLAnchorElement = document.createElement("a") as HTMLAnchorElement;
+                document.body.appendChild(anchor);
+//              document.body.appendChild(anchor);
+                anchor.href     = url;
+//              anchor.href     = url;
+                anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+//              anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+                anchor.click();
+//              anchor.click();
+                window.URL.revokeObjectURL(url);
+//              window.URL.revokeObjectURL(url);
+                videoToShare = blob;
+//              videoToShare = blob;
+                anchor.          remove   (   );
+//              anchor.          remove   (   );
+            };
         };
+        mediaRecorder.start();
+//      mediaRecorder.start();
+    };
+    const startCaptureAsImage         = async() => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
+        canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+//      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+//      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+    };
+    const ceaseCaptureAsVideoFullshot = async() => {
+                video      ?.stop();
+        mediaRecorder      ?.stop();
+        mediaRecorder       = null!;
+        mediaRecorderWebCam?.stop();
+        mediaRecorderWebCam = null!;
+    };
+    const ceaseCaptureAsVideoSnapshot = async() => {
+//              video      ?.stop();
+        mediaRecorder      ?.stop();
+        mediaRecorder       = null!;
+        mediaRecorderWebCam?.stop();
+        mediaRecorderWebCam = null!;
+    };
+    const ceaseCaptureAsImage         = async() => {
+        canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+//      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+//      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+    };
 
-//         const deepAR = await deepar.initialize({
-//   licenseKey: 'd936878d07a3b05ef50fb9559398728d37f73663965c3754c84a998bc35e4ab18d1d6b164bbc6af4', 
-//   canvas: canvas.children[0]  as HTMLCanvasElement,
-//   effect: '../Pixel Heart Particles/8bitHearts.deepar',
-// });
+    const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
+        webcamCapture = canvasInstance.createCapture({ video: { mandatory: { minWidth: 1280, minHeight: 720, }, optional: [{ maxFrameRate: 120, }] }, audio: true, });
+//      webcamCapture = canvasInstance.createCapture({ video: { mandatory: { minWidth: 1280, minHeight: 720, }, optional: [{ maxFrameRate: 120, }] }, audio: true, });
+        canvasInstance.resizeCanvas(1280 * 2 / 3, 720 * 2 / 3);
+//      canvasInstance.resizeCanvas(1280 * 2 / 3, 720 * 2 / 3);
+//      canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH_, DEFAULT_CANVAS_SIZE.HEIGHT);
+//      canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH_, DEFAULT_CANVAS_SIZE.HEIGHT);
+        webcamCapture .size(        canvasInstance     .width , canvasInstance     .height);
+//      webcamCapture .size(        canvasInstance     .width , canvasInstance     .height);
+        webcamCapture .hide(                                                              );
+        canvasInstance.draw = () => {
+//------------------------------//
+        canvasInstance.textureWrap("repeat");
+//      canvasInstance.textureWrap("mirror");        
+//      canvasInstance.textureWrap("repeat");
+        canvasInstance.
+           image(      webcamCapture
+                      , 0.0
+                      , 0.0
+                )     ;
+            for (let { fragmentShaderSourceCode________,
+                       fragmentShader______GLSLUniforms,
+                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceCode________) continue;
+                if   (!fragmentShader______GLSLUniforms) continue;
+                if   (!fragmentShaderFiltering_Instance) continue;
+                       shaderSetNecessaryUniforms      (
+                       fragmentShaderFiltering_Instance);
 
+                if   (                      fragmentShader______GLSLUniforms) {
+                    for (let glslUniform of fragmentShader______GLSLUniforms) {
+                         if (glslUniform.thisUniformType === "sampler2D"
+                         ||  glslUniform.thisUniformType === "sampler3D")     {
+                            if
+                            (glslUniform.thisUniformSampler2DImg) {
+                                fragmentShaderFiltering_Instance.setUniform(
+                             glslUniform.thisUniformName        ,
+                             glslUniform.thisUniformSampler2DImg,          );
+                            }
+                        } else                                                {
+                                fragmentShaderFiltering_Instance.setUniform(
+                             glslUniform.thisUniformName        ,
+                             glslUniform.thisUniformDefaultValue,          );
+                        }
+                    }
+                }
+                canvasInstance.filter(fragmentShaderFiltering_Instance);
+            }
+//------------------------------//
+        };
+        mode = MODE.WEBCAM;
         mode = MODE.WEBCAM;
     };
 
     const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }) => {
-        mediaRecorderWebCam .   stop();
+        mediaRecorder      ?.   stop();
+        mediaRecorder       = null!;
+        mediaRecorderWebCam?.   stop();
         mediaRecorderWebCam = null!;
         webcamCapture       . remove();
         webcamCapture       = null!;
@@ -398,35 +562,19 @@ void main(){
         };
     };
 
-    let webcamCapture: p5.Element;
+    let webcamCapture       :        p5.Element;
     let imageFormatSelection: HTMLSelectElement;
     let videoFormatSelection: HTMLSelectElement;
+    let videoProgressSlider_:
+         HTMLProgressElement;
 
-    let anch: HTMLAnchorElement;
 
-    const y = ()=> {
-    let canvasElement = canvas.children[0] as HTMLCanvasElement;
-    canvasElement.toBlob(b => {
-        anch.href=URL.createObjectURL(b as Blob)
-        navigator.share({
-            title: "MDN",
-  text: "Learn web development on MDN!",
-  url: data.publicUrl,
-//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
-        })
-    }, "image/png", 1.0);
-    // console.log(anch.href);
-}
 
-import { f } from "./a.i.effects";
-import { g } from "./a.i.effects";
 
-import { createClient } from '@supabase/supabase-js'
-const supabase = createClient(import.meta.env.VITE_SUPABASE_URL
-, import.meta.env.VITE_SUPABASE_KEY_PUB);
 
-const {data}=supabase.storage.from("noise_textures").getPublicUrl("sbs_-_noise_texture_pack_-_128x128/128x128/Cracks/Cracks 10 - 128x128.png")
-console.log(data);
+
+
+
 
 
 //sbs_-_noise_texture_pack_-_128x128
@@ -456,549 +604,370 @@ console.log(data);
 //Voronoi      (128x128: 1 - 14) (256x256: 1 - 14) (512x512: 1 - 14) random
 
 
-import A from "./lib/A.svelte";
 
-//GIF? (LATER IF THERE IS STILL TIME LEFT)
+import { supabase                   } from "./global";
+import { fetchAllTextures_Noise     } from "./common";
+import { fetchAllTextures_Bayer     } from "./common";
+import { fetchAllTextures_Palette   } from "./common";
+import { fetchAllTextures_Pencil_   } from "./common";
+import { fetchAllTextures_ASCII     } from "./common";
+import { fetchAllTextures_Tiled     } from "./common";
+import { fetchAllTextures_ShaderToy } from "./common";
+import { texturesNoise              } from "./global";
+import { texturesBayer              } from "./global";
+import { texturesPalette            } from "./global";
+import { texturesPencil_            } from "./global";
+import { texturesASCII              } from "./global";
+import { texturesTiled              } from "./global";
+import { texturesShaderToy          } from "./global";
+import { effectsUsedForFiltering    } from "./global";
+
+onMount(async () => {
+  $texturesNoise     = [... $texturesNoise    , ... await fetchAllTextures_Noise    (        )].sort();
+  $texturesBayer     = [... $texturesBayer    , ... await fetchAllTextures_Bayer    (        )].sort();
+  $texturesPalette   = [... $texturesPalette  , ... await fetchAllTextures_Palette  (supabase)].sort();
+  $texturesPencil_   = [... $texturesPencil_  , ... await fetchAllTextures_Pencil_  (supabase)].sort();
+  $texturesASCII     = [... $texturesASCII    , ... await fetchAllTextures_ASCII    (supabase)].sort();
+  $texturesTiled     = [... $texturesTiled    , ... await fetchAllTextures_Tiled    (supabase)].sort();
+  $texturesShaderToy = [... $texturesShaderToy, ... await fetchAllTextures_ShaderToy(supabase)].sort();
+});
+
+
 //imgur video/image
-//Giphy? (LATER IF THERE IS STILL TIME LEFT)
+//Giphy gif@@/gif@@
 
-// import imgur from "imgur";
-// const client = new imgur({ clientId: import.meta.env.VITE_CLIENT_ID____ });
-import { ImgurClient } from 'imgur';
-
-const client = new ImgurClient({ clientId: import.meta.env.VITE_CLIENT_ID____ });
-
-const shareImage = async () => {
-    let canvasElement = canvas.children[0] as HTMLCanvasElement;
-    const res = await client.upload({
-        image: canvasElement.toDataURL("image/png",1.0).split(',')[1],
-        type: "base64",
-        name: "abc.png",
-        title: "hello",
-        description: "desc",
-        disable_audio: "1",
-    });
-    console.log(res.data);
-    window.navigator.share({
-            title: "MDN",
-  text: "Learn web development on MDN!",
-  url: res.data.link,
-//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
-        })
-}
-
-
-function blobToBase64(blob:Blob): Promise<string> {
-    return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        
-        reader.onloadend = () => {
-            if (reader.result) {
-                // Split to remove the data URL prefix and get only the base64 part
-                resolve((reader.result as string).split(",")[1]);
-            } else {
-                reject(new Error("FileReader result is null"));
-            }
-        };
-
-        reader.onerror = () => reject(new Error("Failed to read the Blob as Data URL"));
-        reader.readAsDataURL(blob); // This will start reading the blob as a Data URL
-    });
-}
 
 let videoToShare: Blob;
-const shareVideo = async () => {
-    let canvasElement = canvas.children[0] as HTMLCanvasElement;
-    const res = await client.upload({
-        image: await blobToBase64(videoToShare),
-        type: "base64",
-        name: "abc",
-        title: "hello",
-        description: "desc",
-        disable_audio: "1",
-    });
-    console.log(res.data);
-    window.navigator.share({
-            title: "MDN",
-  text: "Learn web development on MDN!",
-  url: res.data.link,
-//   files: [new File([b as Blob], "image.png", { type: "image/png", })],
-        })
-}
+let imageToShare: Blob;
 
-const shareWebcam = async () => {
 
-}
-
-enum MODE
-{
-    IMAGE,
-    VIDEO,
-    WEBCAM,
-};
-
-let mode:MODE = MODE.IMAGE;
-
+let mode            : MODE               = MODE              .   IMAGE         ;
+let modeCaptureImage: MODE_CAPTURE_IMAGE = MODE_CAPTURE_IMAGE.AS_IMAGE         ;
+let modeCAptureVideo: MODE_CAPTURE_VIDEO = MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT;
 //PREVIEW
 //IMAGE
 //VIDEO
-//GIF 
+//GIF
 
-for (let i: number = 1; i <= 7; i++)
-{
-    import(`./lib/${i}.glsl?raw`);
-}
-// import glslString from "./lib/1.glsl?raw";
-// console.log(glslString);
-
-const  loadAsset = async (assetPath: string): Promise<string> => {
-    const  asset = await import(assetPath);
-    return asset.default;
-}
-
-
-// https://www.npmjs.com/package/vite-plugin-glsl no need
-// https://www.npmjs.com/package/glsl-shader-name
-// https://www.npmjs.com/package/glsl-100-to-300
-// https://www.npmjs.com/package/lygia use
-// https://www.npmjs.com/package/@infra7/glsl use
-
-
-//#version 300 es
-
-import GLSLUniform from './GLSLUniform.svelte';
-import type { GLSLUniformValue,
-    GLSLUniforms, GLSLUniform_} from "./types";
-
-// Example uniforms
-let uniforms: GLSLUniforms = [
-    { thisUniformName: "a", thisUniformNameJustForDisplay: "a", thisUniformType: "float", thisUniformDefaultValue: 0.0   },
-    { thisUniformName: "b", thisUniformNameJustForDisplay: "b", thisUniformType: "int"  , thisUniformDefaultValue: 0     },
-    { thisUniformName: "c", thisUniformNameJustForDisplay: "c", thisUniformType: "bool" , thisUniformDefaultValue: false },    
-    
-    { thisUniformName: "d", thisUniformNameJustForDisplay: "d", thisUniformType: "vec2", thisUniformDefaultValue: [0.0, 0.0          ] },
-    { thisUniformName: "e", thisUniformNameJustForDisplay: "e", thisUniformType: "vec3", thisUniformDefaultValue: [0.0, 0.0, 0.0     ] },
-    { thisUniformName: "f", thisUniformNameJustForDisplay: "f", thisUniformType: "vec4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0] },
-    
-    { thisUniformName: "g", thisUniformNameJustForDisplay: "g", thisUniformType: "ivec2", thisUniformDefaultValue: [0, 0      ] },
-    { thisUniformName: "h", thisUniformNameJustForDisplay: "h", thisUniformType: "ivec3", thisUniformDefaultValue: [0, 0, 0   ] },
-    { thisUniformName: "i", thisUniformNameJustForDisplay: "i", thisUniformType: "ivec4", thisUniformDefaultValue: [0, 0, 0, 0] },
-    
-    { thisUniformName: "j", thisUniformNameJustForDisplay: "j", thisUniformType: "mat2", thisUniformDefaultValue: [0.0, 0.0,          
-                                                                                                                   0.0, 0.0            ] },
-    { thisUniformName: "k", thisUniformNameJustForDisplay: "k", thisUniformType: "mat3", thisUniformDefaultValue: [0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0       ] },
-    { thisUniformName: "l", thisUniformNameJustForDisplay: "l", thisUniformType: "mat4", thisUniformDefaultValue: [0.0, 0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0, 0.0, 
-                                                                                                                   0.0, 0.0, 0.0, 0.0,
-                                                                                                                   0.0, 0.0, 0.0, 0.0  ] },
-    
-   
-    { thisUniformName: "m", thisUniformNameJustForDisplay: "m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-    { thisUniformName: "noise_m", thisUniformNameJustForDisplay: "noise_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-    { thisUniformName: "bayer_m", thisUniformNameJustForDisplay: "bayer_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-    { thisUniformName: "pallete_m", thisUniformNameJustForDisplay: "pallete_m", thisUniformType: "sampler2D", thisUniformDefaultValue: data.publicUrl   },
-];
-
-  // Handle updates to uniforms
-  const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
-    uniforms = updatedUniforms;
-    console.log("Updated uniforms:", uniforms);
-  };
-
-
-  function parseGLSL(glslCode: string): GLSLUniforms {
-    const uniformRegex = /uniform\s+(\w+)\s+(\w+)\s*;\s*(\/\/\s*([\w.\-, ]+))?/g;
-    const uniforms: GLSLUniforms = [];
-    let match;
-
-    while ((match = uniformRegex.exec(glslCode)) !== null) {
-        const [, type, name, , defaultValueRaw] = match;
-
-        //guard - filter
-        //not editable - auto set internal
-        if (name === "tex0"
-        ||  name === "vTexCoord"
-        ||  name === "fragColor"
-        ||  name === "time"
-        ||  name === "canvasSize"
-        ||  name === "texelSize"
-        ) {
-            continue;
+import {      Shaders    } from "./common";
+import { type ShaderName } from "./common";
+import { type ShaderPath } from "./common";
+const shaderMaps: Map<string, any> = new Map();
+onMount(    async () => {
+    for(let shaderPath of Shaders.values()) {
+        if (shaderPath
+                .includes("./lib/")) {
+            const moduleGLSL =
+            await import (`./lib/${shaderPath
+                .replace ("./lib/"   , "")
+                .replace (".glsl?raw", "")
+                          }.glsl?raw`);
+            shaderMaps.set(
+            shaderPath,
+            moduleGLSL.
+            default   ,   );
         }
-
-        // Parse the default value based on type
-        let parsedValue: GLSLUniformValue | null = null;
-        if (defaultValueRaw) {
-            const cleanedValue = defaultValueRaw.replace(/\s+/g, ""); // Remove spaces
-
-            switch (type) {
-                case "float":
-                case "int":
-                case "uint":
-                    parsedValue = parseFloat(cleanedValue);
-                    break;
-                case "bool":
-                    parsedValue = cleanedValue === "true";
-                    break;
-                case "vec2":
-                case "vec3":
-                case "vec4":
-                case "ivec2":
-                case "ivec3":
-                case "ivec4":    
-                case "uvec2":
-                case "uvec3":
-                case "uvec4":    
-                case "mat2":
-                case "mat3":
-                case "mat4":
-                    parsedValue = cleanedValue.split(",").map(v => parseFloat(v));
-                    break;
-                case "sampler2D":
-                case "sampler3D":
-                // case "samplerCube":
-                    parsedValue = cleanedValue; // Use the raw string for sampler types
-                    break;
-                default:
-                    parsedValue = null; // Unsupported type
-                    // bvec2
-                    // bvec3
-                    // bvec4
-                    // mat2x3
-                    // mat2x4
-                    // mat3x2
-                    // mat3x4
-                    // mat4x2
-                    // mat4x3
-
-                    // samplerCube 
-                    // sampler2DArray 
-                    // sampler2DShadow 
-                    // samplerCubeShadow 
-                    // isampler2D 
-                    // isampler3D 
-                    // isamplerCube 
-                    // isampler2DArray 
-                    // usampler2D 
-                    // usampler3D 
-                    // usamplerCube 
-                    // usampler2DArray 
-                    // struct
-            }
+        else
+        if (shaderPath
+                .includes("./shadertoys/")) {
+            const moduleGLSL =
+            await import (`./shadertoys/${shaderPath
+                .replace ("./shadertoys/", "")
+                .replace (".glsl?raw"    , "")
+                          }.glsl?raw`);
+            shaderMaps.set(
+            shaderPath,
+            moduleGLSL.
+            default   ,   );
         }
-
-        uniforms.push({
-            thisUniformName: name,
-            thisUniformNameJustForDisplay: null,
-            thisUniformType: type,
-            thisUniformDefaultValue: parsedValue,
-        });
+        else
+        if (shaderPath
+                .includes("./lygia/")) {
+            const moduleGLSL =
+            await import (`./lygia/${shaderPath
+                .replace ("./lygia/" , "")
+                .replace (".glsl?raw", "")
+                          }.glsl?raw`);
+            shaderMaps.set(
+            shaderPath,
+            moduleGLSL.
+            default   ,   );
+        }
     }
+});
 
-    return uniforms;
+const  loadAsset = async       (assetPath: string): Promise<string> => {
+//  const  asset = await import(assetPath        );
+//  return asset.default                          ;
+    return shaderMaps.get(assetPath);
+//  return shaderMaps.get(assetPath);
 }
 
-// Example GLSL code
-const glslCode = `
-#version 300 es
-precision highp float;
 
-uniform sampler2D  tex0;
-in      vec2           vTexCoord;
-out     vec4           fragColor;
-uniform float      time;
-uniform vec2 canvasSize;
-uniform vec2           texelSize; // - 1.0  , 0.0
 
-uniform float    PI    ;                             // 3.14
-uniform float    scan_line_amount    ;//   1.0 
-uniform float         warp_amount    ;//   0.1 
-uniform float        noise_amount    ;//   0.03
-uniform float interference_amount    ;//   0.2 
-uniform float       grille_amount    ;//   0.1 
-uniform float       grille_size      ;//   1.0 
-uniform float     vignette_amount    ;//   0.6 
-uniform float     vignette_intensity ;//   0.4 
-uniform float    aberation_amount    ;//   0.5 
-uniform float    roll_line_amount    ;//   0.3 
-uniform float    roll_speed          ;//   1.0 
-uniform float    scan_line_strength  ;// - 8.0 
-uniform float        pixel_strength  ;// - 2.0 
-
-float random(vec2 uv) {
-    return fract(cos(uv.x * 83.4827
-                   + uv.y * 92.2842) * 43758.5453123);
-}
-
-vec3 fetch_pixel(vec2 uv, vec2 off) {
-    vec2 pos = floor(uv * canvasSize + off) / canvasSize + vec2(0.5) / canvasSize;
-
-    float noise        = 0.0;
-    if (  noise_amount > 0.0) {
-          noise        = random(pos + fract(time))
-       *  noise_amount;
-    }
-
-    if (max(abs(pos.x - 0.5),
-            abs(pos.y - 0.5)) > 0.5) {
-        return vec3(0.0, 0.0, 0.0);
-    }
-
-    vec3   clr = texture(tex0, pos, -16.0).rgb + noise;
-    return clr;
-}
-
-// Distance in emulated pixels to nearest texel @@@@.
-vec2 Dist(vec2 pos) {
-               pos =       pos   * canvasSize;
-    return - ((pos - floor(pos)) - vec2(0.5));
-}
-
-// 1D@@@@@@ @@ Gaussian @@@@@@ @@ @@@@@@@ @@@@@ @@@@.
-float Gaus(float pos, float scale) {
-    return
-      exp2(                 scale * pos
-                                  * pos);
-}
-
-// 3-tap@@@ @@ Gaussian filter @@ along@@ horz@ line.
-vec3 Horz3(vec2 pos, float off) {
-    vec3 b = fetch_pixel(pos, vec2(-1.0, off));
-    vec3 c = fetch_pixel(pos, vec2( 0.0, off));
-    vec3 d = fetch_pixel(pos, vec2( 1.0, off));
-    float dst = Dist(pos).x;
-
-    // Convert distance to weight.
-    float scale = pixel_strength;
-    float wb = Gaus(dst - 1.0, scale);
-    float wc = Gaus(dst + 0.0, scale);
-    float wd = Gaus(dst + 1.0, scale);
-
-    // Return@ filtered @@ sample.
-    return (b * wb + c * wc + d * wd) / (wb + wc + wd);
-}
-
-// Return scanline weight @@@@@ @@ @@@@@@ @@@@@.
-float Scan(vec2 pos, float off) {
-    float       dst = Dist(pos).y;
-
-    return Gaus(dst + off, scan_line_strength);
-}
-
-// Allow@ nearest@ three@ lines to effect pixel.
-vec3 Tri(vec2 pos) {
-    vec3 clr = fetch_pixel(pos, vec2(0.0));
-    if (scan_line_amount > 0.0) {
-        vec3 a = Horz3(pos, -1.0);
-        vec3 b = Horz3(pos,  0.0);
-        vec3 c = Horz3(pos,  1.0);
-
-        float wa = Scan(pos, -1.0);
-        float wb = Scan(pos,  0.0);
-        float wc = Scan(pos,  1.0);
-
-        vec3 scanlines = a * wa
-                       + b * wb
-                       + c * wc                       ;
-           clr = mix(clr, scanlines, scan_line_amount);
-    }
-    return clr;
-}
-
-// Takes in the UV and warps the edges, creating the spherized effect
-vec2 warp(vec2 uv) {
-    vec2  delta = uv - 0.5;
-    float delta2 = dot(delta.xy, delta.xy);
-    float delta4 =       delta2 *      delta2;
-    float delta_offset = delta4 * warp_amount;
-
-    vec2    warped = uv + delta *                     delta_offset;
-    return (warped - 0.5) / mix(1.0, 1.2, warp_amount / 5.0) + 0.5;
-}
-
-float vignette(vec2 uv) {
-                    uv *= 1.0 - uv.xy;
-    float      vignette = uv.x
-                        * uv.y
-                        * 15.0;
-    return pow(vignette, vignette_intensity * vignette_amount);
-}
-
-float floating_mod(float a
-,                  float b) {
-    return a - b * floor(
-           a / b        );
-}
-
-vec3 grille(vec2 uv) {
-    float  unit =         PI / 3.0        ;
-    float scale = 2.0 * unit / grille_size;
-    float r = smoothstep(0.5, 0.8, cos(uv.x * scale - unit));
-    float g = smoothstep(0.5, 0.8, cos(uv.x * scale + unit));
-    float b = smoothstep(0.5, 0.8, cos(uv.x * scale + 3.0 * unit));
-    return mix(vec3(1.0), vec3(r, g, b), grille_amount);
-}
-
-float roll_line(vec2 uv) {
-    float x =  uv.y  * 3.0 - time * roll_speed;
-    float f = cos(x) * cos(x * 2.35 + 1.1)
-                     * cos(x * 4.45 + 2.3);
-    float  roll_line = smoothstep(0.5, 0.9, f);
-    return roll_line *
-           roll_line_amount;
-}
-
-void main() {
-    vec2 pix =   gl_FragCoord.xy;
-    vec2 pos = warp(vTexCoord)  ;
-
-    float    line =        0.0  ;
-    if (roll_line_amount > 0.0) {
-             line =
-        roll_line(pos);
-    }
-
-    vec2 sq_pix = floor(pos * canvasSize) / canvasSize +   vec2(0.5)  / canvasSize  ;
-    if (                          interference_amount  + roll_line_amount > 0.0) {
-        float     interference =     random(sq_pix.yy  + fract(time));
-        pos.x += (interference * (interference_amount  + line * 6.0)) / canvasSize.x;
-    }
-
-    vec3 clr = Tri(pos);
-    if (aberation_amount > 0.0) {
-        float chromatic   = aberation_amount + line * 2.0;
-        vec2  chromatic_x = vec2(     chromatic , 0.0) / canvasSize.x;
-        vec2  chromatic_y = vec2(0.0, chromatic / 2.0) / canvasSize.y;
-        float r = Tri(pos - chromatic_x).r;
-        float g = Tri(pos + chromatic_y).g;
-        float b = Tri(pos + chromatic_x).b;
-        clr = vec3(r, g, b);
-    }
-
-    if (     grille_amount > 0.0    )
-    clr *=   grille(pix);
-    clr *= 1.0 + scan_line_amount * 0.6 + line * 3.0 + grille_amount * 2.0;
-    if(    vignette_amount > 0.0    )
-    clr *= vignette(pos);
-
-    fragColor.rgb = clr;
-    fragColor.a   = 1.0;
-}
-
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
-// https://godotshaders.com/shader/realistic-crt-shader/
-// @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+import        GLSLUniform          from "./GLSLUniform.svelte";
+import      { MODE               } from "./types";
+import      { MODE_CAPTURE_IMAGE } from "./types";
+import      { MODE_CAPTURE_VIDEO } from "./types";
+import type { GLSLUniformValue   } from "./types";
+import type { GLSLUniforms       } from "./types";
+import type { GLSLUniform_       } from "./types";
+import        GlslUniform          from "./GLSLUniform.svelte";
 
 
 
-`;
+const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
+};
 
-const result = parseGLSL(glslCode);
-console.log(result);
+let videoIsPlaying: boolean = false ;
+let imageIsPlaying: boolean = false ;
+let AIInputPrompts: HTMLInputElement;
 
 </script>
 
-<main class="responsive">
+<main    class="responsive">
+    <div class="space     "></div>
     <form action="">
-        <input
-            bind:this={input}
-            on:change={onChange}
-            type="file"
-            accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm"
-        />
-        <button>LOAD IMAGE OR VIDEO</button>
+        <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
+<!--    <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />    -->
+        <button class="slow-ripple">LOAD IMAGE OR VIDEO</button>
     </form>
-    <div bind:this={canvas} on:change={()=>{console.log("change")}}></div>
-    <button on:click={async (e) => { canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension); }}>SAVE IMAGE</button>
-    <button on:click={async (e) => { mediaRecorder.stop(); }}>SAVE VIDEO</button>
-    <button on:click={startWebCam}>START WEB CAM</button>
-    <button on:click={ceaseWebCam}>STOP@ WEB CAM</button>
+    <div class="space"></div>
+    <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
+<!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
+  -->
+    <div class="space"></div>
+    <div>
+        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsImage        (); }}>START SAVE AS IMAGE         </button>
+    </div>
+    <div class="space"></div>
+    <div>
+        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button>
+        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button>    
+    </div>
+    <div class="space"></div>
+    <div>
+        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button>
+        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button>    
+    </div>
+    <div class="space"></div>
+    <div>
+        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
+        <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button>    
+    </div>
+    <div class="space"></div>
+    <div>
+        <button class="slow-ripple" on:click={async (e) => {
+            $effectsUsedForFiltering = [ ...
+            $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
+                                     ,   fragmentShaderSourceCode________: null
+                                     ,   fragmentShader______GLSLUniforms: null
+                                     ,   fragmentShaderFiltering_Instance: null
+                                     , }
+                                       ];
+        }}>ADD EFFECT NI</button>
+        <button class="slow-ripple" on:click={async (e) => {
+            $effectsUsedForFiltering = [ ...
+            $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
+                                     ,   fragmentShaderSourceCode________: null
+                                     ,   fragmentShader______GLSLUniforms: null
+                                     ,   fragmentShaderFiltering_Instance: null
+                                     , }
+                                       ];
+        }}>ADD EFFECT AI</button>
+    </div>
+    <div class="space"></div>
+
+    <div>
+        <button class="slow-ripple extend square" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
+                                                                                videoIsPlaying =
+                                                                               !videoIsPlaying ;
+        }}>
+            {#if videoIsPlaying}
+                <i class="fa-solid fa-pause"></i>
+                <span>Pause</span>
+            {:else}
+                <i class="fa-solid fa-play "></i>
+                <span>Play!</span>
+            {/if}
+        </button>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="slow-ripple extend square" on:click={async (e) => {
+                video?.time(video?.time() - 10);
+//              video?.time(video?.time() - 10);
+        }}>
+            <i  class="fa-solid fa-backward"></i>
+            <span>Backward</span>
+        </button>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="slow-ripple extend square" on:click={async (e) => {
+                video?.time(video?.time() + 10);
+//              video?.time(video?.time() + 10);
+        }}>
+            <i  class="fa-solid fa-forward "></i>
+            <span>Forward!</span>
+        </button>
+        <nav   class="no-space                            ">
+            <i class="fa-solid fa-volume-high padding-tiny"></i>
+            <label                class="slider
+                                         medium           ">
+              <input type="range" value="1.0" min="0.0"
+                                              max="1.0"
+                     step="0.010" on:input={async (e) => {
+                                     video?.volume(e.currentTarget.valueAsNumber);
+//                                   video?.volume(e.currentTarget.valueAsNumber);
+              }}>
+              <span class="       "></span>
+              <div  class="tooltip"></div >
+            </label>
+          </nav>
+        <progress value="0" max="100" class="light-green-text" bind:this={videoProgressSlider_}></progress>
+    </div>
+
 
     <div class="field label suffix round border">
         <select bind:this={imageFormatSelection}>
-          {#each imageFormats as imageFormat (imageFormat)}
-            <option>{imageFormat.extension}</option>
-          {/each}
+            {#each         imageFormats as
+                           imageFormat
+                          (imageFormat)
+            }
+                  <option>{imageFormat.extension}</option>
+            {/each}
         </select>
         <label>Image Format</label>
-        <i>arrow_drop_down</i>
+        <i class="fa-solid fa-chevron-down"></i>
     </div>
 
     <div class="field label suffix round border">
         <select bind:this={videoFormatSelection}>
-          {#each videoFormats as videoFormat (videoFormat)}
-            <option>{videoFormat.mimeType}</option>            
-          {/each}
+            {#each         videoFormats as
+                           videoFormat
+                          (videoFormat)
+            }
+                  <option>{videoFormat.mimeType }</option>
+            {/each}
         </select>
         <label>Video Format</label>
-        <i>arrow_drop_down</i>
+        <i class="fa-solid fa-chevron-down"></i>
     </div>
 
-<a bind:this={anch}>download</a>
-<button on:click={y}>noise</button>
 
-<button on:click={async() => {
-const res = await f();
-console.log(await res.text())
-}}>AI 1</button>
+    <div>
+        <button class="slow-ripple" on:click={async() => {
+        const   res = await promptShader();
+        console.log(  await res.text()   );
+        }}>AI</button>
+        <button class="slow-ripple" on:click={async () => { await shareImage (              canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.IMAGE }>SHARE IMAGE </button>
+        <button class="slow-ripple" on:click={async () => { await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.VIDEO }>SHARE VIDEO </button>
+        <button class="slow-ripple" on:click={async () => { await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
+    </div>
+    <div class="space"></div>
 
-<button on:click={async() => {
-const res = await g();
-console.log(await res.text())
-}}>AI 2</button>
-
-<button on:click={async () => {
-    eval(`canvasInstance.draw = () => { canvasInstance.background(255,0,0); };`)
-}}>FUNC</button>
-
-<button on:click={async () => {
-    imageFragmentShaderSourceCode = videoFragmentShaderSourceCode;
-}}>CHANGE EFFECT IMAGE</button>
-
-<button on:click={async () => {
-    videoFragmentShaderSourceCode = imageFragmentShaderSourceCode;
-}}>CHANGE EFFECT VIDEO</button>
-
-<button on:click={shareImage} disabled={mode !== MODE.IMAGE}>SHARE IMAGE</button>
-<button on:click={shareVideo} disabled={mode !== MODE.VIDEO}>SHARE VIDEO</button>
-<button on:click={shareWebcam} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
-
-<A/>
-
-<div class="field label suffix round border">
-    <select on:change={async (e) => {
-        let assetPath=e.currentTarget.options[e.currentTarget.selectedIndex].value;
-        if (assetPath==="none") console.log("Choose nothing");
-        else {
-            console.log(assetPath)
-            const shaderSrc = await loadAsset(`./lib/${assetPath}`);
-            imageFragmentShaderSourceCode = shaderSrc;
-        }
+    {#each $effectsUsedForFiltering as {
+           fragmentShaderSourceType________
+     ,     fragmentShaderSourceCode________
+     ,     fragmentShader______GLSLUniforms
+     ,     fragmentShaderFiltering_Instance
+     ,
+                                       }
+    }
+    {#if fragmentShaderSourceType________ ===  "NI"}
+    <div class="field label suffix round border">
+        <select on:change={async(e) => {
+            let shaderName  =    e.currentTarget.options      [
+                                 e.currentTarget.selectedIndex].value;
+            if (shaderName ===            "none")             {
+                console.log(`Shader name:   ${shaderName}          `);
+                fragmentShaderSourceCode________ = null;
+                fragmentShader______GLSLUniforms = null;
+                fragmentShaderFiltering_Instance = null;
+            }
+            else                                              {
+                console.log(`Shader name:   ${shaderName}          `);
+                let  shaderPath = Shaders.get(shaderName            );
+                if (!shaderPath) {
+                console.log(`Shader path:   ${shaderPath} not exist`);
+                             return                                  ;
+                }
+                const                                                          shaderRawSourceCode = await loadAsset(shaderPath);
+                if ( shaderName.toLowerCase()
+                               .       trim().includes("lygia"))    {
+                    fragmentShaderSourceCode________ = await resolveLygiaAsync(shaderRawSourceCode);
+                }
+                else                                                {
+                    fragmentShaderSourceCode________ =                         shaderRawSourceCode ;
+                }
+                if (fragmentShaderSourceCode________.charAt( 0 ) === "-") {
+                    fragmentShaderSourceCode________ =
+                    fragmentShaderSourceCode________.
+                    substring(1);
+                }
+                console.log(fragmentShaderSourceCode________);
+                fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
+                console.log(fragmentShader______GLSLUniforms);
+                fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+            }
         }}>
-      {#each ["none", ... Array.from({ length: 7 }, (value, index) => `${index + 1}.glsl?raw`)] as index (index)}
-        <option>{index}</option>            
-      {/each}
-    </select>
-    <label>Choose your effects</label>
-    <i>arrow_drop_down</i>
-</div>
-
-<h1 class="large">Test 1</h1>
-<GLSLUniform uniforms={uniforms} onUpdate={handleUpdate} />
-
-<h1 class="large">Test 2</h1>
-<GLSLUniform uniforms={result  } onUpdate={handleUpdate} />
-
+        {#each [ "none" , ... [ ... Shaders.keys() ].sort() ] as shaderName
+                                                                (shaderName)
+        }
+                                                        <option>{shaderName}</option>            
+        {/each}
+        </select>
+        <label>Choose your effects</label>
+<!--    <label>Choose your effects</label>       -->
+        <i class="fa-solid fa-chevron-down"></i>
+<!--    <i class="fa-solid fa-chevron-down"></i> -->
+    </div>
+    
+    <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
+                                                                                           canvasInstance }></GlslUniform>
+    {/if}
+    {#if fragmentShaderSourceType________ ===  "AI"}
+    <div class="field border">
+        <input type="text" bind:this={AIInputPrompts}>
+    </div>
+    <button class="slow-ripple" on:click={async (e)=>{
+        fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
+        console.log(fragmentShaderSourceCode________);
+        fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
+        console.log(fragmentShader______GLSLUniforms);
+        fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+    }}>ASK AI</button>
+    <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
+                                                                                           canvasInstance }></GlslUniform>
+    
+    {/if}
+    {/each}
 </main>
 
 <style>
-    main {
-        overflow-x: visible;
-        scroll-behavior: smooth;
+    main { overflow-x: visible; scroll-behavior: smooth; }
+    *    {                      scroll-behavior: smooth; }
+    @font-face {
+     font-family:            'SF Mono Regular'                                       ;
+     font-weight: normal;
+     font-style : normal;
+     src: url('./assets/fonts/SF-Mono-Regular.otf') format('opentype')               ;
     }
-    * {
-  scroll-behavior: smooth;
-}
+
+    *    {
+     font-family:            'SF Mono Regular'                        , 'fontawesome';
+    }
 </style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

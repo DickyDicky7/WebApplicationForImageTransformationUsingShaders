@@ -870,6 +870,7 @@ let AIInputPrompts: HTMLInputElement;
      ,     fragmentShaderFiltering_Instance
      ,
                                        }
+     ,      effectIndex
     }
     {#if fragmentShaderSourceType________ ===  "NI"}
     <div class="field label suffix round border">
@@ -919,7 +920,7 @@ let AIInputPrompts: HTMLInputElement;
         <i class="fa-solid fa-chevron-down"></i>
 <!--    <i class="fa-solid fa-chevron-down"></i> -->
     </div>
-    
+    <button class="slow-ripple" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>REMOVE THIS EFFECT</button>
     <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                            canvasInstance }></GlslUniform>
     {/if}
@@ -934,6 +935,7 @@ let AIInputPrompts: HTMLInputElement;
         console.log(fragmentShader______GLSLUniforms);
         fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
     }}>ASK AI</button>
+    <button class="slow-ripple" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>REMOVE THIS EFFECT</button>
     <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                            canvasInstance }></GlslUniform>
     

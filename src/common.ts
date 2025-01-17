@@ -737,6 +737,396 @@ export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     ]
     ,
     [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${100}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${101}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${102}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${106}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${107}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${108}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${109}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${110}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${111}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${112}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${113}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${114}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${116}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${117}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${118}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${119}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${120}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${121}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${122}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${123}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${124}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${125}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${126}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${128}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${129}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${130}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${131}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${134}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${135}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${136}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${137}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${140}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${143}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${144}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${146}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${147}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${149}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${150}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${151}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${153}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${154}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${155}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${156}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${157}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${158}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${159}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${160}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${165}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${166}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${169}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${170}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${171}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${173}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${174}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${175}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${177}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${178}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${179}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${180}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${181}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${182}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${183}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${184}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${185}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${186}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${187}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${188}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${189}.glsl?raw`,
+    ]
+    ,
+    [
+        "PC98 COLOR LOADING #002     ",
+        `./shadertoys/${190}.glsl?raw`,
+    ]
+    ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    // [
+    //     "PC98 COLOR LOADING #002     ",
+    //     `./shadertoys/${ 93}.glsl?raw`,
+    // ]
+    // ,
+    [
         "  LYGIA BlendAdd         ",
         `./lygia/BlendAdd.glsl?raw`,
     ]

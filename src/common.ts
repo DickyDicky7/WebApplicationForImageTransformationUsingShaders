@@ -737,347 +737,347 @@ export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 100          ",
         `./shadertoys/${100}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 101          ",
         `./shadertoys/${101}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 102          ",
         `./shadertoys/${102}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 106          ",
         `./shadertoys/${106}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 107          ",
         `./shadertoys/${107}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 108          ",
         `./shadertoys/${108}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 109          ",
         `./shadertoys/${109}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 110          ",
         `./shadertoys/${110}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 111          ",
         `./shadertoys/${111}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 112          ",
         `./shadertoys/${112}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 113          ",
         `./shadertoys/${113}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 114          ",
         `./shadertoys/${114}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 116          ",
         `./shadertoys/${116}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 117          ",
         `./shadertoys/${117}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 118          ",
         `./shadertoys/${118}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 119          ",
         `./shadertoys/${119}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 120          ",
         `./shadertoys/${120}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 121          ",
         `./shadertoys/${121}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 122          ",
         `./shadertoys/${122}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 123          ",
         `./shadertoys/${123}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 124          ",
         `./shadertoys/${124}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 125          ",
         `./shadertoys/${125}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 126          ",
         `./shadertoys/${126}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 128          ",
         `./shadertoys/${128}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 129          ",
         `./shadertoys/${129}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 130          ",
         `./shadertoys/${130}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 131          ",
         `./shadertoys/${131}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 134          ",
         `./shadertoys/${134}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 135          ",
         `./shadertoys/${135}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 136          ",
         `./shadertoys/${136}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 137          ",
         `./shadertoys/${137}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 140          ",
         `./shadertoys/${140}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 143          ",
         `./shadertoys/${143}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 144          ",
         `./shadertoys/${144}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 146          ",
         `./shadertoys/${146}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 147          ",
         `./shadertoys/${147}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 149          ",
         `./shadertoys/${149}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 150          ",
         `./shadertoys/${150}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 151          ",
         `./shadertoys/${151}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 153          ",
         `./shadertoys/${153}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 154          ",
         `./shadertoys/${154}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 155          ",
         `./shadertoys/${155}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 156          ",
         `./shadertoys/${156}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 157          ",
         `./shadertoys/${157}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 158          ",
         `./shadertoys/${158}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 159          ",
         `./shadertoys/${159}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 160          ",
         `./shadertoys/${160}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 165          ",
         `./shadertoys/${165}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 166          ",
         `./shadertoys/${166}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 169          ",
         `./shadertoys/${169}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 170          ",
         `./shadertoys/${170}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 171          ",
         `./shadertoys/${171}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 173          ",
         `./shadertoys/${173}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 174          ",
         `./shadertoys/${174}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 175          ",
         `./shadertoys/${175}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 177          ",
         `./shadertoys/${177}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 178          ",
         `./shadertoys/${178}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 179          ",
         `./shadertoys/${179}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 180          ",
         `./shadertoys/${180}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 181          ",
         `./shadertoys/${181}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 182          ",
         `./shadertoys/${182}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 183          ",
         `./shadertoys/${183}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 184          ",
         `./shadertoys/${184}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 185          ",
         `./shadertoys/${185}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 186          ",
         `./shadertoys/${186}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 187          ",
         `./shadertoys/${187}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 188          ",
         `./shadertoys/${188}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 189          ",
         `./shadertoys/${189}.glsl?raw`,
     ]
     ,
     [
-        "PC98 COLOR LOADING #002     ",
+        "UNNAMED EFFECT 190          ",
         `./shadertoys/${190}.glsl?raw`,
     ]
     ,

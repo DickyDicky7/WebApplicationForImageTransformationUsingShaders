@@ -1972,10 +1972,11 @@ export const onRedoActionExecuted = async () => {
     let redoEditorSnapshot: EditorSnapshot | undefined = editorSnapshotsRedoStack.pop();
     if (redoEditorSnapshot) {
         await
-        redoEditorSnapshot.redo();
+        redoEditorSnapshot.redo!(
+        redoEditorSnapshot.dynamicStorage);
                                                          editorSnapshotsUndoStack
-                          .push(
-        redoEditorSnapshot      );
+                          .push (
+        redoEditorSnapshot               );
     }
 };
 
@@ -1983,10 +1984,11 @@ export const onUndoActionExecuted = async () => {
     let undoEditorSnapshot: EditorSnapshot | undefined = editorSnapshotsUndoStack.pop();
     if (undoEditorSnapshot) {
         await
-        undoEditorSnapshot.undo();
+        undoEditorSnapshot.undo!(
+        undoEditorSnapshot.dynamicStorage);
                                                          editorSnapshotsRedoStack
-                          .push(
-        undoEditorSnapshot      );
+                          .push (
+        undoEditorSnapshot               );
     }
 };
 

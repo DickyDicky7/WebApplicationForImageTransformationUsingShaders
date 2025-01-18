@@ -55,9 +55,19 @@ enum MODE_CAPTURE_VIDEO {
 
 export
 type EditorSnapshot = {
-     undo: () => Promise<void> | null,
-     redo: () => Promise<void> | null,
+     undo: ((dynamicStorage: Map<string, any> | null) => Promise<void>) | null,
+     redo: ((dynamicStorage: Map<string, any> | null) => Promise<void>) | null,
+             dynamicStorage: Map<string, any> | null                         ,
 };
+
+
+
+
+
+
+
+
+
 
 
 

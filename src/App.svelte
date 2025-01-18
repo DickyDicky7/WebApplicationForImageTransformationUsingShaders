@@ -726,6 +726,7 @@ import      { MODE               } from "./types";
 import      { MODE_CAPTURE_IMAGE } from "./types";
 import      { MODE_CAPTURE_VIDEO } from "./types";
 import type { GLSLUniformValue   } from "./types";
+import type { EditorSnapshot     } from "./types";
 import type { GLSLUniforms       } from "./types";
 import type { GLSLUniform_       } from "./types";
 import        GlslUniform          from "./GLSLUniform.svelte";
@@ -738,6 +739,8 @@ const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
 let videoIsPlaying: boolean = false ;
 let imageIsPlaying: boolean = false ;
 let AIInputPrompts: HTMLInputElement;
+let cachedSelectedIndex:
+    number                  =   0   ;
 
 </script>
 
@@ -778,23 +781,22 @@ let AIInputPrompts: HTMLInputElement;
   -->
     <div class="space"></div>
     <div>
-        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsImage        (); }}>START SAVE AS IMAGE         </button>
+        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsImage        (); }}>START SAVE AS IMAGE         </button><!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
     </div>
     <div class="space"></div>
     <div>
-        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button>
-        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button>    
+        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
+        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
     </div>
     <div class="space"></div>
     <div>
-        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button>
-        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button>    
+        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
+        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
     </div>
     <div class="space"></div>
     <div>
-        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
-        <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button>    
-    </div>
+        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button><!--Giống START SAVE AS VIDEO SNAPSHOT nhưng dành riêng cho sử dụng webcam-->
+        <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button><!--Giống CEASE SAVE AS VIDEO SNAPSHOT nhưng dành riêng cho sử dụng webcam-->
     <div class="space"></div>
     <div>
         <button class="slow-ripple" on:click={async (e) => {
@@ -806,13 +808,13 @@ let AIInputPrompts: HTMLInputElement;
                                      , }
                                        ];
             editorSnapshotsUndoStack.push({
-                undo: async () => {
+                undo: async (dynamicStorage: Map<string, any> | null) => {
             $effectsUsedForFiltering.pop();
             $effectsUsedForFiltering = $effectsUsedForFiltering;
             console.log("call");
                 }
                 ,
-                redo: async () => {
+                redo: async (dynamicStorage: Map<string, any> | null) => {
             $effectsUsedForFiltering = [ ...
             $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
                                      ,   fragmentShaderSourceCode________: null
@@ -822,8 +824,10 @@ let AIInputPrompts: HTMLInputElement;
                                        ];
                 }
                 ,
+                dynamicStorage: null
+                ,
             });
-        }}>ADD EFFECT NI</button>
+        }}>ADD EFFECT NI</button><!--Thêm effect @có sẵn @@-->
         <button class="slow-ripple" on:click={async (e) => {
             $effectsUsedForFiltering = [ ...
             $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
@@ -832,10 +836,31 @@ let AIInputPrompts: HTMLInputElement;
                                      ,   fragmentShaderFiltering_Instance: null
                                      , }
                                        ];
-        }}>ADD EFFECT AI</button>
+            editorSnapshotsUndoStack.push({
+                undo: async (dynamicStorage: Map<string, any> | null) => {
+            $effectsUsedForFiltering.pop();
+            $effectsUsedForFiltering = $effectsUsedForFiltering;
+            console.log("call");
+                }
+                ,
+                redo: async (dynamicStorage: Map<string, any> | null) => {
+            $effectsUsedForFiltering = [ ...
+            $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
+                                     ,   fragmentShaderSourceCode________: null
+                                     ,   fragmentShader______GLSLUniforms: null
+                                     ,   fragmentShaderFiltering_Instance: null
+                                     , }
+                                       ];
+                }
+                ,
+                dynamicStorage: null
+                ,
+            });
+        }}>ADD EFFECT AI</button><!--Thêm effect gen bởi AI-->
     </div>
     <div class="space"></div>
 
+    <!--Dành cho canvas đang render video-->
     <div>
         <button class="slow-ripple extend square" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
                                                                                 videoIsPlaying =
@@ -881,6 +906,7 @@ let AIInputPrompts: HTMLInputElement;
           </nav>
         <progress value="0" max="100" class="light-green-text" bind:this={videoProgressSlider_}></progress>
     </div>
+    <!--Dành cho canvas đang render video-->
 
 
     <div class="field label suffix round border">
@@ -914,7 +940,7 @@ let AIInputPrompts: HTMLInputElement;
         <button class="slow-ripple" on:click={async() => {
         const   res = await promptShader();
         console.log(  await res.text()   );
-        }}>AI</button>
+        }}>AI</button><!--Button này quick test xem AI còn chạy hay không-->
         <button class="slow-ripple" on:click={async () => { await shareImage (              canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.IMAGE }>SHARE IMAGE </button>
         <button class="slow-ripple" on:click={async () => { await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.VIDEO }>SHARE VIDEO </button>
         <button class="slow-ripple" on:click={async () => { await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
@@ -933,6 +959,34 @@ let AIInputPrompts: HTMLInputElement;
     {#if fragmentShaderSourceType________ ===  "NI"}
     <div class="field label suffix round border">
         <select on:change={async(e) => {
+            let editorSnapshot: EditorSnapshot = {
+                undo          : null,
+                redo          : null,
+                dynamicStorage: null,
+            };
+            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                fragmentShaderSourceType________ = dynamicStorage?.get("undoFragmentShaderSourceType________");
+                fragmentShaderSourceCode________ = dynamicStorage?.get("undoFragmentShaderSourceCode________");
+                fragmentShader______GLSLUniforms = dynamicStorage?.get("undoFragmentShader______GLSLUniforms");
+                fragmentShaderFiltering_Instance = dynamicStorage?.get("undoFragmentShaderFiltering_Instance");
+                // e.currentTarget.selectedIndex = dynamicStorage?.get("undoCachedSelectedIndex");
+            };
+            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                fragmentShaderSourceType________ = dynamicStorage?.get("redoFragmentShaderSourceType________");
+                fragmentShaderSourceCode________ = dynamicStorage?.get("redoFragmentShaderSourceCode________");
+                fragmentShader______GLSLUniforms = dynamicStorage?.get("redoFragmentShader______GLSLUniforms");
+                fragmentShaderFiltering_Instance = dynamicStorage?.get("redoFragmentShaderFiltering_Instance");
+                // e.currentTarget.selectedIndex = dynamicStorage?.get("redoCachedSelectedIndex");
+            };
+            editorSnapshot.dynamicStorage = new Map<string, any>();
+            editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceType________", fragmentShaderSourceType________);
+            editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
+            editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
+            editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
+//          editorSnapshot.dynamicStorage. set("undoCachedSelectedIndex"
+//                                       ,          cachedSelectedIndex);
+                                                    cachedSelectedIndex =
+                                 e.currentTarget.selectedIndex;
             let shaderName  =    e.currentTarget.options      [
                                  e.currentTarget.selectedIndex].value;
             if (shaderName ===            "none")             {
@@ -940,6 +994,12 @@ let AIInputPrompts: HTMLInputElement;
                 fragmentShaderSourceCode________ = null;
                 fragmentShader______GLSLUniforms = null;
                 fragmentShaderFiltering_Instance = null;
+                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
+                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
+                editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
+                editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
+//              editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+//                                           ,         cachedSelectedIndex);
             }
             else                                              {
                 console.log(`Shader name:   ${shaderName}          `);
@@ -965,7 +1025,15 @@ let AIInputPrompts: HTMLInputElement;
                 fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
                 console.log(fragmentShader______GLSLUniforms);
                 fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
+                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
+                editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
+                editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
+//              editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+//                                           ,         cachedSelectedIndex);
             }
+            editorSnapshotsUndoStack.push(
+            editorSnapshot               );
         }}>
         {#each [ "none" , ... [ ... Shaders.keys() ].sort() ] as shaderName
                                                                 (shaderName)
@@ -1067,6 +1135,8 @@ let AIInputPrompts: HTMLInputElement;
         overflow: scroll;
     }
 </style>
+
+
 
 
 

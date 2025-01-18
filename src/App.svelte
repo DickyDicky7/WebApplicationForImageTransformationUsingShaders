@@ -621,6 +621,22 @@ import { texturesASCII              } from "./global";
 import { texturesTiled              } from "./global";
 import { texturesShaderToy          } from "./global";
 import { effectsUsedForFiltering    } from "./global";
+import { onUndoActionExecuted       } from "./common";
+import { onRedoActionExecuted       } from "./common";
+import { editorSnapshotsRedoStack   } from "./global";
+import { editorSnapshotsUndoStack   } from "./global";
+
+window.addEventListener("keydown", async (e: KeyboardEvent) => {
+    if (e.ctrlKey && e.key === "z") {
+        await onUndoActionExecuted();
+        console.log("undo");
+    }
+    else
+    if (e.ctrlKey && e.key === "y") {
+        await onRedoActionExecuted();
+        console.log("redo");
+    }
+});
 
 onMount(async () => {
   $texturesNoise     = [... $texturesNoise    , ... await fetchAllTextures_Noise    (        )].sort();
@@ -765,6 +781,24 @@ let AIInputPrompts: HTMLInputElement;
                                      ,   fragmentShaderFiltering_Instance: null
                                      , }
                                        ];
+            editorSnapshotsUndoStack.push({
+                undo: async () => {
+            $effectsUsedForFiltering.pop();
+            $effectsUsedForFiltering = $effectsUsedForFiltering;
+            console.log("call");
+                }
+                ,
+                redo: async () => {
+            $effectsUsedForFiltering = [ ...
+            $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
+                                     ,   fragmentShaderSourceCode________: null
+                                     ,   fragmentShader______GLSLUniforms: null
+                                     ,   fragmentShaderFiltering_Instance: null
+                                     , }
+                                       ];
+                }
+                ,
+            });
         }}>ADD EFFECT NI</button>
         <button class="slow-ripple" on:click={async (e) => {
             $effectsUsedForFiltering = [ ...

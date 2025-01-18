@@ -53,6 +53,13 @@ enum MODE_CAPTURE_VIDEO {
      AS_VIDEO_SNAPSHOT,
 };
 
+export
+type EditorSnapshot = {
+     undo: () => Promise<void> | null,
+     redo: () => Promise<void> | null,
+};
+
+
 
 
 

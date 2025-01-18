@@ -40,8 +40,9 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
                                                    ]             );
 
 
-
-
+import { type EditorSnapshot } from "./types"                     ;
+export let    editorSnapshotsRedoStack: Array<EditorSnapshot> = [];
+export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
 
@@ -58,3 +59,11 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
 
 
                                                    
+
+
+
+
+
+
+
+

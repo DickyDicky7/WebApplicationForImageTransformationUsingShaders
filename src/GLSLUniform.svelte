@@ -17,6 +17,8 @@
   import { texturesASCII     } from "./global";
   import { texturesTiled     } from "./global";
   import { texturesShaderToy } from "./global";
+  import { editorSnapshotsUndoStack } from "./global";
+  import { editorSnapshotsRedoStack } from "./global";
 
 
 

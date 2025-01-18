@@ -1962,3 +1962,38 @@ export const fetchAllTextures_ShaderToy = async (supabase        :      Supabase
     }
     return result;
 };
+
+
+import { type EditorSnapshot } from "./types";
+import { editorSnapshotsRedoStack } from "./global";
+import { editorSnapshotsUndoStack } from "./global";
+
+export const onRedoActionExecuted = async () => {
+    let redoEditorSnapshot: EditorSnapshot | undefined = editorSnapshotsRedoStack.pop();
+    if (redoEditorSnapshot) {
+        await
+        redoEditorSnapshot.redo();
+                                                         editorSnapshotsUndoStack
+                          .push(
+        redoEditorSnapshot      );
+    }
+};
+
+export const onUndoActionExecuted = async () => {
+    let undoEditorSnapshot: EditorSnapshot | undefined = editorSnapshotsUndoStack.pop();
+    if (undoEditorSnapshot) {
+        await
+        undoEditorSnapshot.undo();
+                                                         editorSnapshotsRedoStack
+                          .push(
+        undoEditorSnapshot      );
+    }
+};
+
+
+
+
+
+
+
+

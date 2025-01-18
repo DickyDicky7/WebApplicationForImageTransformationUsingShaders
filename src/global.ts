@@ -29,6 +29,8 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
                                                      fragmentShaderSourceCode________:       string | null,
                                                      fragmentShader______GLSLUniforms: GLSLUniforms | null,
                                                      fragmentShaderFiltering_Instance: any          | null,
+                                                     fragmentShader_HTMLSelectElement:
+                                                                    HTMLSelectElement               | null,
                                                    }>> = writable(
                                                    [
                                                    {
@@ -36,6 +38,7 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
                                                      fragmentShaderSourceCode________:                null,
                                                      fragmentShader______GLSLUniforms:                null,
                                                      fragmentShaderFiltering_Instance:                null,
+                                                     fragmentShader_HTMLSelectElement:                null,
                                                    }
                                                    ]             );
 
@@ -59,6 +62,13 @@ export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
                                                    
+
+
+
+
+
+
+
 
 
 

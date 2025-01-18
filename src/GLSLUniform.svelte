@@ -2,6 +2,7 @@
   import      p5                   from "p5";
   import          "beercss"       ;
   import "material-dynamic-colors";
+  import type { EditorSnapshot   } from "./types";
   import type { GLSLUniformValue } from "./types";
   import type { GLSLUniforms     } from "./types";
   import type { TextureForShader } from "./types";
@@ -30,6 +31,15 @@
   , newValue: number | boolean | string
   ,
                         ): void => {
+    let editorSnapshot: EditorSnapshot = {
+        undo          : null,
+        redo          : null,
+        dynamicStorage: null,
+    };
+    editorSnapshot.dynamicStorage =   new Map<string, any>();
+    editorSnapshot.dynamicStorage.set("undoUniforms", uniforms);
+    editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { uniforms = dynamicStorage?.get("undoUniforms"); };
+    editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { uniforms = dynamicStorage?.get("redoUniforms"); };
     // const updatedUniforms: GLSLUniforms = { ...uniforms };
     // const updatedUniforms: GLSLUniforms = { ...uniforms };
     if (Array.isArray(uniforms[key].thisUniformDefaultValue)) {
@@ -48,6 +58,9 @@
     // Trigger callback
     // Trigger callback
     onUpdate?.(uniforms);
+    editorSnapshot.dynamicStorage.set("redoUniforms", uniforms);
+    editorSnapshotsUndoStack.push(
+    editorSnapshot               );
   };
 
 

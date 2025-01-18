@@ -57,7 +57,7 @@ import {   onMount   } from   "svelte";
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
-        let imageRatio    = 1.0                       ;
+        let imageRatio    = 0.3                       ;
         canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         canvasInstance.  draw = () => {
@@ -742,8 +742,11 @@ let AIInputPrompts: HTMLInputElement;
 let cachedSelectedIndex:
     number                  =   0   ;
 
+    import MouseCursor from "./MouseCursor.svelte";
+//  import MouseCursor from "./MouseCursor.svelte";
 </script>
 
+<MouseCursor> </MouseCursor>
 <main    class="responsive">
     <div class="space     "></div>
     <form action="">
@@ -928,13 +931,17 @@ let cachedSelectedIndex:
      ,     fragmentShaderSourceCode________
      ,     fragmentShader______GLSLUniforms
      ,     fragmentShaderFiltering_Instance
+     ,     fragmentShader_HTMLSelectElement
      ,
                                        }
      ,      effectIndex
     }
     {#if fragmentShaderSourceType________ ===  "NI"}
     <div class="field label suffix round border">
-        <select on:change={async(e) => {
+        <select
+bind:this={fragmentShader_HTMLSelectElement
+          }
+                on:change={async(e) => {
             let editorSnapshot: EditorSnapshot = {
                 undo          : null,
                 redo          : null,
@@ -945,23 +952,25 @@ let cachedSelectedIndex:
                 fragmentShaderSourceCode________ = dynamicStorage?.get("undoFragmentShaderSourceCode________");
                 fragmentShader______GLSLUniforms = dynamicStorage?.get("undoFragmentShader______GLSLUniforms");
                 fragmentShaderFiltering_Instance = dynamicStorage?.get("undoFragmentShaderFiltering_Instance");
-                // e.currentTarget.selectedIndex = dynamicStorage?.get("undoCachedSelectedIndex");
+                fragmentShader_HTMLSelectElement
+                .selectedIndex!                  = dynamicStorage?.get("undoCachedSelectedIndex");
             };
             editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
                 fragmentShaderSourceType________ = dynamicStorage?.get("redoFragmentShaderSourceType________");
                 fragmentShaderSourceCode________ = dynamicStorage?.get("redoFragmentShaderSourceCode________");
                 fragmentShader______GLSLUniforms = dynamicStorage?.get("redoFragmentShader______GLSLUniforms");
                 fragmentShaderFiltering_Instance = dynamicStorage?.get("redoFragmentShaderFiltering_Instance");
-                // e.currentTarget.selectedIndex = dynamicStorage?.get("redoCachedSelectedIndex");
+                fragmentShader_HTMLSelectElement
+                .selectedIndex!                  = dynamicStorage?.get("redoCachedSelectedIndex");
             };
             editorSnapshot.dynamicStorage = new Map<string, any>();
             editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceType________", fragmentShaderSourceType________);
             editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
             editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
             editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-//          editorSnapshot.dynamicStorage. set("undoCachedSelectedIndex"
-//                                       ,          cachedSelectedIndex);
-                                                    cachedSelectedIndex =
+            editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex"
+                                         ,         cachedSelectedIndex);
+                                                   cachedSelectedIndex =
                                  e.currentTarget.selectedIndex;
             let shaderName  =    e.currentTarget.options      [
                                  e.currentTarget.selectedIndex].value;
@@ -974,8 +983,8 @@ let cachedSelectedIndex:
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
                 editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-//              editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-//                                           ,         cachedSelectedIndex);
+                editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+                                             ,         cachedSelectedIndex);
             }
             else                                              {
                 console.log(`Shader name:   ${shaderName}          `);
@@ -1005,8 +1014,8 @@ let cachedSelectedIndex:
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
                 editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-//              editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-//                                           ,         cachedSelectedIndex);
+                editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+                                             ,         cachedSelectedIndex);
             }
             editorSnapshotsUndoStack.push(
             editorSnapshot               );

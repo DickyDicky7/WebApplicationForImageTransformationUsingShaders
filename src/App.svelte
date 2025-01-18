@@ -742,6 +742,30 @@ let AIInputPrompts: HTMLInputElement;
 </script>
 
 <main    class="responsive">
+    <!-- <div class="container">
+        <div class="headerContainer grey-border border">
+            
+        </div>
+        <div class="topBarContainer amber7 grey-border border">
+
+        </div>
+        <div class="mainContainer grey-border border">
+            <div class="sideBarContainer grey-border border">
+                
+            </div>
+            <div class="canvasContainer grey-border border">
+                <div class="canvasTool grey-border border">
+                    
+                </div>
+                <div class="canvas grey-border border">
+                    
+                </div>
+            </div>
+            <div class="footerContainer grey-border border">
+                
+            </div>
+        </div>
+    </div> -->
     <div class="space     "></div>
     <form action="">
         <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
@@ -989,6 +1013,58 @@ let AIInputPrompts: HTMLInputElement;
 
     *    {
      font-family:            'SF Mono Regular'                        , 'fontawesome';
+    }
+    .container {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+    }
+    .headerContainer {
+        width: 100%;
+    }
+    .footerContainer {
+        width: 100%;
+    }
+    .topBarContainer {
+        width: 100%;
+        padding: 10px;
+        justify-content: space-between;
+        display: flex;
+        flex-direction: row;
+    }
+    .mainContainer {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+    }
+    .sideBarContainer {
+        width: 40%;
+        height: 100%;
+    }
+    .canvasContainer {
+        width: 60%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    .canvasTool {
+        width: 100%;
+        height: 20%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .canvas {
+        width: 100%;
+        height: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        overflow: scroll;
     }
 </style>
 

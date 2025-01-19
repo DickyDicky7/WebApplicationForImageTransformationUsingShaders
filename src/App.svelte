@@ -23,6 +23,8 @@ import {   onMount   } from   "svelte";
 
     const p5Logic = (p: p5) => {
           p.setup = (     ) => {
+            p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
+//          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
                            Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
                               p.WEBGL);
@@ -790,6 +792,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
             editorSnapshotsUndoStack.push({
@@ -805,6 +808,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
                 }
@@ -819,6 +823,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
             editorSnapshotsUndoStack.push({
@@ -834,6 +839,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
                 }
@@ -936,6 +942,7 @@ let cachedSelectedIndex:
     </div>
     <div class="space"></div>
 
+    <div>
     {#each $effectsUsedForFiltering as {
            fragmentShaderSourceType________
      ,     fragmentShaderSourceCode________
@@ -962,7 +969,7 @@ bind:this={fragmentShader_HTMLSelectElement
                 fragmentShaderSourceCode________ = dynamicStorage?.get("undoFragmentShaderSourceCode________");
                 fragmentShader______GLSLUniforms = dynamicStorage?.get("undoFragmentShader______GLSLUniforms");
                 fragmentShaderFiltering_Instance = dynamicStorage?.get("undoFragmentShaderFiltering_Instance");
-                fragmentShader_HTMLSelectElement
+                fragmentShader_HTMLSelectElement!
                 .selectedIndex!                  = dynamicStorage?.get("undoCachedSelectedIndex");
             };
             editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
@@ -970,7 +977,7 @@ bind:this={fragmentShader_HTMLSelectElement
                 fragmentShaderSourceCode________ = dynamicStorage?.get("redoFragmentShaderSourceCode________");
                 fragmentShader______GLSLUniforms = dynamicStorage?.get("redoFragmentShader______GLSLUniforms");
                 fragmentShaderFiltering_Instance = dynamicStorage?.get("redoFragmentShaderFiltering_Instance");
-                fragmentShader_HTMLSelectElement
+                fragmentShader_HTMLSelectElement!
                 .selectedIndex!                  = dynamicStorage?.get("redoCachedSelectedIndex");
             };
             editorSnapshot.dynamicStorage = new Map<string, any>();
@@ -1064,6 +1071,7 @@ bind:this={fragmentShader_HTMLSelectElement
     
     {/if}
     {/each}
+    </div>
 </main>
 
 <style>
@@ -1080,6 +1088,15 @@ bind:this={fragmentShader_HTMLSelectElement
      font-family:            'SF Mono Regular'                        , 'fontawesome';
     }
 </style>
+
+
+
+
+
+
+
+
+
 
 
 

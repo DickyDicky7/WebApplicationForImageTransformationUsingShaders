@@ -744,13 +744,38 @@ let cachedSelectedIndex:
 
 </script>
 
-<main    class="responsive">
-    <!-- <div class="container">
+<main>
+    <div class="container">
         <div class="headerContainer grey-border border">
             
         </div>
         <div class="topBarContainer amber7 grey-border border">
-
+            <button class="slow-ripple">
+                <i class="fas fa-paperclip"></i>
+                <span>Load Image Or Video</span>
+                <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
+            </button>
+            <div class="column">
+                <button>
+                    <i class="fas fa-download"></i>
+                    <span>Save</span>
+                </button>
+                <button
+                    on:click = {async() => {
+                        if (mode === MODE.IMAGE){
+                            await shareImage (              canvas.children[0] as HTMLCanvasElement);
+                        }
+                        else if (mode === MODE.VIDEO) {
+                            await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement);
+                        }
+                        else {
+                            await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement);
+                        }
+                    }}>
+                    <i class="fas fa-share"></i>
+                    <span>Share</span>
+                </button>
+            </div>
         </div>
         <div class="mainContainer grey-border border">
             <div class="sideBarContainer grey-border border">
@@ -761,24 +786,21 @@ let cachedSelectedIndex:
                     
                 </div>
                 <div class="canvas grey-border border">
-                    
+                    <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
+                    <!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>-->
                 </div>
             </div>
-            <div class="footerContainer grey-border border">
-                
-            </div>
+            
         </div>
-    </div> -->
+        <div class="footerContainer grey-border border">
+                
+        </div>
+    </div>
     <div class="space     "></div>
-    <form action="">
-        <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
-<!--    <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />    -->
-        <button class="slow-ripple">LOAD IMAGE OR VIDEO</button>
-    </form>
+    
     <div class="space"></div>
-    <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
-<!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
-  -->
+    
+
     <div class="space"></div>
     <div>
         <button class="slow-ripple" on:click={async (e) => { await startCaptureAsImage        (); }}>START SAVE AS IMAGE         </button><!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
@@ -1109,11 +1131,11 @@ let cachedSelectedIndex:
         flex-direction: row;
     }
     .sideBarContainer {
-        width: 40%;
+        width: 30%;
         height: 100%;
     }
     .canvasContainer {
-        width: 60%;
+        width: 70%;
         height: 100%;
         display: flex;
         flex-direction: column;

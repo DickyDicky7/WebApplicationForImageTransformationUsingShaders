@@ -1,5 +1,4 @@
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
+
 <script lang="ts">
 
 import { promptShader } from "./a.i.effects";
@@ -24,6 +23,8 @@ import {   onMount   } from   "svelte";
 
     const p5Logic = (p: p5) => {
           p.setup = (     ) => {
+            p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
+//          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
                            Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
                               p.WEBGL);
@@ -57,7 +58,7 @@ import {   onMount   } from   "svelte";
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
-        let imageRatio    = 1.0                       ;
+        let imageRatio    = 0.3                       ;
         canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         canvasInstance.  draw = () => {
@@ -742,9 +743,19 @@ let AIInputPrompts: HTMLInputElement;
 let cachedSelectedIndex:
     number                  =   0   ;
 
+    import MouseCursor from "./MouseCursor.svelte";
+//  import MouseCursor from "./MouseCursor.svelte";
 </script>
 
+<MouseCursor> </MouseCursor>
 <main>
+    <div class="space     "></div>
+    <div>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="slow-ripple" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left "></i></button>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="slow-ripple" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right"></i></button>
+    </div>
     <div class="container">
         <div class="headerContainer grey-border border">
             
@@ -827,6 +838,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
             editorSnapshotsUndoStack.push({
@@ -842,6 +854,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
                 }
@@ -856,6 +869,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
             editorSnapshotsUndoStack.push({
@@ -871,6 +885,7 @@ let cachedSelectedIndex:
                                      ,   fragmentShaderSourceCode________: null
                                      ,   fragmentShader______GLSLUniforms: null
                                      ,   fragmentShaderFiltering_Instance: null
+                                     ,   fragmentShader_HTMLSelectElement: null
                                      , }
                                        ];
                 }
@@ -940,6 +955,8 @@ let cachedSelectedIndex:
                   <option>{imageFormat.extension}</option>
             {/each}
         </select>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
         <label>Image Format</label>
         <i class="fa-solid fa-chevron-down"></i>
     </div>
@@ -953,6 +970,8 @@ let cachedSelectedIndex:
                   <option>{videoFormat.mimeType }</option>
             {/each}
         </select>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
         <label>Video Format</label>
         <i class="fa-solid fa-chevron-down"></i>
     </div>
@@ -969,18 +988,23 @@ let cachedSelectedIndex:
     </div>
     <div class="space"></div>
 
+    <div>
     {#each $effectsUsedForFiltering as {
            fragmentShaderSourceType________
      ,     fragmentShaderSourceCode________
      ,     fragmentShader______GLSLUniforms
      ,     fragmentShaderFiltering_Instance
+     ,     fragmentShader_HTMLSelectElement
      ,
                                        }
      ,      effectIndex
     }
     {#if fragmentShaderSourceType________ ===  "NI"}
     <div class="field label suffix round border">
-        <select on:change={async(e) => {
+        <select
+bind:this={fragmentShader_HTMLSelectElement
+          }
+                on:change={async(e) => {
             let editorSnapshot: EditorSnapshot = {
                 undo          : null,
                 redo          : null,
@@ -991,23 +1015,25 @@ let cachedSelectedIndex:
                 fragmentShaderSourceCode________ = dynamicStorage?.get("undoFragmentShaderSourceCode________");
                 fragmentShader______GLSLUniforms = dynamicStorage?.get("undoFragmentShader______GLSLUniforms");
                 fragmentShaderFiltering_Instance = dynamicStorage?.get("undoFragmentShaderFiltering_Instance");
-                // e.currentTarget.selectedIndex = dynamicStorage?.get("undoCachedSelectedIndex");
+                fragmentShader_HTMLSelectElement!
+                .selectedIndex!                  = dynamicStorage?.get("undoCachedSelectedIndex");
             };
             editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
                 fragmentShaderSourceType________ = dynamicStorage?.get("redoFragmentShaderSourceType________");
                 fragmentShaderSourceCode________ = dynamicStorage?.get("redoFragmentShaderSourceCode________");
                 fragmentShader______GLSLUniforms = dynamicStorage?.get("redoFragmentShader______GLSLUniforms");
                 fragmentShaderFiltering_Instance = dynamicStorage?.get("redoFragmentShaderFiltering_Instance");
-                // e.currentTarget.selectedIndex = dynamicStorage?.get("redoCachedSelectedIndex");
+                fragmentShader_HTMLSelectElement!
+                .selectedIndex!                  = dynamicStorage?.get("redoCachedSelectedIndex");
             };
             editorSnapshot.dynamicStorage = new Map<string, any>();
             editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceType________", fragmentShaderSourceType________);
             editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
             editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
             editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-//          editorSnapshot.dynamicStorage. set("undoCachedSelectedIndex"
-//                                       ,          cachedSelectedIndex);
-                                                    cachedSelectedIndex =
+            editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex"
+                                         ,         cachedSelectedIndex);
+                                                   cachedSelectedIndex =
                                  e.currentTarget.selectedIndex;
             let shaderName  =    e.currentTarget.options      [
                                  e.currentTarget.selectedIndex].value;
@@ -1020,8 +1046,8 @@ let cachedSelectedIndex:
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
                 editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-//              editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-//                                           ,         cachedSelectedIndex);
+                editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+                                             ,         cachedSelectedIndex);
             }
             else                                              {
                 console.log(`Shader name:   ${shaderName}          `);
@@ -1051,8 +1077,8 @@ let cachedSelectedIndex:
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
                 editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                 editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-//              editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-//                                           ,         cachedSelectedIndex);
+                editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+                                             ,         cachedSelectedIndex);
             }
             editorSnapshotsUndoStack.push(
             editorSnapshot               );
@@ -1063,6 +1089,8 @@ let cachedSelectedIndex:
                                                         <option>{shaderName}</option>            
         {/each}
         </select>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
         <label>Choose your effects</label>
 <!--    <label>Choose your effects</label>       -->
         <i class="fa-solid fa-chevron-down"></i>
@@ -1089,6 +1117,7 @@ let cachedSelectedIndex:
     
     {/if}
     {/each}
+    </div>
 </main>
 
 <style>
@@ -1157,6 +1186,15 @@ let cachedSelectedIndex:
         overflow: scroll;
     }
 </style>
+
+
+
+
+
+
+
+
+
 
 
 

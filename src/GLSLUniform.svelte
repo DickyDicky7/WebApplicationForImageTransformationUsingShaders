@@ -37,28 +37,42 @@
         dynamicStorage: null,
     };
     editorSnapshot.dynamicStorage =   new Map<string, any>();
-    editorSnapshot.dynamicStorage.set("undoUniforms", uniforms);
-    editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { uniforms = dynamicStorage?.get("undoUniforms"); };
-    editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { uniforms = dynamicStorage?.get("redoUniforms"); };
+//  editorSnapshot.dynamicStorage.set("undoUniforms", uniforms);
+//  editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { uniforms = dynamicStorage?.get("undoUniforms"); };
+//  editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { uniforms = dynamicStorage?.get("redoUniforms"); };
     // const updatedUniforms: GLSLUniforms = { ...uniforms };
     // const updatedUniforms: GLSLUniforms = { ...uniforms };
     if (Array.isArray(uniforms[key].thisUniformDefaultValue)) {
     if (index !== null)                                       {
+       editorSnapshot.dynamicStorage.set(`undo(uniforms[${key}].thisUniformDefaultValue as number[])[${index}]`
+                                    ,         (uniforms[  key ].thisUniformDefaultValue as number[])[  index ]);
       (
         uniforms[key].thisUniformDefaultValue as number[])[index] = newValue as number;
+       editorSnapshot.dynamicStorage.set(`redo(uniforms[${key}].thisUniformDefaultValue as number[])[${index}]`
+                                    ,         (uniforms[  key ].thisUniformDefaultValue as number[])[  index ]);
+       editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { (uniforms[key].thisUniformDefaultValue as number[])[index] = dynamicStorage?.get(`undo(uniforms[${key}].thisUniformDefaultValue as number[])[${index}]`); };
+       editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { (uniforms[key].thisUniformDefaultValue as number[])[index] = dynamicStorage?.get(`redo(uniforms[${key}].thisUniformDefaultValue as number[])[${index}]`); };
       }
     } else                                                                  {
+       editorSnapshot.dynamicStorage.set(`undoUniforms[${key}].thisUniformDefaultValue`, uniforms[key].thisUniformDefaultValue);
         uniforms[key].thisUniformDefaultValue                     = newValue          ;
+       editorSnapshot.dynamicStorage.set(`redoUniforms[${key}].thisUniformDefaultValue`, uniforms[key].thisUniformDefaultValue);
+       editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { uniforms[key].thisUniformDefaultValue = dynamicStorage?.get(`undoUniforms[${key}].thisUniformDefaultValue`); };
+       editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { uniforms[key].thisUniformDefaultValue = dynamicStorage?.get(`redoUniforms[${key}].thisUniformDefaultValue`); };
     }
     if (                                         canvasInstance
     &&  uniforms[key].thisUniformType     ===                  "sampler2D") {
+       editorSnapshot.dynamicStorage.set( `undoUniforms[${key}].thisUniformSampler2DImg`, uniforms[key].thisUniformSampler2DImg);
         uniforms[key].thisUniformSampler2DImg =  canvasInstance.loadImage (
         uniforms[key].thisUniformDefaultValue as string                   );
+       editorSnapshot.dynamicStorage.set( `redoUniforms[${key}].thisUniformSampler2DImg`, uniforms[key].thisUniformSampler2DImg);
+       editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { uniforms[key].thisUniformDefaultValue = dynamicStorage?.get(`undoUniforms[${key}].thisUniformDefaultValue`); uniforms[key].thisUniformSampler2DImg = dynamicStorage?.get(`undoUniforms[${key}].thisUniformSampler2DImg`); };
+       editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { uniforms[key].thisUniformDefaultValue = dynamicStorage?.get(`redoUniforms[${key}].thisUniformDefaultValue`); uniforms[key].thisUniformSampler2DImg = dynamicStorage?.get(`redoUniforms[${key}].thisUniformSampler2DImg`); };
     }
     // Trigger callback
     // Trigger callback
     onUpdate?.(uniforms);
-    editorSnapshot.dynamicStorage.set("redoUniforms", uniforms);
+//  editorSnapshot.dynamicStorage.set("redoUniforms", uniforms);
     editorSnapshotsUndoStack.push(
     editorSnapshot               );
   };

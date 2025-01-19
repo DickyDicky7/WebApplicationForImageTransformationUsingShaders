@@ -748,6 +748,13 @@ let cachedSelectedIndex:
 <MouseCursor> </MouseCursor>
 <main    class="responsive">
     <div class="space     "></div>
+    <div>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="slow-ripple" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left "></i></button>
+        <!-- svelte-ignore a11y_consider_explicit_label -->
+        <button class="slow-ripple" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right"></i></button>
+    </div>
+    <div class="space     "></div>
     <form action="">
         <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
 <!--    <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />    -->

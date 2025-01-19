@@ -1,5 +1,4 @@
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
+
 <script lang="ts">
 
 import { promptShader } from "./a.i.effects";
@@ -897,6 +896,8 @@ let cachedSelectedIndex:
                   <option>{imageFormat.extension}</option>
             {/each}
         </select>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
         <label>Image Format</label>
         <i class="fa-solid fa-chevron-down"></i>
     </div>
@@ -910,6 +911,8 @@ let cachedSelectedIndex:
                   <option>{videoFormat.mimeType }</option>
             {/each}
         </select>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
         <label>Video Format</label>
         <i class="fa-solid fa-chevron-down"></i>
     </div>
@@ -1026,6 +1029,8 @@ bind:this={fragmentShader_HTMLSelectElement
                                                         <option>{shaderName}</option>            
         {/each}
         </select>
+<!-- svelte-ignore a11y-label-has-associated-control -->
+<!-- svelte-ignore a11y-label-has-associated-control -->
         <label>Choose your effects</label>
 <!--    <label>Choose your effects</label>       -->
         <i class="fa-solid fa-chevron-down"></i>

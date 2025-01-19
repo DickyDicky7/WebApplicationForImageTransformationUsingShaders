@@ -16,8 +16,8 @@ uniform         vec4      mousePosition;
 
 #define THRESHOLD .333
 
-    void main() { vec3 color = L(gl_FragCoord); int pressure = 0; int height = int(R.y); int y = int(gl_FragCoord.y); while (y < height) { vec2 nU = vec2(gl_FragCoord.x, y); float diff = distance(color, L(nU)); if (diff > THRESHOLD) break; y++; pressure++; } float press = float(pressure) / float(height); fragColor = vec4(sqrt(press)); }
-//  void main() { vec3 color = L(gl_FragCoord); int pressure = 0; int height = int(R.y); int y = int(gl_FragCoord.y); while (y < height) { vec2 nU = vec2(gl_FragCoord.x, y); float diff = distance(color, L(nU)); if (diff > THRESHOLD) break; y++; pressure++; } float press = float(pressure) / float(height); fragColor = vec4(sqrt(press)); }
+    void main() { vec3 color = L(gl_FragCoord.xy); int pressure = 0; int height = int(R.y); int y = int(gl_FragCoord.y); while (y < height) { vec2 nU = vec2(gl_FragCoord.x, y); float diff = distance(color, L(nU)); if (diff > THRESHOLD) break; y++; pressure++; } float press = float(pressure) / float(height); fragColor = vec4(sqrt(press)); }
+//  void main() { vec3 color = L(gl_FragCoord.xy); int pressure = 0; int height = int(R.y); int y = int(gl_FragCoord.y); while (y < height) { vec2 nU = vec2(gl_FragCoord.x, y); float diff = distance(color, L(nU)); if (diff > THRESHOLD) break; y++; pressure++; } float press = float(pressure) / float(height); fragColor = vec4(sqrt(press)); }
 
 
 

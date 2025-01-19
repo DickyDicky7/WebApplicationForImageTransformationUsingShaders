@@ -42,7 +42,7 @@ void main() {
         anchorsCurr[animatedAnchor] = mousePosition.xy / canvasSize.y;
     }
 
-    vec2 uv = gl_FragCoord / canvasSize.y;
+    vec2 uv = gl_FragCoord.xy / canvasSize.y;
     
     // Step 1: Calculate how similar is the current fragment to each anchor
     // Step 1: Calculate how similar is the current fragment to each anchor

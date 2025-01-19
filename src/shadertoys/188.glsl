@@ -2,7 +2,7 @@
 precision  lowp float;
 
 uniform         sampler2D          tex0;
-uniform         sampler2D    uploadtex0;
+uniform         sampler2D    uploadtex0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;

@@ -46,8 +46,8 @@ float aaline(float x) {
 
 void main() {
     vec2 uv0 = vTexCoord;
-    vec2 uv  = (2.0 * gl_FragCoord - canvasSize.xy)
-                                   / canvasSize.y ;
+    vec2 uv  = (2.0 * gl_FragCoord.xy - canvasSize.xy)
+                                      / canvasSize.y ;
 
     // Dynamic zigzag motion
     // Dynamic zigzag motion

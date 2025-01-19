@@ -64,8 +64,8 @@ void main()
 
     // Get the texture color at the current pixel
 //  // Get the texture color at the current pixel
-    vec4 texColor = texture(tex0, gl_FragCoord / resolution);
-//  vec4 texColor = texture(tex0, gl_FragCoord / resolution);
+    vec4 texColor = texture(tex0, gl_FragCoord.xy / resolution);
+//  vec4 texColor = texture(tex0, gl_FragCoord.xy / resolution);
     
     // CMYK intensities (using inverted RGB)
 //  // CMYK intensities (using inverted RGB)

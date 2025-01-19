@@ -13,8 +13,8 @@ uniform         vec4      mousePosition;
 
 // length of edges of grid
 // length of edges of grid
-uniform float size  ; // 6.0
-uniform float angle ; // 0.0
+float size  ; // 6.0
+float angle ; // 0.0
 #define SEPERATE_CHANNELS
 
 const float sin30 =      0.5          ;
@@ -117,11 +117,11 @@ void main()
     mat2 mg = rotm(radians(45.0 + angle));
     mat2 ma = rotm(radians(45.0 + angle));
 
-    ratio.r = halftone_dist(gl_FragCoord, mr).r;
-    ratio.g = halftone_dist(gl_FragCoord, mg).g;
-    ratio.b = halftone_dist(gl_FragCoord, mb).b;
+    ratio.r = halftone_dist(gl_FragCoord.xy, mr).r;
+    ratio.g = halftone_dist(gl_FragCoord.xy, mg).g;
+    ratio.b = halftone_dist(gl_FragCoord.xy, mb).b;
 #else
-    ratio   = halftone_dist(gl_FragCoord, mb)  ;
+    ratio   = halftone_dist(gl_FragCoord.xy, mb)  ;
 #endif
     
     vec3               col = vec3(1.);

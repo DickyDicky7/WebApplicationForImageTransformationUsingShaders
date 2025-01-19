@@ -953,6 +953,9 @@ let cachedSelectedIndex:
                                        }
      ,      effectIndex
     }
+<!--<div class="space"></div>-->
+    <div class="space"></div>
+<!--<div class="space"></div>-->
     {#if fragmentShaderSourceType________ ===  "NI"}
     <div class="field label suffix round border">
         <select
@@ -1051,6 +1054,9 @@ bind:this={fragmentShader_HTMLSelectElement
 <!--    <i class="fa-solid fa-chevron-down"></i> -->
     </div>
     <button class="slow-ripple" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>REMOVE THIS EFFECT</button>
+<!--<div class="space"></div>-->
+    <div class="space"></div>
+<!--<div class="space"></div>-->
     <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                            canvasInstance }></GlslUniform>
     {/if}
@@ -1066,6 +1072,9 @@ bind:this={fragmentShader_HTMLSelectElement
         fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
     }}>ASK AI</button>
     <button class="slow-ripple" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>REMOVE THIS EFFECT</button>
+<!--<div class="space"></div>-->
+    <div class="space"></div>
+<!--<div class="space"></div>-->    
     <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                            canvasInstance }></GlslUniform>
     

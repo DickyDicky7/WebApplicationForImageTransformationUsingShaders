@@ -1017,6 +1017,21 @@ bind:this={fragmentShader_HTMLSelectElement
                 if ( shaderName.toLowerCase()
                                .       trim().includes("lygia"))    {
                     fragmentShaderSourceCode________ = await resolveLygiaAsync(shaderRawSourceCode);
+                if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
+//              if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
+                    fragmentShaderSourceCode________ =
+                    fragmentShaderSourceCode________.replaceAll("HIGHP"
+                                                    ,           "     "
+                                                    ,          );
+                }
+                else
+                if (shaderName.includes("LYGIA FilterJointBilateral")) {
+//              if (shaderName.includes("LYGIA FilterJointBilateral")) {
+                    fragmentShaderSourceCode________ =
+                    fragmentShaderSourceCode________.replaceAll(/\bsample\b/g                  
+                                                    ,             "samples"
+                                                    ,          );
+                }
                 }
                 else                                                {
                     fragmentShaderSourceCode________ =                         shaderRawSourceCode ;

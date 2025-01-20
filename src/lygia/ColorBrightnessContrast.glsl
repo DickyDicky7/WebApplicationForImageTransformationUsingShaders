@@ -12,11 +12,11 @@ uniform         vec4      mousePosition;
 #include "lygia/color/brightnessContrast.glsl"
 
 uniform float brightness; // 0.0
-uniform float contrast__; // 0.0
+uniform float contrastVL; // 0.0
 
 void main()
 {
-    fragColor = brightnessContrast(texture(tex0, vTexCoord), brightness, contrast__);
+    fragColor = brightnessContrast(texture(tex0, vTexCoord), brightness, contrastVL);
 }
 
 // https://lygia.xyz/color/brightnessContrast

@@ -20,8 +20,29 @@ import {   onMount   } from   "svelte";
                                 }            ;
     const DPR = window.devicePixelRatio || 1 ;
 //  const DPR = window.devicePixelRatio || 2 ;
-
+import type { DraggableText } from "./types";
+import { display } from "./common";
+import { onMousePressed } from "./common";
+import { drag } from "./common";
+import { stopDrag } from "./common";
+let myFont:p5.Font;
+let textObj:DraggableText ;
     const p5Logic = (p: p5) => {
+        p.mousePressed = (e) => {
+            console.log("1")
+            onMousePressed(textObj, p);
+        };
+        p.mouseDragged = (e) => {
+            console.log("2")
+            drag(textObj, p);
+        };
+        p.mouseReleased = (e) => {
+            console.log("3")
+            stopDrag(textObj,p);
+        };
+          p.preload = () => {
+myFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
+          };
           p.setup = (     ) => {
             p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
 //          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
@@ -33,12 +54,31 @@ import {   onMount   } from   "svelte";
             p.frameRate (  fps   );
             p.disableFriendlyErrors = true;
 //          p.disableFriendlyErrors = true;
+textObj = {
+    colorOutline: {r:255,g:255,b:0,a:255},
+    colorFilling: {r:255,g:0,b:0,a:255},
+    fontSize: 48,
+    contents: `Hello`,
+    alignHOption: "center",
+    alignVOption: "center",
+    font: myFont,
+    stylesOption: "normal",
+    positionX:0,
+    positionY:0,
+    dimensionW: 100,
+    dimensionH: 100,
+    isDragging:false,
+    offsetX:0,
+    offsetY:0,
+    spacing:0,
+    wrapMode: null!,
+};
 
         };
 
         p.draw = () => {
         p.background( 255 );
-            
+            display(textObj,p);
         };
     };
 
@@ -745,10 +785,12 @@ let cachedSelectedIndex:
 
     import MouseCursor from "./MouseCursor.svelte";
 //  import MouseCursor from "./MouseCursor.svelte";
+import DraggableTextComponent from "./DraggableTextComponent.svelte";
 </script>
 
 <MouseCursor> </MouseCursor>
 <main    class="responsive">
+    <DraggableTextComponent></DraggableTextComponent>
     <div class="space     "></div>
     <div>
         <!-- svelte-ignore a11y_consider_explicit_label -->

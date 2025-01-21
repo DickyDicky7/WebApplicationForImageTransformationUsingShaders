@@ -949,6 +949,9 @@ let cachedSelectedIndex:
                                                        }
                      ,      effectIndex
                     }
+                    <!--<div class="space"></div>-->
+                        <div class="space"></div>
+                    <!--<div class="space"></div>-->
                         {#if fragmentShaderSourceType________ ===  "NI"}
                             <div class="row">
                                 <div class="field label suffix round border max ">
@@ -1010,6 +1013,21 @@ let cachedSelectedIndex:
                                             if ( shaderName.toLowerCase()
                                                         .       trim().includes("lygia"))    {
                                                 fragmentShaderSourceCode________ = await resolveLygiaAsync(shaderRawSourceCode);
+                                                if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
+//                                              if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
+                                                    fragmentShaderSourceCode________ =
+                                                    fragmentShaderSourceCode________.replaceAll("HIGHP"
+                                                                                    ,           "     "
+                                                                                    ,          );
+                                                }
+                                                else
+                                                if (shaderName.includes("LYGIA FilterJointBilateral")) {
+//                                              if (shaderName.includes("LYGIA FilterJointBilateral")) {
+                                                    fragmentShaderSourceCode________ =
+                                                    fragmentShaderSourceCode________.replaceAll(/\bsample\b/g                  
+                                                                                    ,             "samples"
+                                                                                    ,          );
+                                                }
                                             }
                                             else                                                {
                                                 fragmentShaderSourceCode________ =                         shaderRawSourceCode ;
@@ -1056,8 +1074,11 @@ let cachedSelectedIndex:
                                 </button>
                             </div>
                             <dialog id={`b${String(effectIndex)}`}>
+                            <!--<div class="space"></div>-->
+                            <!--<div class="space"></div>-->
+                            <!--<div class="space"></div>-->
                                 <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
-                                                                                                                    canvasInstance }></GlslUniform>
+                                                                                                                       canvasInstance }></GlslUniform>
                             </dialog>
                         {/if}
                         {#if fragmentShaderSourceType________ ===  "AI"}
@@ -1092,8 +1113,11 @@ let cachedSelectedIndex:
                                         <i class="fas fa-paper-plane"></i>
                                     </button>
                                 </div>
+                            <!--<div class="space"></div>-->
+                                <div class="space"></div>
+                            <!--<div class="space"></div>-->
                                 <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
-                                                                                                                    canvasInstance }></GlslUniform>
+                                                                                                                       canvasInstance }></GlslUniform>
                             </dialog>
                         {/if}
                     {/each}

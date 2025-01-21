@@ -2,7 +2,7 @@
 precision  lowp float;
 
 uniform         sampler2D          tex0;
-uniform         sampler2D    uploadTex0;
+uniform         sampler2D        noise0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -30,8 +30,8 @@ void main()
     /////////////////
     //    Grain    //
     /////////////////
-    float  grain_power =                                                    0.1      ;
-    vec3   noise       = texture(uploadTex0, mod(uv + vec2(0, 10.0 * time), 1.0)).rgb;
+    float  grain_power =                                                0.1      ;
+    vec3   noise       = texture(noise0, mod(uv + vec2(0, 10.0 * time), 1.0)).rgb;
     col += grain_power
         *  noise.r     ;
     

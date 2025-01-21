@@ -2,7 +2,7 @@
 precision  lowp float;
 
 uniform         sampler2D          tex0;
-uniform         sampler2D    uploadTex0;
+uniform         sampler2D    uploadTex0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -34,8 +34,8 @@ uniform vec2  move           ; // -0.02, 0.1
 
 void main()
 {
-    float rotation_ratio = 2. * rotation_count * pi; float remapTime = mod(speed * time, 2. * pi) - pi; remapTime *= step(0., remapTime); float rot = rotation_ratio * (-(cos(remapTime) - 1.) / 2.); mat2 rotation = get_rotation_matirx(rot); vec2 uv = gl_FragCoord / canvasSize.x; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y; uv = gl_FragCoord/canvasSize.xy; uv = rotate_uv(uv, center, canvasSize, rotation);
-//  float rotation_ratio = 2. * rotation_count * pi; float remapTime = mod(speed * time, 2. * pi) - pi; remapTime *= step(0., remapTime); float rot = rotation_ratio * (-(cos(remapTime) - 1.) / 2.); mat2 rotation = get_rotation_matirx(rot); vec2 uv = gl_FragCoord / canvasSize.x; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y; uv = gl_FragCoord/canvasSize.xy; uv = rotate_uv(uv, center, canvasSize, rotation);
+    float rotation_ratio = 2. * rotation_count * pi; float remapTime = mod(speed * time, 2. * pi) - pi; remapTime *= step(0., remapTime); float rot = rotation_ratio * (-(cos(remapTime) - 1.) / 2.); mat2 rotation = get_rotation_matirx(rot); vec2 uv = gl_FragCoord.xy / canvasSize.x; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y; uv = gl_FragCoord.xy/canvasSize.xy; uv = rotate_uv(uv, center, canvasSize, rotation);
+//  float rotation_ratio = 2. * rotation_count * pi; float remapTime = mod(speed * time, 2. * pi) - pi; remapTime *= step(0., remapTime); float rot = rotation_ratio * (-(cos(remapTime) - 1.) / 2.); mat2 rotation = get_rotation_matirx(rot); vec2 uv = gl_FragCoord.xy / canvasSize.x; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y; uv = gl_FragCoord.xy/canvasSize.xy; uv = rotate_uv(uv, center, canvasSize, rotation);
     
     bool change_scene = int((speed * time + pi / 2.) / (2. * pi)) % 2 == 0; vec3 col = (change_scene) ? texture(tex0, uv).rgb  : texture(uploadTex0, uv).rgb;
 //  bool change_scene = int((speed * time + pi / 2.) / (2. * pi)) % 2 == 0; vec3 col = (change_scene) ? texture(tex0, uv).rgb  : texture(uploadTex0, uv).rgb;

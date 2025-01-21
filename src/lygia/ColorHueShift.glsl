@@ -9,6 +9,10 @@ uniform         vec2         canvasSize;
 uniform         vec2          texelSize;
 uniform         vec4      mousePosition;
 
+// ------------------------------------------
+#define TAU 6.2831853071795864769252867665590
+// ------------------------------------------
+
 #include "lygia/color/hueShift.glsl"
 
 //const float angle; // 0.0

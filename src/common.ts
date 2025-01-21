@@ -1993,9 +1993,28 @@ export const onUndoActionExecuted = async () => {
 };
 
 
+export const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number }> => {
+    hex = hex.replace(/^#/, '');
+    const r = parseInt(hex.substring(0, 2), 16) / 255;
+    const g = parseInt(hex.substring(2, 4), 16) / 255;
+    const b = parseInt(hex.substring(4, 6), 16) / 255;
+    return { r, g, b };
+};
 
 
 
 
-
+import type { DraggableText } from "./types";
+import type p5 from "p5";
+export const display = (draggableText: DraggableText, canvasInstance: p5): void => {
+    canvasInstance.push();
+    canvasInstance.textSize(draggableText.textFontSize);
+    canvasInstance.fill(draggableText.textColorFill.r, draggableText.textColorFill.g, draggableText.textColorFill.b,draggableText.textColorFill.a);
+    canvasInstance.textStyle(draggableText.textStyle);
+    canvasInstance.textAlign(draggableText.textAlignH,draggableText.textAlignV);
+    canvasInstance.textFont(draggableText.textFont, draggableText.textFontSize);
+    canvasInstance.text(draggableText.text, draggableText.x,draggableText.y,draggableText.w,draggableText.h);
+    
+    canvasInstance.pop();
+};
 

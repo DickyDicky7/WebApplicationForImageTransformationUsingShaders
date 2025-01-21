@@ -77,3 +77,19 @@ type EditorSnapshot = {
 
 
 
+export type DraggableText = {
+     textColorFill: {r:number,g:number,b:number,a:number,},
+     textFontSize  : number ,
+     text      : string ,
+     textAlignH : p5.HORIZ_ALIGN,
+     textAlignV : p5. VERT_ALIGN,
+     textFont  : p5.Font,
+     textStyle : p5.THE_STYLE,
+     x         : number ,
+     y         : number ,
+     w         : number ,
+     h         : number ,
+     isDragging: boolean,
+     offsetX   : number ,
+     offsetY   : number ,
+};

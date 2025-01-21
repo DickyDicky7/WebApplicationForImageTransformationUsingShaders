@@ -39,8 +39,8 @@ vec2 rotate_uv(vec2 uv, vec2 center, float rotation, bool use_degrees) {
 
 void main() {
     vec2 uv   = vTexCoord;
-         uv.y =  1.0 -
-         uv.y            ;
+//       uv.y =  1.0 -
+//       uv.y            ;
     vec2                             center_uv = uv - vec2(0.5, 0.5);
     float gradient_to_edge = max(abs(center_uv.x)
                            ,     abs(center_uv.y));

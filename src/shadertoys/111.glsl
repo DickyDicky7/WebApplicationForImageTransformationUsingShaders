@@ -26,8 +26,8 @@ void main() {
     float a = float(i) / 32.f;
 //  float a = float(i) / 32.f;
 
-    vec2 uv = .5f + (gl_FragCoord - canvasSize.xy * .5f) * vec2(canvasSize.y / canvasSize.x, 1) / canvasSize.y;
-//  vec2 uv = .5f + (gl_FragCoord - canvasSize.xy * .5f) * vec2(canvasSize.y / canvasSize.x, 1) / canvasSize.y;
+    vec2 uv = .5f + (gl_FragCoord.xy - canvasSize.xy * .5f) * vec2(canvasSize.y / canvasSize.x, 1) / canvasSize.y;
+//  vec2 uv = .5f + (gl_FragCoord.xy - canvasSize.xy * .5f) * vec2(canvasSize.y / canvasSize.x, 1) / canvasSize.y;
 
     // stretch the sides out to fill the frame, but leave the middle the correct aspect ratio
 //  // stretch the sides out to fill the frame, but leave the middle the correct aspect ratio

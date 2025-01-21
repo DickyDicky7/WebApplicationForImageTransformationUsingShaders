@@ -29,9 +29,9 @@ uniform vec3  FOREGROUND    ; // 00.96875000, 0.93359375, 0.88281250
 //  float remap(float inMin, float inMax, float outMin, float outMax, float value) { float normalizedValue = clamp((value - inMin) / (inMax - inMin), 0.0f, 1.0f); return mix(outMin, outMax, normalizedValue); }
 
 void main() {
-    vec2 mc  =                     mousePosition.xy  / canvasSize.y;
-    vec2 uv  =  gl_FragCoord                         / canvasSize.y;
-    vec2 gv  = (gl_FragCoord - 0.5f * canvasSize.xy) / canvasSize.y;
+    vec2 mc  =                        mousePosition.xy  / canvasSize.y;
+    vec2 uv  =  gl_FragCoord.xy                         / canvasSize.y;
+    vec2 gv  = (gl_FragCoord.xy - 0.5f * canvasSize.xy) / canvasSize.y;
     vec2 ouv =       gv  +     0.5f    ;
          gv  = fract(gv  * GRID_HEIGHT);
          ouv = floor(ouv * GRID_HEIGHT) / GRID_HEIGHT;

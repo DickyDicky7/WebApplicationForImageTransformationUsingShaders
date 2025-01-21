@@ -8,6 +8,7 @@
   import type { TextureForShader } from "./types";
   import {               onMount } from   "svelte";
   import { splitArrayIntoGroups  } from "./common";
+  import { doHexToRgbNormalized  } from "./common";
   export let canvasInstance: p5 = null!;
   export let uniforms:                   GLSLUniforms  =  [  ];
   export let onUpdate: (updatedUniforms: GLSLUniforms) => void;
@@ -104,6 +105,7 @@
           <thead>
             <tr>
               {#if thisUniformDefaultValue.length >= 2}
+                <th>*</th>
                 <th>x</th>
                 <th>y</th>
               {/if}
@@ -117,6 +119,18 @@
           </thead>
           <tbody>
             <tr>
+              <td>
+                <!-- svelte-ignore a11y_consider_explicit_label -->
+                <!-- svelte-ignore a11y_consider_explicit_label -->
+                <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
+                    const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
+//                  const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
+                    updateUniform(ii, 0, r);
+                    updateUniform(ii, 1, g);
+                    updateUniform(ii, 2, b);
+                      }}>
+                </button>
+              </td>
               {#each thisUniformDefaultValue as v, i}
                 <td class="s2 field small border">
                   <input

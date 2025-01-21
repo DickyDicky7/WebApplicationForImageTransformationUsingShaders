@@ -11,8 +11,8 @@ uniform         vec4      mousePosition;
 
 // https://www.shadertoy.com/view/4XjfDG
 
-float NUMBERSS ; // 100.00
-float DISTANCE ; // 000.01
+uniform float NUMBERSS ; // 100.00
+uniform float DISTANCE ; // 000.01
 
 const float pi = 3.14159265358;
 

@@ -2,7 +2,7 @@
 precision  lowp float;
 
 uniform         sampler2D          tex0;
-uniform         sampler2D    uploadTex0;
+uniform         sampler2D    uploadTex0; // null
 in              vec2          vTexCoord;
 out             vec4          fragColor;
 uniform         float              time;
@@ -59,10 +59,10 @@ void main()
     //////////////////////////////
     ///   Getting the center   ///
     //////////////////////////////
-    vec2 uv = gl_FragCoord / canvasSize.x ; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y;
-//  vec2 uv = gl_FragCoord / canvasSize.x ; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y;
-         uv = gl_FragCoord / canvasSize.xy;
-//       uv = gl_FragCoord / canvasSize.xy;
+    vec2 uv = gl_FragCoord.xy / canvasSize.x ; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y;
+//  vec2 uv = gl_FragCoord.xy / canvasSize.x ; vec2 center = side * round((uv + move) / side); center -= move; center.y = center.y * canvasSize.x / canvasSize.y;
+         uv = gl_FragCoord.xy / canvasSize.xy;
+//       uv = gl_FragCoord.xy / canvasSize.xy;
     
     /////////////////////////////
     ///   Applying the zoom   ///

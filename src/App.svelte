@@ -58,6 +58,9 @@ import {   onMount   } from   "svelte";
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
+        if (video) {
+            video.remove();
+        }
         let imageRatio    = 0.3                       ;
         canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);

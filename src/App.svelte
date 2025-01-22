@@ -23,8 +23,8 @@ import {   onMount   } from   "svelte";
 import type { DraggableText } from "./types";
 import { display } from "./common";
 import { onMousePressed } from "./common";
-import { drag } from "./common";
-import { stopDrag } from "./common";
+import { startDragging } from "./common";
+import { ceaseDragging } from "./common";
 let myFont:p5.Font;
 let textObj:DraggableText ;
     const p5Logic = (p: p5) => {
@@ -34,11 +34,11 @@ let textObj:DraggableText ;
         };
         p.mouseDragged = (e) => {
             console.log("2")
-            drag(textObj, p);
+            startDragging(textObj, p);
         };
         p.mouseReleased = (e) => {
             console.log("3")
-            stopDrag(textObj,p);
+            ceaseDragging(textObj,p);
         };
           p.preload = () => {
 myFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
@@ -70,7 +70,7 @@ textObj = {
     isDragging:false,
     offsetX:0,
     offsetY:0,
-    spacing:0,
+    spacings:0,
     wrapMode: null!,
 };
 

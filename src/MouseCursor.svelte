@@ -1,17 +1,9 @@
-<script>
-	import { Cursor } from 'svelte-cursor';
-</script>
+    <script>import { Cursor } from "svelte-cursor";</script>
+<!--<script>import { Cursor } from "svelte-cursor";</script>-->
 
-<Cursor>
-	<!-- svelte-ignore element_invalid_self_closing_tag -->
-	<div class="cursor" />
-</Cursor>
+<!-- svelte-ignore element_invalid_self_closing_tag -->
+<!-- svelte-ignore element_invalid_self_closing_tag -->
+    <Cursor><div class="cursor" /></Cursor>
+<!--<Cursor><div class="cursor" /></Cursor>-->
 
-<style>
-    .cursor {
-	width: 20px;
-	aspect-ratio: 1;
-	background-color: white;
-	border-radius: 50%;
-}
-</style>
+<style>.cursor { width: 20px; aspect-ratio: 1; background-color: white; border-radius: 50%; }</style>

@@ -93,6 +93,6 @@ export type DraggableText = {
      isDragging: boolean,
      offsetX: number,
      offsetY: number,
-     spacing: number,//
+     spacings: number,//
      wrapMode: p5.WRAP_STYLE//
 };

@@ -2001,48 +2001,73 @@ export const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g:
     return { r, g, b };
 };
 
-
+export const rgba_ToHexNormalized = async (r: number
+                                  ,        g: number
+                                  ,        b: number
+                                  ,        a: number
+                                  ,       ) : Promise<string> => {
+    r = Math.round(Math.max(0, Math.min(255, r)));
+    g = Math.round(Math.max(0, Math.min(255, g)));
+    b = Math.round(Math.max(0, Math.min(255, b)));
+    a = Math.round(Math.max(0, Math.min(255, a)));
+    const  hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a.toString(16).padStart(2, '0')}`;
+//  const  hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a.toString(16).padStart(2, '0')}`;
+    return hex ;
+};
 
 
 import type { DraggableText } from "./types";
-import type p5 from "p5";
+import type {               } from "./types";
+import type              p5   from "p5"     ;
+import type {              }  from "p5"     ;
 export const display = (draggableText: DraggableText, canvasInstance: p5): void => {
     canvasInstance.push();
-    canvasInstance.textSize(draggableText.fontSize);
-    canvasInstance.stroke('black');
-    if (draggableText.wrapMode) {
-        canvasInstance.textWrap(draggableText.wrapMode);
+//  canvasInstance.push();
+    canvasInstance.textLeading(                    draggableText.spacings);
+    canvasInstance.textSize   (                    draggableText.fontSize);
+    canvasInstance.textFont   (draggableText.font, draggableText.fontSize);
+//  canvasInstance.strokeWeight(10);
+//  canvasInstance.stroke(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a);
+    canvasInstance.fill  (draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a);
+//  canvasInstance.strokeWeight(10);
+    if (                    draggableText.wrapMode) {
+//  if (                    draggableText.wrapMode) {
+    canvasInstance.textWrap(draggableText.wrapMode) ;
+//  canvasInstance.textWrap(draggableText.wrapMode) ;
     }
-    canvasInstance.fill(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b,draggableText.colorFilling.a);
-    canvasInstance.textLeading(draggableText.spacing);
-    canvasInstance.strokeWeight(10);
+//  }
     canvasInstance.textStyle(draggableText.stylesOption);
-    canvasInstance.textAlign(draggableText.alignHOption,draggableText.alignVOption);
-    canvasInstance.textFont(draggableText.font, draggableText.fontSize);
-    canvasInstance.text(draggableText.contents, draggableText.positionX,draggableText.positionY,draggableText.dimensionW,draggableText.dimensionH);
-    
+    canvasInstance.textAlign(draggableText.alignHOption
+                  ,          draggableText.alignVOption);
+    canvasInstance.text(draggableText. contents
+                  ,     draggableText. positionX
+                  ,     draggableText. positionY
+                  ,     draggableText.dimensionW
+                  ,     draggableText.dimensionH);
     canvasInstance.pop();
+//  canvasInstance.pop();
 };
 
 export const onMousePressed = (draggableText: DraggableText, canvasInstance: p5): void => {
-    if (canvasInstance.mouseX- canvasInstance.width/2 > draggableText.positionX &&
-        canvasInstance.mouseX- canvasInstance.width/2 < draggableText.positionX + draggableText.dimensionW &&
-        canvasInstance.mouseY- canvasInstance.height/2 < draggableText.positionY + draggableText.dimensionH &&
-        canvasInstance.mouseY- canvasInstance.height/2 > draggableText.positionY) {
-            console.log("4")
-            draggableText.isDragging = true;
-            // draggableText.offsetX = canvasInstance.mouseX- canvasInstance.width/2 - draggableText.positionX; // Calculate offset for smooth dragging
-            // draggableText.offsetY = canvasInstance.mouseY - canvasInstance.height/2 - draggableText.positionY;
+    if (canvasInstance.mouseX - canvasInstance.width  / 2 > draggableText.positionX                            &&
+        canvasInstance.mouseX - canvasInstance.width  / 2 < draggableText.positionX + draggableText.dimensionW &&
+        canvasInstance.mouseY - canvasInstance.height / 2 < draggableText.positionY + draggableText.dimensionH &&
+        canvasInstance.mouseY - canvasInstance.height / 2 > draggableText.positionY) {
+        draggableText.isDragging = true;
+//      draggableText.isDragging = true;
     }
 };
 
-export const drag = (draggableText: DraggableText, canvasInstance: p5): void => {
+export const startDragging  = (draggableText: DraggableText, canvasInstance: p5): void => {
     if (draggableText.isDragging) {
-        draggableText.positionX = canvasInstance.mouseX - canvasInstance.width/2 ; // Update position
-        draggableText.positionY = canvasInstance.mouseY -canvasInstance.height/2;
+        draggableText.positionX = canvasInstance.mouseX - canvasInstance.width  / 2;
+//      draggableText.positionX = canvasInstance.mouseX - canvasInstance.width  / 2;
+        draggableText.positionY = canvasInstance.mouseY - canvasInstance.height / 2;
+//      draggableText.positionY = canvasInstance.mouseY - canvasInstance.height / 2;
       }
 };
 
-export const stopDrag = (draggableText: DraggableText, canvasInstance: p5): void => {
-    draggableText.isDragging = false;
+export const ceaseDragging  = (draggableText: DraggableText, canvasInstance: p5): void => {
+  draggableText.isDragging  = false;
+//draggableText.isDragging  = false;
 };

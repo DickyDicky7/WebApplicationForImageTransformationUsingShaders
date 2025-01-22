@@ -30,6 +30,8 @@
   ,
      "dependencies":
   {
+    "svelte-cursor"                 : "^0.1.1"  ,
+    "svelte-cursor"                 : "^0.1.1"  ,
     "@openrouter/ai-sdk-provider"   : "^0.0.6"  ,
     "@supabase/auth-ui-svelte"      : "^0.2.9"  ,
     "@supabase/auth-ui-svelte"      : "^0.2.9"  ,

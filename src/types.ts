@@ -80,19 +80,20 @@ type EditorSnapshot = {
 export type DraggableText = {
      colorOutline: { r: number, g: number, b: number, a: number, },//
      colorFilling: { r: number, g: number, b: number, a: number, },//
-     fontSize: number,//
-     contents: string,//
-     alignHOption: p5.HORIZ_ALIGN,//
-     alignVOption: p5.VERT_ALIGN,//
-     font: p5.Font,//
-     stylesOption: p5.THE_STYLE,//
-     positionX: number,//
-     positionY: number,//
-     dimensionW: number,//
-     dimensionH: number,//
-     isDragging: boolean,
-     offsetX: number,
-     offsetY: number,
-     spacings: number,//
-     wrapMode: p5.WRAP_STYLE//
+     fontSize    : number                                         ,//
+     contents    : string                                         ,//
+     alignHOption: p5.HORIZ_ALIGN                                 ,//
+     alignVOption: p5. VERT_ALIGN                                 ,//
+     font        : p5.Font                                        ,//
+     stylesOption: p5. THE_STYLE                                  ,//
+     wrapMode    : p5.WRAP_STYLE                                  ,//
+     spacings    : number                                         ,//
+     positionX   : number                                         ,//
+     positionY   : number                                         ,//
+     dimensionW  : number                                         ,//
+     dimensionH  : number                                         ,//
+     isDragging  : boolean                                        ,
+     offsetX     : number                                         ,
+     offsetY     : number                                         ,
 };
+

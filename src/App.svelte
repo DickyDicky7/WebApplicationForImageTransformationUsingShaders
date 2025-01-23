@@ -204,6 +204,7 @@ import {   onMount   } from   "svelte";
                      ceaseRecord = true;
                      fshotRecord = true;
                      ceaseCaptureAsVideoFullshot();
+                     recording = false;
                 };
 //------------------------------//
             };
@@ -748,6 +749,29 @@ let cachedSelectedIndex:
 
     import MouseCursor from "./MouseCursor.svelte";
 //  import MouseCursor from "./MouseCursor.svelte";
+
+let recording: boolean = false;
+let selectedCaptureOption: string = "Snapshot";
+const handleCaptureAsVideo = async(): Promise<void> => {
+    if (recording === false){
+        recording = true;
+        if (selectedCaptureOption === "Snapshot"){
+            await startCaptureAsVideoSnapshot();
+        }
+        else if (selectedCaptureOption === "Fullshot"){
+            await startCaptureAsVideoFullshot();
+        }
+    }
+    else{
+        recording = false;
+        if (selectedCaptureOption === "Snapshot"){
+            await ceaseCaptureAsVideoSnapshot();
+        }
+        else if (selectedCaptureOption === "Fullshot"){
+            await ceaseCaptureAsVideoFullshot();
+        }
+    }
+}
 </script>
 
 <MouseCursor> </MouseCursor>
@@ -796,53 +820,103 @@ let cachedSelectedIndex:
                 
             </div>
             
-            <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button><!--Giống START SAVE AS VIDEO SNAPSHOT nhưng dành riêng cho sử dụng webcam-->
-            <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button><!--Giống CEASE SAVE AS VIDEO SNAPSHOT nhưng dành riêng cho sử dụng webcam-->
-            <div class="column">
+            <!-- <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
+            <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button> -->
+            <div class="horizontal">
                 <button data-ui="#a">
                     <i class="fas fa-download"></i>
                     <span>Save</span>
                 </button>
-                <dialog class="left" id="a">
-                    <div class="field label suffix round border">
-                        <select bind:this={imageFormatSelection}>
-                            {#each         imageFormats as
-                                           imageFormat
-                                          (imageFormat)
-                            }
-                                  <option>{imageFormat.extension}</option>
-                            {/each}
-                        </select>
-                <!-- svelte-ignore a11y-label-has-associated-control -->
-                <!-- svelte-ignore a11y-label-has-associated-control -->
-                        <label>Image Format</label>
-                        <i class="fas fa-chevron-down"></i>
+                <dialog class="left small-blur dialogSide" id="a">
+                    <div class="max right-align">
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button class="transparent circle right" data-ui="#a">
+                            <i class="fas fa-xmark"></i>
+                        </button>
                     </div>
-                
-                    <div class="field label suffix round border">
-                        <select bind:this={videoFormatSelection}>
-                            {#each         videoFormats as
-                                           videoFormat
-                                          (videoFormat)
-                            }
-                                  <option>{videoFormat.mimeType }</option>
-                            {/each}
-                        </select>
-                <!-- svelte-ignore a11y-label-has-associated-control -->
-                <!-- svelte-ignore a11y-label-has-associated-control -->
-                        <label>Video Format</label>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div>
-                        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsImage        (); }}>START SAVE AS IMAGE         </button><!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
-                    </div>
-                    <div class="space"></div>
-                    <div>
+                    <div class="column max small-padding">
+                        <div class="column">
+                            <h6>Save as image</h6>
+                            <div class="field label suffix round border">
+                                <select bind:this={imageFormatSelection}>
+                                    {#each         imageFormats as
+                                                   imageFormat
+                                                  (imageFormat)
+                                    }
+                                          <option>{imageFormat.extension}</option>
+                                    {/each}
+                                </select>
+                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                                <label>Image Format</label>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <button class="slow-ripple center" on:click={async (e) => { await startCaptureAsImage        (); }}>
+                                <i class="fas fa-camera"></i>
+                                <span>Capture</span>
+                                <div class="tooltip top max toolTip round">
+                                    <span>Save the current frame.</span>
+                                </div>
+                            </button><!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
+                        </div>
+                        <div class="medium-space"></div>
+                        <div class="column">
+                            <h6>Save as video</h6>
+                            <div class="field label suffix round border"> 
+                                <select bind:this={videoFormatSelection}>
+                                    {#each         videoFormats as
+                                                   videoFormat
+                                                  (videoFormat)
+                                    }
+                                          <option>{videoFormat.mimeType }</option>
+                                    {/each}
+                                </select>
+                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                                <label>Video Format</label>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="row center-align">
+                                <div class="field middle-align">
+                                    <nav>
+                                        <label class="radio">
+                                            <input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}>
+                                            <span>Snapshot</span>
+                                            <div class="tooltip right max toolTip round">
+                                                <span>Save frames from when you press start button until you press stop button into a video.</span>
+                                            </div>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}>
+                                            <span>Fullshot</span>
+                                            <div class="tooltip left max toolTip round">
+                                                <span>For image: same as snapshot.<br> For video: Save entire video with applied effect.</span>
+                                            </div>
+                                        </label>
+                                    </nav>
+                                </div>
+                            </div>
+                            <div class="row middle-align">
+                                <button class="slow-ripple" on:click={async(e) => {await handleCaptureAsVideo()}}>
+                                    {#if recording === false}
+                                        <i class="fas fa-circle-play"></i>
+                                        <span>Start</span>
+                                    {:else}
+                                        <i class="fas fa-circle-pause"></i>
+                                        <span>Stop</span>
+                                    {/if}
+                                </button>
+                                {#if recording === true}
+                                    <div>
+                                        <i class="fas fa-record-vinyl"></i>
+                                        <span>Recording...</span>
+                                    </div>
+                                {/if}
+                            </div>
+                        </div>
                         <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
                         <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
-                    </div>
-                    <div class="space"></div>
-                    <div>
                         <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
                         <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
                     </div>
@@ -1073,7 +1147,13 @@ let cachedSelectedIndex:
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-                            <dialog id={`b${String(effectIndex)}`}>
+                            <dialog class="dialog blur" id={`b${String(effectIndex)}`}>
+                                <div class="max right-align">
+                                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                                    <button class="transparent circle right" data-ui={`#b${effectIndex}`}>
+                                        <i class="fas fa-xmark"></i>
+                                    </button>
+                                </div>
                             <!--<div class="space"></div>-->
                             <!--<div class="space"></div>-->
                             <!--<div class="space"></div>-->
@@ -1095,7 +1175,13 @@ let cachedSelectedIndex:
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
-                            <dialog class="dialog" id={`c${effectIndex}`}>
+                            <dialog class="dialog blur" id={`c${effectIndex}`}>
+                                <div class="max right-align">
+                                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                                    <button class="transparent circle right" data-ui={`#c${effectIndex}`}>
+                                        <i class="fas fa-xmark"></i>
+                                    </button>
+                                </div>
                                 <div class="row">
                                     <div class="field border round label max">
                                         <input type="text" bind:this={AIInputPrompts}>
@@ -1129,6 +1215,13 @@ let cachedSelectedIndex:
                     <div class="row">
                         {#if mode === MODE.VIDEO}
                         <div class="column">
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <button class="slow-ripple circle" on:click={async (e) => {
+                                    video?.time(video?.time() - 10);
+                    //              video?.time(video?.time() - 10);
+                            }}>
+                                <i  class="fas fa-backward"></i>
+                             </button>
                             <button class="slow-ripple circle" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
                                                                                                 videoIsPlaying =
                                                                                             !videoIsPlaying ;
@@ -1138,13 +1231,6 @@ let cachedSelectedIndex:
                                 {:else} 
                                     <i class="fas fa-play "></i>
                                 {/if}
-                            </button>
-                            <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <button class="slow-ripple circle" on:click={async (e) => {
-                                    video?.time(video?.time() - 10);
-                    //              video?.time(video?.time() - 10);
-                            }}>
-                                <i  class="fas fa-backward"></i>
                             </button>
                             <!-- svelte-ignore a11y_consider_explicit_label -->
                             <button class="slow-ripple circle" on:click={async (e) => {
@@ -1273,11 +1359,17 @@ let cachedSelectedIndex:
         flex-grow: 1;
     }
     .dialog {
-        width: 70%;
+        width: 50%;
     }
     .effectContainer{
         overflow-y: scroll;
         height: 100%;
+    }
+    .dialogSide {
+        width: 30%;
+    }
+    .toolTip {
+        width: 200px;
     }
 </style>
 

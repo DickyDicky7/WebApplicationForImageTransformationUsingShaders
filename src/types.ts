@@ -12,8 +12,10 @@ type GLSLUniform_     =
     thisUniformNameJustForDisplay: string           | null,
     thisUniformType              : string           | null,
     thisUniformDefaultValue      : GLSLUniformValue | null,
-    thisUniformSampler2DImg      :         p5.Image | null,
-    thisUniformSampler2DEle      : HTMLImageElement | null,
+    thisUniformSampler2DImg      :         p5.Image | null
+                                 |         p5.MediaElement,
+    thisUniformSampler2DEle      : HTMLImageElement | null
+                                 | HTMLVideoElement | null,
 }
 
 type GLSLUniforms     = Array<

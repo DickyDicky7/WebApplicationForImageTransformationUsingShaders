@@ -81,6 +81,84 @@
 
 
   let interval: NodeJS.Timeout = null!;
+
+
+  const successCallback = (key: number) => (image_Instance: p5.Image): void => {
+    uniforms[key].thisUniformSampler2DImg = image_Instance;
+//  uniforms[key].thisUniformSampler2DImg = image_Instance;
+    if (!input         ) {
+//  if (!input         ) {
+      return;
+    }
+    if (!input.files   ) {
+//  if (!input.files   ) {
+      return;
+    }
+    if (!input.files[0]) {
+//  if (!input.files[0]) {
+      return;
+    }
+    let imageObjectURL: string = window.URL.createObjectURL(input.files[0]);
+//  let imageObjectURL: string = window.URL.createObjectURL(input.files[0]);
+    if (!uniforms[key].thisUniformSampler2DEle) {
+//  if (!uniforms[key].thisUniformSampler2DEle) {
+      return;
+    }
+         uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;
+//       uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;      
+  };
+
+  const failureCallback = (key: number) => (event_Instance:    Event): void => {
+    if (!input         ) {
+//  if (!input         ) {
+      return;
+    }
+    if (!input.files   ) {
+//  if (!input.files   ) {
+      return;
+    }
+    if (!input.files[0]) {
+//  if (!input.files[0]) {
+      return;
+    }
+    let videoObjectURL: string = window.URL.createObjectURL(input.files[0]);
+//  let videoObjectURL: string = window.URL.createObjectURL(input.files[0]);
+    uniforms[key].thisUniformSampler2DImg = canvasInstance.createVideo(videoObjectURL);
+    uniforms[key].thisUniformSampler2DImg.hide();
+    uniforms[key].thisUniformSampler2DImg.loop();
+    uniforms[key].thisUniformSampler2DImg.volume(0);
+    if (!uniforms[key].thisUniformSampler2DEle) {
+//  if (!uniforms[key].thisUniformSampler2DEle) {
+      return;
+    }
+         uniforms[key].thisUniformSampler2DEle.src = videoObjectURL;
+//       uniforms[key].thisUniformSampler2DEle.src = videoObjectURL;
+  };
+
+    let input: HTMLInputElement;
+//  let input: HTMLInputElement;
+    const onChange = (key: number): ReturnType<any> => { return () => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
+//  const onChange = (key: number): ReturnType<any> => { return () => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
+                        // console.log(reader.result);
+                        // console.log(reader.result);
+                  }
+              });
+              reader.addEventListener("abort", () => {
+              });
+              reader.addEventListener("error", () => {
+              });
+        let file                  ;
+//      let file                  ;
+        if (        input.files)
+//      if (        input.files)
+        {
+            file  = input.files[0];
+//          file  = input.files[0];
+        }
+        if (file != null) { reader.readAsDataURL(file); }
+//      if (file != null) { reader.readAsDataURL(file); }
+    }
+  };
 </script>
 
 <div>
@@ -328,6 +406,10 @@
         {:else if (thisUniformName ?? "").startsWith("bayer")}
         {:else if (thisUniformName ?? "").startsWith("palette")}
         {/if} -->
+        {#if (thisUniformName ?? "").startsWith("upload")}
+        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>
+<!--    <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>    -->
+        {:else}
         <div class="field label suffix round border">
           <select on:change={async (e) => {
             let chosen =            e.currentTarget.options[e.currentTarget.selectedIndex].value;
@@ -355,9 +437,12 @@
             {/each}
           </select>
           <!-- svelte-ignore a11y-label-has-associated-control -->
+          <!-- svelte-ignore a11y-label-has-associated-control -->
           <label>Texture For Shader</label>
           <i class="fa-solid fa-chevron-down"></i>
-      </div>
+<!--      <i class="fa-solid fa-chevron-down"></i>      -->
+        </div>
+        {/if}
 
       {:else}
         <span>Unsupported type</span>

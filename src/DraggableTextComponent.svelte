@@ -25,28 +25,18 @@
     spacings: 0,
     wrapMode: null!,
   };
+  //https://p5js.org/reference/p5/drawingContext/
+  //https://www.youtube.com/watch?v=iIWH3IUYHzM
 </script>
 
 <div>
   <span>Outline color</span>
   <!-- svelte-ignore a11y_consider_explicit_label -->
-  <button class="circle slow-ripple">
-    <i class="fa-solid fa-palette"></i>
-    <input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
-
-    }}/>
-  </button>
+  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await doHexToRgbNormalized(e.currentTarget.value); draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, }; }}/></button>
   <br />
   <span>Filling color</span>
   <!-- svelte-ignore a11y_consider_explicit_label -->
-  <button class="circle slow-ripple"
-    ><i class="fa-solid fa-palette"></i><input
-      type="color"
-      on:input={async (
-        e: Event & { currentTarget: EventTarget & HTMLInputElement }
-      ) => {}}
-    />
-  </button>
+  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await doHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
   <br />
   <table>
     <thead>
@@ -89,27 +79,26 @@
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="align-h-radio-1" value="" /><span>Item 1</span></label>
+              <label class="radio"><input type="radio" name="align-h-radio-2" value="" /><span>Item 2</span></label>
+              <label class="radio"><input type="radio" name="align-h-radio-3" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="align-h-radio-4" value="" /><span>Item 3</span></label>
             </nav>
           </div>
         </td>
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="align-v-radio-1" value="" /><span>Item 1</span></label>
+              <label class="radio"><input type="radio" name="align-v-radio-2" value="" /><span>Item 2</span></label>
+              <label class="radio"><input type="radio" name="align-v-radio-3" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="align-v-radio-4" value="" /><span>Item 3</span></label>
             </nav>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
-
   <table>
     <thead>
       <tr>
@@ -122,20 +111,20 @@
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio-1" value="" /><span>Item 1</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio-2" value="" /><span>Item 2</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio-3" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio-4" value="" /><span>Item 3</span></label>
             </nav>
           </div>
         </td>
         <td>
-          <div class="field middle-align">
-            <nav class="center-align">
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="radio4_" /><span>Item 3</span></label>
+          <div   class="field middle-align">
+            <nav class="      center-align">
+              <label class="radio"><input type="radio" name="style-radio-1" value="" /><span>Item 1</span></label>
+              <label class="radio"><input type="radio" name="style-radio-2" value="" /><span>Item 2</span></label>
+              <label class="radio"><input type="radio" name="style-radio-3" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="style-radio-4" value="" /><span>Item 3</span></label>
             </nav>
           </div>
         </td>

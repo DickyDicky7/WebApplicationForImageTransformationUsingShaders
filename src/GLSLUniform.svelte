@@ -139,8 +139,8 @@
 
     let input: HTMLInputElement;
 //  let input: HTMLInputElement;
-    const onChange = (key: number): ReturnType<any> => { return () => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
-//  const onChange = (key: number): ReturnType<any> => { return () => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
+    const onChange: (key: number) => (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => Promise<void> = (key: number) => { return async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
+//  const onChange: (key: number) => (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => Promise<void> = (key: number) => { return async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
                         // console.log(reader.result);
                         // console.log(reader.result);
                   }

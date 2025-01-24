@@ -215,14 +215,8 @@ import {   onMount   } from   "svelte";
 
     let input: HTMLInputElement;
 //  let input: HTMLInputElement;
-    const onChange = () => {
-        const reader = new FileReader();
-              reader.addEventListener("load", () => {
-                    if (               typeof    reader.result === "string"               ) {
-                        canvasInstance.loadImage(reader.result
-                                      ,                       successCallback
-                                      ,                       failureCallback
-                                      ,         );
+    const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback, failureCallback,);
+//  const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback, failureCallback,);
                         // console.log(reader.result);
                         // console.log(reader.result);
                     }

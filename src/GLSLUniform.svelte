@@ -9,6 +9,8 @@
   import {               onMount } from   "svelte";
   import { splitArrayIntoGroups  } from "./common";
   import { doHexToRgbNormalized  } from "./common";
+  import { noHexToRgbNormalized  } from "./common";
+  import { rgba_ToHexNormalized  } from "./common";
   export let canvasInstance: p5 = null!;
   export let uniforms:                   GLSLUniforms  =  [  ];
   export let onUpdate: (updatedUniforms: GLSLUniforms) => void;
@@ -137,8 +139,8 @@
 
     let input: HTMLInputElement;
 //  let input: HTMLInputElement;
-    const onChange = (key: number): ReturnType<any> => { return () => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
-//  const onChange = (key: number): ReturnType<any> => { return () => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
+    const onChange: (key: number) => (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => Promise<void> = (key: number) => { return async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
+//  const onChange: (key: number) => (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => Promise<void> = (key: number) => { return async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key),);
                         // console.log(reader.result);
                         // console.log(reader.result);
                   }
@@ -200,7 +202,7 @@
               <td>
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
+                <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input id={`${thisUniformName}-color-button`} type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
                     const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
 //                  const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
                     updateUniform(ii, 0, r);
@@ -215,7 +217,14 @@
                     type="number"
                     step="0.0100"
                        value={       v                                                                 }
-                    on:input={async (e) => { updateUniform(ii, i, parseFloat(e.currentTarget.value)); }}
+                    on:input={async (e) => { updateUniform(ii, i, parseFloat(e.currentTarget.value));
+                 const input: HTMLInputElement = document.getElementById(`${thisUniformName}-color-button`) as HTMLInputElement;
+                       input.value = (await rgba_ToHexNormalized(255 * (thisUniformDefaultValue[0] ?? 1.0)
+                            ,                                    255 * (thisUniformDefaultValue[1] ?? 1.0)
+                            ,                                    255 * (thisUniformDefaultValue[2] ?? 1.0)
+                            ,                                    255 * (thisUniformDefaultValue[3] ?? 1.0))).slice(+0
+                                                                                                            ,      -2
+                                                                                                            ,     ); }}
                   />
                 </td>
               {/each}

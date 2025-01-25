@@ -21,8 +21,37 @@ import {   onMount   } from   "svelte";
     const DPR = window.devicePixelRatio || 1 ;
 //  const DPR = window.devicePixelRatio || 2 ;
 
+    import type { DraggableText  } from "./types" ;
+//  import type { DraggableText  } from "./types" ;
+    import      { display        } from "./common";
+//  import      { display        } from "./common";
+    import      { onMousePressed } from "./common";
+//  import      { onMousePressed } from "./common";
+    import      { startDragging  } from "./common";
+//  import      { startDragging  } from "./common";
+    import      { ceaseDragging  } from "./common";
+//  import      { ceaseDragging  } from "./common";
+
+    let defaultFont: p5.Font;
+//  let defaultFont: p5.Font;
+
     const p5Logic = (p: p5) => {
-          p.setup = (     ) => {
+          p.mousePressed  = (e?: object): void => {
+          onMousePressed (draggableText, p);
+          };
+          p.mouseDragged  = (e?: object): void => {
+            startDragging(draggableText, p);
+          };
+          p.mouseReleased = (e?: object): void => {
+            ceaseDragging(draggableText, p);
+          };
+          p.preload = (): void => {
+            defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
+//          defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
+          };
+          p.setup   = (): void => {
+            draggableText.font = defaultFont;
+//          draggableText.font = defaultFont;
             p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
 //          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
@@ -34,11 +63,13 @@ import {   onMount   } from   "svelte";
             p.disableFriendlyErrors = true;
 //          p.disableFriendlyErrors = true;
 
+
         };
 
         p.draw = () => {
         p.background( 255 );
-            
+        display(draggableText, p);
+//      display(draggableText, p);
         };
     };
 
@@ -216,14 +247,8 @@ import {   onMount   } from   "svelte";
 
     let input: HTMLInputElement;
 //  let input: HTMLInputElement;
-    const onChange = () => {
-        const reader = new FileReader();
-              reader.addEventListener("load", () => {
-                    if (               typeof    reader.result === "string"               ) {
-                        canvasInstance.loadImage(reader.result
-                                      ,                       successCallback
-                                      ,                       failureCallback
-                                      ,         );
+    const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback, failureCallback,);
+//  const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => { const reader = new FileReader(); reader.addEventListener("load", () => { if (typeof reader.result === "string") { canvasInstance.loadImage(reader.result, successCallback, failureCallback,);
                         // console.log(reader.result);
                         // console.log(reader.result);
                     }
@@ -618,6 +643,8 @@ import { fetchAllTextures_Pencil_   } from "./common";
 import { fetchAllTextures_ASCII     } from "./common";
 import { fetchAllTextures_Tiled     } from "./common";
 import { fetchAllTextures_ShaderToy } from "./common";
+import { fetchAllFonts_TTF_ITCHIO   } from "./common";
+import { fetchAllFonts_OTF_ITCHIO   } from "./common";
 import { texturesNoise              } from "./global";
 import { texturesBayer              } from "./global";
 import { texturesPalette            } from "./global";
@@ -626,6 +653,7 @@ import { texturesASCII              } from "./global";
 import { texturesTiled              } from "./global";
 import { texturesShaderToy          } from "./global";
 import { effectsUsedForFiltering    } from "./global";
+import { customFonts                } from "./global";
 import { onUndoActionExecuted       } from "./common";
 import { onRedoActionExecuted       } from "./common";
 import { editorSnapshotsRedoStack   } from "./global";
@@ -651,6 +679,8 @@ onMount(async () => {
   $texturesASCII     = [... $texturesASCII    , ... await fetchAllTextures_ASCII    (supabase)].sort();
   $texturesTiled     = [... $texturesTiled    , ... await fetchAllTextures_Tiled    (supabase)].sort();
   $texturesShaderToy = [... $texturesShaderToy, ... await fetchAllTextures_ShaderToy(supabase)].sort();
+  $customFonts = [... $customFonts, ... await fetchAllFonts_TTF_ITCHIO(supabase), ... await fetchAllFonts_OTF_ITCHIO(supabase)].sort();//.map(customFont => { customFont.customFontFace = canvasInstance.loadFont(customFont.customFontPath); return customFont; });
+//$customFonts = [... $customFonts, ... await fetchAllFonts_TTF_ITCHIO(supabase), ... await fetchAllFonts_OTF_ITCHIO(supabase)].sort();//.map(customFont => { customFont.customFontFace = canvasInstance.loadFont(customFont.customFontPath); return customFont; });
 });
 
 
@@ -747,6 +777,10 @@ let AIInputPrompts: HTMLInputElement;
 let cachedSelectedIndex:
     number                  =   0   ;
 
+    import DraggableTextComponent from "./DraggableTextComponent.svelte";
+//  import DraggableTextComponent from "./DraggableTextComponent.svelte";
+let        draggableText:
+           DraggableText;
     import MouseCursor from "./MouseCursor.svelte";
 //  import MouseCursor from "./MouseCursor.svelte";
 
@@ -774,6 +808,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 }
 </script>
 
+    <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>
+<!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor> </MouseCursor>
 <main>
     <div class="container">

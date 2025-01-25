@@ -367,6 +367,16 @@ export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     ]
     ,
     [
+        "MULTILAYER-SNOWFALL--",
+        `./lib/${ 91}.glsl?raw`,
+    ]
+    ,
+    [
+        "VERYSIMPLE-CRT-------",
+        `./lib/${ 92}.glsl?raw`,
+    ]
+    ,
+    [
         "CHROMATIC #007          ",
         `./lib/${"p5.1"}.glsl?raw`,
     ]
@@ -2001,20 +2011,89 @@ export const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g:
     return { r, g, b };
 };
 
+export const noHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number }> => {
+    hex = hex.replace(/^#/, '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return { r, g, b };
+};
 
+export const rgba_ToHexNormalized = async (r: number
+                                  ,        g: number
+                                  ,        b: number
+                                  ,        a: number
+                                  ,       ) : Promise<string> => {
+    r = Math.round(Math.max(0, Math.min(255, r)));
+    g = Math.round(Math.max(0, Math.min(255, g)));
+    b = Math.round(Math.max(0, Math.min(255, b)));
+    a = Math.round(Math.max(0, Math.min(255, a)));
+    const  hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a.toString(16).padStart(2, '0')}`;
+//  const  hex = `#${r.toString(16).padStart(2, '0')}${g.toString(16).padStart(2, '0')}${b.toString(16).padStart(2, '0')}${a.toString(16).padStart(2, '0')}`;
+    return hex ;
+};
 
 
 import type { DraggableText } from "./types";
-import type p5 from "p5";
+import type {               } from "./types";
+import type              p5   from "p5"     ;
+import type {               } from "p5"     ;
 export const display = (draggableText: DraggableText, canvasInstance: p5): void => {
     canvasInstance.push();
-    canvasInstance.textSize(draggableText.textFontSize);
-    canvasInstance.fill(draggableText.textColorFill.r, draggableText.textColorFill.g, draggableText.textColorFill.b,draggableText.textColorFill.a);
-    canvasInstance.textStyle(draggableText.textStyle);
-    canvasInstance.textAlign(draggableText.textAlignH,draggableText.textAlignV);
-    canvasInstance.textFont(draggableText.textFont, draggableText.textFontSize);
-    canvasInstance.text(draggableText.text, draggableText.x,draggableText.y,draggableText.w,draggableText.h);
-    
+//  canvasInstance.push();
+    canvasInstance.textLeading(                    draggableText.spacings);
+    canvasInstance.textSize   (                    draggableText.fontSize);
+    if (                       draggableText.font                        )
+    canvasInstance.textFont   (draggableText.font, draggableText.fontSize);
+//  canvasInstance.strokeWeight(10);
+//  canvasInstance.stroke(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a);
+    canvasInstance.fill  (draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a);
+//  canvasInstance.strokeWeight(10);
+//  if (                    draggableText.wrapMode) {
+//  if (                    draggableText.wrapMode) {
+//  canvasInstance.textWrap(draggableText.wrapMode) ;
+//  canvasInstance.textWrap(draggableText.wrapMode) ;
+//  }
+//  }
+//  canvasInstance.textStyle(draggableText.stylesOption);
+    canvasInstance.textAlign(draggableText.alignHOption
+                  ,          draggableText.alignVOption);
+    canvasInstance.text(draggableText. contents
+                  ,     draggableText. positionX
+                  ,     draggableText. positionY
+//                ,     draggableText.dimensionW
+//                ,     draggableText.dimensionH
+                  ,    );
     canvasInstance.pop();
+//  canvasInstance.pop();
 };
+
+export const onMousePressed = (draggableText: DraggableText, canvasInstance: p5): void => {
+    if (canvasInstance.mouseX - canvasInstance.width  / 2 > draggableText.positionX                            &&
+        canvasInstance.mouseX - canvasInstance.width  / 2 < draggableText.positionX + draggableText.dimensionW &&
+        canvasInstance.mouseY - canvasInstance.height / 2 < draggableText.positionY + draggableText.dimensionH &&
+        canvasInstance.mouseY - canvasInstance.height / 2 > draggableText.positionY) {
+        draggableText.isDragging = true;
+//      draggableText.isDragging = true;
+    }
+};
+
+export const startDragging  = (draggableText: DraggableText, canvasInstance: p5): void => {
+    if (draggableText.isDragging) {
+        draggableText.positionX = canvasInstance.mouseX - canvasInstance.width  / 2;
+//      draggableText.positionX = canvasInstance.mouseX - canvasInstance.width  / 2;
+        draggableText.positionY = canvasInstance.mouseY - canvasInstance.height / 2;
+//      draggableText.positionY = canvasInstance.mouseY - canvasInstance.height / 2;
+      }
+};
+
+export const ceaseDragging  = (draggableText: DraggableText, canvasInstance: p5): void => {
+  draggableText.isDragging  = false;
+//draggableText.isDragging  = false;
+};
+
+import                                                                     type { CustomFont } from "./types";
+export const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; };
+export const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; };
+
 

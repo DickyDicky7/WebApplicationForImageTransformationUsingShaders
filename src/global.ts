@@ -48,6 +48,10 @@ export let    editorSnapshotsRedoStack: Array<EditorSnapshot> = [];
 export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
+    import type { CustomFont } from "./types";
+//  import type { CustomFont } from "./types";
+    export let customFonts: Writable<Array<CustomFont>> = writable([{ customFontName: "none", customFontPath: "none", customFontFace: null, }]);
+//  export let customFonts: Writable<Array<CustomFont>> = writable([{ customFontName: "none", customFontPath: "none", customFontFace: null, }]);
 
 
 
@@ -62,6 +66,12 @@ export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
                                                    
+
+
+
+
+
+
 
 
 

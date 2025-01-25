@@ -367,6 +367,16 @@ export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     ]
     ,
     [
+        "MULTILAYER-SNOWFALL--",
+        `./lib/${ 91}.glsl?raw`,
+    ]
+    ,
+    [
+        "VERYSIMPLE-CRT-------",
+        `./lib/${ 92}.glsl?raw`,
+    ]
+    ,
+    [
         "CHROMATIC #007          ",
         `./lib/${"p5.1"}.glsl?raw`,
     ]

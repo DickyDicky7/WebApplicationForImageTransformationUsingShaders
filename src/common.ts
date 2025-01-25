@@ -2001,6 +2001,14 @@ export const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g:
     return { r, g, b };
 };
 
+export const noHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number }> => {
+    hex = hex.replace(/^#/, '');
+    const r = parseInt(hex.substring(0, 2), 16);
+    const g = parseInt(hex.substring(2, 4), 16);
+    const b = parseInt(hex.substring(4, 6), 16);
+    return { r, g, b };
+};
+
 export const rgba_ToHexNormalized = async (r: number
                                   ,        g: number
                                   ,        b: number
@@ -2025,25 +2033,27 @@ export const display = (draggableText: DraggableText, canvasInstance: p5): void 
 //  canvasInstance.push();
     canvasInstance.textLeading(                    draggableText.spacings);
     canvasInstance.textSize   (                    draggableText.fontSize);
+    if (                       draggableText.font                        )
     canvasInstance.textFont   (draggableText.font, draggableText.fontSize);
 //  canvasInstance.strokeWeight(10);
 //  canvasInstance.stroke(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a);
     canvasInstance.fill  (draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a);
 //  canvasInstance.strokeWeight(10);
-    if (                    draggableText.wrapMode) {
 //  if (                    draggableText.wrapMode) {
-    canvasInstance.textWrap(draggableText.wrapMode) ;
+//  if (                    draggableText.wrapMode) {
 //  canvasInstance.textWrap(draggableText.wrapMode) ;
-    }
+//  canvasInstance.textWrap(draggableText.wrapMode) ;
 //  }
-    canvasInstance.textStyle(draggableText.stylesOption);
+//  }
+//  canvasInstance.textStyle(draggableText.stylesOption);
     canvasInstance.textAlign(draggableText.alignHOption
                   ,          draggableText.alignVOption);
     canvasInstance.text(draggableText. contents
                   ,     draggableText. positionX
                   ,     draggableText. positionY
-                  ,     draggableText.dimensionW
-                  ,     draggableText.dimensionH);
+//                ,     draggableText.dimensionW
+//                ,     draggableText.dimensionH
+                  ,    );
     canvasInstance.pop();
 //  canvasInstance.pop();
 };
@@ -2071,3 +2081,9 @@ export const ceaseDragging  = (draggableText: DraggableText, canvasInstance: p5)
   draggableText.isDragging  = false;
 //draggableText.isDragging  = false;
 };
+
+import                                                                     type { CustomFont } from "./types";
+export const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; };
+export const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; };
+
+

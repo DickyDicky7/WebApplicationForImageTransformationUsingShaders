@@ -97,3 +97,13 @@ export type DraggableText = {
      offsetY     : number                                         ,
 };
 
+export type CustomFont = {
+            customFontName: string  | null,
+            customFontPath: string  | null,
+            customFontFace: p5.Font | null,
+};
+
+
+
+
+

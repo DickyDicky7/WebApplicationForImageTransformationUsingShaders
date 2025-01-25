@@ -1,42 +1,59 @@
 <script lang="ts">
-    
+  
   import type { DraggableText } from "./types";
-  import type p5 from "p5";
-  export let defaultFont: p5.Font = null!;
+//import type { DraggableText } from "./types";
+  import type   p5              from "p5"     ;
+//import type   p5              from "p5"     ;
+  export let canvasInstance: p5 = null!;
+//export let canvasInstance: p5 = null!;
   import { doHexToRgbNormalized } from "./common";
+//import { doHexToRgbNormalized } from "./common";
   import { rgba_ToHexNormalized } from "./common";
-  // svelte-ignore export_let_unused
-  export let draggableText: DraggableText = {
-    colorFilling: { r: 0, g: 0, b: 0, a: 1 },
-    colorOutline: { r: 0, g: 0, b: 0, a: 1 },
-    fontSize: 24,
-    contents: "Text",
-    alignHOption: "center",
-    alignVOption: "center",
-    font: defaultFont,
-    stylesOption: "normal",
-    positionX: 0,
-    positionY: 0,
-    dimensionW: 24 * 4,
-    dimensionH: 24 * 1,
-    isDragging: false,
-    offsetX: 0,
-    offsetY: 0,
-    spacings: 0,
-    wrapMode: null!,
+//import { rgba_ToHexNormalized } from "./common";
+  import { noHexToRgbNormalized } from "./common";
+//import { noHexToRgbNormalized } from "./common";
+  import { customFonts          } from "./global";
+//import { customFonts          } from "./global";
+  export let draggableText:
+             DraggableText = {
+    colorFilling: { r: 0, g: 0, b: 0, a: 255 },
+    colorOutline: { r: 0, g: 0, b: 0, a: 255 },
+    fontSize    : 24                          ,
+    contents    : "Text"                      ,
+    alignHOption: "center"                    ,
+    alignVOption: "center"                    ,
+    font        : null!                       ,
+    stylesOption: "normal"                    ,
+    positionX   : 0                           ,
+    positionY   : 0                           ,
+    dimensionW  : 24 * 4                      ,
+    dimensionH  : 24 * 1                      ,
+    isDragging  : false                       ,
+    offsetX     : 0                           ,
+    offsetY     : 0                           ,
+    spacings    : 24                          ,
+    wrapMode    : null!                       ,
   };
   //https://p5js.org/reference/p5/drawingContext/
+  //https://p5js.org/reference/p5/drawingContext/
+  //https://p5js.org/reference/p5/drawingContext/
+  //https://www.youtube.com/watch?v=iIWH3IUYHzM
+  //https://www.youtube.com/watch?v=iIWH3IUYHzM
   //https://www.youtube.com/watch?v=iIWH3IUYHzM
 </script>
 
 <div>
+<!--
   <span>Outline color</span>
+--->
   <!-- svelte-ignore a11y_consider_explicit_label -->
-  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await doHexToRgbNormalized(e.currentTarget.value); draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, }; }}/></button>
+<!--
+  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, }; }}/></button>
   <br />
+--->  
   <span>Filling color</span>
   <!-- svelte-ignore a11y_consider_explicit_label -->
-  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await doHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
+  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
   <br />
   <table>
     <thead>
@@ -47,8 +64,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><div class="field border"><input type="number" bind:value={draggableText.fontSize} /></div></td>
-        <td><div class="field border"><input type="number" bind:value={draggableText.spacings} /></div></td>
+        <td><div class="field border"><input type="number" bind:value={draggableText.fontSize} on:input={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} /></div></td>
+        <td><div class="field border"><input type="number" bind:value={draggableText.spacings} on:input={async (e) => {                                                                                                                                                                                   }} /></div></td>
       </tr>
     </tbody>
   </table>
@@ -61,8 +78,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><div class="field border"><input type="text" bind:value={draggableText.contents} /></div></td>
-<!--    <td><div class="field border"><input type="text" bind:value={draggableText.contents} /></div></td>    -->
+        <td><div class="field border"><textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea></div></td>
+<!--    <td><div class="field border"><textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea></div></td>    -->
       </tr>
     </tbody>
   </table>
@@ -79,26 +96,27 @@
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="align-h-radio-1" value="" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="align-h-radio-2" value="" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="align-h-radio-3" value="" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="align-h-radio-4" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }} checked value="center" /><span>Center</span></label>
+              <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }}         value="left"   /><span>Left@ </span></label>
+              <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }}         value="right"  /><span>Right </span></label>
+<!--          <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }}         value="right"  /><span>Right </span></label>          -->
             </nav>
           </div>
         </td>
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="align-v-radio-1" value="" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="align-v-radio-2" value="" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="align-v-radio-3" value="" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="align-v-radio-4" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="align-v-radio" on:input={async (e) => { draggableText.alignVOption = e.currentTarget.value as p5.VERT_ALIGN; }}         value="alphabetic" /><span>Alphabetic</span></label>
+              <label class="radio"><input type="radio" name="align-v-radio" on:input={async (e) => { draggableText.alignVOption = e.currentTarget.value as p5.VERT_ALIGN; }}         value="top"        /><span>Bottom    </span></label>
+              <label class="radio"><input type="radio" name="align-v-radio" on:input={async (e) => { draggableText.alignVOption = e.currentTarget.value as p5.VERT_ALIGN; }} checked value="center"     /><span>Center    </span></label>
+              <label class="radio"><input type="radio" name="align-v-radio" on:input={async (e) => { draggableText.alignVOption = e.currentTarget.value as p5.VERT_ALIGN; }}         value="bottom"     /><span>Top       </span></label>
             </nav>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
+<!--
   <table>
     <thead>
       <tr>
@@ -111,35 +129,56 @@
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="wrap-mode-radio-1" value="" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="wrap-mode-radio-2" value="" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="wrap-mode-radio-3" value="" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="wrap-mode-radio-4" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio" on:input={async (e) => { draggableText.wrapMode =                                  null!; }} value="none" /><span>None</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio" on:input={async (e) => { draggableText.wrapMode = e.currentTarget.value as p5.WRAP_STYLE; }} value="char" /><span>Char</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio" on:input={async (e) => { draggableText.wrapMode = e.currentTarget.value as p5.WRAP_STYLE; }} value="word" /><span>Word</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio" on:input={async (e) => { draggableText.wrapMode = e.currentTarget.value as p5.WRAP_STYLE; }} value="char" /><span>Char</span></label>
+              <label class="radio"><input type="radio" name="wrap-mode-radio" on:input={async (e) => { draggableText.wrapMode = e.currentTarget.value as p5.WRAP_STYLE; }} value="word" /><span>Word</span></label>
             </nav>
           </div>
         </td>
         <td>
           <div   class="field middle-align">
             <nav class="      center-align">
-              <label class="radio"><input type="radio" name="style-radio-1" value="" /><span>Item 1</span></label>
-              <label class="radio"><input type="radio" name="style-radio-2" value="" /><span>Item 2</span></label>
-              <label class="radio"><input type="radio" name="style-radio-3" value="" /><span>Item 3</span></label>
-              <label class="radio"><input type="radio" name="style-radio-4" value="" /><span>Item 3</span></label>
+              <label class="radio"><input type="radio" name="style-radio" on:input={async (e) => { draggableText.stylesOption = e.currentTarget.value as p5.THE_STYLE; }} value="normal"     /><span>Normal     </span></label>
+              <label class="radio"><input type="radio" name="style-radio" on:input={async (e) => { draggableText.stylesOption = e.currentTarget.value as p5.THE_STYLE; }} value="italic"     /><span>Italic     </span></label>
+              <label class="radio"><input type="radio" name="style-radio" on:input={async (e) => { draggableText.stylesOption = e.currentTarget.value as p5.THE_STYLE; }} value="bold"       /><span>Bold       </span></label>
+              <label class="radio"><input type="radio" name="style-radio" on:input={async (e) => { draggableText.stylesOption = e.currentTarget.value as p5.THE_STYLE; }} value="bolditalic" /><span>Bold Italic</span></label>
             </nav>
           </div>
         </td>
       </tr>
     </tbody>
   </table>
+--->
   <span>Font</span>
   <div class="field suffix round fill small border">
-    <select>
-      <option>Item 1</option>
-      <option>Item 2</option>
-      <option>Item 3</option>
+    <select on:input={async (e) => {
+      if (              e.currentTarget.options       [
+                        e.currentTarget.selectedIndex ].value === "none") {
+           $customFonts[e.currentTarget.selectedIndex ].customFontFace = null;
+           return;
+      }
+      if (!$customFonts[e.currentTarget.selectedIndex ].customFontFace) {
+           $customFonts[e.currentTarget.selectedIndex ].customFontFace = canvasInstance.loadFont(
+           $customFonts[e.currentTarget.selectedIndex ].customFontPath !                        );
+      }
+      draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
+//    draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
+    }}>
+      {#each $customFonts as
+              customFont
+             (customFont)
+      }
+        <option value={customFont.customFontPath}>
+                      {customFont.customFontName!.replace(".ttf", "")
+                                                 .replace(".otf", "")}</option>
+      {/each}
     </select>
-    <i>arrow_drop_down</i>
+    <i class="fa-solid fa-chevron-down"></i>
+<!--<i class="fa-solid fa-chevron-down"></i>-->
   </div>
+<!--
   <table>
     <thead>
       <tr>
@@ -154,6 +193,8 @@
       </tr>
     </tbody>
   </table>
+--->
+<!--
   <table>
     <thead>
       <tr>
@@ -163,9 +204,14 @@
     </thead>
     <tbody>
       <tr>
-        <td><div class="field border"><input type="number" bind:value={draggableText.dimensionW} /></div></td>
-        <td><div class="field border"><input type="number" bind:value={draggableText.dimensionH} /></div></td>
+        <td><div class="field border"><input type="number" bind:value={draggableText.dimensionW} disabled /></div></td>
+        <td><div class="field border"><input type="number" bind:value={draggableText.dimensionH} disabled /></div></td>
       </tr>
     </tbody>
   </table>
+--->
 </div>
+
+
+
+

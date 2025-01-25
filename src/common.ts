@@ -2027,7 +2027,7 @@ export const rgba_ToHexNormalized = async (r: number
 import type { DraggableText } from "./types";
 import type {               } from "./types";
 import type              p5   from "p5"     ;
-import type {              }  from "p5"     ;
+import type {               } from "p5"     ;
 export const display = (draggableText: DraggableText, canvasInstance: p5): void => {
     canvasInstance.push();
 //  canvasInstance.push();

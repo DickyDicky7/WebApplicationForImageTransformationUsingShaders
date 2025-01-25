@@ -776,18 +776,18 @@ let AIInputPrompts: HTMLInputElement;
 let cachedSelectedIndex:
     number                  =   0   ;
 
-    import MouseCursor from "./MouseCursor.svelte";
-//  import MouseCursor from "./MouseCursor.svelte";
     import DraggableTextComponent from "./DraggableTextComponent.svelte";
 //  import DraggableTextComponent from "./DraggableTextComponent.svelte";
 let        draggableText:
            DraggableText;
+    import MouseCursor from "./MouseCursor.svelte";
+//  import MouseCursor from "./MouseCursor.svelte";
 </script>
 
 <MouseCursor> </MouseCursor>
-<main    class="responsive">
     <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
+<main    class="responsive">
     <div class="space     "></div>
     <div>
         <!-- svelte-ignore a11y_consider_explicit_label -->

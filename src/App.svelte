@@ -784,9 +784,9 @@ let        draggableText:
 //  import MouseCursor from "./MouseCursor.svelte";
 </script>
 
-<MouseCursor> </MouseCursor>
     <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
+<MouseCursor> </MouseCursor>
 <main    class="responsive">
     <div class="space     "></div>
     <div>

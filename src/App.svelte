@@ -1257,11 +1257,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                         fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
 //                                      fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
                                         console.log(fragmentShaderSourceCode________);
-                                        fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
-//                                      fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
+                                        fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
+//                                      fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
                                         console.log(fragmentShader______GLSLUniforms);
-                                        fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
-//                                      fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+                                        fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
+//                                      fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
                                     }}>
                                     <!--<i class="fas fa-paper-plane"></i>-->
                                         <i class="fas fa-paper-plane"></i>

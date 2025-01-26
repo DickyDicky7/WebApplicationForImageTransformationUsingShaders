@@ -819,42 +819,37 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor> </MouseCursor>
 <main>
-    <div class="container">
-        <div class="headerContainer grey-border border">
-            
-        </div>
-        <div class="topBarContainer small-padding grey-border border">
+    <div     class="      container                                 ">
+        <div class="headerContainer grey-border border              "></div>
+    <!--<div class="headerContainer grey-border border              "></div>-->
+        <div class="topBarContainer grey-border border small-padding">
             <div class="row">
-                <button class="slow-ripple">
-                    <i class="fas fa-paperclip"></i>
-                    <span>Load Image Or Video</span>
-                    <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
-                </button>
-                <div class="field middle-align">
+                <button class="slow-ripple"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
+            <!--<button class="slow-ripple"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+                <div    class="field middle-align">
                     <nav>
-                        <div class="max">
-                            <span>Webcam</span>
-                        </div>
+                    <!--<div class="max"><span>Webcam</span></div>-->
+                        <div class="max"><span>Webcam</span></div>
+                    <!--<div class="max"><span>Webcam</span></div>-->
                         <label class="switch icon">
                             <input type="checkbox" on:change={(e) => {
-                                const fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
-                                if (e.currentTarget.checked){
+                                const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
+//                              const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
+                                if (e.currentTarget.checked) {
                                     startWebCam(fakeMouseEvent);
                                 }
-                                else{
+                                else                         {
                                     ceaseWebCam(fakeMouseEvent);
                                 }
                             }}>
                             <span>
                                 <i>Videocam_Off</i>
-                                <i>Videocam</i>
+                                <i>Videocam    </i>
                             </span>
                         </label>
                     </nav>
-                  </div>
-                
+                </div>
             </div>
-            
 <!--        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
@@ -904,7 +899,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                    videoFormat
                                                   (videoFormat)
                                     }
-                                          <option>{videoFormat.mimeType }</option>
+                                          <option>{videoFormat.mimeType}</option>
                                     {/each}
                                 </select>
                             <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -912,7 +907,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <label>Video Format</label>
                                 <i class="fas fa-chevron-down"></i>
                             </div>
-                            <div class="row center-align">
+                            <div     class="row   center-align">
                                 <div class="field middle-align">
                                     <nav>
                                         <label class="radio">
@@ -932,20 +927,26 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     </nav>
                                 </div>
                             </div>
-                            <div class="row middle-align">
-                                <button class="slow-ripple" on:click={async(e) => {await handleCaptureAsVideo()}}>
+                            <div        class="row  middle-align">
+                                <button class="slow-ripple      " on:click={async (e) => { await handleCaptureAsVideo(); }}>
                                     {#if recording === false}
-                                        <i class="fas fa-circle-play"></i>
+                                        <i class="fas fa-circle-play "></i>
+                                    <!--<i class="fas fa-circle-play "></i>-->
                                         <span>Start</span>
+                                    <!--<span>Start</span>                 -->
                                     {:else}
                                         <i class="fas fa-circle-pause"></i>
-                                        <span>Stop</span>
+                                    <!--<i class="fas fa-circle-pause"></i>-->
+                                        <span>Stop </span>
+                                    <!--<span>Stop </span>                 -->
                                     {/if}
                                 </button>
                                 {#if recording === true}
                                     <div>
                                         <i class="fas fa-record-vinyl"></i>
+                                    <!--<i class="fas fa-record-vinyl"></i>-->
                                         <span>Recording...</span>
+                                    <!--<span>Recording...</span>          -->
                                     </div>
                                 {/if}
                             </div>
@@ -956,20 +957,27 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
                     </div>
                 </dialog>
-                <button
-                    on:click = {async() => {
-                        if (mode === MODE.IMAGE){
-                            await shareImage (              canvas.children[0] as HTMLCanvasElement);
+                <button class="slow-ripple"
+                     on:click={async (e) => {
+                        if (mode === MODE.IMAGE ) {
+                            await shareImage (/*imageToShare,*/ canvas.children[0] as HTMLCanvasElement);
+//                          await shareImage (/*imageToShare,*/ canvas.children[0] as HTMLCanvasElement);
                         }
-                        else if (mode === MODE.VIDEO) {
-                            await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement);
+                        else
+                        if (mode === MODE.VIDEO ) {
+                            await shareVideo (  videoToShare,   canvas.children[0] as HTMLCanvasElement);
+//                          await shareVideo (  videoToShare,   canvas.children[0] as HTMLCanvasElement);
                         }
-                        else {
-                            await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement);
+                        else
+                        if (mode === MODE.WEBCAM) {
+                            await shareWebcam(  videoToShare,   canvas.children[0] as HTMLCanvasElement);
+//                          await shareWebcam(  videoToShare,   canvas.children[0] as HTMLCanvasElement);
                         }
-                    }}>
+                }}>
                     <i class="fas fa-share"></i>
+                <!--<i class="fas fa-share"></i>-->
                     <span>Share</span>
+                <!--<span>Share</span>          -->
                 </button>
             </div>
         </div>
@@ -977,30 +985,31 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             <div class="sideBarContainer grey-border border">
                 <div class="small-padding center-align">
                     <button class="slow-ripple" 
-                        on:click={async (e) => {
+                         on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                                    ,   fragmentShaderSourceCode________: null
-                                                    ,   fragmentShader______GLSLUniforms: null
-                                                    ,   fragmentShaderFiltering_Instance: null
-                                                    ,   fragmentShader_HTMLSelectElement: null
-                                                    , }
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     , }
                                                     ];
                             editorSnapshotsUndoStack.push({
                                 undo: async (dynamicStorage: Map<string, any> | null) => {
                             $effectsUsedForFiltering.pop();
+//                          $effectsUsedForFiltering.pop();
                             $effectsUsedForFiltering = $effectsUsedForFiltering;
-                            console.log("call");
+//                          $effectsUsedForFiltering = $effectsUsedForFiltering;
                                 }
                                 ,
                                 redo: async (dynamicStorage: Map<string, any> | null) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                                    ,   fragmentShaderSourceCode________: null
-                                                    ,   fragmentShader______GLSLUniforms: null
-                                                    ,   fragmentShaderFiltering_Instance: null
-                                                    ,   fragmentShader_HTMLSelectElement: null
-                                                    , }
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     , }
                                                     ];
                                 }
                                 ,
@@ -1015,27 +1024,28 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                                    ,   fragmentShaderSourceCode________: null
-                                                    ,   fragmentShader______GLSLUniforms: null
-                                                    ,   fragmentShaderFiltering_Instance: null
-                                                    ,   fragmentShader_HTMLSelectElement: null
-                                                    , }
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     , }
                                                     ];
                             editorSnapshotsUndoStack.push({
                                 undo: async (dynamicStorage: Map<string, any> | null) => {
                             $effectsUsedForFiltering.pop();
+//                          $effectsUsedForFiltering.pop();
                             $effectsUsedForFiltering = $effectsUsedForFiltering;
-                            console.log("call");
+//                          $effectsUsedForFiltering = $effectsUsedForFiltering;
                                 }
                                 ,
                                 redo: async (dynamicStorage: Map<string, any> | null) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                                    ,   fragmentShaderSourceCode________: null
-                                                    ,   fragmentShader______GLSLUniforms: null
-                                                    ,   fragmentShaderFiltering_Instance: null
-                                                    ,   fragmentShader_HTMLSelectElement: null
-                                                    , }
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     , }
                                                     ];
                                 }
                                 ,
@@ -1315,9 +1325,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             </div>
             
         </div>
-        <div class="footerContainer grey-border border">
-                
-        </div>
+        <div class="footerContainer grey-border border"></div>
+    <!--<div class="footerContainer grey-border border"></div>-->
     </div>
 <!--<div><button class="slow-ripple" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->
 <!--<div><button class="slow-ripple" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->

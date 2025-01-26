@@ -1258,50 +1258,69 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 <div class="canvasToolBoxes grey-border border small-padding">
                     <!--Dành cho canvas đang render video-->
                     <!--Dành cho canvas đang render video-->
+                <!--<div     class="row   ">-->
                     <div     class="row   ">
+                <!--<div     class="row   ">-->
                         {#if mode === MODE.VIDEO}
                         <div class="column">
                             <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
                             <button class="slow-ripple circle" on:click={async (e) => {
                                     video?.time(video?.time() - 10);
-                    //              video?.time(video?.time() - 10);
+//                                  video?.time(video?.time() - 10);
                             }}>
+                            <!--<i  class="fas fa-backward"></i>-->
                                 <i  class="fas fa-backward"></i>
+                            <!--<i  class="fas fa-backward"></i>-->
                             </button>
                             <button class="slow-ripple circle" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
-                                                                                                videoIsPlaying =
+                                                                                             videoIsPlaying =
                                                                                             !videoIsPlaying ;
                             }}>
                                 {#if videoIsPlaying}
+                                <!--<i class="fas fa-pause"></i>-->
                                     <i class="fas fa-pause"></i>
-                                {:else} 
+                                <!--<i class="fas fa-pause"></i>-->
+                                {:else}
+                                <!--<i class="fas fa-play "></i>-->
                                     <i class="fas fa-play "></i>
+                                <!--<i class="fas fa-play "></i>-->
                                 {/if}
                             </button>
                             <!-- svelte-ignore a11y_consider_explicit_label -->
                             <button class="slow-ripple circle" on:click={async (e) => {
                                     video?.time(video?.time() + 10);
-                    //              video?.time(video?.time() + 10);
+//                                  video?.time(video?.time() + 10);
                             }}>
+                            <!--<i  class="fas fa-forward "></i>-->
                                 <i  class="fas fa-forward "></i>
+                            <!--<i  class="fas fa-forward "></i>-->
                             </button>
                             <progress value="0" max="100" class="light-green-text" bind:this={videoProgressSlider_}></progress>
                         </div>
                         
-                        <nav   class="no-space                            ">
+                        <nav   class="no-space">
+                        <!--<i class="fas fa-volume-off padding-tiny"></i>-->
                             <i class="fas fa-volume-off padding-tiny"></i>
-                            <label                class="slider
-                                                        medium           ">
-                                <input type="range" value="1.0" min="0.0"
-                                                                max="1.0"
-                                        step="0.010" on:input={async (e) => {
-                                                        video?.volume(e.currentTarget.valueAsNumber);
-                    //                                   video?.volume(e.currentTarget.valueAsNumber);
+                        <!--<i class="fas fa-volume-off padding-tiny"></i>-->
+                            <label                     class="slider
+                                                              medium       ">
+                                <input type="range"    value="1.0" min="0.0"
+                                                                   max="1.0"
+                                       step="0.010" on:input={async (e) => {
+                                                       video?.volume(e.currentTarget.valueAsNumber);
+//                                                     video?.volume(e.currentTarget.valueAsNumber);
                                 }}>
+                            <!--<span class="       "></span>-->
                                 <span class="       "></span>
+                            <!--<span class="       "></span>-->
+                            <!--<div  class="tooltip"></div >-->
                                 <div  class="tooltip"></div >
+                            <!--<div  class="tooltip"></div >-->
                             </label>
+                        <!--<i class="fas fa-volume-high padding-tiny"></i>-->
                             <i class="fas fa-volume-high padding-tiny"></i>
+                        <!--<i class="fas fa-volume-high padding-tiny"></i>-->
                         </nav>
                         {/if}
                     </div>

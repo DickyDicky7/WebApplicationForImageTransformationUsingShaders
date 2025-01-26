@@ -1072,8 +1072,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <div class="space"></div>
                     <!--<div class="space"></div>-->
                         {#if fragmentShaderSourceType________ ===  "NI"}
-                            <div class="row">
-                                <div class="field label suffix round border max ">
+                            <div     class="                                row">
+                                <div class="field label suffix round border max">
                                     <select
                                         bind:this={fragmentShader_HTMLSelectElement}
                                         on:change={async(e) => {
@@ -1104,10 +1104,10 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                         editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                                         editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
                                         editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex"
-                                                                    ,         cachedSelectedIndex);
-                                                                            cachedSelectedIndex =
+                                                                     ,         cachedSelectedIndex);
+                                                                               cachedSelectedIndex =
                                                             e.currentTarget.selectedIndex;
-                                        let shaderName  =    e.currentTarget.options      [
+                                        let shaderName  =   e.currentTarget.options      [
                                                             e.currentTarget.selectedIndex].value;
                                         if (shaderName ===            "none")             {
                                             console.log(`Shader name:   ${shaderName}          `);
@@ -1119,18 +1119,18 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                             editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                                             editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
                                             editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-                                                                        ,         cachedSelectedIndex);
+                                                                         ,         cachedSelectedIndex);
                                         }
                                         else                                              {
                                             console.log(`Shader name:   ${shaderName}          `);
                                             let  shaderPath = Shaders.get(shaderName            );
                                             if (!shaderPath) {
                                             console.log(`Shader path:   ${shaderPath} not exist`);
-                                                        return                                  ;
+                                                         return                                  ;
                                             }
                                             const                                                          shaderRawSourceCode = await loadAsset(shaderPath);
                                             if ( shaderName.toLowerCase()
-                                                        .       trim().includes("lygia"))    {
+                                                           .       trim().includes("lygia"))    {
                                                 fragmentShaderSourceCode________ = await resolveLygiaAsync(shaderRawSourceCode);
                                                 if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
 //                                              if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
@@ -1165,7 +1165,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                             editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
                                             editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
                                             editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-                                                                        ,         cachedSelectedIndex);
+                                                                         ,         cachedSelectedIndex);
                                         }
                                         editorSnapshotsUndoStack.push(
                                         editorSnapshot               );
@@ -1179,26 +1179,27 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <!-- svelte-ignore a11y-label-has-associated-control -->
                             <!-- svelte-ignore a11y-label-has-associated-control -->
                                     <label>Choose your effects</label>
-                            <!--    <label>Choose your effects</label>       -->
+                            <!--    <label>Choose your effects</label>           -->
                                     <i class="fas fa-chevron-down"></i>
-                            <!--    <i class="fas fa-chevron-down"></i> -->
+                            <!--    <i class="fas fa-chevron-down"></i>          -->
                                 </div>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple circle" data-ui={`#b${effectIndex}`}>
-                                    <i class="fas fa-pen"></i>
-                                </button>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                            <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                <button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>
+                            <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
+                                <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
+                            <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
-                            <dialog class="dialog blur" id={`b${String(effectIndex)}`}>
-                                <div class="max right-align">
-                                    <!-- svelte-ignore a11y_consider_explicit_label -->
-                                    <button class="transparent circle right" data-ui={`#b${effectIndex}`}>
-                                        <i class="fas fa-xmark"></i>
-                                    </button>
-                                </div>
+                            <dialog  class="dialog blur" id={`b${String(effectIndex)}`}>
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
+                                <div class="max right-align"><button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button></div>
+                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
                             <!--<div class="space"></div>-->
                             <!--<div class="space"></div>-->
                             <!--<div class="space"></div>-->

@@ -853,7 +853,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <!--        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
-                <button data-ui="#a">
+                <button class="slow-ripple" data-ui="#a">
                     <i class="fas fa-download"></i>
                     <span>Save</span>
                 </button>
@@ -1207,41 +1207,49 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             </dialog>
                         {/if}
                         {#if fragmentShaderSourceType________ ===  "AI"}
-                            <div class="row">
-                                <div class="max medium-padding">
-                                    <span>Effect {effectIndex} by AI</span>
-                                </div>
+                            <div     class="row               ">
+                            <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
+                                <div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>
+                            <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple circle" data-ui={`#c${effectIndex}`}>
-                                    <i class="fas fa-pen"></i>
-                                </button>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                            <!--<button class="slow-ripple circle" data-ui={`#c${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                <button class="slow-ripple circle" data-ui={`#c${effectIndex}`}><i class="fas fa-pen"></i></button>
+                            <!--<button class="slow-ripple circle" data-ui={`#c${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
+                                <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
+                            <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
-                            <dialog class="dialog blur" id={`c${effectIndex}`}>
-                                <div class="max right-align">
-                                    <!-- svelte-ignore a11y_consider_explicit_label -->
-                                    <button class="transparent circle right" data-ui={`#c${effectIndex}`}>
-                                        <i class="fas fa-xmark"></i>
-                                    </button>
-                                </div>
-                                <div class="row">
+                            <dialog  class="dialog blur" id={`c${effectIndex}`}>
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
+                                <div class="max right-align"><button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button></div>
+                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
+                                <div     class="                         row">
                                     <div class="field border round label max">
                                         <input type="text" bind:this={AIInputPrompts}>
+                                        <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <label>Ask me for a new effect</label>
                                     </div>
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
+                                    <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <button class="slow-ripple circle" on:click={async (e)=>{
                                         fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
+//                                      fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
                                         console.log(fragmentShaderSourceCode________);
-                                        fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
+                                        fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
+//                                      fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
                                         console.log(fragmentShader______GLSLUniforms);
                                         fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+//                                      fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
                                     }}>
+                                    <!--<i class="fas fa-paper-plane"></i>-->
                                         <i class="fas fa-paper-plane"></i>
+                                    <!--<i class="fas fa-paper-plane"></i>-->
                                     </button>
                                 </div>
                             <!--<div class="space"></div>-->

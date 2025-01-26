@@ -42,7 +42,7 @@
   //https://www.youtube.com/watch?v=iIWH3IUYHzM
 </script>
 
-<div>
+<div style="display: none;">
 <!--
   <span>Outline color</span>
 --->

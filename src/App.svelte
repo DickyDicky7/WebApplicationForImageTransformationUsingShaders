@@ -1305,22 +1305,22 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         {/if}
                     </div>
                     <!--Dành cho canvas đang render video-->
+                    <!--Dành cho canvas đang render video-->
                     <div>
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend" on:click={async (e) => { await onUndoActionExecuted(); }}>
-                            <i class="fas fa-arrow-rotate-left "></i>
-                            <span>Undo</span>
-                        </button>
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend" on:click={async (e) => { await onRedoActionExecuted(); }}>
-                            <i class="fas fa-arrow-rotate-right"></i>
-                            <span>Redo</span>
-                        </button>
+                        <button class="slow-ripple circle extend" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                    <!--<button class="slow-ripple circle extend" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                    -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button class="slow-ripple circle extend" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>
+                    <!--<button class="slow-ripple circle extend" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>-->
                     </div>
                 </div>
                 <div class="canvas grey-border border">
                     <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
-                    <!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>-->
+                <!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>-->
                 </div>
             </div>
             

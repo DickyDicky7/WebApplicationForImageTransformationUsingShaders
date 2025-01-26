@@ -981,8 +981,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 </button>
             </div>
         </div>
-        <div class="mainContainer grey-border border">
-            <div class="sideBarContainer grey-border border">
+        <div         class="mainBarContainer grey-border border">
+            <div     class="sideBarContainer grey-border border">
                 <div class="small-padding center-align">
                     <button class="slow-ripple" 
                          on:click={async (e) => {
@@ -1254,10 +1254,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     {/each}
                 </div>
             </div>
-            <div class="canvasContainer grey-border border">
-                <div class="canvasTool grey-border border small-padding">
+            <div     class="canvasContainer grey-border border              ">
+                <div class="canvasToolBoxes grey-border border small-padding">
                     <!--Dành cho canvas đang render video-->
-                    <div class="row">
+                    <!--Dành cho canvas đang render video-->
+                    <div     class="row   ">
                         {#if mode === MODE.VIDEO}
                         <div class="column">
                             <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -1266,7 +1267,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     //              video?.time(video?.time() - 10);
                             }}>
                                 <i  class="fas fa-backward"></i>
-                             </button>
+                            </button>
                             <button class="slow-ripple circle" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
                                                                                                 videoIsPlaying =
                                                                                             !videoIsPlaying ;
@@ -1353,14 +1354,14 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 /*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
     .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
 /*  .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }  */
-    .mainContainer    { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }
-/*  .mainContainer    { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }  */
+    .mainBarContainer { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }
+/*  .mainBarContainer { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }  */
     .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
 /*  .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
     .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
 /*  .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
-    .canvasTool       { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
-/*  .canvasTool       { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }  */
+    .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
+/*  .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }  */
     .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : scroll; flex-grow: 1; }
 /*  .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : scroll; flex-grow: 1; }  */
     .dialog           { width: 050% ;                                                                                                                                                                  }

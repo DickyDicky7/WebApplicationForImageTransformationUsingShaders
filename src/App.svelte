@@ -62,6 +62,11 @@ import {   onMount   } from   "svelte";
             p.frameRate (  fps   );
             p.disableFriendlyErrors = true;
 //          p.disableFriendlyErrors = true;
+//EXPERIMENT
+            p.noLights   ();
+            p.noDebugMode();
+            p.noSmooth   ();
+//EXPERIMENT
 
 
         };
@@ -853,19 +858,17 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <!--        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
-                <button class="slow-ripple" data-ui="#a">
-                    <i class="fas fa-download"></i>
-                    <span>Save</span>
-                </button>
+            <!--<button class="slow-ripple" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
+                <button class="slow-ripple" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>
+            <!--<button class="slow-ripple" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
                 <dialog class="left small-blur dialogSide" id="a">
-                    <div class="max right-align">
-                        <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="transparent circle right" data-ui="#a">
-                            <i class="fas fa-xmark"></i>
-                        </button>
-                    </div>
-                    <div class="column max small-padding">
-                        <div class="column">
+                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                <!--<div class="max right-align"><button class="slow-ripple transparent circle right" data-ui="#a"><i class="fas fa-xmark"></i></button></div>-->
+                    <div class="max right-align"><button class="slow-ripple transparent circle right" data-ui="#a"><i class="fas fa-xmark"></i></button></div>
+                <!--<div class="max right-align"><button class="slow-ripple transparent circle right" data-ui="#a"><i class="fas fa-xmark"></i></button></div>-->
+                    <div     class="column max small-padding">
+                        <div class="column                  ">
                             <h6>Save as image</h6>
                             <div class="field label suffix round border">
                                 <select bind:this={imageFormatSelection}>
@@ -876,22 +879,25 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                           <option>{imageFormat.extension}</option>
                                     {/each}
                                 </select>
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!--<label>Image Format</label>-->
                                 <label>Image Format</label>
+                            <!--<label>Image Format</label>-->
+                            <!--<i class="fas fa-chevron-down"></i>-->
                                 <i class="fas fa-chevron-down"></i>
+                            <!--<i class="fas fa-chevron-down"></i>-->
                             </div>
                             <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <button class="slow-ripple center" on:click={async (e) => { await startCaptureAsImage        (); }}>
-                                <i class="fas fa-camera"></i>
-                                <span>Capture</span>
-                                <div class="tooltip top max toolTip round">
-                                    <span>Save the current frame.</span>
-                                </div>
-                            </button><!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!--<button class="slow-ripple center" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera"></i><span>Capture</span><div class="tooltip top max toolTip round"><span>Save the current frame.</span></div></button>-->
+                            <button class="slow-ripple center" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera"></i><span>Capture</span><div class="tooltip top max toolTip round"><span>Save the current frame.</span></div></button>
+                        <!--<button class="slow-ripple center" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera"></i><span>Capture</span><div class="tooltip top max toolTip round"><span>Save the current frame.</span></div></button>-->
+                            <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
+                            <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
                         </div>
                         <div class="medium-space"></div>
-                        <div class="column">
+                        <div class="column      ">
                             <h6>Save as video</h6>
                             <div class="field label suffix round border"> 
                                 <select bind:this={videoFormatSelection}>
@@ -902,28 +908,24 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                           <option>{videoFormat.mimeType}</option>
                                     {/each}
                                 </select>
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
-                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!--<label>Video Format</label>-->
                                 <label>Video Format</label>
+                            <!--<label>Video Format</label>-->
+                            <!--<i class="fas fa-chevron-down"></i>-->
                                 <i class="fas fa-chevron-down"></i>
+                            <!--<i class="fas fa-chevron-down"></i>-->
                             </div>
                             <div     class="row   center-align">
                                 <div class="field middle-align">
                                     <nav>
-                                        <label class="radio">
-                                            <input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}>
-                                            <span>Snapshot</span>
-                                            <div class="tooltip right max toolTip round">
-                                                <span>Save frames from when you press start button until you press stop button into a video.</span>
-                                            </div>
-                                        </label>
-                                        <label class="radio">
-                                            <input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}>
-                                            <span>Fullshot</span>
-                                            <div class="tooltip left max toolTip round">
-                                                <span>For image: same as snapshot.<br> For video: Save entire video with applied effect.</span>
-                                            </div>
-                                        </label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>-->
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>-->
                                     </nav>
                                 </div>
                             </div>
@@ -1017,11 +1019,17 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 ,
                             });
                         }}>
+                    <!--<i class="fas fa-plus"></i>-->
                         <i class="fas fa-plus"></i>
+                    <!--<i class="fas fa-plus"></i>-->
+                    <!--<span>Add Effect NI</span> -->
                         <span>Add Effect NI</span>
-                    </button><!--Thêm effect @có sẵn @@-->
+                    <!--<span>Add Effect NI</span> -->
+                    </button>
+                    <!--Thêm effect @có sẵn @@-->
+                    <!--Thêm effect @có sẵn @@-->
                     <button class="slow-ripple" 
-                        on:click={async (e) => {
+                         on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
                                                      ,   fragmentShaderSourceCode________: null
@@ -1053,9 +1061,15 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 ,
                             });
                         }}>
+                    <!--<i class="fas fa-plus"></i>-->
                         <i class="fas fa-plus"></i>
+                    <!--<i class="fas fa-plus"></i>-->
+                    <!--<span>Add Effect AI</span> -->
                         <span>Add Effect AI</span>
-                    </button><!--Thêm effect gen bởi AI-->
+                    <!--<span>Add Effect AI</span> -->
+                    </button>
+                    <!--Thêm effect gen bởi AI-->
+                    <!--Thêm effect gen bởi AI-->
                 </div>
                 <div class="small-padding effectContainer">
                     {#each $effectsUsedForFiltering as {
@@ -1074,8 +1088,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         {#if fragmentShaderSourceType________ ===  "NI"}
                             <div     class="                                row">
                                 <div class="field label suffix round border max">
-                                    <select
-                                        bind:this={fragmentShader_HTMLSelectElement}
+                                <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
+                                <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
+                                    <select bind:this={fragmentShader_HTMLSelectElement}
                                         on:change={async(e) => {
                                         let editorSnapshot: EditorSnapshot = {
                                             undo          : null,
@@ -1108,7 +1123,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                                                cachedSelectedIndex =
                                                             e.currentTarget.selectedIndex;
                                         let shaderName  =   e.currentTarget.options      [
-                                                            e.currentTarget.selectedIndex].value;
+                                                            e.currentTarget.selectedIndex].value ;
                                         if (shaderName ===            "none")             {
                                             console.log(`Shader name:   ${shaderName}          `);
                                             fragmentShaderSourceCode________ = null;

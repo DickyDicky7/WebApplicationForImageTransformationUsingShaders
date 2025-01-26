@@ -235,7 +235,8 @@ import {   onMount   } from   "svelte";
                      ceaseRecord = true;
                      fshotRecord = true;
                      ceaseCaptureAsVideoFullshot();
-                     recording = false;
+                     recording   = false;
+//                   recording   = false;
                 };
 //------------------------------//
             };
@@ -784,24 +785,30 @@ let        draggableText:
     import MouseCursor from "./MouseCursor.svelte";
 //  import MouseCursor from "./MouseCursor.svelte";
 
-let recording: boolean = false;
-let selectedCaptureOption: string = "Snapshot";
+    let recording: boolean = false;
+//  let recording: boolean = false;
+    let selectedCaptureOption: string = "Snapshot";
+//  let selectedCaptureOption: string = "Snapshot";
 const handleCaptureAsVideo = async(): Promise<void> => {
-    if (recording === false){
-        recording = true;
-        if (selectedCaptureOption === "Snapshot"){
+    if (recording === false) {
+        recording =   true ;
+//      recording =   true ;
+        if (selectedCaptureOption === "Snapshot") {
             await startCaptureAsVideoSnapshot();
         }
-        else if (selectedCaptureOption === "Fullshot"){
+        else
+        if (selectedCaptureOption === "Fullshot") {
             await startCaptureAsVideoFullshot();
         }
     }
-    else{
-        recording = false;
-        if (selectedCaptureOption === "Snapshot"){
+    else                     {
+        recording =   false;
+//      recording =   false;
+        if (selectedCaptureOption === "Snapshot") {
             await ceaseCaptureAsVideoSnapshot();
         }
-        else if (selectedCaptureOption === "Fullshot"){
+        else
+        if (selectedCaptureOption === "Fullshot") {
             await ceaseCaptureAsVideoFullshot();
         }
     }
@@ -829,21 +836,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <span>Webcam</span>
                         </div>
                         <label class="switch icon">
-                            <input type="checkbox" on:change={(event) => {
-                                const input =event.target as HTMLInputElement;
-                                const button = document.createElement("button"); 
-                                button.type = "button";
-                                const fakeEvent = new MouseEvent("click", {
-                                    bubbles: true,
-                                    cancelable: true,
-                                }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
-
-                                //fakeEvent.currentTarget = button;
-                                if (input.checked){
-                                    startWebCam(fakeEvent);
+                            <input type="checkbox" on:change={(e) => {
+                                const fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
+                                if (e.currentTarget.checked){
+                                    startWebCam(fakeMouseEvent);
                                 }
                                 else{
-                                    ceaseWebCam(fakeEvent);
+                                    ceaseWebCam(fakeMouseEvent);
                                 }
                             }}>
                             <span>
@@ -856,8 +855,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 
             </div>
             
-            <!-- <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
-            <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button> -->
+<!--        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button>
+            <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
                 <button data-ui="#a">
                     <i class="fas fa-download"></i>
@@ -1320,12 +1319,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 
         </div>
     </div>
-    <!-- <div>
-        <button class="slow-ripple" on:click={async() => {
-        const   res = await promptShader();
-        console.log(  await res.text()   );
-        }}>AI</button>
-    </div> -->
+<!--<div><button class="slow-ripple" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->
+<!--<div><button class="slow-ripple" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->
 </main>
 
 <style>
@@ -1341,72 +1336,32 @@ const handleCaptureAsVideo = async(): Promise<void> => {
     *    {
      font-family:            'SF Mono Regular'                        , 'fontawesome';
     }
-    .container {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        display: flex;
-        flex-direction: column;
-    }
-    .headerContainer {
-        width: 100%;
-    }
-    .footerContainer {
-        width: 100%;
-    }
-    .topBarContainer {
-        width: 100%;
-        justify-content: space-between;
-        display: flex;
-        flex-direction: row;
-    }
-    .mainContainer {
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-    }
-    .sideBarContainer {
-        width: 30%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .canvasContainer {
-        width: 70%;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    .canvasTool {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-    }
-    .canvas {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        align-items: center;
-        overflow: scroll;
-        flex-grow: 1;
-    }
-    .dialog {
-        width: 50%;
-    }
-    .effectContainer{
-        overflow-y: scroll;
-        height: 100%;
-    }
-    .dialogSide {
-        width: 30%;
-    }
-    .toolTip {
-        width: 200px;
-    }
+    .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }
+/*  .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }  */
+    .headerContainer  { width: 100% ;                                                                                                                                                                  }
+/*  .headerContainer  { width: 100% ;                                                                                                                                                                  }  */
+    .footerContainer  { width: 100% ;                                                                                                                                                                  }
+/*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
+    .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
+/*  .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }  */
+    .mainContainer    { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }
+/*  .mainContainer    { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }  */
+    .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
+/*  .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
+    .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
+/*  .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
+    .canvasTool       { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
+/*  .canvasTool       { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }  */
+    .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : scroll; flex-grow: 1; }
+/*  .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : scroll; flex-grow: 1; }  */
+    .dialog           { width: 050% ;                                                                                                                                                                  }
+/*  .dialog           { width: 050% ;                                                                                                                                                                  }  */
+    .effectContainer  {               height: 100% ;                                                                                                                 overflow-y: scroll;               }
+/*  .effectContainer  {               height: 100% ;                                                                                                                 overflow-y: scroll;               }  */
+    .dialogSide       { width: 030% ;                                                                                                                                                                  }
+/*  .dialogSide       { width: 030% ;                                                                                                                                                                  }  */
+    .toolTip          { width: 200px;                                                                                                                                                                  }
+/*  .toolTip          { width: 200px;                                                                                                                                                                  }  */
 </style>
 
 

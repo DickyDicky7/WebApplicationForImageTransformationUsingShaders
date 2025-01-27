@@ -37,23 +37,35 @@ import {   onMount   } from   "svelte";
 
     const p5Logic = (p: p5) => {
           p.mousePressed  = (e?: object): void => {
+//        onMousePressed (draggableText, p);
+          for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
           onMousePressed (draggableText, p);
+          }
           };
           p.mouseDragged  = (e?: object): void => {
+//          startDragging(draggableText, p);
+          for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
             startDragging(draggableText, p);
+          }
           };
           p.mouseReleased = (e?: object): void => {
+//          ceaseDragging(draggableText, p);
+          for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
             ceaseDragging(draggableText, p);
+          }
           };
           p.preload = (): void => {
             defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
 //          defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
           };
           p.setup   = (): void => {
-            draggableText.font = defaultFont;
 //          draggableText.font = defaultFont;
-            p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
-//          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
+//          draggableText.font = defaultFont;
+            p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: true, perPixelLighting: true, });
+//          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: true, perPixelLighting: true, });
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
                            Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
                               p.WEBGL);
@@ -73,8 +85,12 @@ import {   onMount   } from   "svelte";
 
         p.draw = () => {
         p.background( 255 );
-        display(draggableText, p);
 //      display(draggableText, p);
+//      display(draggableText, p);
+        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//      for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+        display(draggableText, p);
+        }
         };
     };
 
@@ -108,9 +124,19 @@ import {   onMount   } from   "svelte";
             image_Instance, 0.0, 0.0)           ;
 
 
-            for (let { fragmentShaderSourceCode________,
+            for (let { fragmentShaderSourceType________,
+                       fragmentShaderSourceCode________,
                        fragmentShader______GLSLUniforms,
-                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                       fragmentShaderFiltering_Instance,
+                       draggableText                   , } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceType________) {
+                if   (!draggableText) { continue; }
+//              if   (!draggableText) { continue; }
+                    display(draggableText, canvasInstance);
+//                  display(draggableText, canvasInstance);
+                    continue;
+//                  continue;
+                }
                 if   (!fragmentShaderSourceCode________) continue;
                 if   (!fragmentShader______GLSLUniforms) continue;
                 if   (!fragmentShaderFiltering_Instance) continue;
@@ -820,7 +846,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 }
 </script>
 
-    <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>
+<!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor> </MouseCursor>
 <main>
@@ -986,6 +1012,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
         <div         class="mainBarContainer grey-border border">
             <div     class="sideBarContainer grey-border border">
                 <div class="small-padding center-align">
+                <!--<div class="space"></div>-->
+                    <div class="space"></div>
+                <!--<div class="space"></div>-->
                     <button class="slow-ripple" 
                          on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
@@ -994,6 +1023,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                      ,   fragmentShader______GLSLUniforms: null
                                                      ,   fragmentShaderFiltering_Instance: null
                                                      ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : null
+//                                                   ,   draggableText                   : null
                                                      , }
                                                     ];
                             editorSnapshotsUndoStack.push({
@@ -1010,7 +1041,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                      ,   fragmentShaderSourceCode________: null
                                                      ,   fragmentShader______GLSLUniforms: null
                                                      ,   fragmentShaderFiltering_Instance: null
-                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   fragmentShader_HTMLSelectElement: null,draggableText:null
                                                      , }
                                                     ];
                                 }
@@ -1026,6 +1057,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <span>Add Effect NI</span>
                     <!--<span>Add Effect NI</span> -->
                     </button>
+                <!--<div class="space"></div> -->
+                    <div class="space"></div>
+                <!--<div class="space"></div> -->
                     <!--Thêm effect @có sẵn @@-->
                     <!--Thêm effect @có sẵn @@-->
                     <button class="slow-ripple" 
@@ -1036,6 +1070,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                      ,   fragmentShader______GLSLUniforms: null
                                                      ,   fragmentShaderFiltering_Instance: null
                                                      ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : null
+//                                                   ,   draggableText                   : null
                                                      , }
                                                     ];
                             editorSnapshotsUndoStack.push({
@@ -1053,6 +1089,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                      ,   fragmentShader______GLSLUniforms: null
                                                      ,   fragmentShaderFiltering_Instance: null
                                                      ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : null
+//                                                   ,   draggableText                   : null
                                                      , }
                                                     ];
                                 }
@@ -1068,8 +1106,53 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <span>Add Effect AI</span>
                     <!--<span>Add Effect AI</span> -->
                     </button>
+                <!--<div class="space"></div> -->
+                    <div class="space"></div>
+                <!--<div class="space"></div> -->
                     <!--Thêm effect gen bởi AI-->
                     <!--Thêm effect gen bởi AI-->
+                    <button class="slow-ripple"
+                         on:click={async (e) => {
+                            $effectsUsedForFiltering = [ ...
+                            $effectsUsedForFiltering , { fragmentShaderSourceType________: null
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : {
+//                                                   ,   draggableText                   : {
+                                                                                            colorFilling: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            colorOutline: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            fontSize    : 24                          ,
+                                                                                            contents    : "Text"                      ,
+                                                                                            alignHOption: "center"                    ,
+                                                                                            alignVOption: "center"                    ,
+                                                                                            font        : defaultFont                 ,
+                                                                                            stylesOption: "normal"                    ,
+                                                                                            positionX   : 0                           ,
+                                                                                            positionY   : 0                           ,
+                                                                                            dimensionW  : 24 * 4                      ,
+                                                                                            dimensionH  : 24 * 1                      ,
+                                                                                            isDragging  : false                       ,
+                                                                                            offsetX     : 0                           ,
+                                                                                            offsetY     : 0                           ,
+                                                                                            spacings    : 24                          ,
+                                                                                            wrapMode    : null!                       ,
+//                                                                                         }
+                                                                                           }
+                                                     , }
+                                                    ];
+                    }}>
+                    <!--<i class="fas fa-plus"></i>-->
+                        <i class="fas fa-plus"></i>
+                    <!--<i class="fas fa-plus"></i>-->
+                    <!--<span>Add Text     </span> -->
+                        <span>Add Text     </span>
+                    <!--<span>Add Text     </span> -->                        
+                    </button>
+                <!--<div class="space"></div>-->
+                    <div class="space"></div>
+                <!--<div class="space"></div>-->
                 </div>
                 <div class="small-padding effectContainer">
                     {#each $effectsUsedForFiltering as {
@@ -1078,6 +1161,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                      ,     fragmentShader______GLSLUniforms
                      ,     fragmentShaderFiltering_Instance
                      ,     fragmentShader_HTMLSelectElement
+                     ,     draggableText
+//                   ,     draggableText
                      ,
                                                        }
                      ,      effectIndex
@@ -1274,6 +1359,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                                                        canvasInstance }></GlslUniform>
                             </dialog>
+                        {/if}
+                        {#if !fragmentShaderSourceType________}
+                        <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
+                            <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>
+                        <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
                         {/if}
                     {/each}
                 </div>

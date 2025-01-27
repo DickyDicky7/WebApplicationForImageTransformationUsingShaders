@@ -1310,9 +1310,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 </div>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
-                                <button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>
-                            <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                 {#if fragmentShader______GLSLUniforms !== null}
+                                    {#if fragmentShader______GLSLUniforms.length > 0}
+                                        <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                        <button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>
+                                        <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                    {/if}
+                                 {/if}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                             <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
@@ -1506,9 +1510,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
     }
     .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }
 /*  .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }  */
-    .headerContainer  { width: 100% ;                                                                                                                                                                  }
+/*  .headerContainer  { width: 100% ;                                                                                                                                                                  }
 /*  .headerContainer  { width: 100% ;                                                                                                                                                                  }  */
-    .footerContainer  { width: 100% ;                                                                                                                                                                  }
+/*  .footerContainer  { width: 100% ;                                                                                                                                                                  }
 /*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
     .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
 /*  .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }  */

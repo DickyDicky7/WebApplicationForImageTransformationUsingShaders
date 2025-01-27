@@ -173,8 +173,9 @@
    ,                 }
    ,              ii ( thisUniformName )
   }
-    <div>
-      <strong>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</strong>
+    <div class="container">
+      <h6>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</h6>
+      <div class="space"></div>
       <!-- Render inputs based on type -->
       {#if ((thisUniformType ?? "").startsWith( "vec")
         ||  (thisUniformType ?? "").startsWith("ivec")
@@ -355,7 +356,7 @@
         {/if}
       {:else if       (thisUniformType  ??  "") === "bool   ".trim()
              && typeof thisUniformDefaultValue  === "boolean"       }
-        <label  class="switch">
+        <label  class="switch center-align">
           <input
             type="checkbox"
                   checked={                                       thisUniformDefaultValue    }
@@ -366,6 +367,7 @@
             <i></i>
           </span>
         </label>
+        <div class="space"></div>
       {:else if (thisUniformType ?? "") === "float"
              || (thisUniformType ?? "") ===        "int"
              || (thisUniformType ?? "") ===             "uint"}
@@ -407,16 +409,19 @@
              &&                               typeof     thisUniformDefaultValue === "string"}
         <!-- <span>sampler2D (not editable)</span> -->
         <!-- <span>sampler2D (not editable)</span> -->
-        <img class="small-width small-height"       src={thisUniformDefaultValue}
-                                                    alt=""
+        <div class="max center-align">
+          <img class="small-width small-height"       src={thisUniformDefaultValue}
+                                                      alt=""
                                               bind:this={thisUniformSampler2DEle}/>
+        </div>
+        
         <!-- {#if (thisUniformName ?? "").startsWith("noise")}
         <!-- {#if (thisUniformName ?? "").startsWith("noise")}
         {:else if (thisUniformName ?? "").startsWith("bayer")}
         {:else if (thisUniformName ?? "").startsWith("palette")}
         {/if} -->
         {#if (thisUniformName ?? "").startsWith("upload")}
-        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>
+        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span></button></form>
 <!--    <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>    -->
         {:else}
         <div class="field label suffix round border">
@@ -452,17 +457,22 @@
 <!--      <i class="fa-solid fa-chevron-down"></i>      -->
         </div>
         {/if}
-
+        <div class="space"></div>  
       {:else}
         <span>Unsupported type</span>
       {/if}
     </div>
-    <div class="large-space"></div>
-    <div class="large-space"></div>
+    <!-- <div class="large-space"></div> -->
+    <!-- <div class="large-space"></div> -->
   {/each}
 </div>
 
-
+<style>
+  .container{
+    display: flex;
+    flex-direction: column;
+  }
+</style>
 
 
 

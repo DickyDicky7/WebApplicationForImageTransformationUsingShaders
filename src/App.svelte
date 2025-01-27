@@ -107,6 +107,7 @@ import {   onMount   } from   "svelte";
 //      canvasInstance.WEBGL,        );
             await ui("theme", "#009688");
             await ui("theme", "#009688");
+            await ui("mode", "light");
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
@@ -871,7 +872,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <MouseCursor> </MouseCursor>
 <main>
     <div     class="      container                                 ">
-        <div class="headerContainer grey-border border              "></div>
+    <!-- <div class="headerContainer grey-border border              "></div> -->
     <!--<div class="headerContainer grey-border border              "></div>-->
         <div class="topBarContainer grey-border border small-padding">
             <div class="row">
@@ -999,10 +1000,14 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 {/if}
                             </div>
                         </div>
-                        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
-                        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
-                        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
-                        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
+                        <!-- <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
+                        <!-- <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
+                        <!-- <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
+                        <!-- <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
                     </div>
                 </dialog>
                 <button class="slow-ripple"
@@ -1479,7 +1484,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             </div>
             
         </div>
-        <div class="footerContainer grey-border border"></div>
+    <!-- <div class="footerContainer grey-border border"></div> -->
     <!--<div class="footerContainer grey-border border"></div>-->
     </div>
 <!--<div><button class="slow-ripple" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->

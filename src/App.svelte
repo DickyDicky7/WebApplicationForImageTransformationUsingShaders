@@ -229,9 +229,19 @@ import {   onMount   } from   "svelte";
 //              videoProgressSlider_.value = video.time();
 //              videoProgressSlider_.value = video.time();
 
-            for (let { fragmentShaderSourceCode________,
+            for (let { fragmentShaderSourceType________,
+                       fragmentShaderSourceCode________,
                        fragmentShader______GLSLUniforms,
-                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                       fragmentShaderFiltering_Instance,
+                       draggableText                   , } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceType________) {
+                if   (!draggableText) { continue; }
+//              if   (!draggableText) { continue; }
+                    display(draggableText, canvasInstance);
+//                  display(draggableText, canvasInstance);
+                    continue;
+//                  continue;
+                }
                 if   (!fragmentShaderSourceCode________) continue;
                 if   (!fragmentShader______GLSLUniforms) continue;
                 if   (!fragmentShaderFiltering_Instance) continue;
@@ -578,9 +588,19 @@ import { resolveLygia      } from "./lygia";
                       , 0.0
                       , 0.0
                 )     ;
-            for (let { fragmentShaderSourceCode________,
+            for (let { fragmentShaderSourceType________,
+                       fragmentShaderSourceCode________,
                        fragmentShader______GLSLUniforms,
-                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                       fragmentShaderFiltering_Instance,
+                       draggableText                   , } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceType________) {
+                if   (!draggableText) { continue; }
+//              if   (!draggableText) { continue; }
+                    display(draggableText, canvasInstance);
+//                  display(draggableText, canvasInstance);
+                    continue;
+//                  continue;
+                }
                 if   (!fragmentShaderSourceCode________) continue;
                 if   (!fragmentShader______GLSLUniforms) continue;
                 if   (!fragmentShaderFiltering_Instance) continue;

@@ -1036,108 +1036,113 @@ const handleCaptureAsVideo = async(): Promise<void> => {
         </div>
         <div         class="mainBarContainer grey-border border">
             <div     class="sideBarContainer grey-border border">
-                <div class="small-padding center-align">
+                <div class="grid small-padding">
                 <!--<div class="space"></div>-->
-                    <div class="space"></div>
+                <!-- <div class="space"></div> -->
                 <!--<div class="space"></div>-->
-                    <button class="slow-ripple" 
-                         on:click={async (e) => {
-                            $effectsUsedForFiltering = [ ...
-                            $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                                     ,   fragmentShaderSourceCode________: null
-                                                     ,   fragmentShader______GLSLUniforms: null
-                                                     ,   fragmentShaderFiltering_Instance: null
-                                                     ,   fragmentShader_HTMLSelectElement: null
-                                                     ,   draggableText                   : null
-//                                                   ,   draggableText                   : null
-                                                     , }
-                                                    ];
-                            editorSnapshotsUndoStack.push({
-                                undo: async (dynamicStorage: Map<string, any> | null) => {
-                            $effectsUsedForFiltering.pop();
-//                          $effectsUsedForFiltering.pop();
-                            $effectsUsedForFiltering = $effectsUsedForFiltering;
-//                          $effectsUsedForFiltering = $effectsUsedForFiltering;
-                                }
-                                ,
-                                redo: async (dynamicStorage: Map<string, any> | null) => {
-                            $effectsUsedForFiltering = [ ...
-                            $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                                     ,   fragmentShaderSourceCode________: null
-                                                     ,   fragmentShader______GLSLUniforms: null
-                                                     ,   fragmentShaderFiltering_Instance: null
-                                                     ,   fragmentShader_HTMLSelectElement: null,draggableText:null
-                                                     , }
-                                                    ];
-                                }
-                                ,
-                                dynamicStorage: null
-                                ,
-                            });
-                        }}>
-                    <!--<i class="fas fa-plus"></i>-->
-                        <i class="fas fa-plus"></i>
-                    <!--<i class="fas fa-plus"></i>-->
-                    <!--<span>Add Effect NI</span> -->
-                        <span>Add Effect NI</span>
-                    <!--<span>Add Effect NI</span> -->
-                    </button>
-                <!--<div class="space"></div> -->
-                    <div class="space"></div>
-                <!--<div class="space"></div> -->
+                    <div class="s12 m12 l6">
+                        <button class="slow-ripple responsive" 
+                            on:click={async (e) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
+                                                        ,   fragmentShaderSourceCode________: null
+                                                        ,   fragmentShader______GLSLUniforms: null
+                                                        ,   fragmentShaderFiltering_Instance: null
+                                                        ,   fragmentShader_HTMLSelectElement: null
+                                                        ,   draggableText                   : null
+    //                                                   ,   draggableText                   : null
+                                                        , }
+                                                        ];
+                                editorSnapshotsUndoStack.push({
+                                    undo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering.pop();
+    //                          $effectsUsedForFiltering.pop();
+                                $effectsUsedForFiltering = $effectsUsedForFiltering;
+    //                          $effectsUsedForFiltering = $effectsUsedForFiltering;
+                                    }
+                                    ,
+                                    redo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
+                                                        ,   fragmentShaderSourceCode________: null
+                                                        ,   fragmentShader______GLSLUniforms: null
+                                                        ,   fragmentShaderFiltering_Instance: null
+                                                        ,   fragmentShader_HTMLSelectElement: null,draggableText:null
+                                                        , }
+                                                        ];
+                                    }
+                                    ,
+                                    dynamicStorage: null
+                                    ,
+                                });
+                            }}>
+                            <!--<i class="fas fa-plus"></i>-->
+                                <i class="fas fa-plus"></i>
+                            <!--<i class="fas fa-plus"></i>-->
+                            <!--<span>Add Effect NI</span> -->
+                                <span>Add Effect NI</span>
+                            <!--<span>Add Effect NI</span> -->
+                        </button>
+                    </div>
+                    <!--<div class="space"></div> -->
+                    <!-- <div class="space"></div> -->
+                    <!--<div class="space"></div> -->
                     <!--Thêm effect @có sẵn @@-->
                     <!--Thêm effect @có sẵn @@-->
-                    <button class="slow-ripple" 
-                         on:click={async (e) => {
-                            $effectsUsedForFiltering = [ ...
-                            $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                                     ,   fragmentShaderSourceCode________: null
-                                                     ,   fragmentShader______GLSLUniforms: null
-                                                     ,   fragmentShaderFiltering_Instance: null
-                                                     ,   fragmentShader_HTMLSelectElement: null
-                                                     ,   draggableText                   : null
-//                                                   ,   draggableText                   : null
-                                                     , }
-                                                    ];
-                            editorSnapshotsUndoStack.push({
-                                undo: async (dynamicStorage: Map<string, any> | null) => {
-                            $effectsUsedForFiltering.pop();
-//                          $effectsUsedForFiltering.pop();
-                            $effectsUsedForFiltering = $effectsUsedForFiltering;
-//                          $effectsUsedForFiltering = $effectsUsedForFiltering;
-                                }
-                                ,
-                                redo: async (dynamicStorage: Map<string, any> | null) => {
-                            $effectsUsedForFiltering = [ ...
-                            $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                                     ,   fragmentShaderSourceCode________: null
-                                                     ,   fragmentShader______GLSLUniforms: null
-                                                     ,   fragmentShaderFiltering_Instance: null
-                                                     ,   fragmentShader_HTMLSelectElement: null
-                                                     ,   draggableText                   : null
-//                                                   ,   draggableText                   : null
-                                                     , }
-                                                    ];
-                                }
-                                ,
-                                dynamicStorage: null
-                                ,
-                            });
-                        }}>
-                    <!--<i class="fas fa-plus"></i>-->
-                        <i class="fas fa-plus"></i>
-                    <!--<i class="fas fa-plus"></i>-->
-                    <!--<span>Add Effect AI</span> -->
-                        <span>Add Effect AI</span>
-                    <!--<span>Add Effect AI</span> -->
-                    </button>
+                    <div class="s12 m12 l6">
+                        <button class="slow-ripple responsive" 
+                            on:click={async (e) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
+                                                        ,   fragmentShaderSourceCode________: null
+                                                        ,   fragmentShader______GLSLUniforms: null
+                                                        ,   fragmentShaderFiltering_Instance: null
+                                                        ,   fragmentShader_HTMLSelectElement: null
+                                                        ,   draggableText                   : null
+    //                                                   ,   draggableText                   : null
+                                                        , }
+                                                        ];
+                                editorSnapshotsUndoStack.push({
+                                    undo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering.pop();
+    //                          $effectsUsedForFiltering.pop();
+                                $effectsUsedForFiltering = $effectsUsedForFiltering;
+    //                          $effectsUsedForFiltering = $effectsUsedForFiltering;
+                                    }
+                                    ,
+                                    redo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
+                                                        ,   fragmentShaderSourceCode________: null
+                                                        ,   fragmentShader______GLSLUniforms: null
+                                                        ,   fragmentShaderFiltering_Instance: null
+                                                        ,   fragmentShader_HTMLSelectElement: null
+                                                        ,   draggableText                   : null
+    //                                                   ,   draggableText                   : null
+                                                        , }
+                                                        ];
+                                    }
+                                    ,
+                                    dynamicStorage: null
+                                    ,
+                                });
+                            }}>
+                            <!--<i class="fas fa-plus"></i>-->
+                                <i class="fas fa-plus"></i>
+                            <!--<i class="fas fa-plus"></i>-->
+                            <!--<span>Add Effect AI</span> -->
+                                <span>Add Effect AI</span>
+                            <!--<span>Add Effect AI</span> -->
+                        </button>
+                    </div>
                 <!--<div class="space"></div> -->
-                    <div class="space"></div>
+                <!--<div class="space"></div> -->
                 <!--<div class="space"></div> -->
                     <!--Thêm effect gen bởi AI-->
                     <!--Thêm effect gen bởi AI-->
-                    <button class="slow-ripple"
-                         on:click={async (e) => {
+                    <div class="s12 m12 l6">
+                        <button class="slow-ripple responsive"
+                            on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: null
                                                      ,   fragmentShaderSourceCode________: null
@@ -1167,16 +1172,17 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                                                            }
                                                      , }
                                                     ];
-                    }}>
+                        }}>
                     <!--<i class="fas fa-plus"></i>-->
-                        <i class="fas fa-plus"></i>
+                            <i class="fas fa-plus"></i>
                     <!--<i class="fas fa-plus"></i>-->
                     <!--<span>Add Text     </span> -->
-                        <span>Add Text     </span>
+                            <span>Add Text     </span>
                     <!--<span>Add Text     </span> -->                        
-                    </button>
+                        </button>
+                    </div>
                 <!--<div class="space"></div>-->
-                    <div class="space"></div>
+                <!-- <div class="space"></div> -->
                 <!--<div class="space"></div>-->
                 </div>
                 <div class="small-padding effectContainer">

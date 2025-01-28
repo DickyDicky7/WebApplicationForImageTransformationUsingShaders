@@ -371,8 +371,14 @@
       {:else if (thisUniformType ?? "") === "float"
              || (thisUniformType ?? "") ===        "int"
              || (thisUniformType ?? "") ===             "uint"}
-        <div   class="grid                 ">
-          <div class="s2 field small border">
+        <div   class="row center-align middle-align">
+          <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
+          <button class="circle        small"
+          on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
+          on:mouseout  ={async (e) => { clearInterval(interval); }}
+          on:mouseup   ={async (e) => { clearInterval(interval); }}
+          on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-left "></i></button >
+          <div class="s2 field small border min">
             <input
               type="number"
               step="1.0000"
@@ -388,22 +394,14 @@
                        }
             />
           </div>
-          <div      class="center center-align">
-            <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-            <button class="circle        small"
-            on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
-            on:mouseout  ={async (e) => { clearInterval(interval); }}
-            on:mouseup   ={async (e) => { clearInterval(interval); }}
-            on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-left "></i></button >
-            <div class="space"></div>
-            <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-            <button class="circle        small"
+          <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
+          <button class="circle        small"
             on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue + 0.00001); } }, 75); }}
             on:mouseout  ={async (e) => { clearInterval(interval); }}
             on:mouseup   ={async (e) => { clearInterval(interval); }}
             on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-right"></i></button >
-          </div>
         </div>
+        <div class="space"></div>
       {:else if ((thisUniformType ?? "") === "sampler2D"
              ||  (thisUniformType ?? "") === "sampler3D")
              &&                               typeof     thisUniformDefaultValue === "string"}

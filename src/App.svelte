@@ -872,7 +872,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <MouseCursor> </MouseCursor>
 <main>
     <div     class="      container                                 ">
-    <!-- <div class="headerContainer grey-border border              "></div> -->
+    <!--<div class="headerContainer grey-border border              "></div>-->
     <!--<div class="headerContainer grey-border border              "></div>-->
         <div class="topBarContainer grey-border border small-padding">
             <div class="row">
@@ -1038,37 +1038,39 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             <div     class="sideBarContainer grey-border border small-padding">
                 <div class="grid small-padding">
                 <!--<div class="space"></div>-->
-                <!-- <div class="space"></div> -->
+                <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                     <div class="s12 m12 l6">
                         <button class="slow-ripple responsive" 
-                            on:click={async (e) => {
+                             on:click={async (e) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                                        ,   fragmentShaderSourceCode________: null
-                                                        ,   fragmentShader______GLSLUniforms: null
-                                                        ,   fragmentShaderFiltering_Instance: null
-                                                        ,   fragmentShader_HTMLSelectElement: null
-                                                        ,   draggableText                   : null
-    //                                                   ,   draggableText                   : null
-                                                        , }
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
                                                         ];
                                 editorSnapshotsUndoStack.push({
                                     undo: async (dynamicStorage: Map<string, any> | null) => {
                                 $effectsUsedForFiltering.pop();
-    //                          $effectsUsedForFiltering.pop();
+//                              $effectsUsedForFiltering.pop();
                                 $effectsUsedForFiltering = $effectsUsedForFiltering;
-    //                          $effectsUsedForFiltering = $effectsUsedForFiltering;
+//                              $effectsUsedForFiltering = $effectsUsedForFiltering;
                                     }
                                     ,
                                     redo: async (dynamicStorage: Map<string, any> | null) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                                        ,   fragmentShaderSourceCode________: null
-                                                        ,   fragmentShader______GLSLUniforms: null
-                                                        ,   fragmentShaderFiltering_Instance: null
-                                                        ,   fragmentShader_HTMLSelectElement: null,draggableText:null
-                                                        , }
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
                                                         ];
                                     }
                                     ,
@@ -1085,41 +1087,41 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         </button>
                     </div>
                     <!--<div class="space"></div> -->
-                    <!-- <div class="space"></div> -->
+                    <!--<div class="space"></div> -->
                     <!--<div class="space"></div> -->
                     <!--Thêm effect @có sẵn @@-->
                     <!--Thêm effect @có sẵn @@-->
                     <div class="s12 m12 l6">
                         <button class="slow-ripple responsive" 
-                            on:click={async (e) => {
+                             on:click={async (e) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                                        ,   fragmentShaderSourceCode________: null
-                                                        ,   fragmentShader______GLSLUniforms: null
-                                                        ,   fragmentShaderFiltering_Instance: null
-                                                        ,   fragmentShader_HTMLSelectElement: null
-                                                        ,   draggableText                   : null
-    //                                                   ,   draggableText                   : null
-                                                        , }
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
                                                         ];
                                 editorSnapshotsUndoStack.push({
                                     undo: async (dynamicStorage: Map<string, any> | null) => {
                                 $effectsUsedForFiltering.pop();
-    //                          $effectsUsedForFiltering.pop();
+//                              $effectsUsedForFiltering.pop();
                                 $effectsUsedForFiltering = $effectsUsedForFiltering;
-    //                          $effectsUsedForFiltering = $effectsUsedForFiltering;
+//                              $effectsUsedForFiltering = $effectsUsedForFiltering;
                                     }
                                     ,
                                     redo: async (dynamicStorage: Map<string, any> | null) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                                        ,   fragmentShaderSourceCode________: null
-                                                        ,   fragmentShader______GLSLUniforms: null
-                                                        ,   fragmentShaderFiltering_Instance: null
-                                                        ,   fragmentShader_HTMLSelectElement: null
-                                                        ,   draggableText                   : null
-    //                                                   ,   draggableText                   : null
-                                                        , }
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
                                                         ];
                                     }
                                     ,
@@ -1173,16 +1175,16 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                      , }
                                                     ];
                         }}>
-                    <!--<i class="fas fa-plus"></i>-->
+                        <!--<i class="fas fa-plus"></i>-->
                             <i class="fas fa-plus"></i>
-                    <!--<i class="fas fa-plus"></i>-->
-                    <!--<span>Add Text     </span> -->
+                        <!--<i class="fas fa-plus"></i>-->
+                        <!--<span>Add Text     </span> -->
                             <span>Add Text     </span>
-                    <!--<span>Add Text     </span> -->                        
+                        <!--<span>Add Text     </span> -->                        
                         </button>
                     </div>
                 <!--<div class="space"></div>-->
-                <!-- <div class="space"></div> -->
+                <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 </div>
                 <div class="small-padding effectContainer fill round">
@@ -1198,6 +1200,155 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                        }
                      ,      effectIndex
                     }
+                    <!--<div class="space"></div>-->
+                        <div class="space"></div>
+                    <!--<div class="space"></div>-->                    
+                    <hr>
+                    <!--<div class="space"></div>-->
+                        <div class="space"></div>
+                    <!--<div class="space"></div>-->
+                    {#if effectIndex > 0}
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button on:click={async (e) => {
+                            let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                            let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                            let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                            $effectsUsedForFiltering[effectIndex    ] =
+                            $effectsUsedForFiltering[effectIndex - 1] ;
+                            $effectsUsedForFiltering[effectIndex - 1] =
+                                temp                                  ;
+                            if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                            }
+                            if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                            }
+                            $effectsUsedForFiltering =
+                            $effectsUsedForFiltering ;
+
+
+                            
+//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let temp                       = $effectsUsedForFiltering[effectIndex - 1]                                                ;
+                                $effectsUsedForFiltering[effectIndex - 1] =
+                                $effectsUsedForFiltering[effectIndex    ] ;
+                                $effectsUsedForFiltering[effectIndex    ] =
+                                    temp                                  ;
+                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                }
+                                if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                }
+                                $effectsUsedForFiltering =
+                                $effectsUsedForFiltering ;
+                            };
+                            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                $effectsUsedForFiltering[effectIndex    ] =
+                                $effectsUsedForFiltering[effectIndex - 1] ;
+                                $effectsUsedForFiltering[effectIndex - 1] =
+                                    temp                                  ;
+                                if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                }
+                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                }
+                                $effectsUsedForFiltering =
+                                $effectsUsedForFiltering ;
+                            };
+
+
+
+//                          editorSnapshotsUndoStack.push(editorSnapshot);
+                            editorSnapshotsUndoStack.push(editorSnapshot);
+//                          editorSnapshotsUndoStack.push(editorSnapshot);
+                        }}>
+                        <!--<i class="fa-solid fa-chevron-up  "></i>-->
+                            <i class="fa-solid fa-chevron-up  "></i>
+                        <!--<i class="fa-solid fa-chevron-up  "></i>-->
+                        </button>
+                    {/if}
+                    {#if effectIndex < $effectsUsedForFiltering.length - 1}
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button on:click={async (e) => {
+                            let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                            let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                            let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                            $effectsUsedForFiltering[effectIndex    ] =
+                            $effectsUsedForFiltering[effectIndex + 1] ;
+                            $effectsUsedForFiltering[effectIndex + 1] =
+                                temp                                  ;
+                            if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                            }
+                            if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                            }
+                            $effectsUsedForFiltering =
+                            $effectsUsedForFiltering ;
+
+
+                            
+//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let temp                       = $effectsUsedForFiltering[effectIndex + 1]                                                ;
+                                $effectsUsedForFiltering[effectIndex + 1] =
+                                $effectsUsedForFiltering[effectIndex    ] ;
+                                $effectsUsedForFiltering[effectIndex    ] =
+                                    temp                                  ;
+                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                }
+                                if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                }
+                                $effectsUsedForFiltering =
+                                $effectsUsedForFiltering ;
+                            };
+                            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                $effectsUsedForFiltering[effectIndex    ] =
+                                $effectsUsedForFiltering[effectIndex + 1] ;
+                                $effectsUsedForFiltering[effectIndex + 1] =
+                                    temp                                  ;
+                                if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                }
+                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                }
+                                $effectsUsedForFiltering =
+                                $effectsUsedForFiltering ;
+                            };
+
+
+
+//                          editorSnapshotsUndoStack.push(editorSnapshot);
+                            editorSnapshotsUndoStack.push(editorSnapshot);
+//                          editorSnapshotsUndoStack.push(editorSnapshot);
+                        }}>
+                        <!--<i class="fa-solid fa-chevron-down"></i>-->
+                            <i class="fa-solid fa-chevron-down"></i>
+                        <!--<i class="fa-solid fa-chevron-down"></i>-->                        
+                        </button>
+                    {/if}
                     <!--<div class="space"></div>-->
                         <div class="space"></div>
                     <!--<div class="space"></div>-->
@@ -1316,13 +1467,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 </div>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                 {#if fragmentShader______GLSLUniforms !== null}
-                                    {#if fragmentShader______GLSLUniforms.length > 0}
-                                        <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                {#if fragmentShader______GLSLUniforms        !== null}
+                                {#if fragmentShader______GLSLUniforms.length  >     0}
+                                    <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
                                         <button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>
-                                        <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
-                                    {/if}
-                                 {/if}
+                                    <!--<button class="slow-ripple circle" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                {/if}
+                                {/if}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                             <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
@@ -1514,7 +1665,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             </div>
             
         </div>
-    <!-- <div class="footerContainer grey-border border"></div> -->
+    <!--<div class="footerContainer grey-border border"></div>-->
     <!--<div class="footerContainer grey-border border"></div>-->
     </div>
 <!--<div><button class="slow-ripple" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->

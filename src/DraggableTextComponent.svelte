@@ -58,20 +58,65 @@
 <div    >
 <!--
   <span>Outline color</span>
+  <span>Outline color</span>
 --->
+  <!-- svelte-ignore a11y_consider_explicit_label -->
   <!-- svelte-ignore a11y_consider_explicit_label -->
 <!--
   <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, }; }}/></button>
+  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, }; }}/></button>
+  <br />
   <br />
 --->  
-  <div class="row responsive">
-    <div class="field border textarea round label max">
-      <textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea>
+  <div   class="                                  row responsive">
+    <div class="field border textarea round label max responsive">
+      <textarea on:change={async (e) => {
+        let oldContents:  string = draggableText.contents;
+//                                 draggableText.contents = e.currentTarget.value;
+                                   draggableText.contents = e.currentTarget.value;
+//                                 draggableText.contents = e.currentTarget.value;
+        let newContents:  string = draggableText.contents;
+        draggableText.dimensionW = draggableText.fontSize * draggableText.contents.            length;
+        draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length;
+//      let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+        let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//      let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+        editorSnapshot.dynamicStorage = new Map<string , any>();
+        editorSnapshot.dynamicStorage.set("oldContents", oldContents);
+        editorSnapshot.dynamicStorage.set("newContents", newContents);
+        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("oldContents"); } };
+        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("newContents"); } };
+//      editorSnapshotsUndoStack.push(editorSnapshot);
+        editorSnapshotsUndoStack.push(editorSnapshot);
+//      editorSnapshotsUndoStack.push(editorSnapshot);
+      }}    value={draggableText.contents} ></textarea>
+      <!-- svelte-ignore a11y_label_has_associated_control -->
       <!-- svelte-ignore a11y_label_has_associated_control -->
       <label>Content</label>
     </div>
     <!-- svelte-ignore a11y_consider_explicit_label -->
-    <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
+    <!-- svelte-ignore a11y_consider_explicit_label -->
+    <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:change={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+//    const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
+      const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
+//    const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
+      let oldColorFilling = structuredClone(draggableText.colorFilling);
+//                                          draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, };
+                                            draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, };
+//                                          draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, };
+      let newColorFilling = structuredClone(draggableText.colorFilling);
+//    let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+      let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//    let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+      editorSnapshot.dynamicStorage      = new Map<string, any>(          );
+      editorSnapshot.dynamicStorage.set("oldColorFilling", oldColorFilling);
+      editorSnapshot.dynamicStorage.set("newColorFilling", newColorFilling);
+      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("oldColorFilling"); (e.target as HTMLInputElement).value = (await rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
+      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("newColorFilling"); (e.target as HTMLInputElement).value = (await rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
+//    editorSnapshotsUndoStack.push(editorSnapshot);
+      editorSnapshotsUndoStack.push(editorSnapshot);
+//    editorSnapshotsUndoStack.push(editorSnapshot);
+    }}/></button>
   </div>
 <!--
   <table>

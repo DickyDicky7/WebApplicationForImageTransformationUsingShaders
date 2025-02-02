@@ -40,6 +40,19 @@
   //https://www.youtube.com/watch?v=iIWH3IUYHzM
   //https://www.youtube.com/watch?v=iIWH3IUYHzM
   //https://www.youtube.com/watch?v=iIWH3IUYHzM
+
+  import type { EditorSnapshot } from "./types";
+  import { editorSnapshotsUndoStack } from "./global";
+  import { editorSnapshotsRedoStack } from "./global";
+
+//let fontFaceSelectedIndex: number = 0;
+  let fontFaceSelectedIndex: number = 0;
+//let fontFaceSelectedIndex: number = 0;
+
+//let defaultFont: p5.Font = draggableText.font;
+  let defaultFont: p5.Font = draggableText.font;
+//let defaultFont: p5.Font = draggableText.font;
+
 </script>
 
 <div    >
@@ -60,67 +73,154 @@
     <!-- svelte-ignore a11y_consider_explicit_label -->
     <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
   </div>
-  <!-- <table>
+<!--
+  <table>
     <thead>
       <tr>
+        <th class="center-align"><span>Content</span></th>
         <th class="center-align"><span>Content</span></th>
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><div class="field border"><textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea></div></td>
+        <td><div class="field border"><textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea></div></td>
       </tr>
     </tbody>
-  </table> -->
+  </table>
+--->
   <table>
     <thead>
       <tr>
-        <!-- <th class="center-align"><span>Font size</span></th>
-        <th class="center-align"><span> Spacing </span></th> -->
+<!--
+        <th class="center-align"><span>Font size</span></th>
+        <th class="center-align"><span>Font size</span></th>
+        <th class="center-align"><span> Spacing </span></th>
+        <th class="center-align"><span> Spacing </span></th>
+--->
       </tr>
     </thead>
     <tbody>
       <tr>
         <td>
-          <div class="field suffix round border label">
+          <div         class="field suffix round border label">
             <select on:input={async (e) => {
               if (              e.currentTarget.options       [
-                                e.currentTarget.selectedIndex ].value === "none") {
-                  $customFonts[e.currentTarget.selectedIndex ].customFontFace = null;
-                  return;
+                                e.currentTarget.selectedIndex ].value         ===       "none") {
+                   $customFonts[e.currentTarget.selectedIndex ].customFontFace =  defaultFont ;
+//                 $customFonts[e.currentTarget.selectedIndex ].customFontFace =  defaultFont ;
+//                  return;
+//                  return;
+//                  return;
               }
-              if (!$customFonts[e.currentTarget.selectedIndex ].customFontFace) {
-                  $customFonts[e.currentTarget.selectedIndex ].customFontFace = canvasInstance.loadFont(
-                  $customFonts[e.currentTarget.selectedIndex ].customFontPath !                        );
+              if (!$customFonts[e.currentTarget.selectedIndex ].customFontFace                ) {
+                   $customFonts[e.currentTarget.selectedIndex ].customFontFace = canvasInstance.loadFont(
+                   $customFonts[e.currentTarget.selectedIndex ].customFontPath !                        );
               }
               draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
-        //    draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
+//            draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
+
+              let oldFontFaceSelectedIndex: number =         fontFaceSelectedIndex;
+                     fontFaceSelectedIndex         = e.currentTarget.selectedIndex;
+              let newFontFaceSelectedIndex: number =         fontFaceSelectedIndex;
+
+//            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+              let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+              editorSnapshot.dynamicStorage = new Map<string, any>();
+              editorSnapshot.dynamicStorage.set("oldFontFaceSelectedIndex", oldFontFaceSelectedIndex);
+              editorSnapshot.dynamicStorage.set("newFontFaceSelectedIndex", newFontFaceSelectedIndex);
+              editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                if (dynamicStorage) {
+                  if (!$customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace) {
+                       $customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = defaultFont;
+                  }
+                  draggableText.font = $customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace!;
+//                draggableText.font = $customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace!;
+                  e.currentTarget.selectedIndex  =  dynamicStorage.get("oldFontFaceSelectedIndex");
+//                e.currentTarget.selectedIndex  =  dynamicStorage.get("oldFontFaceSelectedIndex");
+                }
+              };
+              editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                if (dynamicStorage) {
+                  if (!$customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace) {
+                       $customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = defaultFont;
+                  }
+                  draggableText.font = $customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace!;
+//                draggableText.font = $customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace!;
+                  e.currentTarget.selectedIndex  =  dynamicStorage.get("newFontFaceSelectedIndex");
+//                e.currentTarget.selectedIndex  =  dynamicStorage.get("newFontFaceSelectedIndex");
+                }
+              };
+//            editorSnapshotsUndoStack.push(editorSnapshot);
+              editorSnapshotsUndoStack.push(editorSnapshot);
+//            editorSnapshotsUndoStack.push(editorSnapshot);
             }}>
               {#each $customFonts as
                       customFont
-                    (customFont)
+                     (customFont)
               }
                 <option value={customFont.customFontPath}>
                               {customFont.customFontName!.replace(".ttf", "")
-                                                        .replace(".otf", "")}</option>
+                                                         .replace(".otf", "")}</option>
               {/each}
             </select>
             <!-- svelte-ignore a11y_label_has_associated_control -->
+            <!-- svelte-ignore a11y_label_has_associated_control -->
             <label>Font</label>
+        <!--<i class="fa-solid fa-chevron-down"></i>-->
             <i class="fa-solid fa-chevron-down"></i>
         <!--<i class="fa-solid fa-chevron-down"></i>-->
           </div>
         </td>
         <td>
-          <div class="field border round label">
-            <input type="number" bind:value={draggableText.fontSize} on:input={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} />
+          <div                    class="field border round label">
+            <input type="number"  value={draggableText.fontSize} on:input={async (e) => {
+              let oldFontSize: number  = draggableText.fontSize;
+//                                       draggableText.fontSize = e.currentTarget.valueAsNumber;
+                                         draggableText.fontSize = e.currentTarget.valueAsNumber;
+//                                       draggableText.fontSize = e.currentTarget.valueAsNumber;
+              let newFontSize: number  = draggableText.fontSize;
+              draggableText.dimensionW = draggableText.fontSize * draggableText.contents.            length;
+              draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length;
+//            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+              let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+              editorSnapshot.dynamicStorage = new Map<string , any>();
+              editorSnapshot.dynamicStorage.set("oldFontSize", oldFontSize);
+              editorSnapshot.dynamicStorage.set("newFontSize", newFontSize);
+              editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("oldFontSize"); } };
+              editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("newFontSize"); } };
+//            editorSnapshotsUndoStack.push(editorSnapshot);
+              editorSnapshotsUndoStack.push(editorSnapshot);
+//            editorSnapshotsUndoStack.push(editorSnapshot);
+            }} />
+            <!-- svelte-ignore a11y_label_has_associated_control -->
             <!-- svelte-ignore a11y_label_has_associated_control -->
             <label>Font size</label>
           </div>
         </td>
         <td>
-          <div class="field border round label">
-            <input type="number" bind:value={draggableText.spacings} on:input={async (e) => {                                                                                                                                                                                   }} />
+          <div                   class="field border round label">
+            <input type="number" value={draggableText.spacings} on:input={async (e) => {
+              let oldSpacings: number = draggableText.spacings;
+//                                      draggableText.spacings = e.currentTarget.valueAsNumber;
+                                        draggableText.spacings = e.currentTarget.valueAsNumber;
+//                                      draggableText.spacings = e.currentTarget.valueAsNumber;
+              let newSpacings: number = draggableText.spacings;
+//            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+              let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+//            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+              editorSnapshot.dynamicStorage = new Map<string , any>();
+              editorSnapshot.dynamicStorage.set("oldSpacings", oldSpacings);
+              editorSnapshot.dynamicStorage.set("newSpacings", newSpacings);
+              editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("oldSpacings"); } };
+              editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("newSpacings"); } };
+//            editorSnapshotsUndoStack.push(editorSnapshot);
+              editorSnapshotsUndoStack.push(editorSnapshot);
+//            editorSnapshotsUndoStack.push(editorSnapshot);
+            }} />
+            <!-- svelte-ignore a11y_label_has_associated_control -->
             <!-- svelte-ignore a11y_label_has_associated_control -->
             <label>Spacing</label>
           </div>
@@ -128,7 +228,8 @@
       </tr>
     </tbody>
   </table>
-  <!-- <table>
+<!--
+  <table>
     <thead>
       <tr>
         <th class="center-align"><span>Align H</span></th>
@@ -158,7 +259,8 @@
         </td>
       </tr>
     </tbody>
-  </table> -->
+  </table>
+--->
 <!--
   <table>
     <thead>

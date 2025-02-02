@@ -2,6 +2,11 @@ export type ShaderName = string;
 export type ShaderPath = string;
 export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     [
+        "0                    ",
+        `./lib/${  0}.glsl?raw`,
+    ]
+    ,
+    [
         "CRT #001             ",
         `./lib/${  1}.glsl?raw`,
     ]

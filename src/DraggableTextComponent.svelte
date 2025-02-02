@@ -51,40 +51,84 @@
   <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, }; }}/></button>
   <br />
 --->  
-  <span>Filling color</span>
-  <!-- svelte-ignore a11y_consider_explicit_label -->
-  <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
-  <br />
-  <table>
-    <thead>
-      <tr>
-        <th class="center-align"><span>Font size</span></th>
-        <th class="center-align"><span> Spacing </span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><div class="field border"><input type="number" bind:value={draggableText.fontSize} on:input={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} /></div></td>
-        <td><div class="field border"><input type="number" bind:value={draggableText.spacings} on:input={async (e) => {                                                                                                                                                                                   }} /></div></td>
-      </tr>
-    </tbody>
-  </table>
-  <table>
+  <div class="row responsive">
+    <div class="field border textarea round label max">
+      <textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea>
+      <!-- svelte-ignore a11y_label_has_associated_control -->
+      <label>Content</label>
+    </div>
+    <!-- svelte-ignore a11y_consider_explicit_label -->
+    <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:input={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => { const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value); draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, }; }}/></button>
+  </div>
+  <!-- <table>
     <thead>
       <tr>
         <th class="center-align"><span>Content</span></th>
-<!--    <th class="center-align"><span>Content</span></th>   -->
       </tr>
     </thead>
     <tbody>
       <tr>
         <td><div class="field border"><textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea></div></td>
-<!--    <td><div class="field border"><textarea on:change={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} bind:value={draggableText.contents} ></textarea></div></td>    -->
+      </tr>
+    </tbody>
+  </table> -->
+  <table>
+    <thead>
+      <tr>
+        <!-- <th class="center-align"><span>Font size</span></th>
+        <th class="center-align"><span> Spacing </span></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>
+          <div class="field suffix round border label">
+            <select on:input={async (e) => {
+              if (              e.currentTarget.options       [
+                                e.currentTarget.selectedIndex ].value === "none") {
+                  $customFonts[e.currentTarget.selectedIndex ].customFontFace = null;
+                  return;
+              }
+              if (!$customFonts[e.currentTarget.selectedIndex ].customFontFace) {
+                  $customFonts[e.currentTarget.selectedIndex ].customFontFace = canvasInstance.loadFont(
+                  $customFonts[e.currentTarget.selectedIndex ].customFontPath !                        );
+              }
+              draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
+        //    draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
+            }}>
+              {#each $customFonts as
+                      customFont
+                    (customFont)
+              }
+                <option value={customFont.customFontPath}>
+                              {customFont.customFontName!.replace(".ttf", "")
+                                                        .replace(".otf", "")}</option>
+              {/each}
+            </select>
+            <!-- svelte-ignore a11y_label_has_associated_control -->
+            <label>Font</label>
+            <i class="fa-solid fa-chevron-down"></i>
+        <!--<i class="fa-solid fa-chevron-down"></i>-->
+          </div>
+        </td>
+        <td>
+          <div class="field border round label">
+            <input type="number" bind:value={draggableText.fontSize} on:input={async (e) => { draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length; draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length; }} />
+            <!-- svelte-ignore a11y_label_has_associated_control -->
+            <label>Font size</label>
+          </div>
+        </td>
+        <td>
+          <div class="field border round label">
+            <input type="number" bind:value={draggableText.spacings} on:input={async (e) => {                                                                                                                                                                                   }} />
+            <!-- svelte-ignore a11y_label_has_associated_control -->
+            <label>Spacing</label>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
-
-  <table>
+  <!-- <table>
     <thead>
       <tr>
         <th class="center-align"><span>Align H</span></th>
@@ -99,7 +143,6 @@
               <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }} checked value="center" /><span>Center</span></label>
               <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }}         value="left"   /><span>Left@ </span></label>
               <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }}         value="right"  /><span>Right </span></label>
-<!--          <label class="radio"><input type="radio" name="align-h-radio" on:input={async (e) => { draggableText.alignHOption = e.currentTarget.value as p5.HORIZ_ALIGN; }}         value="right"  /><span>Right </span></label>          -->
             </nav>
           </div>
         </td>
@@ -115,7 +158,7 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
 <!--
   <table>
     <thead>
@@ -150,35 +193,7 @@
       </tr>
     </tbody>
   </table>
---->
-  <span>Font</span>
-  <div class="field suffix round fill small border">
-    <select on:input={async (e) => {
-      if (              e.currentTarget.options       [
-                        e.currentTarget.selectedIndex ].value === "none") {
-           $customFonts[e.currentTarget.selectedIndex ].customFontFace = null;
-           return;
-      }
-      if (!$customFonts[e.currentTarget.selectedIndex ].customFontFace) {
-           $customFonts[e.currentTarget.selectedIndex ].customFontFace = canvasInstance.loadFont(
-           $customFonts[e.currentTarget.selectedIndex ].customFontPath !                        );
-      }
-      draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
-//    draggableText.font = $customFonts[e.currentTarget.selectedIndex].customFontFace!;
-    }}>
-      {#each $customFonts as
-              customFont
-             (customFont)
-      }
-        <option value={customFont.customFontPath}>
-                      {customFont.customFontName!.replace(".ttf", "")
-                                                 .replace(".otf", "")}</option>
-      {/each}
-    </select>
-    <i class="fa-solid fa-chevron-down"></i>
-<!--<i class="fa-solid fa-chevron-down"></i>-->
-  </div>
-<!--
+
   <table>
     <thead>
       <tr>

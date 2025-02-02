@@ -1035,7 +1035,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             </div>
         </div>
         <div         class="mainBarContainer grey-border border">
-            <div     class="sideBarContainer grey-border border">
+            <div     class="sideBarContainer grey-border border small-padding">
                 <div class="grid small-padding">
                 <!--<div class="space"></div>-->
                 <!-- <div class="space"></div> -->
@@ -1185,7 +1185,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 <!-- <div class="space"></div> -->
                 <!--<div class="space"></div>-->
                 </div>
-                <div class="small-padding effectContainer">
+                <div class="small-padding effectContainer fill round">
                     {#each $effectsUsedForFiltering as {
                            fragmentShaderSourceType________
                      ,     fragmentShaderSourceCode________
@@ -1330,14 +1330,14 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
                             <dialog  class="dialog blur" id={`b${String(effectIndex)}`}>
-                                <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
-                                <div class="max right-align"><button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button></div>
-                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
-                            <!--<div class="space"></div>-->
-                            <!--<div class="space"></div>-->
-                            <!--<div class="space"></div>-->
+                                <div class="row responsive">
+                                    <h6>Customize your effect</h6>
+                                    <div class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                                <div class="medium-space"></div>
                                 <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                                                        canvasInstance }></GlslUniform>
                             </dialog>
@@ -1359,17 +1359,20 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
                             <dialog  class="dialog blur" id={`c${effectIndex}`}>
-                                <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
-                                <div class="max right-align"><button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button></div>
-                            <!--<div class="max right-align"><button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button></div>-->
+                                <div class="row responsive">
+                                    <h6>Ask AI for a new effect</h6>
+                                    <div class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                                <div class="medium-space"></div>
                                 <div     class="                         row">
                                     <div class="field border round label max">
                                         <input type="text" bind:this={AIInputPrompts}>
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
-                                        <label>Ask me for a new effect</label>
+                                        <label>Describe the effect you want</label>
                                     </div>
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -1396,9 +1399,26 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             </dialog>
                         {/if}
                         {#if !fragmentShaderSourceType________}
-                        <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
-                            <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>
-                        <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
+                            <div class="row">
+                                <div class="max medium-padding"><span>Caption: {draggableText?.contents}</span></div>
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <button class="slow-ripple circle" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
+                            </div>
+                            <dialog  class="dialog blur" id={`d${String(effectIndex)}`}>
+                                <div class="row responsive">
+                                    <h6>Customize your text</h6>
+                                    <div class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <button class="transparent circle right" data-ui={`#d${effectIndex}`}><i class="fas fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                                <div class="medium-space"></div>
+                            <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
+                                <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>
+                            <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
+                            </dialog>
                         {/if}
                     {/each}
                 </div>

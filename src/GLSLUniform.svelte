@@ -174,7 +174,7 @@
    ,              ii ( thisUniformName )
   }
     <div class="container">
-      <h6>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</h6>
+      <span>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</span>
       <div class="space"></div>
       <!-- Render inputs based on type -->
       {#if ((thisUniformType ?? "").startsWith( "vec")
@@ -232,6 +232,7 @@
             </tr>
           </tbody>
         </table>
+        <div class="space"></div>
       {:else if (thisUniformType ?? ""). startsWith("mat")
              &&  thisUniformDefaultValue instanceof Array
       }
@@ -354,6 +355,7 @@
             </table>
           {/each}
         {/if}
+        <div class="space"></div>
       {:else if       (thisUniformType  ??  "") === "bool   ".trim()
              && typeof thisUniformDefaultValue  === "boolean"       }
         <label  class="switch center-align">

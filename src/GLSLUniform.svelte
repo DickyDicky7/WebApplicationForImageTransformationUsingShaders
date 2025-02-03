@@ -186,21 +186,21 @@
           <thead>
             <tr>
               {#if thisUniformDefaultValue.length >= 2}
-                <th>*</th>
-                <th>x</th>
-                <th>y</th>
+                <th class="border">*</th>
+                <th class="border">x</th>
+                <th class="border">y</th>
               {/if}
               {#if thisUniformDefaultValue.length >= 3}
-                <th>z</th>
+                <th class="border">z</th>
               {/if}
               {#if thisUniformDefaultValue.length >= 4}
-                <th>a</th>
+                <th class="border">a</th>
               {/if}
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>
+              <td class="border">
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input id={`${thisUniformName}-color-button`} type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
@@ -213,20 +213,22 @@
                 </button>
               </td>
               {#each thisUniformDefaultValue as v, i}
-                <td class="s2 field small border">
-                  <input
-                    type="number"
-                    step="0.0100"
-                       value={       v                                                                 }
-                    on:input={async (e) => { updateUniform(ii, i, parseFloat(e.currentTarget.value));
-                 const input: HTMLInputElement = document.getElementById(`${thisUniformName}-color-button`) as HTMLInputElement;
-                       input.value = (await rgba_ToHexNormalized(255 * (thisUniformDefaultValue[0] ?? 1.0)
-                            ,                                    255 * (thisUniformDefaultValue[1] ?? 1.0)
-                            ,                                    255 * (thisUniformDefaultValue[2] ?? 1.0)
-                            ,                                    255 * (thisUniformDefaultValue[3] ?? 1.0))).slice(+0
-                                                                                                            ,      -2
-                                                                                                            ,     ); }}
-                  />
+                <td class="border">
+                  <div class="s2 field small">
+                    <input
+                      type="number"
+                      step="0.0100"
+                        value={       v                                                                 }
+                      on:input={async (e) => { updateUniform(ii, i, parseFloat(e.currentTarget.value));
+                  const input: HTMLInputElement = document.getElementById(`${thisUniformName}-color-button`) as HTMLInputElement;
+                        input.value = (await rgba_ToHexNormalized(255 * (thisUniformDefaultValue[0] ?? 1.0)
+                              ,                                    255 * (thisUniformDefaultValue[1] ?? 1.0)
+                              ,                                    255 * (thisUniformDefaultValue[2] ?? 1.0)
+                              ,                                    255 * (thisUniformDefaultValue[3] ?? 1.0))).slice(+0
+                                                                                                              ,      -2
+                                                                                                              ,     ); }}
+                    />
+                  </div>
                 </td>
               {/each}
             </tr>
@@ -237,123 +239,148 @@
              &&  thisUniformDefaultValue instanceof Array
       }
         {#if                          thisUniformDefaultValue.length === 4           }
-          {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  2) as r, ri }
-            <table class="center-align">
-              <thead>
+          <table class="center-align">
+            <thead>
+              <tr>
+                <th> </th>
+                <th class="border">0</th>
+                <th class="border">1</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  2) as r, ri }
                 <tr>
                   {#if ri === 0}
-                    <th>x0</th>
-                    <th>x1</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>X</span>
+                    </td>
                   {/if}
                   {#if ri === 1}
-                    <th>y0</th>
-                    <th>y1</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Y</span>
+                    </td>
                   {/if}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   {#each r as c, ci }
-                    <td class="s2 field small border">
-                      <input
-                        type="number"
-                        step="0.0100"
-                           value={       c                                                                           }
-                        on:input={async (e) => { updateUniform(ii, ri * 2 + ci, parseFloat(e.currentTarget.value)); }}
-                      />
+                    <td class="border">
+                      <div class="s2 field small">
+                        <input
+                          type="number"
+                          step="0.0100"
+                            value={       c                                                                           }
+                          on:input={async (e) => { updateUniform(ii, ri * 2 + ci, parseFloat(e.currentTarget.value)); }}
+                        />
+                      </div>
                     </td>
                   {/each}
                 </tr>
-              </tbody>
-            </table>
-          {/each}
+              {/each}
+            </tbody>
+          </table>
         {/if}
         {#if                          thisUniformDefaultValue.length === 9           }
-          {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  3) as r, ri }
-            <table class="center-align">
-              <thead>
+          <table class="center-align">
+            <thead>
+              <tr>
+                <th> </th>
+                <th class="border">0</th>
+                <th class="border">1</th>
+                <th class="border">2</th>
+              </tr>
+           </thead>
+            <tbody>
+              {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  3) as r, ri }
                 <tr>
                   {#if ri === 0}
-                    <th>x0</th>
-                    <th>x1</th>
-                    <th>x2</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>X</span>
+                    </td>
                   {/if}
                   {#if ri === 1}
-                    <th>y0</th>
-                    <th>y1</th>
-                    <th>y2</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Y</span>
+                    </td>
                   {/if}
-                  {#if ri ===2}
-                    <th>z0</th>
-                    <th>z1</th>
-                    <th>z2</th>
+                  {#if ri === 2}
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Z</span>
+                    </td>
                   {/if}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   {#each r as c, ci }
-                    <td class="s2 field small border">
-                      <input
+                    <td class="border">
+                      <div class="s2 field small">
+                        <input
                         type="number"
                         step="0.0100"
                            value={       c                                                                           }
                         on:input={async (e) => { updateUniform(ii, ri * 3 + ci, parseFloat(e.currentTarget.value)); }}
-                      />
+                        />
+                      </div>
                     </td>
                   {/each}
                 </tr>
-              </tbody>
-            </table>
-          {/each}
+              {/each}
+            </tbody>
+          </table>
         {/if}
         {#if                          thisUniformDefaultValue.length === 16          }
-          {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  4) as r, ri }
-            <table>
-              <thead>
+          <table class="center-align">
+            <thead>
+              <tr>
+                <th> </th>
+                <th class="border">0</th>
+                <th class="border">1</th>
+                <th class="border">2</th>
+                <th class="border">3</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  4) as r, ri }
                 <tr>
                   {#if ri === 0}
-                    <th>x0</th>
-                    <th>x1</th>
-                    <th>x2</th>
-                    <th>x3</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>X</span>
+                    </td>
                   {/if}
                   {#if ri === 1}
-                    <th>y0</th>
-                    <th>y1</th>
-                    <th>y2</th>
-                    <th>y3</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Y</span>
+                    </td>
                   {/if}
                   {#if ri === 2}
-                    <th>z0</th>
-                    <th>z1</th>
-                    <th>z2</th>
-                    <th>z3</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Z</span>
+                    </td>
                   {/if}
                   {#if ri === 3}
-                    <th>a0</th>
-                    <th>a1</th>
-                    <th>a2</th>
-                    <th>a3</th>
+                    <td class="border">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>A</span>
+                    </td>
                   {/if}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   {#each r as c, ci }
-                    <td class="s2 field small border">
-                      <input
-                        type="number"
-                        step="0.0100"
-                           value={       c                                                                           }
-                        on:input={async (e) => { updateUniform(ii, ri * 4 + ci, parseFloat(e.currentTarget.value)); }}
-                      />
+                    <td class="border">
+                      <div class="s2 field small">
+                        <input
+                          type="number"
+                          step="0.0100"
+                            value={       c                                                                           }
+                          on:input={async (e) => { updateUniform(ii, ri * 4 + ci, parseFloat(e.currentTarget.value)); }}
+                        />
+                      </div>
                     </td>
                   {/each}
                 </tr>
-              </tbody>
-            </table>
-          {/each}
+              {/each}
+            </tbody>
+          </table>
         {/if}
         <div class="space"></div>
       {:else if       (thisUniformType  ??  "") === "bool   ".trim()

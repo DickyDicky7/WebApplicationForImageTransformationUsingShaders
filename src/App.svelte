@@ -93,13 +93,25 @@ import {   onMount   } from   "svelte";
         }
         };
     };
-
+    
+    let canvasBG      : HTMLElement;
     let canvas        : HTMLElement;
     let canvasInstance: p5         ;
     let bufferInstance: p5.Graphics;
     
+    import bg1 from "./shadertoys/bg1.1.glsl?raw";
+    import bg2 from "./shadertoys/bg2.1.glsl?raw";
+    import bg3 from "./shadertoys/bg2.2.glsl?raw";
+    import bg4 from "./shadertoys/bg2.3.glsl?raw";
+    import bg5 from "./shadertoys/bg2.4.glsl?raw";
+    let bgs: string[] = [ bg1, bg2, bg3, bg4, bg5, ];
+
     onMount(async ()  : Promise<void> => {
-    
+
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+
         canvasInstance = new p5(p5Logic, canvas);
 //      bufferInstance =
 //      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
@@ -107,7 +119,9 @@ import {   onMount   } from   "svelte";
 //      canvasInstance.WEBGL,        );
             await ui("theme", "#009688");
             await ui("theme", "#009688");
-            await ui("mode", "light");
+//          await ui("mode" , "light"  );
+            await ui("mode" , "light"  );
+//          await ui("mode" , "light"  );
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
@@ -867,6 +881,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 }
 </script>
 
+<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
+    <div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>
+<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor> </MouseCursor>

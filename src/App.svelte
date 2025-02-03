@@ -1056,7 +1056,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
             </div>
         </div>
         <div         class="mainBarContainer grey-border border              ">
-            <div     class="sideBarContainer grey-border border small-padding">
+            <div     class="sideBarContainer grey-border border ">
                 <div class="grid small-padding">
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
@@ -1208,7 +1208,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 </div>
-                <div class="small-padding effectContainer fill round">
+                <div class="effectContainer round">
                     {#each $effectsUsedForFiltering as {
                            fragmentShaderSourceType________
                      ,     fragmentShaderSourceCode________
@@ -1221,158 +1221,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                        }
                      ,      effectIndex
                     }
-                    <!--<div class="space"></div>-->
-                        <div class="space"></div>
-                    <!--<div class="space"></div>-->                    
-                    <hr>
-                    <!--<div class="space"></div>-->
-                        <div class="space"></div>
-                    <!--<div class="space"></div>-->
-                    {#if effectIndex > 0}
-                        <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button on:click={async (e) => {
-                            let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
-                            let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
-                            let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
-                            $effectsUsedForFiltering[effectIndex    ] =
-                            $effectsUsedForFiltering[effectIndex - 1] ;
-                            $effectsUsedForFiltering[effectIndex - 1] =
-                                temp                                  ;
-                            if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
-                                $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
-                            }
-                            if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
-                                $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
-                            }
-                            $effectsUsedForFiltering =
-                            $effectsUsedForFiltering ;
-
-
-                            
-//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-                            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-                            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
-                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let temp                       = $effectsUsedForFiltering[effectIndex - 1]                                                ;
-                                $effectsUsedForFiltering[effectIndex - 1] =
-                                $effectsUsedForFiltering[effectIndex    ] ;
-                                $effectsUsedForFiltering[effectIndex    ] =
-                                    temp                                  ;
-                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
-                                }
-                                if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
-                                }
-                                $effectsUsedForFiltering =
-                                $effectsUsedForFiltering ;
-                            };
-                            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
-                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
-                                $effectsUsedForFiltering[effectIndex    ] =
-                                $effectsUsedForFiltering[effectIndex - 1] ;
-                                $effectsUsedForFiltering[effectIndex - 1] =
-                                    temp                                  ;
-                                if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
-                                }
-                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
-                                }
-                                $effectsUsedForFiltering =
-                                $effectsUsedForFiltering ;
-                            };
-
-
-
-//                          editorSnapshotsUndoStack.push(editorSnapshot);
-                            editorSnapshotsUndoStack.push(editorSnapshot);
-//                          editorSnapshotsUndoStack.push(editorSnapshot);
-                        }}>
-                        <!--<i class="fa-solid fa-chevron-up  "></i>-->
-                            <i class="fa-solid fa-chevron-up  "></i>
-                        <!--<i class="fa-solid fa-chevron-up  "></i>-->
-                        </button>
-                    {/if}
-                    {#if effectIndex < $effectsUsedForFiltering.length - 1}
-                        <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button on:click={async (e) => {
-                            let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
-                            let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
-                            let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
-                            $effectsUsedForFiltering[effectIndex    ] =
-                            $effectsUsedForFiltering[effectIndex + 1] ;
-                            $effectsUsedForFiltering[effectIndex + 1] =
-                                temp                                  ;
-                            if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
-                                $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
-                            }
-                            if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
-                                $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
-                            }
-                            $effectsUsedForFiltering =
-                            $effectsUsedForFiltering ;
-
-
-                            
-//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-                            let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-                            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
-                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let temp                       = $effectsUsedForFiltering[effectIndex + 1]                                                ;
-                                $effectsUsedForFiltering[effectIndex + 1] =
-                                $effectsUsedForFiltering[effectIndex    ] ;
-                                $effectsUsedForFiltering[effectIndex    ] =
-                                    temp                                  ;
-                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
-                                }
-                                if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
-                                }
-                                $effectsUsedForFiltering =
-                                $effectsUsedForFiltering ;
-                            };
-                            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
-                                let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
-                                let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
-                                $effectsUsedForFiltering[effectIndex    ] =
-                                $effectsUsedForFiltering[effectIndex + 1] ;
-                                $effectsUsedForFiltering[effectIndex + 1] =
-                                    temp                                  ;
-                                if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
-                                }
-                                if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
-                                    $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
-                                }
-                                $effectsUsedForFiltering =
-                                $effectsUsedForFiltering ;
-                            };
-
-
-
-//                          editorSnapshotsUndoStack.push(editorSnapshot);
-                            editorSnapshotsUndoStack.push(editorSnapshot);
-//                          editorSnapshotsUndoStack.push(editorSnapshot);
-                        }}>
-                        <!--<i class="fa-solid fa-chevron-down"></i>-->
-                            <i class="fa-solid fa-chevron-down"></i>
-                        <!--<i class="fa-solid fa-chevron-down"></i>-->                        
-                        </button>
-                    {/if}
-                    <!--<div class="space"></div>-->
-                        <div class="space"></div>
-                    <!--<div class="space"></div>-->
+                    <div class="tiny-space"></div>   
+                    <div class="fill round medium-padding">            
                         {#if fragmentShaderSourceType________ ===  "NI"}
                             <div     class="                                row">
                                 <div class="field label suffix round border max">
@@ -1522,7 +1372,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         {#if fragmentShaderSourceType________ ===  "AI"}
                             <div     class="row               ">
                             <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
-                                <div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>
+                                <div class="max medium-padding border round"><span>Effect {effectIndex} by AI</span></div>
                             <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -1611,6 +1461,153 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
                             </dialog>
                         {/if}
+                        <div class="row max">
+                            {#if effectIndex > 0}
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <button class="slow-ripple max"
+                                on:click={async (e) => {
+                                    let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                    $effectsUsedForFiltering[effectIndex    ] =
+                                    $effectsUsedForFiltering[effectIndex - 1] ;
+                                    $effectsUsedForFiltering[effectIndex - 1] =
+                                        temp                                  ;
+                                    if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                    }
+                                    if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                    }
+                                    $effectsUsedForFiltering =
+                                    $effectsUsedForFiltering ;
+
+
+                                    
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex - 1]                                                ;
+                                        $effectsUsedForFiltering[effectIndex - 1] =
+                                        $effectsUsedForFiltering[effectIndex    ] ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+                                    editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                        $effectsUsedForFiltering[effectIndex - 1] ;
+                                        $effectsUsedForFiltering[effectIndex - 1] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+
+
+
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                    editorSnapshotsUndoStack.push(editorSnapshot);
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                }}>
+                                <!--<i class="fa-solid fa-chevron-up  "></i>-->
+                                    <i class="fa-solid fa-chevron-up  "></i>
+                                <!--<i class="fa-solid fa-chevron-up  "></i>-->
+                                </button>
+                            {/if}
+                            {#if effectIndex < $effectsUsedForFiltering.length - 1}
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <button class="slow-ripple max"
+                                on:click={async (e) => {
+                                    let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                    $effectsUsedForFiltering[effectIndex    ] =
+                                    $effectsUsedForFiltering[effectIndex + 1] ;
+                                    $effectsUsedForFiltering[effectIndex + 1] =
+                                        temp                                  ;
+                                    if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                    }
+                                    if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                    }
+                                    $effectsUsedForFiltering =
+                                    $effectsUsedForFiltering ;
+
+
+                                    
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex + 1]                                                ;
+                                        $effectsUsedForFiltering[effectIndex + 1] =
+                                        $effectsUsedForFiltering[effectIndex    ] ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+                                    editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                        $effectsUsedForFiltering[effectIndex + 1] ;
+                                        $effectsUsedForFiltering[effectIndex + 1] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+
+
+
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                    editorSnapshotsUndoStack.push(editorSnapshot);
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                }}>
+                                <!--<i class="fa-solid fa-chevron-down"></i>-->
+                                    <i class="fa-solid fa-chevron-down"></i>
+                                <!--<i class="fa-solid fa-chevron-down"></i>-->                        
+                                </button>
+                            {/if}
+                        </div>
+                    </div>
                     {/each}
                 </div>
             </div>

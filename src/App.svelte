@@ -93,13 +93,25 @@ import {   onMount   } from   "svelte";
         }
         };
     };
-
+    
+    let canvasBG      : HTMLElement;
     let canvas        : HTMLElement;
     let canvasInstance: p5         ;
     let bufferInstance: p5.Graphics;
     
+    import bg1 from "./shadertoys/bg1.1.glsl?raw";
+    import bg2 from "./shadertoys/bg2.1.glsl?raw";
+    import bg3 from "./shadertoys/bg2.2.glsl?raw";
+    import bg4 from "./shadertoys/bg2.3.glsl?raw";
+    import bg5 from "./shadertoys/bg2.4.glsl?raw";
+    let bgs: string[] = [ bg1, bg2, bg3, bg4, bg5, ];
+
     onMount(async ()  : Promise<void> => {
-    
+
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+
         canvasInstance = new p5(p5Logic, canvas);
 //      bufferInstance =
 //      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
@@ -107,7 +119,9 @@ import {   onMount   } from   "svelte";
 //      canvasInstance.WEBGL,        );
             await ui("theme", "#009688");
             await ui("theme", "#009688");
-            await ui("mode", "light");
+//          await ui("mode" , "light"  );
+            await ui("mode" , "light"  );
+//          await ui("mode" , "light"  );
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
@@ -867,6 +881,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 }
 </script>
 
+<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
+    <div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>
+<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor> </MouseCursor>
@@ -883,8 +900,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <!--<div class="max"><span>Webcam</span></div>-->
                         <div class="max"><span>Webcam</span></div>
                     <!--<div class="max"><span>Webcam</span></div>-->
-                        <label class="switch icon">
-                            <input type="checkbox" on:change={(e) => {
+                        <label     class="switch icon">
+                            <input class="           " type="checkbox" on:change={(e) => {
                                 const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
 //                              const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
                                 if (e.currentTarget.checked) {
@@ -1002,11 +1019,15 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         </div>
                         <!-- <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button> -->
                         <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
                         <!-- <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
                         <!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
                         <!-- <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button> -->
                         <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
                         <!-- <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
                         <!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
                     </div>
                 </dialog>
@@ -1034,7 +1055,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 </button>
             </div>
         </div>
-        <div         class="mainBarContainer grey-border border">
+        <div         class="mainBarContainer grey-border border              ">
             <div     class="sideBarContainer grey-border border small-padding">
                 <div class="grid small-padding">
                 <!--<div class="space"></div>-->
@@ -1439,9 +1460,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                 substring(1);
                                             }
                                             console.log(fragmentShaderSourceCode________);
-                                            fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
+                                            fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
+//                                          fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
                                             console.log(fragmentShader______GLSLUniforms);
                                             fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+//                                          fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
                                             editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
                                             editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
                                             editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
@@ -1480,15 +1503,18 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
                             <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
-                            <dialog  class="dialog blur" id={`b${String(effectIndex)}`}>
-                                <div class="row responsive">
+                            <dialog  class="    responsive dialog blur" id={`b${String(effectIndex)}`}>
+                                <div class="row responsive            "                               >
                                     <h6>Customize your effect</h6>
-                                    <div class="max right-align">
+                                    <div        class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
                                         <!-- svelte-ignore a11y_consider_explicit_label -->
                                         <button class="transparent circle right" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button>
                                     </div>
                                 </div>
+                            <!--<div class="medium-space"></div>-->
                                 <div class="medium-space"></div>
+                            <!--<div class="medium-space"></div>-->
                                 <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
                                                                                                                        canvasInstance }></GlslUniform>
                             </dialog>
@@ -1509,21 +1535,26 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
                             <!--<button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
-                            <dialog  class="dialog blur" id={`c${effectIndex}`}>
-                                <div class="row responsive">
-                                    <h6>Ask AI for a new effect</h6>
-                                    <div class="max right-align">
+                            <dialog  class="    responsive dialog blur" id={`c${effectIndex}`}>
+                                <div class="row responsive            "                       >
+                                    <h6>  Ask AI for a new effect  </h6>
+                                    <div        class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
                                         <!-- svelte-ignore a11y_consider_explicit_label -->
                                         <button class="transparent circle right" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button>
                                     </div>
                                 </div>
-                                <div class="medium-space"></div>
+                            <!--<div     class="      medium-space          ">  </div>-->
+                                <div     class="      medium-space          ">  </div>
+                            <!--<div     class="      medium-space          ">  </div>-->
                                 <div     class="                         row">
                                     <div class="field border round label max">
                                         <input type="text" bind:this={AIInputPrompts}>
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
+                                    <!--<label>Describe the effect you want</label> -->
                                         <label>Describe the effect you want</label>
+                                    <!--<label>Describe the effect you want</label> -->
                                     </div>
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -1550,22 +1581,31 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             </dialog>
                         {/if}
                         {#if !fragmentShaderSourceType________}
-                            <div class="row">
-                                <div class="max medium-padding"><span>Caption: {draggableText?.contents}</span></div>
+                            <div        class="row                ">
+                                <div    class="max  medium-padding"><span>Caption: {draggableText?.contents ?? ""}</span></div>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple circle" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
+                            <!--<button class="slow-ripple  circle" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                <button class="slow-ripple  circle" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>
+                            <!--<button class="slow-ripple  circle" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple  circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
+                                <button class="slow-ripple  circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>
+                            <!--<button class="slow-ripple  circle" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}><i class="fas fa-trash"></i></button>-->
                             </div>
-                            <dialog  class="dialog blur" id={`d${String(effectIndex)}`}>
-                                <div class="row responsive">
+                            <dialog  class="    responsive dialog blur" id={`d${String(effectIndex)}`}>
+                                <div class="row responsive            "                               >
                                     <h6>Customize your text</h6>
-                                    <div class="max right-align">
+                                    <div        class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
                                         <!-- svelte-ignore a11y_consider_explicit_label -->
                                         <button class="transparent circle right" data-ui={`#d${effectIndex}`}><i class="fas fa-xmark"></i></button>
                                     </div>
                                 </div>
+                            <!--<div class="medium-space"></div>-->
                                 <div class="medium-space"></div>
+                            <!--<div class="medium-space"></div>-->
                             <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
                                 <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>
                             <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
@@ -1687,9 +1727,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
     }
     .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }
 /*  .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }  */
-/*  .headerContainer  { width: 100% ;                                                                                                                                                                  }
 /*  .headerContainer  { width: 100% ;                                                                                                                                                                  }  */
-/*  .footerContainer  { width: 100% ;                                                                                                                                                                  }
+/*  .headerContainer  { width: 100% ;                                                                                                                                                                  }  */
+/*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
 /*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
     .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
 /*  .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }  */

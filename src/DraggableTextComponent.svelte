@@ -96,7 +96,7 @@
     </div>
     <!-- svelte-ignore a11y_consider_explicit_label -->
     <!-- svelte-ignore a11y_consider_explicit_label -->
-    <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input type="color" on:change={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+    <button class="circle slow-ripple large-elevate"><i class="fa-solid fa-palette"></i><input type="color" on:change={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
 //    const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
       const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
 //    const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);

@@ -203,7 +203,7 @@
               <td class="border">
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input id={`${thisUniformName}-color-button`} type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
+                <button class="circle slow-ripple large-elevate"><i class="fa-solid fa-palette"></i><input id={`${thisUniformName}-color-button`} type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
                     const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
 //                  const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
                     updateUniform(ii, 0, r);
@@ -402,7 +402,7 @@
              || (thisUniformType ?? "") ===             "uint"}
         <div   class="row center-align middle-align">
           <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-          <button class="circle        small"
+          <button class="circle small large-elevate"
           on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
           on:mouseout  ={async (e) => { clearInterval(interval); }}
           on:mouseup   ={async (e) => { clearInterval(interval); }}
@@ -424,7 +424,7 @@
             />
           </div>
           <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-          <button class="circle        small"
+          <button class="circle small large-elevate"
             on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue + 0.00001); } }, 75); }}
             on:mouseout  ={async (e) => { clearInterval(interval); }}
             on:mouseup   ={async (e) => { clearInterval(interval); }}

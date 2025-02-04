@@ -128,7 +128,7 @@ import {   onMount   } from   "svelte";
         if (video) {
             video.remove();
         }
-        let imageRatio    = 0.3                       ;
+        let imageRatio    = 1.0                       ;
         canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         canvasInstance.  draw = () => {

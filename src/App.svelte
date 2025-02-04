@@ -35,6 +35,9 @@ import {   onMount   } from   "svelte";
     let defaultFont: p5.Font;
 //  let defaultFont: p5.Font;
 
+    import SFMonoRegularURL from "./assets/fonts/SF-Mono-Regular.otf";
+//  import SFMonoRegularURL from "./assets/fonts/SF-Mono-Regular.otf";
+
     const p5Logic = (p: p5) => {
           p.mousePressed  = (e?: object): void => {
 //        onMousePressed (draggableText, p);
@@ -58,8 +61,8 @@ import {   onMount   } from   "svelte";
           }
           };
           p.preload = (): void => {
-            defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
-//          defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
+            defaultFont = p.loadFont(SFMonoRegularURL);
+//          defaultFont = p.loadFont(SFMonoRegularURL);
           };
           p.setup   = (): void => {
 //          draggableText.font = defaultFont;

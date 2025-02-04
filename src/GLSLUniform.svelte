@@ -400,9 +400,9 @@
       {:else if (thisUniformType ?? "") === "float"
              || (thisUniformType ?? "") ===        "int"
              || (thisUniformType ?? "") ===             "uint"}
-        <div   class="row center-align middle-align">
+        <div      class="row    center-align middle-align        " >
           <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-          <button class="circle small large-elevate"
+          <button class="circle        small        large-elevate"
           on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
           on:mouseout  ={async (e) => { clearInterval(interval); }}
           on:mouseup   ={async (e) => { clearInterval(interval); }}
@@ -448,8 +448,8 @@
         {:else if (thisUniformName ?? "").startsWith("palette")}
         {/if} -->
         {#if (thisUniformName ?? "").startsWith("upload")}
-        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span></button></form>
-<!--    <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>    -->
+        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span></button></form>
+<!--    <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span></button></form>    -->
         {:else}
         <div class="field label suffix round border">
           <select on:change={async (e) => {

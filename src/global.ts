@@ -60,8 +60,8 @@ export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
 
-
-
+export let successScript: Writable<string> = writable("");
+export let failureScript: Writable<string> = writable("");
 
 
                                                    

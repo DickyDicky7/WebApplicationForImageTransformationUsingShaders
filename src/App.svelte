@@ -1213,6 +1213,51 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                     ];
 
 
+                            editorSnapshotsUndoStack.push({
+                                undo: async (dynamicStorage: Map<string, any> | null) => {
+                            $effectsUsedForFiltering.pop();
+//                          $effectsUsedForFiltering.pop();
+                            $effectsUsedForFiltering = $effectsUsedForFiltering;
+//                          $effectsUsedForFiltering = $effectsUsedForFiltering;
+                                }
+                                ,
+                                redo: async (dynamicStorage: Map<string, any> | null) => {
+                            $effectsUsedForFiltering = [ ...
+                            $effectsUsedForFiltering , { fragmentShaderSourceType________: null
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : {
+//                                                   ,   draggableText                   : {
+                                                                                            colorFilling: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            colorOutline: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            fontSize    : 24                          ,
+                                                                                            contents    : "Text"                      ,
+                                                                                            alignHOption: "center"                    ,
+                                                                                            alignVOption: "center"                    ,
+                                                                                            font        : defaultFont                 ,
+                                                                                            stylesOption: "normal"                    ,
+                                                                                            positionX   : 0                           ,
+                                                                                            positionY   : 0                           ,
+                                                                                            dimensionW  : 24 * 4                      ,
+                                                                                            dimensionH  : 24 * 1                      ,
+                                                                                            isDragging  : false                       ,
+                                                                                            offsetX     : 0                           ,
+                                                                                            offsetY     : 0                           ,
+                                                                                            spacings    : 24                          ,
+                                                                                            wrapMode    : null!                       ,
+//                                                                                         }
+                                                                                           }
+                                                     , }
+                                                    ];
+                                }
+                                ,
+                                dynamicStorage: null
+                                ,
+                            });
+
+
                             await makeNewSnackbarSuccess(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                          await makeNewSnackbarFailure(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
                         }}>

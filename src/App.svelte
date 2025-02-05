@@ -102,18 +102,43 @@ import {   onMount   } from   "svelte";
     let canvasInstance: p5         ;
     let bufferInstance: p5.Graphics;
     
-    import bg1 from "./shadertoys/bg1.1.glsl?raw";
-    import bg2 from "./shadertoys/bg2.1.glsl?raw";
-    import bg3 from "./shadertoys/bg2.2.glsl?raw";
-    import bg4 from "./shadertoys/bg2.3.glsl?raw";
-    import bg5 from "./shadertoys/bg2.4.glsl?raw";
-    let bgs: string[] = [ bg1, bg2, bg3, bg4, bg5, ];
+    import bg1_1  from "./shadertoys/bg1.1.glsl?raw";
+    import bg2_1  from "./shadertoys/bg2.1.glsl?raw";
+    import bg2_2  from "./shadertoys/bg2.2.glsl?raw";
+    import bg2_3  from "./shadertoys/bg2.3.glsl?raw";
+    import bg2_4  from "./shadertoys/bg2.4.glsl?raw";
+    import bg3_1  from "./shadertoys/bg3.1.glsl?raw";
+    import bg4_1  from "./shadertoys/bg4.1.glsl?raw";
+    import bg5_1  from "./shadertoys/bg5.1.glsl?raw";
+    import bg6_1  from "./shadertoys/bg6.1.glsl?raw";
+    import bg7_1  from "./shadertoys/bg7.1.glsl?raw";
+    import bg8_1  from "./shadertoys/bg8.1.glsl?raw";
+    import bg9_1  from "./shadertoys/bg9.1.glsl?raw";
+    import bg11_1 from "./shadertoys/bg11.1.glsl?raw";
+    import bg12_1 from "./shadertoys/bg12.1.glsl?raw";
+    import bg13_1 from "./shadertoys/bg13.1.glsl?raw";
+    let bgs: string[] = [ bg1_1
+                      ,   bg2_1
+                      ,   bg2_2
+                      ,   bg2_3
+                      ,   bg2_4
+                      ,   bg3_1
+                      ,   bg4_1
+                      ,   bg5_1
+                      ,   bg6_1
+                      ,   bg7_1
+                      ,   bg8_1
+                      ,   bg9_1
+                      ,   bg11_1
+                      ,   bg12_1
+                      ,   bg13_1
+                      , ];
 
     onMount(async ()  : Promise<void> => {
 
-//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
-        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
-//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 15)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 15)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 15)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
 
         canvasInstance = new p5(p5Logic, canvas);
 //      bufferInstance =

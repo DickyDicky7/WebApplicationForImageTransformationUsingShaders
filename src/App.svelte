@@ -145,8 +145,8 @@ import {   onMount   } from   "svelte";
 //      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
 //                                    Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
 //      canvasInstance.WEBGL,        );
-            await ui("theme", "#009688");
-            await ui("theme", "#009688");
+            await ui("theme", "#FF5A1E");
+            await ui("theme", "#FF5A1E");
 //          await ui("mode" , "light"  );
             await ui("mode" , "light"  );
 //          await ui("mode" , "light"  );
@@ -924,17 +924,17 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <MouseCursor> </MouseCursor>
 <main>
     <div     class="      container                                 ">
-    <!--<div class="headerContainer grey-border border              "></div>-->
-    <!--<div class="headerContainer grey-border border              "></div>-->
-        <div class="topBarContainer grey-border border small-padding">
+    <!--<div class="headerContainer                "></div>-->
+    <!--<div class="headerContainer                "></div>-->
+        <div class="topBarContainer   small-padding">
             <div class="row">
-                <button class="slow-ripple large-elevate"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
-            <!--<button class="slow-ripple large-elevate"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+                <button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
+            <!--<button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
                 <div    class="field middle-align">
                     <nav>
-                    <!--<div class="max"><span>Webcam</span></div>-->
-                        <div class="max"><span>Webcam</span></div>
-                    <!--<div class="max"><span>Webcam</span></div>-->
+                    <!--<div class="max margin"><span>Webcam</span></div>-->
+                        <div class="max margin"><span>Webcam</span></div>
+                    <!--<div class="max margin"><span>Webcam</span></div>-->
                         <label     class="switch icon">
                             <input class="           " type="checkbox" on:change={(e) => {
                                 const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
@@ -957,9 +957,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <!--        <button class="slow-ripple large-elevate" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple large-elevate" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
-            <!--<button class="slow-ripple large-elevate" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
-                <button class="slow-ripple large-elevate" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>
-            <!--<button class="slow-ripple large-elevate" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
+            <!--<button class="slow-ripple large-elevate margin deep-orange" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
+                <button class="slow-ripple large-elevate margin deep-orange" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>
+            <!--<button class="slow-ripple large-elevate margin deep-orange" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
                 <dialog class="left small-blur dialogSide" id="a">
                     <!-- svelte-ignore a11y_consider_explicit_label -->
                     <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -969,7 +969,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <div     class="column max small-padding">
                         <div class="column                  ">
                             <h6>Save as image</h6>
-                            <div class="field label suffix round border">
+                            <div class="field label suffix round ">
                                 <select bind:this={imageFormatSelection}>
                                     {#each         imageFormats as
                                                    imageFormat
@@ -998,7 +998,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <div class="medium-space"></div>
                         <div class="column      ">
                             <h6>Save as video</h6>
-                            <div class="field label suffix round border"> 
+                            <div class="field label suffix round "> 
                                 <select bind:this={videoFormatSelection}>
                                     {#each         videoFormats as
                                                    videoFormat
@@ -1066,7 +1066,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
                     </div>
                 </dialog>
-                <button class="slow-ripple large-elevate"
+                <button class="slow-ripple large-elevate margin deep-orange"
                      on:click={async (e) => {
                         if (mode === MODE.IMAGE ) {
                             await shareImage (/*imageToShare,*/ canvas.children[0] as HTMLCanvasElement);
@@ -1090,14 +1090,14 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 </button>
             </div>
         </div>
-        <div         class="mainBarContainer grey-border border              ">
-            <div     class="sideBarContainer grey-border border ">
+        <div         class="mainBarContainer   ">
+            <div     class="sideBarContainer   ">
                 <div class="grid small-padding">
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                     <div class="s12 m12 l6">
-                        <button class="slow-ripple responsive large-elevate" 
+                        <button class="slow-ripple responsive large-elevate deep-orange" 
                              on:click={async (e) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
@@ -1151,7 +1151,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <!--Thêm effect @có sẵn @@-->
                     <!--Thêm effect @có sẵn @@-->
                     <div class="s12 m12 l6">
-                        <button class="slow-ripple responsive large-elevate" 
+                        <button class="slow-ripple responsive large-elevate deep-orange" 
                              on:click={async (e) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
@@ -1205,7 +1205,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <!--Thêm effect gen bởi AI-->
                     <!--Thêm effect gen bởi AI-->
                     <div class="s12 m12 l6">
-                        <button class="slow-ripple responsive large-elevate"
+                        <button class="slow-ripple responsive large-elevate grey10 align-center"
                             on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: null
@@ -1287,18 +1287,18 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 //                          await makeNewSnackbarFailure(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
                         }}>
                         <!--<i class="fas fa-plus"></i>-->
-                            <i class="fas fa-plus"></i>
                         <!--<i class="fas fa-plus"></i>-->
-                        <!--<span>Add Text     </span> -->
-                            <span>Add Text     </span>
-                        <!--<span>Add Text     </span> -->                        
+                        <!--<i class="fas fa-plus"></i>-->
+                        <!--<span>Insert Text     </span> -->
+                            <span>Insert Text     </span>
+                        <!--<span>Insert Text     </span> -->                        
                         </button>
                     </div>
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 </div>
-                <div class="effectContainer round">
+                <div class="effectContainer margin">
                     {#each $effectsUsedForFiltering as {
                            fragmentShaderSourceType________
                      ,     fragmentShaderSourceCode________
@@ -1311,11 +1311,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                        }
                      ,      effectIndex
                     }
-                    <div class="tiny-space"></div>   
-                    <div class="fill round medium-padding">            
+                <!--<div class="tiny-space"></div>-->
+                    <div class="tiny-space"></div>
+                <!--<div class="tiny-space"></div>-->
+                    <div class="medium-padding">            
                         {#if fragmentShaderSourceType________ ===  "NI"}
-                            <div     class="                                row">
-                                <div class="field label suffix round border max">
+                            <div     class="                          row">
+                                <div class="field label suffix round  max large-elevate white-text ">
                                 <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
                                 <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
                                     <select bind:this={fragmentShader_HTMLSelectElement}
@@ -1439,9 +1441,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 {/if}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="slow-ripple circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>-->
-                                <button class="slow-ripple circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>
-                            <!--<button class="slow-ripple circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>-->
+                            <!--<button class="margin slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban"></i></button>-->
+                                <button class="margin slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban"></i></button>
+                            <!--<button class="margin slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban"></i></button>-->
                             </div>
                             <dialog  class="    responsive dialog blur" id={`b${String(effectIndex)}`}>
                                 <div class="row responsive            "                               >
@@ -1462,7 +1464,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         {#if fragmentShaderSourceType________ ===  "AI"}
                             <div     class="row               ">
                             <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
-                                <div class="max medium-padding border round"><span>Effect {effectIndex} by AI</span></div>
+                                <div class="max medium-padding  round"><span>Effect {effectIndex} by AI</span></div>
                             <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -1488,7 +1490,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <div     class="      medium-space          ">  </div>
                             <!--<div     class="      medium-space          ">  </div>-->
                                 <div     class="                         row">
-                                    <div class="field border round label max">
+                                    <div class="field  round label max">
                                         <input type="text" bind:this={AIInputPrompts}>
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
@@ -1701,8 +1703,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     {/each}
                 </div>
             </div>
-            <div     class="canvasContainer grey-border border              ">
-                <div class="canvasToolBoxes grey-border border small-padding">
+            <div     class="canvasContainer                ">
+                <div class="canvasToolBoxes   small-padding">
                     <!--Dành cho canvas đang render video-->
                     <!--Dành cho canvas đang render video-->
                 <!--<div     class="row   ">-->
@@ -1776,24 +1778,24 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <div>
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend large-elevate" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
-                    <!--<button class="slow-ripple circle extend large-elevate" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                        <button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                    <!--<button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
                     -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend large-elevate" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>
-                    <!--<button class="slow-ripple circle extend large-elevate" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>-->
+                        <button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>
+                    <!--<button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>-->
                     </div>
                 </div>
-                <div class="canvas grey-border border">
+                <div class="canvas  ">
                     <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
                 <!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>-->
                 </div>
             </div>
             
         </div>
-    <!--<div class="footerContainer grey-border border"></div>-->
-    <!--<div class="footerContainer grey-border border"></div>-->
+    <!--<div class="footerContainer  "></div>-->
+    <!--<div class="footerContainer  "></div>-->
     </div>
 <!--<div><button class="slow-ripple large-elevate" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->
 <!--<div><button class="slow-ripple large-elevate" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->

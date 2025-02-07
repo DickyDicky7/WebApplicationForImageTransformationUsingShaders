@@ -136,20 +136,20 @@ import {   onMount   } from   "svelte";
 
     onMount(async ()  : Promise<void> => {
 
-//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 15)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
-        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 15)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
-//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 15)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
 
         canvasInstance = new p5(p5Logic, canvas);
 //      bufferInstance =
 //      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
 //                                    Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
 //      canvasInstance.WEBGL,        );
-            await ui("theme", "#FF5A1E");
-            await ui("theme", "#FF5A1E");
-//          await ui("mode" , "light"  );
-            await ui("mode" , "light"  );
-//          await ui("mode" , "light"  );
+            await ui("theme", "#000000");
+            await ui("theme", "#000000");
+//          await ui("mode" , "dark"   );
+            await ui("mode" , "dark"   );
+//          await ui("mode" , "dark"   );
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
@@ -861,7 +861,10 @@ import type { GLSLUniforms       } from "./types";
 import type { GLSLUniform_       } from "./types";
 import        GlslUniform          from "./GLSLUniform.svelte";
 
-
+    import { onDestroy } from "svelte";
+//  import { onDestroy } from "svelte";
+    onDestroy(async() => { canvasInstance.remove(); });
+//  onDestroy(async() => { canvasInstance.remove(); });
 
 const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
 };
@@ -928,13 +931,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
     <!--<div class="headerContainer                "></div>-->
         <div class="topBarContainer   small-padding">
             <div class="row">
-                <button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
-            <!--<button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip"></i><span>Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+                <button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
+            <!--<button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
                 <div    class="field middle-align">
                     <nav>
-                    <!--<div class="max margin"><span>Webcam</span></div>-->
-                        <div class="max margin"><span>Webcam</span></div>
-                    <!--<div class="max margin"><span>Webcam</span></div>-->
+                    <!--<div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>-->
+                        <div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>
+                    <!--<div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>-->
                         <label     class="switch icon">
                             <input class="           " type="checkbox" on:change={(e) => {
                                 const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
@@ -947,8 +950,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 }
                             }}>
                             <span>
-                                <i>Videocam_Off</i>
-                                <i>Videocam    </i>
+                                <i class="white-text deep-orange">Videocam_Off</i>
+                                <i class="white-text deep-orange">Videocam    </i>
                             </span>
                         </label>
                     </nav>
@@ -957,19 +960,19 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <!--        <button class="slow-ripple large-elevate" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple large-elevate" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
-            <!--<button class="slow-ripple large-elevate margin deep-orange" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
-                <button class="slow-ripple large-elevate margin deep-orange" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>
-            <!--<button class="slow-ripple large-elevate margin deep-orange" data-ui="#a"><i class="fas fa-download"></i><span>Save</span></button>-->
+            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-download white-text"></i><span>Save</span></button>-->
+                <button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-download white-text"></i><span>Save</span></button>
+            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-download white-text"></i><span>Save</span></button>-->
                 <dialog class="left small-blur dialogSide" id="a">
                     <!-- svelte-ignore a11y_consider_explicit_label -->
                     <!-- svelte-ignore a11y_consider_explicit_label -->
-                <!--<div class="max right-align"><button class="slow-ripple transparent circle right large-elevate" data-ui="#a"><i class="fas fa-xmark"></i></button></div>-->
-                    <div class="max right-align"><button class="slow-ripple transparent circle right large-elevate" data-ui="#a"><i class="fas fa-xmark"></i></button></div>
-                <!--<div class="max right-align"><button class="slow-ripple transparent circle right large-elevate" data-ui="#a"><i class="fas fa-xmark"></i></button></div>-->
+                <!--<div class="max right-align"><button class="slow-ripple transparent circle left-round top-round right large-elevate white-text grey10" data-ui="#a"><i class="fas fa-xmark white-text"></i></button></div>-->
+                    <div class="max right-align"><button class="slow-ripple transparent circle left-round top-round right large-elevate white-text grey10" data-ui="#a"><i class="fas fa-xmark white-text"></i></button></div>
+                <!--<div class="max right-align"><button class="slow-ripple transparent circle left-round top-round right large-elevate white-text grey10" data-ui="#a"><i class="fas fa-xmark white-text"></i></button></div>-->
                     <div     class="column max small-padding">
                         <div class="column                  ">
-                            <h6>Save as image</h6>
-                            <div class="field label suffix round ">
+                            <h6  class="                         white-text                          ">Save as image</h6>
+                            <div class="field label suffix round white-text large-elevate slow-ripple">
                                 <select bind:this={imageFormatSelection}>
                                     {#each         imageFormats as
                                                    imageFormat
@@ -989,16 +992,16 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             </div>
                             <!-- svelte-ignore a11y_consider_explicit_label -->
                             <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <!--<button class="slow-ripple center large-elevate" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera"></i><span>Capture</span><div class="tooltip top max toolTip round"><span>Save the current frame.</span></div></button>-->
-                            <button class="slow-ripple center large-elevate" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera"></i><span>Capture</span><div class="tooltip top max toolTip round"><span>Save the current frame.</span></div></button>
-                        <!--<button class="slow-ripple center large-elevate" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera"></i><span>Capture</span><div class="tooltip top max toolTip round"><span>Save the current frame.</span></div></button>-->
+                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>-->
+                            <button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>
+                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>-->
                             <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
                             <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
                         </div>
                         <div class="medium-space"></div>
                         <div class="column      ">
-                            <h6>Save as video</h6>
-                            <div class="field label suffix round "> 
+                            <h6  class="                   white-text                                ">Save as video</h6>
+                            <div class="field label suffix round white-text large-elevate slow-ripple"> 
                                 <select bind:this={videoFormatSelection}>
                                     {#each         videoFormats as
                                                    videoFormat
@@ -1028,24 +1031,24 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     </nav>
                                 </div>
                             </div>
-                            <div        class="row  middle-align        "                                                          >
-                                <button class="slow-ripple large-elevate" on:click={async (e) => { await handleCaptureAsVideo(); }}>
+                            <div        class="row  middle-align                               "                                                          >
+                                <button class="slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { await handleCaptureAsVideo(); }}>
                                     {#if recording === false}
-                                        <i class="fas fa-circle-play "></i>
-                                    <!--<i class="fas fa-circle-play "></i>-->
+                                        <i class="fa-solid fa-bolt         white-text"></i>
+                                    <!--<i class="fa-solid fa-bolt         white-text"></i>-->
                                         <span>Start</span>
                                     <!--<span>Start</span>                 -->
                                     {:else}
-                                        <i class="fas fa-circle-pause"></i>
-                                    <!--<i class="fas fa-circle-pause"></i>-->
+                                        <i class="fa-solid fa-pause        white-text"></i>
+                                    <!--<i class="fa-solid fa-pause        white-text"></i>-->
                                         <span>Stop </span>
                                     <!--<span>Stop </span>                 -->
                                     {/if}
                                 </button>
                                 {#if recording === true}
                                     <div>
-                                        <i class="fas fa-record-vinyl"></i>
-                                    <!--<i class="fas fa-record-vinyl"></i>-->
+                                        <i class="fa-solid fa-record-vinyl white-text"></i>
+                                    <!--<i class="fa-solid fa-record-vinyl white-text"></i>-->
                                         <span>Recording...</span>
                                     <!--<span>Recording...</span>          -->
                                     </div>
@@ -1083,10 +1086,10 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 //                          await shareWebcam(  videoToShare,   canvas.children[0] as HTMLCanvasElement);
                         }
                 }}>
-                    <i class="fas fa-share"></i>
-                <!--<i class="fas fa-share"></i>-->
-                    <span>Share</span>
-                <!--<span>Share</span>          -->
+                    <i    class="fas fa-share white-text"></i>
+                <!--<i    class="fas fa-share white-text"></i>        -->
+                    <span class="             white-text">Share</span>
+                <!--<span class="             white-text">Share</span>-->
                 </button>
             </div>
         </div>
@@ -1137,12 +1140,12 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 await makeNewSnackbarSuccess(`A new NI effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                              await makeNewSnackbarFailure(`A new NI effect has been added - ${$effectsUsedForFiltering.length} so far`);
                             }}>
-                            <!--<i class="fas fa-plus"></i>-->
-                                <i class="fas fa-plus"></i>
-                            <!--<i class="fas fa-plus"></i>-->
-                            <!--<span>Add Effect NI</span> -->
-                                <span>Add Effect NI</span>
-                            <!--<span>Add Effect NI</span> -->
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                                <i class="fas fa-plus white-text"></i>
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                            <!--<span class="white-text">Add Effect NI</span> -->
+                                <span class="white-text">Add Effect NI</span>
+                            <!--<span class="white-text">Add Effect NI</span> -->
                         </button>
                     </div>
                     <!--<div class="space"></div> -->
@@ -1191,12 +1194,12 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 await makeNewSnackbarSuccess(`A new AI effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                              await makeNewSnackbarFailure(`A new AI effect has been added - ${$effectsUsedForFiltering.length} so far`);
                             }}>
-                            <!--<i class="fas fa-plus"></i>-->
-                                <i class="fas fa-plus"></i>
-                            <!--<i class="fas fa-plus"></i>-->
-                            <!--<span>Add Effect AI</span> -->
-                                <span>Add Effect AI</span>
-                            <!--<span>Add Effect AI</span> -->
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                                <i class="fas fa-plus white-text"></i>
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                            <!--<span class="white-text">Add Effect AI</span> -->
+                                <span class="white-text">Add Effect AI</span>
+                            <!--<span class="white-text">Add Effect AI</span> -->
                         </button>
                     </div>
                 <!--<div class="space"></div> -->
@@ -1286,12 +1289,12 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             await makeNewSnackbarSuccess(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                          await makeNewSnackbarFailure(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
                         }}>
-                        <!--<i class="fas fa-plus"></i>-->
-                        <!--<i class="fas fa-plus"></i>-->
-                        <!--<i class="fas fa-plus"></i>-->
-                        <!--<span>Insert Text     </span> -->
-                            <span>Insert Text     </span>
-                        <!--<span>Insert Text     </span> -->                        
+                        <!--<i class="fas fa-plus white-text"></i>-->
+                        <!--<i class="fas fa-plus white-text"></i>-->
+                        <!--<i class="fas fa-plus white-text"></i>-->
+                        <!--<span class="white-text">Insert Text     </span> -->
+                            <span class="white-text">Insert Text     </span>
+                        <!--<span class="white-text">Insert Text     </span> -->                        
                         </button>
                     </div>
                 <!--<div class="space"></div>-->
@@ -1317,7 +1320,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <div class="medium-padding">            
                         {#if fragmentShaderSourceType________ ===  "NI"}
                             <div     class="                          row">
-                                <div class="field label suffix round  max large-elevate white-text ">
+                                <div class="field label suffix round  max large-elevate white-text slow-ripple">
                                 <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
                                 <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
                                     <select bind:this={fragmentShader_HTMLSelectElement}
@@ -1557,7 +1560,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             {#if effectIndex > 0}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple max large-elevate"
+                                <button class="slow-ripple max large-elevate grey10"
                                      on:click={async (e) => {
                                     let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
                                     let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
@@ -1629,7 +1632,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             {#if effectIndex < $effectsUsedForFiltering.length - 1}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple max large-elevate"
+                                <button class="slow-ripple max large-elevate grey10"
                                      on:click={async (e) => {
                                     let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
                                     let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
@@ -1700,6 +1703,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             {/if}
                         </div>
                     </div>
+                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px">-->
+                    <hr class="large white" style:height="3px" style:box-shadow="0 0 3px">
+                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px">-->
                     {/each}
                 </div>
             </div>
@@ -1778,13 +1784,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <div>
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
-                    <!--<button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                        <button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                    <!--<button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
                     -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>
-                    <!--<button class="slow-ripple circle extend large-elevate margin grey10" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>-->
+                        <button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>
+                    <!--<button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>-->
                     </div>
                 </div>
                 <div class="canvas  ">
@@ -1804,8 +1810,15 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 </main>
 
 <style>
-    main { overflow-x: visible; scroll-behavior: smooth; }
-    *    {                      scroll-behavior: smooth; }
+
+    i      { text-shadow: 0 0 3px; }
+    h6     { text-shadow: 0 0 3px; }
+    span   { text-shadow: 0 0 3px; }
+    label  { text-shadow: 0 0 3px; }
+    select { text-shadow: 0 0 3px; }
+    
+    main { overflow-x: visible; overflow-y: hidden; scroll-behavior: smooth; }
+    *    {                                          scroll-behavior: smooth; }
     @font-face {
      font-family:            'SF Mono Regular'                                       ;
      font-weight: normal;
@@ -1842,6 +1855,10 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 /*  .dialogSide       { width: 030% ;                                                                                                                                                                  }  */
     .toolTip          { width: 200px;                                                                                                                                                                  }
 /*  .toolTip          { width: 200px;                                                                                                                                                                  }  */
+
+.switch > input:checked + span:after { border: none; background-color: #222222           ;                          box-shadow: 0 0 10px #222222;                               }
+.switch >                 span:after {                   border-color: #222222 !important; background: #ffffff22; box-shadow: 0 0 10px #222222; border-width: 3px !important; }
+
 </style>
 
 

@@ -98,3 +98,12 @@ button:focus-visible
   }
 }
 */
+:root, body.light, body.dark { --primary: white !important; }
+:root, body.light, body.dark { --primary: white !important; }
+
+
+
+
+
+
+

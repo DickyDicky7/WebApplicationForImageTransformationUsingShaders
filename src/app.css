@@ -98,3 +98,12 @@ button:focus-visible
   }
 }
 */
+:root, body.light, body.dark { --primary: white !important; --primary-container: #2196F3 !important; }
+:root, body.light, body.dark { --primary: white !important; --primary-container: #2196F3 !important; }
+
+
+
+
+
+
+

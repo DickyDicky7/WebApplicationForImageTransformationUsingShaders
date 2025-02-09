@@ -35,25 +35,40 @@ import {   onMount   } from   "svelte";
     let defaultFont: p5.Font;
 //  let defaultFont: p5.Font;
 
+    import SFMonoRegularURL from "./assets/fonts/SF-Mono-Regular.otf";
+//  import SFMonoRegularURL from "./assets/fonts/SF-Mono-Regular.otf";
+
     const p5Logic = (p: p5) => {
           p.mousePressed  = (e?: object): void => {
+//        onMousePressed (draggableText, p);
+          for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
           onMousePressed (draggableText, p);
+          }
           };
           p.mouseDragged  = (e?: object): void => {
+//          startDragging(draggableText, p);
+          for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
             startDragging(draggableText, p);
+          }
           };
           p.mouseReleased = (e?: object): void => {
+//          ceaseDragging(draggableText, p);
+          for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
             ceaseDragging(draggableText, p);
+          }
           };
           p.preload = (): void => {
-            defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
-//          defaultFont = p.loadFont("/src/assets/fonts/SF-Mono-Regular.otf");
+            defaultFont = p.loadFont(SFMonoRegularURL);
+//          defaultFont = p.loadFont(SFMonoRegularURL);
           };
           p.setup   = (): void => {
-            draggableText.font = defaultFont;
 //          draggableText.font = defaultFont;
-            p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
-//          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, });
+//          draggableText.font = defaultFont;
+            p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: true, perPixelLighting: true, });
+//          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: true, perPixelLighting: true, });
             p.createCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
                            Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
                               p.WEBGL);
@@ -62,37 +77,86 @@ import {   onMount   } from   "svelte";
             p.frameRate (  fps   );
             p.disableFriendlyErrors = true;
 //          p.disableFriendlyErrors = true;
+//EXPERIMENT
+            p.noLights   ();
+            p.noDebugMode();
+            p.noSmooth   ();
+//EXPERIMENT
 
 
         };
 
         p.draw = () => {
         p.background( 255 );
-        display(draggableText, p);
 //      display(draggableText, p);
+//      display(draggableText, p);
+        for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+//      for (let { fragmentShaderSourceType________, draggableText } of $effectsUsedForFiltering) { if (fragmentShaderSourceType________) continue; if (!draggableText) continue;
+        display(draggableText, p);
+        }
         };
     };
-
+    
+    let canvasBG      : HTMLElement;
     let canvas        : HTMLElement;
     let canvasInstance: p5         ;
     let bufferInstance: p5.Graphics;
     
+    import bg1_1  from "./shadertoys/bg1.1.glsl?raw";
+    import bg2_1  from "./shadertoys/bg2.1.glsl?raw";
+    import bg2_2  from "./shadertoys/bg2.2.glsl?raw";
+    import bg2_3  from "./shadertoys/bg2.3.glsl?raw";
+    import bg2_4  from "./shadertoys/bg2.4.glsl?raw";
+    import bg3_1  from "./shadertoys/bg3.1.glsl?raw";
+    import bg4_1  from "./shadertoys/bg4.1.glsl?raw";
+    import bg5_1  from "./shadertoys/bg5.1.glsl?raw";
+    import bg6_1  from "./shadertoys/bg6.1.glsl?raw";
+    import bg7_1  from "./shadertoys/bg7.1.glsl?raw";
+    import bg8_1  from "./shadertoys/bg8.1.glsl?raw";
+    import bg9_1  from "./shadertoys/bg9.1.glsl?raw";
+    import bg11_1 from "./shadertoys/bg11.1.glsl?raw";
+    import bg12_1 from "./shadertoys/bg12.1.glsl?raw";
+    import bg13_1 from "./shadertoys/bg13.1.glsl?raw";
+    let bgs: string[] = [ bg1_1
+                      ,   bg2_1
+                      ,   bg2_2
+                      ,   bg2_3
+                      ,   bg2_4
+                      ,   bg3_1
+                      ,   bg4_1
+                      ,   bg5_1
+                      ,   bg6_1
+                      ,   bg7_1
+                      ,   bg8_1
+                      ,   bg9_1
+                      ,   bg11_1
+                      ,   bg12_1
+                      ,   bg13_1
+                      , ];
+
     onMount(async ()  : Promise<void> => {
-    
+
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+        let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+//      let bgShader: any = null!; let bgCanvasInstance: p5 = new p5((p: p5) => { p.setup = () => { p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: false, perPixelLighting: true, }); p.createCanvas(window.innerWidth, window.innerHeight, p.WEBGL); p.disableFriendlyErrors = true; p.noLights(); p.noDebugMode(); p.noSmooth(); bgShader = (p as any).createFilterShader(bgs[Math.floor(Math.random() * 5)]); }; p.draw = () => { bgShader.setUniform("time", p.millis() / 1000); p.filter(bgShader); }; }, canvasBG);
+
         canvasInstance = new p5(p5Logic, canvas);
 //      bufferInstance =
 //      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
 //                                    Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
 //      canvasInstance.WEBGL,        );
-            await ui("theme", "#009688");
-            await ui("theme", "#009688");
+            await ui("theme", "#000000");
+            await ui("theme", "#000000");
+//          await ui("mode" , "dark"   );
+            await ui("mode" , "dark"   );
+//          await ui("mode" , "dark"   );
     });
 
     const successCallback = (image_Instance: p5.Image): void => {
         if (video) {
             video.remove();
         }
-        let imageRatio    = 0.3                       ;
+        let imageRatio    = 1.0                       ;
         canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
         canvasInstance.  draw = () => {
@@ -103,9 +167,19 @@ import {   onMount   } from   "svelte";
             image_Instance, 0.0, 0.0)           ;
 
 
-            for (let { fragmentShaderSourceCode________,
+            for (let { fragmentShaderSourceType________,
+                       fragmentShaderSourceCode________,
                        fragmentShader______GLSLUniforms,
-                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                       fragmentShaderFiltering_Instance,
+                       draggableText                   , } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceType________) {
+                if   (!draggableText) { continue; }
+//              if   (!draggableText) { continue; }
+                    display(draggableText, canvasInstance);
+//                  display(draggableText, canvasInstance);
+                    continue;
+//                  continue;
+                }
                 if   (!fragmentShaderSourceCode________) continue;
                 if   (!fragmentShader______GLSLUniforms) continue;
                 if   (!fragmentShaderFiltering_Instance) continue;
@@ -198,9 +272,19 @@ import {   onMount   } from   "svelte";
 //              videoProgressSlider_.value = video.time();
 //              videoProgressSlider_.value = video.time();
 
-            for (let { fragmentShaderSourceCode________,
+            for (let { fragmentShaderSourceType________,
+                       fragmentShaderSourceCode________,
                        fragmentShader______GLSLUniforms,
-                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                       fragmentShaderFiltering_Instance,
+                       draggableText                   , } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceType________) {
+                if   (!draggableText) { continue; }
+//              if   (!draggableText) { continue; }
+                    display(draggableText, canvasInstance);
+//                  display(draggableText, canvasInstance);
+                    continue;
+//                  continue;
+                }
                 if   (!fragmentShaderSourceCode________) continue;
                 if   (!fragmentShader______GLSLUniforms) continue;
                 if   (!fragmentShaderFiltering_Instance) continue;
@@ -235,6 +319,8 @@ import {   onMount   } from   "svelte";
                      ceaseRecord = true;
                      fshotRecord = true;
                      ceaseCaptureAsVideoFullshot();
+                     recording   = false;
+//                   recording   = false;
                 };
 //------------------------------//
             };
@@ -545,9 +631,19 @@ import { resolveLygia      } from "./lygia";
                       , 0.0
                       , 0.0
                 )     ;
-            for (let { fragmentShaderSourceCode________,
+            for (let { fragmentShaderSourceType________,
+                       fragmentShaderSourceCode________,
                        fragmentShader______GLSLUniforms,
-                       fragmentShaderFiltering_Instance, } of $effectsUsedForFiltering) {
+                       fragmentShaderFiltering_Instance,
+                       draggableText                   , } of $effectsUsedForFiltering) {
+                if   (!fragmentShaderSourceType________) {
+                if   (!draggableText) { continue; }
+//              if   (!draggableText) { continue; }
+                    display(draggableText, canvasInstance);
+//                  display(draggableText, canvasInstance);
+                    continue;
+//                  continue;
+                }
                 if   (!fragmentShaderSourceCode________) continue;
                 if   (!fragmentShader______GLSLUniforms) continue;
                 if   (!fragmentShaderFiltering_Instance) continue;
@@ -765,7 +861,10 @@ import type { GLSLUniforms       } from "./types";
 import type { GLSLUniform_       } from "./types";
 import        GlslUniform          from "./GLSLUniform.svelte";
 
-
+    import { onDestroy } from "svelte";
+//  import { onDestroy } from "svelte";
+    onDestroy(async() => { canvasInstance.remove(); });
+//  onDestroy(async() => { canvasInstance.remove(); });
 
 const handleUpdate = (updatedUniforms: GLSLUniforms): void => {
 };
@@ -782,340 +881,983 @@ let        draggableText:
            DraggableText;
     import MouseCursor from "./MouseCursor.svelte";
 //  import MouseCursor from "./MouseCursor.svelte";
+
+    let recording: boolean = false;
+//  let recording: boolean = false;
+    let selectedCaptureOption: string = "Snapshot";
+//  let selectedCaptureOption: string = "Snapshot";
+const handleCaptureAsVideo = async(): Promise<void> => {
+    if (recording === false) {
+        recording =   true ;
+//      recording =   true ;
+        if (selectedCaptureOption === "Snapshot") {
+            await startCaptureAsVideoSnapshot();
+        }
+        else
+        if (selectedCaptureOption === "Fullshot") {
+            await startCaptureAsVideoFullshot();
+        }
+    }
+    else                     {
+        recording =   false;
+//      recording =   false;
+        if (selectedCaptureOption === "Snapshot") {
+            await ceaseCaptureAsVideoSnapshot();
+        }
+        else
+        if (selectedCaptureOption === "Fullshot") {
+            await ceaseCaptureAsVideoFullshot();
+        }
+    }
+}
+
+    import          SnackbarSuccess         from "./SnackbarSuccess.svelte";
+    import          SnackbarFailure         from "./SnackbarFailure.svelte";
+    import {                successScript } from "./global"                ;
+    import {                failureScript } from "./global"                ;
+    import { makeNewSnackbarSuccess       } from "./common"                ;
+    import { makeNewSnackbarFailure       } from "./common"                ;
+
+    import * as t from "svelte/transition";
+//  import * as t from "svelte/transition";
+    import { tick } from "svelte";
+//  import { tick } from "svelte";
+
+    let bigList: HTMLDivElement = null!;
+//  let bigList: HTMLDivElement = null!;
 </script>
 
-    <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>
+<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
+    <div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>
+<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
+<!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor> </MouseCursor>
-<main    class="responsive">
-    <div class="space     "></div>
-    <div>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="slow-ripple" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left "></i></button>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="slow-ripple" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right"></i></button>
-    </div>
-    <div class="space     "></div>
-    <form action="">
-        <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />
-<!--    <input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" />    -->
-        <button class="slow-ripple">LOAD IMAGE OR VIDEO</button>
-    </form>
-    <div class="space"></div>
-    <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
-<!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
-  -->
-    <div class="space"></div>
-    <div>
-        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsImage        (); }}>START SAVE AS IMAGE         </button><!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
-    </div>
-    <div class="space"></div>
-    <div>
-        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
-        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
-    </div>
-    <div class="space"></div>
-    <div>
-        <button class="slow-ripple" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
-        <button class="slow-ripple" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button><!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
-    </div>
-    <div class="space"></div>
-    <div>
-        <button class="slow-ripple" on:click={startWebCam}>START WEB CAM</button><!--Giống START SAVE AS VIDEO SNAPSHOT nhưng dành riêng cho sử dụng webcam-->
-        <button class="slow-ripple" on:click={ceaseWebCam}>STOP@ WEB CAM</button><!--Giống CEASE SAVE AS VIDEO SNAPSHOT nhưng dành riêng cho sử dụng webcam-->
-    <div class="space"></div>
-    <div>
-        <button class="slow-ripple" on:click={async (e) => {
-            $effectsUsedForFiltering = [ ...
-            $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                     ,   fragmentShaderSourceCode________: null
-                                     ,   fragmentShader______GLSLUniforms: null
-                                     ,   fragmentShaderFiltering_Instance: null
-                                     ,   fragmentShader_HTMLSelectElement: null
-                                     , }
-                                       ];
-            editorSnapshotsUndoStack.push({
-                undo: async (dynamicStorage: Map<string, any> | null) => {
-            $effectsUsedForFiltering.pop();
-            $effectsUsedForFiltering = $effectsUsedForFiltering;
-            console.log("call");
-                }
-                ,
-                redo: async (dynamicStorage: Map<string, any> | null) => {
-            $effectsUsedForFiltering = [ ...
-            $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
-                                     ,   fragmentShaderSourceCode________: null
-                                     ,   fragmentShader______GLSLUniforms: null
-                                     ,   fragmentShaderFiltering_Instance: null
-                                     ,   fragmentShader_HTMLSelectElement: null
-                                     , }
-                                       ];
-                }
-                ,
-                dynamicStorage: null
-                ,
-            });
-        }}>ADD EFFECT NI</button><!--Thêm effect @có sẵn @@-->
-        <button class="slow-ripple" on:click={async (e) => {
-            $effectsUsedForFiltering = [ ...
-            $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                     ,   fragmentShaderSourceCode________: null
-                                     ,   fragmentShader______GLSLUniforms: null
-                                     ,   fragmentShaderFiltering_Instance: null
-                                     ,   fragmentShader_HTMLSelectElement: null
-                                     , }
-                                       ];
-            editorSnapshotsUndoStack.push({
-                undo: async (dynamicStorage: Map<string, any> | null) => {
-            $effectsUsedForFiltering.pop();
-            $effectsUsedForFiltering = $effectsUsedForFiltering;
-            console.log("call");
-                }
-                ,
-                redo: async (dynamicStorage: Map<string, any> | null) => {
-            $effectsUsedForFiltering = [ ...
-            $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
-                                     ,   fragmentShaderSourceCode________: null
-                                     ,   fragmentShader______GLSLUniforms: null
-                                     ,   fragmentShaderFiltering_Instance: null
-                                     ,   fragmentShader_HTMLSelectElement: null
-                                     , }
-                                       ];
-                }
-                ,
-                dynamicStorage: null
-                ,
-            });
-        }}>ADD EFFECT AI</button><!--Thêm effect gen bởi AI-->
-    </div>
-    <div class="space"></div>
+<main>
+    <div     class="      container                                 ">
+    <!--<div class="headerContainer                "></div>-->
+    <!--<div class="headerContainer                "></div>-->
+        <div class="topBarContainer   small-padding">
+            <div class="row">
+                <button class=" slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
+            <!--<button class=" slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+                <div    class="field middle-align">
+                    <nav>
+                    <!--<div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>-->
+                        <div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>
+                    <!--<div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>-->
+                        <label     class="switch icon">
+                            <input class="           " type="checkbox" on:change={(e) => {
+                                const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
+//                              const           fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
+                                if (e.currentTarget.checked) {
+                                    startWebCam(fakeMouseEvent);
+                                }
+                                else                         {
+                                    ceaseWebCam(fakeMouseEvent);
+                                }
+                            }}>
+                            <span>
+                                <i class="white-text deep-orange">Videocam_Off</i>
+                                <i class="white-text deep-orange">Videocam    </i>
+                            </span>
+                        </label>
+                    </nav>
+                </div>
+            </div>
+<!--        <button class="slow-ripple large-elevate" on:click={startWebCam}>START WEB CAM</button>
+            <button class="slow-ripple large-elevate" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
+            <div class="horizontal">
+            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-arrow-down white-text"></i><span>Save</span></button>-->
+                <button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-arrow-down white-text"></i><span>Save</span></button>
+            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-arrow-down white-text"></i><span>Save</span></button>-->
+            <!--<div class="overlay large-blur"></div>-->
+                <div class="overlay large-blur"></div>
+            <!--<div class="overlay large-blur"></div>-->
+                <dialog class="left small-blur dialogSide" id="a">
+                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                <!--<div class="max right-align"><button class="slow-ripple transparent circle left-round top-round right large-elevate white-text grey10" data-ui="#a"><i class="fas fa-xmark white-text"></i></button></div>-->
+                    <div class="max right-align"><button class="slow-ripple transparent circle left-round top-round right large-elevate white-text grey10" data-ui="#a"><i class="fas fa-xmark white-text"></i></button></div>
+                <!--<div class="max right-align"><button class="slow-ripple transparent circle left-round top-round right large-elevate white-text grey10" data-ui="#a"><i class="fas fa-xmark white-text"></i></button></div>-->
+                    <div     class="column max small-padding">
+                        <div class="column                  ">
+                            <h6  class="                         white-text                          ">Save as image</h6>
+                            <div class="field label suffix round white-text large-elevate slow-ripple">
+                                <select bind:this={imageFormatSelection}>
+                                    {#each         imageFormats as
+                                                   imageFormat
+                                                  (imageFormat)
+                                    }
+                <option class="grey10 white-text">{imageFormat.extension}</option>
+                                    {/each}
+                                </select>
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!--<label>Image Format</label>-->
+                                <label>Image Format</label>
+                            <!--<label>Image Format</label>-->
+                            <!--<i class="fas fa-chevron-down"></i>-->
+                                <i class="fas fa-chevron-down"></i>
+                            <!--<i class="fas fa-chevron-down"></i>-->
+                            </div>
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>-->
+                            <button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>
+                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>-->
+                            <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
+                            <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
+                        </div>
+                        <div class="medium-space"></div>
+                        <div class="column      ">
+                            <h6  class="                   white-text                                ">Save as video</h6>
+                            <div class="field label suffix round white-text large-elevate slow-ripple"> 
+                                <select bind:this={videoFormatSelection}>
+                                    {#each         videoFormats as
+                                                   videoFormat
+                                                  (videoFormat)
+                                    }
+                <option class="grey10 white-text">{videoFormat.mimeType}</option>
+                                    {/each}
+                                </select>
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!-- svelte-ignore  a11y-label-has-associated-control -->
+                            <!--<label>Video Format</label>-->
+                                <label>Video Format</label>
+                            <!--<label>Video Format</label>-->
+                            <!--<i class="fas fa-chevron-down"></i>-->
+                                <i class="fas fa-chevron-down"></i>
+                            <!--<i class="fas fa-chevron-down"></i>-->
+                            </div>
+                            <div     class="row   center-align">
+                                <div class="field middle-align">
+                                    <nav>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>-->
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>-->
+                                    </nav>
+                                </div>
+                            </div>
+                            <div        class="row  middle-align                               "                                                          >
+                                <button class="slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { await handleCaptureAsVideo(); }}>
+                                    {#if recording === false}
+                                        <i class="fa-solid fa-bolt         white-text"></i>
+                                    <!--<i class="fa-solid fa-bolt         white-text"></i>-->
+                                        <span>Start</span>
+                                    <!--<span>Start</span>                 -->
+                                    {:else}
+                                        <i class="fa-solid fa-pause        white-text"></i>
+                                    <!--<i class="fa-solid fa-pause        white-text"></i>-->
+                                        <span>Stop </span>
+                                    <!--<span>Stop </span>                 -->
+                                    {/if}
+                                </button>
+                                {#if recording === true}
+                                    <div>
+                                        <i class="fa-solid fa-record-vinyl white-text"></i>
+                                    <!--<i class="fa-solid fa-record-vinyl white-text"></i>-->
+                                        <span>Recording...</span>
+                                    <!--<span>Recording...</span>          -->
+                                    </div>
+                                {/if}
+                            </div>
+                        </div>
+                        <!-- <button class="slow-ripple large-elevate" on:click={async (e) => { await startCaptureAsVideoSnapshot(); }}>START SAVE AS VIDEO SNAPSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc bắt đầu click button này thành 1 video (cần phải click button cạnh bên để ngừng)-->
+                        <!-- <button class="slow-ripple large-elevate" on:click={async (e) => { await ceaseCaptureAsVideoSnapshot(); }}>CEASE SAVE AS VIDEO SNAPSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình                                    thành 1 video (                                       )-->
+                        <!-- <button class="slow-ripple large-elevate" on:click={async (e) => { await startCaptureAsVideoFullshot(); }}>START SAVE AS VIDEO FULLSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
+                        <!--Đang render image/video trên canvas -> bắt @đầu capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (không cần phải click button cạnh bên để ngừng - sẽ được tự động ngừng trong trường hợp canvas đang render video & cần phải click button cạnh bên để ngừng - trong trường hợp canvas đang render image)-->
+                        <!-- <button class="slow-ripple large-elevate" on:click={async (e) => { await ceaseCaptureAsVideoFullshot(); }}>CEASE SAVE AS VIDEO FULLSHOT</button> -->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
+                        <!--Đang render image/video trên canvas -> kết thúc capture các frame hình kể từ lúc ban đầu (giây thứ 0) của image/video thành 1 video (                                                                                                                                                                                                     )-->
+                    </div>
+                </dialog>
+                <button class="slow-ripple large-elevate margin deep-orange"
+                     on:click={async (e) => {
+                        if (mode === MODE.IMAGE ) {
+                            await shareImage (/*imageToShare,*/ canvas.children[0] as HTMLCanvasElement);
+//                          await shareImage (/*imageToShare,*/ canvas.children[0] as HTMLCanvasElement);
+                        }
+                        else
+                        if (mode === MODE.VIDEO ) {
+                            await shareVideo (  videoToShare,   canvas.children[0] as HTMLCanvasElement);
+//                          await shareVideo (  videoToShare,   canvas.children[0] as HTMLCanvasElement);
+                        }
+                        else
+                        if (mode === MODE.WEBCAM) {
+                            await shareWebcam(  videoToShare,   canvas.children[0] as HTMLCanvasElement);
+//                          await shareWebcam(  videoToShare,   canvas.children[0] as HTMLCanvasElement);
+                        }
+                }}>
+                    <i    class="fas fa-share white-text"></i>
+                <!--<i    class="fas fa-share white-text"></i>        -->
+                    <span class="             white-text">Share</span>
+                <!--<span class="             white-text">Share</span>-->
+                </button>
+            </div>
+        </div>
+        <div         class="mainBarContainer   ">
+            <div     class="sideBarContainer   ">
+                <div class="grid small-padding">
+                <!--<div class="space"></div>-->
+                <!--<div class="space"></div>-->
+                <!--<div class="space"></div>-->
+                    <div class="s12 m12 l6">
+                        <button class="slow-ripple responsive large-elevate deep-orange white-text" 
+                             on:click={async (e) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
+                                                        ];
+                                editorSnapshotsUndoStack.push({
+                                    undo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering.pop();
+//                              $effectsUsedForFiltering.pop();
+                                $effectsUsedForFiltering = $effectsUsedForFiltering;
+//                              $effectsUsedForFiltering = $effectsUsedForFiltering;
+                                    }
+                                    ,
+                                    redo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
+                                                        ];
+                                    }
+                                    ,
+                                    dynamicStorage: null
+                                    ,
+                                });
 
-    <!--Dành cho canvas đang render video-->
-    <div>
-        <button class="slow-ripple extend square" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
-                                                                                videoIsPlaying =
-                                                                               !videoIsPlaying ;
-        }}>
-            {#if videoIsPlaying}
-                <i class="fa-solid fa-pause"></i>
-                <span>Pause</span>
-            {:else}
-                <i class="fa-solid fa-play "></i>
-                <span>Play!</span>
-            {/if}
-        </button>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="slow-ripple extend square" on:click={async (e) => {
-                video?.time(video?.time() - 10);
-//              video?.time(video?.time() - 10);
-        }}>
-            <i  class="fa-solid fa-backward"></i>
-            <span>Backward</span>
-        </button>
-        <!-- svelte-ignore a11y_consider_explicit_label -->
-        <button class="slow-ripple extend square" on:click={async (e) => {
-                video?.time(video?.time() + 10);
-//              video?.time(video?.time() + 10);
-        }}>
-            <i  class="fa-solid fa-forward "></i>
-            <span>Forward!</span>
-        </button>
-        <nav   class="no-space                            ">
-            <i class="fa-solid fa-volume-high padding-tiny"></i>
-            <label                class="slider
-                                         medium           ">
-              <input type="range" value="1.0" min="0.0"
-                                              max="1.0"
-                     step="0.010" on:input={async (e) => {
-                                     video?.volume(e.currentTarget.valueAsNumber);
-//                                   video?.volume(e.currentTarget.valueAsNumber);
-              }}>
-              <span class="       "></span>
-              <div  class="tooltip"></div >
-            </label>
-          </nav>
-        <progress value="0" max="100" class="light-green-text" bind:this={videoProgressSlider_}></progress>
-    </div>
-    <!--Dành cho canvas đang render video-->
+                                await tick();
+//                              await tick();
+                                bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+//                              bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+
+                                await makeNewSnackbarSuccess(`A new NI effect has been added - ${$effectsUsedForFiltering.length} so far`);
+//                              await makeNewSnackbarFailure(`A new NI effect has been added - ${$effectsUsedForFiltering.length} so far`);
+                            }}>
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                                <i class="fas fa-plus white-text"></i>
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                            <!--<span class="white-text">Add Effect NI</span> -->
+                                <span class="white-text">Add Effect NI</span>
+                            <!--<span class="white-text">Add Effect NI</span> -->
+                        </button>
+                    </div>
+                    <!--<div class="space"></div> -->
+                    <!--<div class="space"></div> -->
+                    <!--<div class="space"></div> -->
+                    <!--Thêm effect @có sẵn @@-->
+                    <!--Thêm effect @có sẵn @@-->
+                    <div class="s12 m12 l6">
+                        <button class="slow-ripple responsive large-elevate deep-orange white-text" 
+                             on:click={async (e) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
+                                                        ];
+                                editorSnapshotsUndoStack.push({
+                                    undo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering.pop();
+//                              $effectsUsedForFiltering.pop();
+                                $effectsUsedForFiltering = $effectsUsedForFiltering;
+//                              $effectsUsedForFiltering = $effectsUsedForFiltering;
+                                    }
+                                    ,
+                                    redo: async (dynamicStorage: Map<string, any> | null) => {
+                                $effectsUsedForFiltering = [ ...
+                                $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
+                                                         ,   fragmentShaderSourceCode________: null
+                                                         ,   fragmentShader______GLSLUniforms: null
+                                                         ,   fragmentShaderFiltering_Instance: null
+                                                         ,   fragmentShader_HTMLSelectElement: null
+                                                         ,   draggableText                   : null
+//                                                       ,   draggableText                   : null
+                                                         , }
+                                                        ];
+                                    }
+                                    ,
+                                    dynamicStorage: null
+                                    ,
+                                });
+
+                                await tick();
+//                              await tick();
+                                bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+//                              bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+
+                                await makeNewSnackbarSuccess(`A new AI effect has been added - ${$effectsUsedForFiltering.length} so far`);
+//                              await makeNewSnackbarFailure(`A new AI effect has been added - ${$effectsUsedForFiltering.length} so far`);
+                            }}>
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                                <i class="fas fa-plus white-text"></i>
+                            <!--<i class="fas fa-plus white-text"></i>-->
+                            <!--<span class="white-text">Add Effect AI</span> -->
+                                <span class="white-text">Add Effect AI</span>
+                            <!--<span class="white-text">Add Effect AI</span> -->
+                        </button>
+                    </div>
+                <!--<div class="space"></div> -->
+                <!--<div class="space"></div> -->
+                <!--<div class="space"></div> -->
+                    <!--Thêm effect gen bởi AI-->
+                    <!--Thêm effect gen bởi AI-->
+                    <div class="s12 m12 l6">
+                        <button class="slow-ripple responsive large-elevate grey10 align-center white-text"
+                            on:click={async (e) => {
+                            $effectsUsedForFiltering = [ ...
+                            $effectsUsedForFiltering , { fragmentShaderSourceType________: null
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : {
+//                                                   ,   draggableText                   : {
+                                                                                            colorFilling: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            colorOutline: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            fontSize    : 24                          ,
+                                                                                            contents    : "Text"                      ,
+                                                                                            alignHOption: "center"                    ,
+                                                                                            alignVOption: "center"                    ,
+                                                                                            font        : defaultFont                 ,
+                                                                                            stylesOption: "normal"                    ,
+                                                                                            positionX   : 0                           ,
+                                                                                            positionY   : 0                           ,
+                                                                                            dimensionW  : 24 * 4                      ,
+                                                                                            dimensionH  : 24 * 1                      ,
+                                                                                            isDragging  : false                       ,
+                                                                                            offsetX     : 0                           ,
+                                                                                            offsetY     : 0                           ,
+                                                                                            spacings    : 24                          ,
+                                                                                            wrapMode    : null!                       ,
+//                                                                                         }
+                                                                                           }
+                                                     , }
+                                                    ];
 
 
-    <div class="field label suffix round border">
-        <select bind:this={imageFormatSelection}>
-            {#each         imageFormats as
-                           imageFormat
-                          (imageFormat)
-            }
-                  <option>{imageFormat.extension}</option>
-            {/each}
-        </select>
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
-        <label>Image Format</label>
-        <i class="fa-solid fa-chevron-down"></i>
-    </div>
+                            editorSnapshotsUndoStack.push({
+                                undo: async (dynamicStorage: Map<string, any> | null) => {
+                            $effectsUsedForFiltering.pop();
+//                          $effectsUsedForFiltering.pop();
+                            $effectsUsedForFiltering = $effectsUsedForFiltering;
+//                          $effectsUsedForFiltering = $effectsUsedForFiltering;
+                                }
+                                ,
+                                redo: async (dynamicStorage: Map<string, any> | null) => {
+                            $effectsUsedForFiltering = [ ...
+                            $effectsUsedForFiltering , { fragmentShaderSourceType________: null
+                                                     ,   fragmentShaderSourceCode________: null
+                                                     ,   fragmentShader______GLSLUniforms: null
+                                                     ,   fragmentShaderFiltering_Instance: null
+                                                     ,   fragmentShader_HTMLSelectElement: null
+                                                     ,   draggableText                   : {
+//                                                   ,   draggableText                   : {
+                                                                                            colorFilling: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            colorOutline: { r: 0, g: 0, b: 0, a: 255 },
+                                                                                            fontSize    : 24                          ,
+                                                                                            contents    : "Text"                      ,
+                                                                                            alignHOption: "center"                    ,
+                                                                                            alignVOption: "center"                    ,
+                                                                                            font        : defaultFont                 ,
+                                                                                            stylesOption: "normal"                    ,
+                                                                                            positionX   : 0                           ,
+                                                                                            positionY   : 0                           ,
+                                                                                            dimensionW  : 24 * 4                      ,
+                                                                                            dimensionH  : 24 * 1                      ,
+                                                                                            isDragging  : false                       ,
+                                                                                            offsetX     : 0                           ,
+                                                                                            offsetY     : 0                           ,
+                                                                                            spacings    : 24                          ,
+                                                                                            wrapMode    : null!                       ,
+//                                                                                         }
+                                                                                           }
+                                                     , }
+                                                    ];
+                                }
+                                ,
+                                dynamicStorage: null
+                                ,
+                            });
 
-    <div class="field label suffix round border">
-        <select bind:this={videoFormatSelection}>
-            {#each         videoFormats as
-                           videoFormat
-                          (videoFormat)
-            }
-                  <option>{videoFormat.mimeType }</option>
-            {/each}
-        </select>
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
-        <label>Video Format</label>
-        <i class="fa-solid fa-chevron-down"></i>
-    </div>
+
+                            await tick();
+//                          await tick();
+                            bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+//                          bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+
+                            await makeNewSnackbarSuccess(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
+//                          await makeNewSnackbarFailure(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
+                        }}>
+                        <!--<i class="fas fa-plus white-text"></i>-->
+                        <!--<i class="fas fa-plus white-text"></i>-->
+                        <!--<i class="fas fa-plus white-text"></i>-->
+                        <!--<span class="white-text">Insert Text     </span> -->
+                            <span class="white-text">Insert Text     </span>
+                        <!--<span class="white-text">Insert Text     </span> -->                        
+                        </button>
+                    </div>
+                <!--<div class="space"></div>-->
+                <!--<div class="space"></div>-->
+                <!--<div class="space"></div>-->
+                </div>
+                <div class="effectContainer margin" bind:this={bigList}>
+                    {#each $effectsUsedForFiltering as {
+                           fragmentShaderSourceType________
+                     ,     fragmentShaderSourceCode________
+                     ,     fragmentShader______GLSLUniforms
+                     ,     fragmentShaderFiltering_Instance
+                     ,     fragmentShader_HTMLSelectElement
+                     ,     draggableText
+//                   ,     draggableText
+                     ,
+                                                       }
+                     ,      effectIndex
+                    }
+                <!--<div class="tiny-space"></div>-->
+                    <div class="tiny-space"></div>
+                <!--<div class="tiny-space"></div>-->
+                    <div class="medium-padding" in:t.fade out:t.blur      >            
+                        {#if fragmentShaderSourceType________ ===  "NI"}
+                            <div     class="                          row">
+                                <div class="field label suffix round  max large-elevate white-text slow-ripple">
+                                <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
+                                <!--<select bind:this={fragmentShader_HTMLSelectElement}></select>-->
+                                    <select bind:this={fragmentShader_HTMLSelectElement}
+                                        on:change={async(e) => {
+                                        let editorSnapshot: EditorSnapshot = {
+                                            undo          : null,
+                                            redo          : null,
+                                            dynamicStorage: null,
+                                        };
+                                        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                            fragmentShaderSourceType________ = dynamicStorage?.get("undoFragmentShaderSourceType________");
+                                            fragmentShaderSourceCode________ = dynamicStorage?.get("undoFragmentShaderSourceCode________");
+                                            fragmentShader______GLSLUniforms = dynamicStorage?.get("undoFragmentShader______GLSLUniforms");
+                                            fragmentShaderFiltering_Instance = dynamicStorage?.get("undoFragmentShaderFiltering_Instance");
+                                            fragmentShader_HTMLSelectElement!
+                                            .selectedIndex!                  = dynamicStorage?.get("undoCachedSelectedIndex");
+                                        };
+                                        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                            fragmentShaderSourceType________ = dynamicStorage?.get("redoFragmentShaderSourceType________");
+                                            fragmentShaderSourceCode________ = dynamicStorage?.get("redoFragmentShaderSourceCode________");
+                                            fragmentShader______GLSLUniforms = dynamicStorage?.get("redoFragmentShader______GLSLUniforms");
+                                            fragmentShaderFiltering_Instance = dynamicStorage?.get("redoFragmentShaderFiltering_Instance");
+                                            fragmentShader_HTMLSelectElement!
+                                            .selectedIndex!                  = dynamicStorage?.get("redoCachedSelectedIndex");
+                                        };
+                                        editorSnapshot.dynamicStorage = new Map<string, any>();
+                                        editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceType________", fragmentShaderSourceType________);
+                                        editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
+                                        editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
+                                        editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
+                                        editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex"
+                                                                     ,         cachedSelectedIndex);
+                                                                               cachedSelectedIndex =
+                                                            e.currentTarget.selectedIndex;
+                                        let shaderName  =   e.currentTarget.options      [
+                                                            e.currentTarget.selectedIndex].value ;
+                                        if (shaderName ===            "none")             {
+                                            console.log(`Shader name:   ${shaderName}          `);
+                                            fragmentShaderSourceCode________ = null;
+                                            fragmentShader______GLSLUniforms = null;
+                                            fragmentShaderFiltering_Instance = null;
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
+                                            editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+                                                                         ,         cachedSelectedIndex);
+                                        }
+                                        else                                              {
+                                            console.log(`Shader name:   ${shaderName}          `);
+                                            let  shaderPath = Shaders.get(shaderName            );
+                                            if (!shaderPath) {
+                                            console.log(`Shader path:   ${shaderPath} not exist`);
+                                                         return                                  ;
+                                            }
+                                            const                                                          shaderRawSourceCode = await loadAsset(shaderPath);
+                                            if ( shaderName.toLowerCase()
+                                                           .       trim().includes("lygia"))    {
+                                                fragmentShaderSourceCode________ = await resolveLygiaAsync(shaderRawSourceCode);
+                                                if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
+//                                              if (shaderName .includes("LYGIA ColorDitherTriangleNoise")) {
+                                                    fragmentShaderSourceCode________ =
+                                                    fragmentShaderSourceCode________.replaceAll("HIGHP"
+                                                                                    ,           "     "
+                                                                                    ,          );
+                                                }
+                                                else
+                                                if (shaderName.includes("LYGIA FilterJointBilateral")) {
+//                                              if (shaderName.includes("LYGIA FilterJointBilateral")) {
+                                                    fragmentShaderSourceCode________ =
+                                                    fragmentShaderSourceCode________.replaceAll(/\bsample\b/g                  
+                                                                                    ,             "samples"
+                                                                                    ,          );
+                                                }
+                                            }
+                                            else                                                {
+                                                fragmentShaderSourceCode________ =                         shaderRawSourceCode ;
+                                            }
+                                            if (fragmentShaderSourceCode________.charAt( 0 ) === "-") {
+                                                fragmentShaderSourceCode________ =
+                                                fragmentShaderSourceCode________.
+                                                substring(1);
+                                            }
+                                            console.log(fragmentShaderSourceCode________);
+                                            fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
+//                                          fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________);
+                                            console.log(fragmentShader______GLSLUniforms);
+                                            fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+//                                          fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
+                                            editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
+                                            editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
+                                                                         ,         cachedSelectedIndex);
+                                        }
+                                        editorSnapshotsUndoStack.push(
+                                        editorSnapshot               );
+                                        }}>
+                                        {#each [ "none" , ... [ ... Shaders.keys() ].sort() ] as shaderName
+                                                                                                (shaderName)
+                                        }
+                                                              <option class="grey10 white-text">{shaderName}</option>            
+                                        {/each}
+                                    </select>
+                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                            <!-- svelte-ignore a11y-label-has-associated-control -->
+                                    <label>Choose your effects</label>
+                            <!--    <label>Choose your effects</label>           -->
+                                    <i class="fas fa-chevron-down"></i>
+                            <!--    <i class="fas fa-chevron-down"></i>          -->
+                                </div>
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                {#if fragmentShader______GLSLUniforms        !== null}
+                                {#if fragmentShader______GLSLUniforms.length  >     0}
+                                    <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#b${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
+                                        <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#b${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>
+                                    <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#b${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
+                                {/if}
+                                {/if}
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                                <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                            </div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <div class="overlay large-blur"></div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <dialog  class="    responsive dialog blur" id={`b${String(effectIndex)}`}>
+                                <div class="row responsive            "                               >
+                                    <h6>Customize your effect</h6>
+                                    <div        class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <button class="transparent circle right large-elevate" data-ui={`#b${effectIndex}`}><i class="fas fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                            <!--<div class="medium-space"></div>-->
+                                <div class="medium-space"></div>
+                            <!--<div class="medium-space"></div>-->
+                                <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
+                                                                                                                       canvasInstance }></GlslUniform>
+                            </dialog>
+                        {/if}
+                        {#if fragmentShaderSourceType________ ===  "AI"}
+                            <div     class="row               ">
+                            <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
+                                <div class="max medium-padding  round"><span>Effect {effectIndex} by AI</span></div>
+                            <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#c${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
+                                <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#c${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#c${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                                <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                            </div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <div class="overlay large-blur"></div>
+                        <!--<div class="overlay large-blur"></div>-->                            
+                            <dialog  class="    responsive dialog blur" id={`c${effectIndex}`}>
+                                <div class="row responsive            "                       >
+                                    <h6>  Ask AI for a new effect  </h6>
+                                    <div        class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <button class="transparent circle right large-elevate" data-ui={`#c${effectIndex}`}><i class="fas fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                            <!--<div     class="      medium-space          ">  </div>-->
+                                <div     class="      medium-space          ">  </div>
+                            <!--<div     class="      medium-space          ">  </div>-->
+                                <div     class="                         row">
+                                    <div class="field  round label       max suffix white-text large-elevate slow-ripple">
+                                        <input type="text" bind:this={AIInputPrompts}>
+                                        <!-- svelte-ignore a11y_label_has_associated_control -->
+                                        <!-- svelte-ignore a11y_label_has_associated_control -->
+                                    <!--<label>Describe the effect you want</label> -->
+                                        <label>Describe the effect you want</label>
+                                    <!--<label>Describe the effect you want</label> -->
+                                    </div>
+                                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                                    <!-- svelte-ignore a11y_consider_explicit_label -->
+                                    <button class="slow-ripple circle top-round right-round large-elevate deep-orange white-text" on:click={async (e)=>{
+                                        fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
+//                                      fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
+                                        console.log(fragmentShaderSourceCode________);
+                                        fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
+//                                      fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
+                                        console.log(fragmentShader______GLSLUniforms);
+                                        fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
+//                                      fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
+                                    }}>
+                                    <!--<i class="fas fa-paper-plane white-text"></i>-->
+                                        <i class="fas fa-paper-plane white-text"></i>
+                                    <!--<i class="fas fa-paper-plane white-text"></i>-->
+                                    </button>
+                                </div>
+                            <!--<div class="space"></div>-->
+                                <div class="space"></div>
+                            <!--<div class="space"></div>-->
+                                <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
+                                                                                                                       canvasInstance }></GlslUniform>
+                            </dialog>
+                        {/if}
+                        {#if !fragmentShaderSourceType________}
+                            <div        class="row                ">
+                                <div    class="max  medium-padding"><span>Caption: {draggableText?.contents ?? ""}</span></div>
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#d${effectIndex}`}><i class="fa-solid fa-pen"></i></button>-->
+                                <button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#d${effectIndex}`}><i class="fa-solid fa-pen"></i></button>
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#d${effectIndex}`}><i class="fa-solid fa-pen"></i></button>-->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                                <button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                            </div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <div class="overlay large-blur"></div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <dialog  class="    responsive dialog blur" id={`d${String(effectIndex)}`}>
+                                <div class="row responsive            "                               >
+                                    <h6>Customize your text</h6>
+                                    <div        class="max right-align">
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                                        <button class="transparent circle right large-elevate" data-ui={`#d${effectIndex}`}><i class="fas fa-xmark"></i></button>
+                                    </div>
+                                </div>
+                            <!--<div class="medium-space"></div>-->
+                                <div class="medium-space"></div>
+                            <!--<div class="medium-space"></div>-->
+                            <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
+                                <DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>
+                            <!--<DraggableTextComponent canvasInstance={canvasInstance} bind:draggableText={draggableText!}></DraggableTextComponent>-->
+                            </dialog>
+                        {/if}
+                        <div class="row max">
+                            {#if effectIndex > 0}
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <button class="slow-ripple max large-elevate grey10 white-text"
+                                     on:click={async (e) => {
+                                    let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                    $effectsUsedForFiltering[effectIndex    ] =
+                                    $effectsUsedForFiltering[effectIndex - 1] ;
+                                    $effectsUsedForFiltering[effectIndex - 1] =
+                                        temp                                  ;
+                                    if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                    }
+                                    if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                    }
+                                    $effectsUsedForFiltering =
+                                    $effectsUsedForFiltering ;
 
 
-    <div>
-        <button class="slow-ripple" on:click={async() => {
-        const   res = await promptShader();
-        console.log(  await res.text()   );
-        }}>AI</button><!--Button này quick test xem AI còn chạy hay không-->
-        <button class="slow-ripple" on:click={async () => { await shareImage (              canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.IMAGE }>SHARE IMAGE </button>
-        <button class="slow-ripple" on:click={async () => { await shareVideo (videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.VIDEO }>SHARE VIDEO </button>
-        <button class="slow-ripple" on:click={async () => { await shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement); }} disabled={mode !== MODE.WEBCAM}>SHARE WEBCAM</button>
-    </div>
-    <div class="space"></div>
+                                    
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex - 1]                                                ;
+                                        $effectsUsedForFiltering[effectIndex - 1] =
+                                        $effectsUsedForFiltering[effectIndex    ] ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+                                    editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                        $effectsUsedForFiltering[effectIndex - 1] ;
+                                        $effectsUsedForFiltering[effectIndex - 1] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
 
-    <div>
-    {#each $effectsUsedForFiltering as {
-           fragmentShaderSourceType________
-     ,     fragmentShaderSourceCode________
-     ,     fragmentShader______GLSLUniforms
-     ,     fragmentShaderFiltering_Instance
-     ,     fragmentShader_HTMLSelectElement
-     ,
-                                       }
-     ,      effectIndex
-    }
-    {#if fragmentShaderSourceType________ ===  "NI"}
-    <div class="field label suffix round border">
-        <select
-bind:this={fragmentShader_HTMLSelectElement
-          }
-                on:change={async(e) => {
-            let editorSnapshot: EditorSnapshot = {
-                undo          : null,
-                redo          : null,
-                dynamicStorage: null,
-            };
-            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
-                fragmentShaderSourceType________ = dynamicStorage?.get("undoFragmentShaderSourceType________");
-                fragmentShaderSourceCode________ = dynamicStorage?.get("undoFragmentShaderSourceCode________");
-                fragmentShader______GLSLUniforms = dynamicStorage?.get("undoFragmentShader______GLSLUniforms");
-                fragmentShaderFiltering_Instance = dynamicStorage?.get("undoFragmentShaderFiltering_Instance");
-                fragmentShader_HTMLSelectElement!
-                .selectedIndex!                  = dynamicStorage?.get("undoCachedSelectedIndex");
-            };
-            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
-                fragmentShaderSourceType________ = dynamicStorage?.get("redoFragmentShaderSourceType________");
-                fragmentShaderSourceCode________ = dynamicStorage?.get("redoFragmentShaderSourceCode________");
-                fragmentShader______GLSLUniforms = dynamicStorage?.get("redoFragmentShader______GLSLUniforms");
-                fragmentShaderFiltering_Instance = dynamicStorage?.get("redoFragmentShaderFiltering_Instance");
-                fragmentShader_HTMLSelectElement!
-                .selectedIndex!                  = dynamicStorage?.get("redoCachedSelectedIndex");
-            };
-            editorSnapshot.dynamicStorage = new Map<string, any>();
-            editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceType________", fragmentShaderSourceType________);
-            editorSnapshot.dynamicStorage.set("undoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
-            editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
-            editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-            editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex"
-                                         ,         cachedSelectedIndex);
-                                                   cachedSelectedIndex =
-                                 e.currentTarget.selectedIndex;
-            let shaderName  =    e.currentTarget.options      [
-                                 e.currentTarget.selectedIndex].value;
-            if (shaderName ===            "none")             {
-                console.log(`Shader name:   ${shaderName}          `);
-                fragmentShaderSourceCode________ = null;
-                fragmentShader______GLSLUniforms = null;
-                fragmentShaderFiltering_Instance = null;
-                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
-                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
-                editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
-                editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-                editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-                                             ,         cachedSelectedIndex);
-            }
-            else                                              {
-                console.log(`Shader name:   ${shaderName}          `);
-                let  shaderPath = Shaders.get(shaderName            );
-                if (!shaderPath) {
-                console.log(`Shader path:   ${shaderPath} not exist`);
-                             return                                  ;
-                }
-                const                                                          shaderRawSourceCode = await loadAsset(shaderPath);
-                if ( shaderName.toLowerCase()
-                               .       trim().includes("lygia"))    {
-                    fragmentShaderSourceCode________ = await resolveLygiaAsync(shaderRawSourceCode);
-                }
-                else                                                {
-                    fragmentShaderSourceCode________ =                         shaderRawSourceCode ;
-                }
-                if (fragmentShaderSourceCode________.charAt( 0 ) === "-") {
-                    fragmentShaderSourceCode________ =
-                    fragmentShaderSourceCode________.
-                    substring(1);
-                }
-                console.log(fragmentShaderSourceCode________);
-                fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
-                console.log(fragmentShader______GLSLUniforms);
-                fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
-                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", fragmentShaderSourceType________);
-                editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", fragmentShaderSourceCode________);
-                editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", fragmentShader______GLSLUniforms);
-                editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", fragmentShaderFiltering_Instance);
-                editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex"
-                                             ,         cachedSelectedIndex);
-            }
-            editorSnapshotsUndoStack.push(
-            editorSnapshot               );
-        }}>
-        {#each [ "none" , ... [ ... Shaders.keys() ].sort() ] as shaderName
-                                                                (shaderName)
-        }
-                                                        <option>{shaderName}</option>            
-        {/each}
-        </select>
-<!-- svelte-ignore a11y-label-has-associated-control -->
-<!-- svelte-ignore a11y-label-has-associated-control -->
-        <label>Choose your effects</label>
-<!--    <label>Choose your effects</label>       -->
-        <i class="fa-solid fa-chevron-down"></i>
-<!--    <i class="fa-solid fa-chevron-down"></i> -->
+
+
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                    editorSnapshotsUndoStack.push(editorSnapshot);
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                }}>
+                                <!--<i class="fa-solid fa-chevron-up white-text"></i>-->
+                                    <i class="fa-solid fa-chevron-up white-text"></i>
+                                <!--<i class="fa-solid fa-chevron-up white-text"></i>-->
+                                </button>
+                            {/if}
+                            {#if effectIndex < $effectsUsedForFiltering.length - 1}
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <!-- svelte-ignore a11y_consider_explicit_label -->
+                                <button class="slow-ripple max large-elevate grey10 white-text"
+                                     on:click={async (e) => {
+                                    let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                    let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                    $effectsUsedForFiltering[effectIndex    ] =
+                                    $effectsUsedForFiltering[effectIndex + 1] ;
+                                    $effectsUsedForFiltering[effectIndex + 1] =
+                                        temp                                  ;
+                                    if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                    }
+                                    if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                        $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                    }
+                                    $effectsUsedForFiltering =
+                                    $effectsUsedForFiltering ;
+
+
+                                    
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+        //                          let editorSnapshot: EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
+                                    editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex + 1]                                                ;
+                                        $effectsUsedForFiltering[effectIndex + 1] =
+                                        $effectsUsedForFiltering[effectIndex    ] ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+                                    editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null) => {
+                                        let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
+                                        let temp                       = $effectsUsedForFiltering[effectIndex    ]                                                ;
+                                        $effectsUsedForFiltering[effectIndex    ] =
+                                        $effectsUsedForFiltering[effectIndex + 1] ;
+                                        $effectsUsedForFiltering[effectIndex + 1] =
+                                            temp                                  ;
+                                        if ($effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement!.selectedIndex = index2 as number;
+                                        }
+                                        if ($effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement) {
+                                            $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement!.selectedIndex = index1 as number;
+                                        }
+                                        $effectsUsedForFiltering =
+                                        $effectsUsedForFiltering ;
+                                    };
+
+
+
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                    editorSnapshotsUndoStack.push(editorSnapshot);
+        //                          editorSnapshotsUndoStack.push(editorSnapshot);
+                                }}>
+                                <!--<i class="fa-solid fa-chevron-down white-text"></i>-->
+                                    <i class="fa-solid fa-chevron-down white-text"></i>
+                                <!--<i class="fa-solid fa-chevron-down white-text"></i>-->                        
+                                </button>
+                            {/if}
+                        </div>
+                    </div>
+                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px" in:t.fade out:t.blur>-->
+                    <hr class="large white" style:height="3px" style:box-shadow="0 0 3px" in:t.fade out:t.blur>
+                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px" in:t.fade out:t.blur>-->
+                    {/each}
+                </div>
+            </div>
+            <div     class="canvasContainer                ">
+                <div class="canvasToolBoxes   small-padding">
+                    <!--Dành cho canvas đang render video-->
+                    <!--Dành cho canvas đang render video-->
+                <!--<div     class="row   ">-->
+                    <div     class="row   ">
+                <!--<div     class="row   ">-->
+                        {#if mode === MODE.VIDEO}
+                        <div class="column">
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <button class="slow-ripple square large-elevate blue   white-text margin" style="margin-left: 5px;" on:click={async (e) => {
+                                    video?.time(video?.time() - 10);
+//                                  video?.time(video?.time() - 10);
+                            }}>
+                            <!--<i  class="fas fa-backward white-text"></i>-->
+                                <i  class="fas fa-backward white-text"></i>
+                            <!--<i  class="fas fa-backward white-text"></i>-->
+                            </button>
+                            <button class="slow-ripple square large-elevate grey10 white-text margin" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
+                                                                                                                                              videoIsPlaying =
+                                                                                                                                             !videoIsPlaying ;
+                            }}>
+                                {#if videoIsPlaying}
+                                <!--<i class="fas fa-pause white-text"></i>-->
+                                    <i class="fas fa-pause white-text"></i>
+                                <!--<i class="fas fa-pause white-text"></i>-->
+                                {:else}
+                                <!--<i class="fas fa-play  white-text"></i>-->
+                                    <i class="fas fa-play  white-text"></i>
+                                <!--<i class="fas fa-play  white-text"></i>-->
+                                {/if}
+                            </button>
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <button class="slow-ripple square large-elevate blue   white-text margin" on:click={async (e) => {
+                                    video?.time(video?.time() + 10);
+//                                  video?.time(video?.time() + 10);
+                            }}>
+                            <!--<i  class="fas fa-forward  white-text"></i>-->
+                                <i  class="fas fa-forward  white-text"></i>
+                            <!--<i  class="fas fa-forward  white-text"></i>-->
+                            </button>
+                            <progress value="0" max="100" class="white-text blue large-elevate" bind:this={videoProgressSlider_}></progress>
+                        </div>
+                        
+                        <nav   class="no-space">
+                        <!--<i class="fas fa-volume-off  padding-tiny white-text"></i>-->
+                            <i class="fas fa-volume-off  padding-tiny white-text"></i>
+                        <!--<i class="fas fa-volume-off  padding-tiny white-text"></i>-->
+                            <label                     class="slider
+                                                              medium       ">
+                                <input type="range"    value="1.0" min="0.0"
+                                                                   max="1.0"
+                                       step="0.010" on:input={async (e) => {
+                                                       video?.volume(e.currentTarget.valueAsNumber);
+//                                                     video?.volume(e.currentTarget.valueAsNumber);
+                                }}>
+                            <!--<span class="       "></span>-->
+                                <span class="       "></span>
+                            <!--<span class="       "></span>-->
+                            <!--<div  class="tooltip blue white-text"></div >-->
+                                <div  class="tooltip blue white-text"></div >
+                            <!--<div  class="tooltip blue white-text"></div >-->
+                            </label>
+                        <!--<i class="fas fa-volume-high padding-tiny white-text"></i>-->
+                            <i class="fas fa-volume-high padding-tiny white-text"></i>
+                        <!--<i class="fas fa-volume-high padding-tiny white-text"></i>-->
+                        </nav>
+                        {/if}
+                    </div>
+                    <!--Dành cho canvas đang render video-->
+                    <!--Dành cho canvas đang render video-->
+                    <div>
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left  white-text"></i><span>Undo</span></button>
+                    <!--<button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left  white-text"></i><span>Undo</span></button>
+                    -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <!-- svelte-ignore a11y_consider_explicit_label -->
+                        <button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right white-text"></i><span>Redo</span></button>
+                    <!--<button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right white-text"></i><span>Redo</span></button>-->
+                    </div>
+                </div>
+                <div class="canvas  ">
+                    <div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>
+                <!--<div bind:this={canvas} on:change={async (e) => { console.log("change"); }}></div>-->
+                </div>
+            </div>
+            
+        </div>
+    <!--<div class="footerContainer  "></div>-->
+    <!--<div class="footerContainer  "></div>-->
     </div>
-    <button class="slow-ripple" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>REMOVE THIS EFFECT</button>
-    <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
-                                                                                           canvasInstance }></GlslUniform>
-    {/if}
-    {#if fragmentShaderSourceType________ ===  "AI"}
-    <div class="field border">
-        <input type="text" bind:this={AIInputPrompts}>
-    </div>
-    <button class="slow-ripple" on:click={async (e)=>{
-        fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
-        console.log(fragmentShaderSourceCode________);
-        fragmentShader______GLSLUniforms = parseGLSL(fragmentShaderSourceCode________);
-        console.log(fragmentShader______GLSLUniforms);
-        fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________);
-    }}>ASK AI</button>
-    <button class="slow-ripple" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); }}>REMOVE THIS EFFECT</button>
-    <GlslUniform uniforms={fragmentShader______GLSLUniforms ?? []} onUpdate={handleUpdate} canvasInstance={
-                                                                                           canvasInstance }></GlslUniform>
-    
-    {/if}
-    {/each}
-    </div>
+<!--<div><button class="slow-ripple large-elevate" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->
+<!--<div><button class="slow-ripple large-elevate" on:click={async (e) => { const res = await promptShader(); console.log(await res.text()); }}>AI</button></div>-->
+    <SnackbarSuccess></SnackbarSuccess>
+    <SnackbarFailure></SnackbarFailure>
 </main>
 
 <style>
-    main { overflow-x: visible; scroll-behavior: smooth; }
-    *    {                      scroll-behavior: smooth; }
+
+    i        { text-shadow: 0 0 3px; }
+    h6       { text-shadow: 0 0 3px; }
+    span     { text-shadow: 0 0 3px; }
+    label    { text-shadow: 0 0 3px; }
+    input    { text-shadow: 0 0 3px; }
+    select   { text-shadow: 0 0 3px; }
+    option   { text-shadow: 0 0 3px; }
+    progress { text-shadow: 0 0 3px; }
+    
+    main { overflow-x: auto; overflow-y: auto; scroll-behavior: smooth; width: 100vw; height: 100vh; }
+    *    {                                     scroll-behavior: smooth;                              }
     @font-face {
      font-family:            'SF Mono Regular'                                       ;
      font-weight: normal;
@@ -1126,6 +1868,36 @@ bind:this={fragmentShader_HTMLSelectElement
     *    {
      font-family:            'SF Mono Regular'                        , 'fontawesome';
     }
+    .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }
+/*  .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }  */
+/*  .headerContainer  { width: 100% ;                                                                                                                                                                  }  */
+/*  .headerContainer  { width: 100% ;                                                                                                                                                                  }  */
+/*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
+/*  .footerContainer  { width: 100% ;                                                                                                                                                                  }  */
+    .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
+/*  .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }  */
+    .mainBarContainer { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }
+/*  .mainBarContainer { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }  */
+    .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
+/*  .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
+    .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
+/*  .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
+    .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
+/*  .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }  */
+    .canvas           { width: 100% ;                                                                                                                                overflow  : auto;                 }
+/*  .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : auto; flex-grow: 1;   }  */
+    .dialog           { width: 050% ;                                                                                                                                                                  }
+/*  .dialog           { width: 050% ;                                                                                                                                                                  }  */
+    .effectContainer  {               height: 100% ;                                                                                                                 overflow  : auto;                 }
+/*  .effectContainer  {               height: 100% ;                                                                                                                 overflow  : auto;                 }  */
+    .dialogSide       { width: 030% ;                                                                                                                                                                  }
+/*  .dialogSide       { width: 030% ;                                                                                                                                                                  }  */
+    .toolTip          { width: 200px;                                                                                                                                                                  }
+/*  .toolTip          { width: 200px;                                                                                                                                                                  }  */
+
+.switch > input:checked + span:after { border: none; background-color: #222222           ;                          box-shadow: 0 0 10px #222222;                               }
+.switch >                 span:after {                   border-color: #222222 !important; background: #ffffff22; box-shadow: 0 0 10px #222222; border-width: 3px !important; }
+
 </style>
 
 

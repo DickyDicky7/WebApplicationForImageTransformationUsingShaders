@@ -2,6 +2,7 @@ import     ImgurClient                    from                 "imgur"  ;
 export let imgurClient
      = new ImgurClient({ clientId: import.meta.env.VITE_CLIENT_ID____ });
 
+import type { DraggableText    } from "./types";
 import type { GLSLUniform_     } from "./types";
 import type { GLSLUniforms     } from "./types";
 import type { GLSLUniformValue } from "./types";
@@ -31,6 +32,8 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
                                                      fragmentShaderFiltering_Instance: any          | null,
                                                      fragmentShader_HTMLSelectElement:
                                                                     HTMLSelectElement               | null,
+                                                     draggableText                   :
+                                                     DraggableText                                  | null,
                                                    }>> = writable(
                                                    [
                                                    {
@@ -39,6 +42,8 @@ export let effectsUsedForFiltering: Writable<Array<{ fragmentShaderSourceType___
                                                      fragmentShader______GLSLUniforms:                null,
                                                      fragmentShaderFiltering_Instance:                null,
                                                      fragmentShader_HTMLSelectElement:                null,
+                                                     draggableText                   :                null,
+//                                                   draggableText                   :                null,
                                                    }
                                                    ]             );
 
@@ -55,6 +60,12 @@ export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
 
+export let successScript: Writable<string> = writable("");
+export let failureScript: Writable<string> = writable("");
+
+
+                                                   
+
 
 
 
@@ -65,7 +76,6 @@ export let    editorSnapshotsUndoStack: Array<EditorSnapshot> = [];
 
 
 
-                                                   
 
 
 

@@ -2,6 +2,11 @@ export type ShaderName = string;
 export type ShaderPath = string;
 export const Shaders: Map<ShaderName, ShaderPath> = new Map([
     [
+        "0                    ",
+        `./lib/${  0}.glsl?raw`,
+    ]
+    ,
+    [
         "CRT #001             ",
         `./lib/${  1}.glsl?raw`,
     ]
@@ -2097,3 +2102,8 @@ export const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promis
 export const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; };
 
 
+
+import { successScript } from "./global";
+import { failureScript } from "./global";
+export const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { successScript.set(newSuccessScript); await ui("#snackbar-success"); };
+export const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { failureScript.set(newFailureScript); await ui("#snackbar-failure"); };

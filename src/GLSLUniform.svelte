@@ -161,6 +161,9 @@
 //      if (file != null) { reader.readAsDataURL(file); }
     }
   };
+
+  import svelteSvg from "./assets/svelte.svg";
+//import svelteSvg from "./assets/svelte.svg";
 </script>
 
 <div>
@@ -173,36 +176,37 @@
    ,                 }
    ,              ii ( thisUniformName )
   }
-    <div>
-      <strong>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</strong>
+    <div class="container">
+      <span>{thisUniformNameJustForDisplay ?? thisUniformName} ({thisUniformType}):</span>
+      <div class="space"></div>
       <!-- Render inputs based on type -->
       {#if ((thisUniformType ?? "").startsWith( "vec")
         ||  (thisUniformType ?? "").startsWith("ivec")
         ||  (thisUniformType ?? "").startsWith("uvec"))
         &&   thisUniformDefaultValue instanceof Array
       }
-        <table class="center-align">
+        <table class="center-align large-elevate">
           <thead>
             <tr>
               {#if thisUniformDefaultValue.length >= 2}
-                <th>*</th>
-                <th>x</th>
-                <th>y</th>
+                <th class="border white-text  slow-ripple">*</th>
+                <th class="border white-text  slow-ripple">x</th>
+                <th class="border white-text  slow-ripple">y</th>
               {/if}
               {#if thisUniformDefaultValue.length >= 3}
-                <th>z</th>
+                <th class="border white-text  slow-ripple">z</th>
               {/if}
               {#if thisUniformDefaultValue.length >= 4}
-                <th>a</th>
+                <th class="border white-text  slow-ripple">a</th>
               {/if}
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td>
+              <td class="border white-text  slow-ripple">
                 <!-- svelte-ignore a11y_consider_explicit_label -->
                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                <button class="circle slow-ripple"><i class="fa-solid fa-palette"></i><input id={`${thisUniformName}-color-button`} type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
+                <button class="circle slow-ripple large-elevate blue white-text top-round right-round"><i class="fa-solid fa-palette white-text"></i><input id={`${thisUniformName}-color-button`} type="color" on:input={ async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }) => {
                     const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
 //                  const { r, g, b } = await doHexToRgbNormalized(e.currentTarget.value);
                     updateUniform(ii, 0, r);
@@ -212,165 +216,201 @@
                 </button>
               </td>
               {#each thisUniformDefaultValue as v, i}
-                <td class="s2 field small border">
-                  <input
-                    type="number"
-                    step="0.0100"
-                       value={       v                                                                 }
-                    on:input={async (e) => { updateUniform(ii, i, parseFloat(e.currentTarget.value));
-                 const input: HTMLInputElement = document.getElementById(`${thisUniformName}-color-button`) as HTMLInputElement;
-                       input.value = (await rgba_ToHexNormalized(255 * (thisUniformDefaultValue[0] ?? 1.0)
-                            ,                                    255 * (thisUniformDefaultValue[1] ?? 1.0)
-                            ,                                    255 * (thisUniformDefaultValue[2] ?? 1.0)
-                            ,                                    255 * (thisUniformDefaultValue[3] ?? 1.0))).slice(+0
-                                                                                                            ,      -2
-                                                                                                            ,     ); }}
-                  />
+                <td class="border white-text  slow-ripple">
+                  <div class="s2 field small">
+                    <input
+                      type="number"
+                      step="0.0100"
+                        value={       v                                                                 }
+                      on:input={async (e) => { updateUniform(ii, i, parseFloat(e.currentTarget.value));
+                  const input: HTMLInputElement = document.getElementById(`${thisUniformName}-color-button`) as HTMLInputElement;
+                        input.value = (await rgba_ToHexNormalized(255 * (thisUniformDefaultValue[0] ?? 1.0)
+                              ,                                    255 * (thisUniformDefaultValue[1] ?? 1.0)
+                              ,                                    255 * (thisUniformDefaultValue[2] ?? 1.0)
+                              ,                                    255 * (thisUniformDefaultValue[3] ?? 1.0))).slice(+0
+                                                                                                              ,      -2
+                                                                                                              ,     ); }}
+                    />
+                  </div>
                 </td>
               {/each}
             </tr>
           </tbody>
         </table>
+        <div class="space"></div>
       {:else if (thisUniformType ?? ""). startsWith("mat")
              &&  thisUniformDefaultValue instanceof Array
       }
         {#if                          thisUniformDefaultValue.length === 4           }
-          {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  2) as r, ri }
-            <table class="center-align">
-              <thead>
+          <table class="center-align large-elevate">
+            <thead>
+              <tr>
+                <th> </th>
+                <th class="border white-text  slow-ripple">0</th>
+                <th class="border white-text  slow-ripple">1</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  2) as r, ri }
                 <tr>
                   {#if ri === 0}
-                    <th>x0</th>
-                    <th>x1</th>
+                    <td class="border white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>X</span>
+                    </td>
                   {/if}
                   {#if ri === 1}
-                    <th>y0</th>
-                    <th>y1</th>
+                    <td class="border white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Y</span>
+                    </td>
                   {/if}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   {#each r as c, ci }
-                    <td class="s2 field small border">
-                      <input
-                        type="number"
-                        step="0.0100"
-                           value={       c                                                                           }
-                        on:input={async (e) => { updateUniform(ii, ri * 2 + ci, parseFloat(e.currentTarget.value)); }}
-                      />
+                    <td class="border white-text  slow-ripple">
+                      <div class="s2 field small">
+                        <input
+                          type="number"
+                          step="0.0100"
+                            value={       c                                                                           }
+                          on:input={async (e) => { updateUniform(ii, ri * 2 + ci, parseFloat(e.currentTarget.value)); }}
+                        />
+                      </div>
                     </td>
                   {/each}
                 </tr>
-              </tbody>
-            </table>
-          {/each}
+              {/each}
+            </tbody>
+          </table>
         {/if}
         {#if                          thisUniformDefaultValue.length === 9           }
-          {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  3) as r, ri }
-            <table class="center-align">
-              <thead>
+          <table class="center-align large-elevate">
+            <thead>
+              <tr>
+                <th> </th>
+                <th class="border white-text  slow-ripple">0</th>
+                <th class="border white-text  slow-ripple">1</th>
+                <th class="border white-text  slow-ripple">2</th>
+              </tr>
+           </thead>
+            <tbody>
+              {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  3) as r, ri }
                 <tr>
                   {#if ri === 0}
-                    <th>x0</th>
-                    <th>x1</th>
-                    <th>x2</th>
+                    <td class="border white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>X</span>
+                    </td>
                   {/if}
                   {#if ri === 1}
-                    <th>y0</th>
-                    <th>y1</th>
-                    <th>y2</th>
+                    <td class="border white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Y</span>
+                    </td>
                   {/if}
-                  {#if ri ===2}
-                    <th>z0</th>
-                    <th>z1</th>
-                    <th>z2</th>
+                  {#if ri === 2}
+                    <td class="border white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Z</span>
+                    </td>
                   {/if}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   {#each r as c, ci }
-                    <td class="s2 field small border">
-                      <input
+                    <td class="border white-text  slow-ripple">
+                      <div class="s2 field small">
+                        <input
                         type="number"
                         step="0.0100"
                            value={       c                                                                           }
                         on:input={async (e) => { updateUniform(ii, ri * 3 + ci, parseFloat(e.currentTarget.value)); }}
-                      />
+                        />
+                      </div>
                     </td>
                   {/each}
                 </tr>
-              </tbody>
-            </table>
-          {/each}
+              {/each}
+            </tbody>
+          </table>
         {/if}
         {#if                          thisUniformDefaultValue.length === 16          }
-          {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  4) as r, ri }
-            <table>
-              <thead>
+          <table class="center-align large-elevate">
+            <thead>
+              <tr>
+                <th> </th>
+                <th class="border white-text  slow-ripple">0</th>
+                <th class="border white-text  slow-ripple">1</th>
+                <th class="border white-text  slow-ripple">2</th>
+                <th class="border white-text  slow-ripple">3</th>
+              </tr>
+            </thead>
+            <tbody>
+              {#each splitArrayIntoGroups(thisUniformDefaultValue         ,  4) as r, ri }
                 <tr>
                   {#if ri === 0}
-                    <th>x0</th>
-                    <th>x1</th>
-                    <th>x2</th>
-                    <th>x3</th>
+                    <td class="border white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>X</span>
+                    </td>
                   {/if}
                   {#if ri === 1}
-                    <th>y0</th>
-                    <th>y1</th>
-                    <th>y2</th>
-                    <th>y3</th>
+                    <td class="border  white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Y</span>
+                    </td>
                   {/if}
                   {#if ri === 2}
-                    <th>z0</th>
-                    <th>z1</th>
-                    <th>z2</th>
-                    <th>z3</th>
+                    <td class="border  white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>Z</span>
+                    </td>
                   {/if}
                   {#if ri === 3}
-                    <th>a0</th>
-                    <th>a1</th>
-                    <th>a2</th>
-                    <th>a3</th>
+                    <td class="border  white-text  slow-ripple">
+                      <!-- svelte-ignore node_invalid_placement_ssr -->
+                      <span>A</span>
+                    </td>
                   {/if}
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
                   {#each r as c, ci }
-                    <td class="s2 field small border">
-                      <input
-                        type="number"
-                        step="0.0100"
-                           value={       c                                                                           }
-                        on:input={async (e) => { updateUniform(ii, ri * 4 + ci, parseFloat(e.currentTarget.value)); }}
-                      />
+                    <td class="border  white-text  slow-ripple">
+                      <div class="s2 field small">
+                        <input
+                          type="number"
+                          step="0.0100"
+                            value={       c                                                                           }
+                          on:input={async (e) => { updateUniform(ii, ri * 4 + ci, parseFloat(e.currentTarget.value)); }}
+                        />
+                      </div>
                     </td>
                   {/each}
                 </tr>
-              </tbody>
-            </table>
-          {/each}
+              {/each}
+            </tbody>
+          </table>
         {/if}
+        <div class="space"></div>
       {:else if       (thisUniformType  ??  "") === "bool   ".trim()
              && typeof thisUniformDefaultValue  === "boolean"       }
-        <label  class="switch">
+        <label  class="switch center-align icon">
           <input
             type="checkbox"
                   checked={                                       thisUniformDefaultValue    }
                 on:change={async (e) => { updateUniform(ii, null, e.currentTarget.checked); }}
           />
           <span>
-            <i></i>
-            <i></i>
+            <i class="deep-orange white-text"></i>
+            <i class="blue white-text"></i>
           </span>
         </label>
+        <div class="space"></div>
       {:else if (thisUniformType ?? "") === "float"
              || (thisUniformType ?? "") ===        "int"
              || (thisUniformType ?? "") ===             "uint"}
-        <div   class="grid                 ">
-          <div class="s2 field small border">
+        <div      class="row    center-align middle-align        " >
+          <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
+          <button class="circle        small        large-elevate deep-orange white-text top-round right-round"
+          on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
+          on:mouseout  ={async (e) => { clearInterval(interval); }}
+          on:mouseup   ={async (e) => { clearInterval(interval); }}
+          on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-left white-text"></i></button >
+          <div class="s2 field small min suffix round white-text large-elevate slow-ripple">
             <input
               type="number"
               step="1.0000"
@@ -386,40 +426,37 @@
                        }
             />
           </div>
-          <div      class="center center-align">
-            <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-            <button class="circle        small"
-            on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue - 0.00001); } }, 75); }}
-            on:mouseout  ={async (e) => { clearInterval(interval); }}
-            on:mouseup   ={async (e) => { clearInterval(interval); }}
-            on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-left "></i></button >
-            <div class="space"></div>
-            <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-            <button class="circle        small"
+          <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
+          <button class="circle small large-elevate blue white-text bottom-round left-round"
             on:mousedown ={async (e) => { interval = setInterval(() => { if (typeof(thisUniformDefaultValue) === "number") { updateUniform(ii, null, thisUniformDefaultValue + 0.00001); } }, 75); }}
             on:mouseout  ={async (e) => { clearInterval(interval); }}
             on:mouseup   ={async (e) => { clearInterval(interval); }}
-            on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-right"></i></button >
-          </div>
+            on:mouseleave={async (e) => { clearInterval(interval); }}><i class="fa-solid fa-caret-right white-text"></i></button >
         </div>
+        <div class="space"></div>
       {:else if ((thisUniformType ?? "") === "sampler2D"
              ||  (thisUniformType ?? "") === "sampler3D")
-             &&                               typeof     thisUniformDefaultValue === "string"}
+             &&                               typeof                  thisUniformDefaultValue === "string"}
         <!-- <span>sampler2D (not editable)</span> -->
         <!-- <span>sampler2D (not editable)</span> -->
-        <img class="small-width small-height"       src={thisUniformDefaultValue}
-                                                    alt=""
-                                              bind:this={thisUniformSampler2DEle}/>
+        <div   class="max center-align                         ">
+          <img class="max center-align small-width small-height
+                                          no-round             " src={thisUniformDefaultValue === " null ".trim() ? svelteSvg : thisUniformDefaultValue}
+                                                                 alt=""
+                                                           bind:this={thisUniformSampler2DEle                                                          }
+          style:box-shadow="0 0 5px #222222" style:object-fit="content" />
+        </div>
+        
         <!-- {#if (thisUniformName ?? "").startsWith("noise")}
         <!-- {#if (thisUniformName ?? "").startsWith("noise")}
         {:else if (thisUniformName ?? "").startsWith("bayer")}
         {:else if (thisUniformName ?? "").startsWith("palette")}
         {/if} -->
         {#if (thisUniformName ?? "").startsWith("upload")}
-        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>
-<!--    <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple">UPLOAD IMAGE OR VIDEO</button></form>    -->
+        <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>
+<!--    <form action=""><input bind:this={input} on:change={onChange(ii)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>    -->
         {:else}
-        <div class="field label suffix round border">
+        <div class="field label suffix round white-text large-elevate slow-ripple">
           <select on:change={async (e) => {
             let chosen =            e.currentTarget.options[e.currentTarget.selectedIndex].value;
             if (chosen === "none") {
@@ -442,7 +479,7 @@
                     [{ name: "none", path: "none", }]) as textureForShader
                                                          (textureForShader)
             }
-                   <option value={textureForShader.path}>{textureForShader.name}</option>
+                   <option value={textureForShader.path} class="grey10 white-text">{textureForShader.name}</option>
             {/each}
           </select>
           <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -452,15 +489,58 @@
 <!--      <i class="fa-solid fa-chevron-down"></i>      -->
         </div>
         {/if}
-
+        <div class="space"></div>  
       {:else}
         <span>Unsupported type</span>
       {/if}
     </div>
-    <div class="large-space"></div>
-    <div class="large-space"></div>
+    <!-- <div class="large-space"></div> -->
+    <!-- <div class="large-space"></div> -->
   {/each}
 </div>
+
+<style>
+  .container{ display: flex; flex-direction: column; }
+/*.container{ display: flex; flex-direction: column; }*/
+
+  i        { text-shadow: 0 0 3px; }
+/*i        { text-shadow: 0 0 3px; }*/
+/*h6       { text-shadow: 0 0 3px; }*/
+/*h6       { text-shadow: 0 0 3px; }*/
+  span     { text-shadow: 0 0 3px; }
+/*span     { text-shadow: 0 0 3px; }*/
+  label    { text-shadow: 0 0 3px; }
+/*label    { text-shadow: 0 0 3px; }*/
+  input    { text-shadow: 0 0 3px; }
+/*input    { text-shadow: 0 0 3px; }*/
+  button   { text-shadow: 0 0 3px; }
+/*button   { text-shadow: 0 0 3px; }*/
+  select   { text-shadow: 0 0 3px; }
+/*select   { text-shadow: 0 0 3px; }*/
+/*textarea { text-shadow: 0 0 3px; }*/
+/*textarea { text-shadow: 0 0 3px; }*/
+
+.switch > input:checked + span:after { border: none; background-color: #222222           ;                          box-shadow: 0 0 10px #222222;                               }
+.switch >                 span:after {                   border-color: #222222 !important; background: #ffffff22; box-shadow: 0 0 10px #222222; border-width: 3px !important; }
+
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

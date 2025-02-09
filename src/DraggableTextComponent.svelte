@@ -68,8 +68,8 @@
   <br />
   <br />
 --->  
-  <div   class="                                  row responsive">
-    <div class="field border textarea round label max responsive">
+  <div   class="                                  row responsive                                            ">
+    <div class="field        textarea round label max responsive suffix white-text large-elevate slow-ripple">
       <textarea on:change={async (e) => {
         let oldContents:  string = draggableText.contents;
 //                                 draggableText.contents = e.currentTarget.value;
@@ -96,7 +96,7 @@
     </div>
     <!-- svelte-ignore a11y_consider_explicit_label -->
     <!-- svelte-ignore a11y_consider_explicit_label -->
-    <button class="circle slow-ripple large-elevate"><i class="fa-solid fa-palette"></i><input type="color" on:change={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
+    <button class="circle slow-ripple large-elevate deep-orange white-text top-round right-round"><i class="fa-solid fa-palette"></i><input type="color" on:change={async (e: Event & { currentTarget: EventTarget & HTMLInputElement }) => {
 //    const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
       const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
 //    const { r, g, b, } = await noHexToRgbNormalized(e.currentTarget.value);
@@ -148,7 +148,7 @@
     <tbody>
       <tr>
         <td>
-          <div         class="field suffix round border label">
+          <div         class="field label suffix round white-text large-elevate slow-ripple">
             <select on:input={async (e) => {
               if (              e.currentTarget.options       [
                                 e.currentTarget.selectedIndex ].value         ===       "none") {
@@ -205,7 +205,7 @@
                       customFont
                      (customFont)
               }
-                <option value={customFont.customFontPath}>
+                <option value={customFont.customFontPath}   class="grey10 white-text" >
                               {customFont.customFontName!.replace(".ttf", "")
                                                          .replace(".otf", "")}</option>
               {/each}
@@ -219,7 +219,7 @@
           </div>
         </td>
         <td>
-          <div                    class="field border round label">
+          <div                    class="field label suffix round white-text large-elevate slow-ripple">
             <input type="number"  value={draggableText.fontSize} on:input={async (e) => {
               let oldFontSize: number  = draggableText.fontSize;
 //                                       draggableText.fontSize = e.currentTarget.valueAsNumber;
@@ -246,7 +246,7 @@
           </div>
         </td>
         <td>
-          <div                   class="field border round label">
+          <div                   class="field label suffix round white-text large-elevate slow-ripple">
             <input type="number" value={draggableText.spacings} on:input={async (e) => {
               let oldSpacings: number = draggableText.spacings;
 //                                      draggableText.spacings = e.currentTarget.valueAsNumber;
@@ -373,6 +373,36 @@
   </table>
 --->
 </div>
+
+
+
+
+
+<style>
+  i        { text-shadow: 0 0 3px; }
+/*i        { text-shadow: 0 0 3px; }*/
+/*h6       { text-shadow: 0 0 3px; }*/
+/*h6       { text-shadow: 0 0 3px; }*/
+/*span     { text-shadow: 0 0 3px; }*/
+/*span     { text-shadow: 0 0 3px; }*/
+  label    { text-shadow: 0 0 3px; }
+/*label    { text-shadow: 0 0 3px; }*/
+  input    { text-shadow: 0 0 3px; }
+/*input    { text-shadow: 0 0 3px; }*/
+  select   { text-shadow: 0 0 3px; }
+/*select   { text-shadow: 0 0 3px; }*/
+  button   { text-shadow: 0 0 3px; }
+/*button   { text-shadow: 0 0 3px; }*/
+  textarea { text-shadow: 0 0 3px; }
+/*textarea { text-shadow: 0 0 3px; }*/
+</style>
+
+
+
+
+
+
+
 
 
 

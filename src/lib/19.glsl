@@ -21,12 +21,12 @@ uniform vec2           texelSize;
 
 // const lowp float red_mult = 1.0;
 
-uniform lowp float alpha       ; //  0.5
-uniform lowp float scale       ; //  1.0
-uniform lowp float  rred_shift ; // 10.0
-uniform lowp float  blue_shift ; // 20.0
-uniform lowp float green_shift ; // 30.0
-uniform lowp float red_mult    ; //  1.0
+uniform float alpha       ; //  0.5
+uniform float scale       ; //  1.0
+uniform float  rred_shift ; // 10.0
+uniform float  blue_shift ; // 20.0
+uniform float green_shift ; // 30.0
+uniform float red_mult    ; //  1.0
 
 void main() {
 	vec2  uvs = vTexCoord * scale;

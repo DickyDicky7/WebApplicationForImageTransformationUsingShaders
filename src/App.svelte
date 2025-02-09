@@ -917,6 +917,14 @@ const handleCaptureAsVideo = async(): Promise<void> => {
     import {                failureScript } from "./global"                ;
     import { makeNewSnackbarSuccess       } from "./common"                ;
     import { makeNewSnackbarFailure       } from "./common"                ;
+
+    import * as t from "svelte/transition";
+//  import * as t from "svelte/transition";
+    import { tick } from "svelte";
+//  import { tick } from "svelte";
+
+    let bigList: HTMLDivElement = null!;
+//  let bigList: HTMLDivElement = null!;
 </script>
 
 <!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
@@ -931,8 +939,8 @@ const handleCaptureAsVideo = async(): Promise<void> => {
     <!--<div class="headerContainer                "></div>-->
         <div class="topBarContainer   small-padding">
             <div class="row">
-                <button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
-            <!--<button class=" slow-ripple large-elevate margin grey10"><i class="fas fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+                <button class=" slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
+            <!--<button class=" slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} on:change={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
                 <div    class="field middle-align">
                     <nav>
                     <!--<div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>-->
@@ -960,9 +968,12 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 <!--        <button class="slow-ripple large-elevate" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple large-elevate" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
-            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-download white-text"></i><span>Save</span></button>-->
-                <button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-download white-text"></i><span>Save</span></button>
-            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-download white-text"></i><span>Save</span></button>-->
+            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-arrow-down white-text"></i><span>Save</span></button>-->
+                <button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-arrow-down white-text"></i><span>Save</span></button>
+            <!--<button class="slow-ripple large-elevate margin deep-orange white-text" data-ui="#a"><i class="fas fa-arrow-down white-text"></i><span>Save</span></button>-->
+            <!--<div class="overlay large-blur"></div>-->
+                <div class="overlay large-blur"></div>
+            <!--<div class="overlay large-blur"></div>-->
                 <dialog class="left small-blur dialogSide" id="a">
                     <!-- svelte-ignore a11y_consider_explicit_label -->
                     <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -978,7 +989,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                    imageFormat
                                                   (imageFormat)
                                     }
-                                          <option>{imageFormat.extension}</option>
+                <option class="grey10 white-text">{imageFormat.extension}</option>
                                     {/each}
                                 </select>
                             <!-- svelte-ignore  a11y-label-has-associated-control -->
@@ -1007,7 +1018,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                                    videoFormat
                                                   (videoFormat)
                                     }
-                                          <option>{videoFormat.mimeType}</option>
+                <option class="grey10 white-text">{videoFormat.mimeType}</option>
                                     {/each}
                                 </select>
                             <!-- svelte-ignore  a11y-label-has-associated-control -->
@@ -1100,7 +1111,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                     <div class="s12 m12 l6">
-                        <button class="slow-ripple responsive large-elevate deep-orange" 
+                        <button class="slow-ripple responsive large-elevate deep-orange white-text" 
                              on:click={async (e) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "NI"
@@ -1136,6 +1147,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     dynamicStorage: null
                                     ,
                                 });
+
+                                await tick();
+//                              await tick();
+                                bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+//                              bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
 
                                 await makeNewSnackbarSuccess(`A new NI effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                              await makeNewSnackbarFailure(`A new NI effect has been added - ${$effectsUsedForFiltering.length} so far`);
@@ -1154,7 +1170,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <!--Thêm effect @có sẵn @@-->
                     <!--Thêm effect @có sẵn @@-->
                     <div class="s12 m12 l6">
-                        <button class="slow-ripple responsive large-elevate deep-orange" 
+                        <button class="slow-ripple responsive large-elevate deep-orange white-text" 
                              on:click={async (e) => {
                                 $effectsUsedForFiltering = [ ...
                                 $effectsUsedForFiltering , { fragmentShaderSourceType________: "AI"
@@ -1191,6 +1207,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     ,
                                 });
 
+                                await tick();
+//                              await tick();
+                                bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+//                              bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+
                                 await makeNewSnackbarSuccess(`A new AI effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                              await makeNewSnackbarFailure(`A new AI effect has been added - ${$effectsUsedForFiltering.length} so far`);
                             }}>
@@ -1208,7 +1229,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <!--Thêm effect gen bởi AI-->
                     <!--Thêm effect gen bởi AI-->
                     <div class="s12 m12 l6">
-                        <button class="slow-ripple responsive large-elevate grey10 align-center"
+                        <button class="slow-ripple responsive large-elevate grey10 align-center white-text"
                             on:click={async (e) => {
                             $effectsUsedForFiltering = [ ...
                             $effectsUsedForFiltering , { fragmentShaderSourceType________: null
@@ -1286,6 +1307,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             });
 
 
+                            await tick();
+//                          await tick();
+                            bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+//                          bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth" });
+
                             await makeNewSnackbarSuccess(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
 //                          await makeNewSnackbarFailure(`A new text effect has been added - ${$effectsUsedForFiltering.length} so far`);
                         }}>
@@ -1301,7 +1327,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 </div>
-                <div class="effectContainer margin">
+                <div class="effectContainer margin" bind:this={bigList}>
                     {#each $effectsUsedForFiltering as {
                            fragmentShaderSourceType________
                      ,     fragmentShaderSourceCode________
@@ -1317,7 +1343,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                 <!--<div class="tiny-space"></div>-->
                     <div class="tiny-space"></div>
                 <!--<div class="tiny-space"></div>-->
-                    <div class="medium-padding">            
+                    <div class="medium-padding" in:t.fade out:t.blur      >            
                         {#if fragmentShaderSourceType________ ===  "NI"}
                             <div     class="                          row">
                                 <div class="field label suffix round  max large-elevate white-text slow-ripple">
@@ -1423,7 +1449,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                         {#each [ "none" , ... [ ... Shaders.keys() ].sort() ] as shaderName
                                                                                                 (shaderName)
                                         }
-                                                                                        <option>{shaderName}</option>            
+                                                              <option class="grey10 white-text">{shaderName}</option>            
                                         {/each}
                                     </select>
                             <!-- svelte-ignore a11y-label-has-associated-control -->
@@ -1437,17 +1463,20 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 {#if fragmentShader______GLSLUniforms        !== null}
                                 {#if fragmentShader______GLSLUniforms.length  >     0}
-                                    <!--<button class="slow-ripple circle large-elevate" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
-                                        <button class="slow-ripple circle large-elevate" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>
-                                    <!--<button class="slow-ripple circle large-elevate" data-ui={`#b${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                                    <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#b${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
+                                        <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#b${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>
+                                    <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#b${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
                                 {/if}
                                 {/if}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="margin slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban"></i></button>-->
-                                <button class="margin slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban"></i></button>
-                            <!--<button class="margin slow-ripple large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban"></i></button>-->
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                                <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old NI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
                             </div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <div class="overlay large-blur"></div>
+                        <!--<div class="overlay large-blur"></div>-->
                             <dialog  class="    responsive dialog blur" id={`b${String(effectIndex)}`}>
                                 <div class="row responsive            "                               >
                                     <h6>Customize your effect</h6>
@@ -1471,15 +1500,18 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <!--<div class="max medium-padding"><span>Effect {effectIndex} by AI</span></div>-->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="slow-ripple circle large-elevate" data-ui={`#c${effectIndex}`}><i class="fas fa-pen"></i></button>-->
-                                <button class="slow-ripple circle large-elevate" data-ui={`#c${effectIndex}`}><i class="fas fa-pen"></i></button>
-                            <!--<button class="slow-ripple circle large-elevate" data-ui={`#c${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#c${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
+                                <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#c${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#c${effectIndex}`}><i class="fa-solid fa-wand-magic-sparkles white-text"></i></button>-->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="slow-ripple circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>-->
-                                <button class="slow-ripple circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>
-                            <!--<button class="slow-ripple circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>-->
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                                <button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>
+                            <!--<button class="slow-ripple circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old AI effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
                             </div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <div class="overlay large-blur"></div>
+                        <!--<div class="overlay large-blur"></div>-->                            
                             <dialog  class="    responsive dialog blur" id={`c${effectIndex}`}>
                                 <div class="row responsive            "                       >
                                     <h6>  Ask AI for a new effect  </h6>
@@ -1493,7 +1525,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <div     class="      medium-space          ">  </div>
                             <!--<div     class="      medium-space          ">  </div>-->
                                 <div     class="                         row">
-                                    <div class="field  round label max">
+                                    <div class="field  round label       max suffix white-text large-elevate slow-ripple">
                                         <input type="text" bind:this={AIInputPrompts}>
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
@@ -1503,7 +1535,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     </div>
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
-                                    <button class="slow-ripple circle large-elevate" on:click={async (e)=>{
+                                    <button class="slow-ripple circle top-round right-round large-elevate deep-orange white-text" on:click={async (e)=>{
                                         fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
 //                                      fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
                                         console.log(fragmentShaderSourceCode________);
@@ -1513,9 +1545,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                         fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
 //                                      fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
                                     }}>
-                                    <!--<i class="fas fa-paper-plane"></i>-->
-                                        <i class="fas fa-paper-plane"></i>
-                                    <!--<i class="fas fa-paper-plane"></i>-->
+                                    <!--<i class="fas fa-paper-plane white-text"></i>-->
+                                        <i class="fas fa-paper-plane white-text"></i>
+                                    <!--<i class="fas fa-paper-plane white-text"></i>-->
                                     </button>
                                 </div>
                             <!--<div class="space"></div>-->
@@ -1530,15 +1562,18 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                 <div    class="max  medium-padding"><span>Caption: {draggableText?.contents ?? ""}</span></div>
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="slow-ripple  circle large-elevate" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>-->
-                                <button class="slow-ripple  circle large-elevate" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>
-                            <!--<button class="slow-ripple  circle large-elevate" data-ui={`#d${effectIndex}`}><i class="fas fa-pen"></i></button>-->
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#d${effectIndex}`}><i class="fa-solid fa-pen"></i></button>-->
+                                <button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#d${effectIndex}`}><i class="fa-solid fa-pen"></i></button>
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" data-ui={`#d${effectIndex}`}><i class="fa-solid fa-pen"></i></button>-->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <!--<button class="slow-ripple  circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>-->
-                                <button class="slow-ripple  circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>
-                            <!--<button class="slow-ripple  circle large-elevate" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fas fa-trash"></i></button>-->
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
+                                <button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>
+                            <!--<button class="slow-ripple  circle bottom-round left-round large-elevate deep-orange white-text" on:click={async (e) => { $effectsUsedForFiltering = $effectsUsedForFiltering.filter((otherEffect, otherEffectIndex) => otherEffectIndex !== effectIndex); await tick(); await makeNewSnackbarFailure(`An old text effect has been removed - ${$effectsUsedForFiltering.length} left`); }}><i class="fa-solid fa-ban white-text"></i></button>-->
                             </div>
+                        <!--<div class="overlay large-blur"></div>-->
+                            <div class="overlay large-blur"></div>
+                        <!--<div class="overlay large-blur"></div>-->
                             <dialog  class="    responsive dialog blur" id={`d${String(effectIndex)}`}>
                                 <div class="row responsive            "                               >
                                     <h6>Customize your text</h6>
@@ -1560,7 +1595,7 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             {#if effectIndex > 0}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple max large-elevate grey10"
+                                <button class="slow-ripple max large-elevate grey10 white-text"
                                      on:click={async (e) => {
                                     let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
                                     let index2: number | undefined = $effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
@@ -1624,15 +1659,15 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     editorSnapshotsUndoStack.push(editorSnapshot);
         //                          editorSnapshotsUndoStack.push(editorSnapshot);
                                 }}>
-                                <!--<i class="fa-solid fa-chevron-up  "></i>-->
-                                    <i class="fa-solid fa-chevron-up  "></i>
-                                <!--<i class="fa-solid fa-chevron-up  "></i>-->
+                                <!--<i class="fa-solid fa-chevron-up white-text"></i>-->
+                                    <i class="fa-solid fa-chevron-up white-text"></i>
+                                <!--<i class="fa-solid fa-chevron-up white-text"></i>-->
                                 </button>
                             {/if}
                             {#if effectIndex < $effectsUsedForFiltering.length - 1}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="slow-ripple max large-elevate grey10"
+                                <button class="slow-ripple max large-elevate grey10 white-text"
                                      on:click={async (e) => {
                                     let index1: number | undefined = $effectsUsedForFiltering[effectIndex    ].fragmentShader_HTMLSelectElement?.selectedIndex;
                                     let index2: number | undefined = $effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
@@ -1696,16 +1731,16 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     editorSnapshotsUndoStack.push(editorSnapshot);
         //                          editorSnapshotsUndoStack.push(editorSnapshot);
                                 }}>
-                                <!--<i class="fa-solid fa-chevron-down"></i>-->
-                                    <i class="fa-solid fa-chevron-down"></i>
-                                <!--<i class="fa-solid fa-chevron-down"></i>-->                        
+                                <!--<i class="fa-solid fa-chevron-down white-text"></i>-->
+                                    <i class="fa-solid fa-chevron-down white-text"></i>
+                                <!--<i class="fa-solid fa-chevron-down white-text"></i>-->                        
                                 </button>
                             {/if}
                         </div>
                     </div>
-                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px">-->
-                    <hr class="large white" style:height="3px" style:box-shadow="0 0 3px">
-                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px">-->
+                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px" in:t.fade out:t.blur>-->
+                    <hr class="large white" style:height="3px" style:box-shadow="0 0 3px" in:t.fade out:t.blur>
+                <!--<hr class="large white" style:height="3px" style:box-shadow="0 0 3px" in:t.fade out:t.blur>-->
                     {/each}
                 </div>
             </div>
@@ -1720,44 +1755,45 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <div class="column">
                             <!-- svelte-ignore a11y_consider_explicit_label -->
                             <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <button class="slow-ripple circle large-elevate" on:click={async (e) => {
+                            <button class="slow-ripple square large-elevate blue   white-text margin" style="margin-left: 5px;" on:click={async (e) => {
                                     video?.time(video?.time() - 10);
 //                                  video?.time(video?.time() - 10);
                             }}>
-                            <!--<i  class="fas fa-backward"></i>-->
-                                <i  class="fas fa-backward"></i>
-                            <!--<i  class="fas fa-backward"></i>-->
+                            <!--<i  class="fas fa-backward white-text"></i>-->
+                                <i  class="fas fa-backward white-text"></i>
+                            <!--<i  class="fas fa-backward white-text"></i>-->
                             </button>
-                            <button class="slow-ripple circle large-elevate" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
-                                                                                                           videoIsPlaying =
-                                                                                                          !videoIsPlaying ;
+                            <button class="slow-ripple square large-elevate grey10 white-text margin" on:click={async (e) => { if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
+                                                                                                                                              videoIsPlaying =
+                                                                                                                                             !videoIsPlaying ;
                             }}>
                                 {#if videoIsPlaying}
-                                <!--<i class="fas fa-pause"></i>-->
-                                    <i class="fas fa-pause"></i>
-                                <!--<i class="fas fa-pause"></i>-->
+                                <!--<i class="fas fa-pause white-text"></i>-->
+                                    <i class="fas fa-pause white-text"></i>
+                                <!--<i class="fas fa-pause white-text"></i>-->
                                 {:else}
-                                <!--<i class="fas fa-play "></i>-->
-                                    <i class="fas fa-play "></i>
-                                <!--<i class="fas fa-play "></i>-->
+                                <!--<i class="fas fa-play  white-text"></i>-->
+                                    <i class="fas fa-play  white-text"></i>
+                                <!--<i class="fas fa-play  white-text"></i>-->
                                 {/if}
                             </button>
                             <!-- svelte-ignore a11y_consider_explicit_label -->
-                            <button class="slow-ripple circle large-elevate" on:click={async (e) => {
+                            <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <button class="slow-ripple square large-elevate blue   white-text margin" on:click={async (e) => {
                                     video?.time(video?.time() + 10);
 //                                  video?.time(video?.time() + 10);
                             }}>
-                            <!--<i  class="fas fa-forward "></i>-->
-                                <i  class="fas fa-forward "></i>
-                            <!--<i  class="fas fa-forward "></i>-->
+                            <!--<i  class="fas fa-forward  white-text"></i>-->
+                                <i  class="fas fa-forward  white-text"></i>
+                            <!--<i  class="fas fa-forward  white-text"></i>-->
                             </button>
-                            <progress value="0" max="100" class="light-green-text" bind:this={videoProgressSlider_}></progress>
+                            <progress value="0" max="100" class="white-text blue large-elevate" bind:this={videoProgressSlider_}></progress>
                         </div>
                         
                         <nav   class="no-space">
-                        <!--<i class="fas fa-volume-off padding-tiny"></i>-->
-                            <i class="fas fa-volume-off padding-tiny"></i>
-                        <!--<i class="fas fa-volume-off padding-tiny"></i>-->
+                        <!--<i class="fas fa-volume-off  padding-tiny white-text"></i>-->
+                            <i class="fas fa-volume-off  padding-tiny white-text"></i>
+                        <!--<i class="fas fa-volume-off  padding-tiny white-text"></i>-->
                             <label                     class="slider
                                                               medium       ">
                                 <input type="range"    value="1.0" min="0.0"
@@ -1769,13 +1805,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <!--<span class="       "></span>-->
                                 <span class="       "></span>
                             <!--<span class="       "></span>-->
-                            <!--<div  class="tooltip"></div >-->
-                                <div  class="tooltip"></div >
-                            <!--<div  class="tooltip"></div >-->
+                            <!--<div  class="tooltip blue white-text"></div >-->
+                                <div  class="tooltip blue white-text"></div >
+                            <!--<div  class="tooltip blue white-text"></div >-->
                             </label>
-                        <!--<i class="fas fa-volume-high padding-tiny"></i>-->
-                            <i class="fas fa-volume-high padding-tiny"></i>
-                        <!--<i class="fas fa-volume-high padding-tiny"></i>-->
+                        <!--<i class="fas fa-volume-high padding-tiny white-text"></i>-->
+                            <i class="fas fa-volume-high padding-tiny white-text"></i>
+                        <!--<i class="fas fa-volume-high padding-tiny white-text"></i>-->
                         </nav>
                         {/if}
                     </div>
@@ -1784,13 +1820,13 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     <div>
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
-                    <!--<button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fas fa-arrow-rotate-left "></i><span>Undo</span></button>
+                        <button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left  white-text"></i><span>Undo</span></button>
+                    <!--<button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onUndoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-left  white-text"></i><span>Undo</span></button>
                     -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
                         <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>
-                    <!--<button class="slow-ripple circle extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fas fa-arrow-rotate-right"></i><span>Redo</span></button>-->
+                        <button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right white-text"></i><span>Redo</span></button>
+                    <!--<button class="slow-ripple circle bottom-round right-round extend large-elevate margin grey10 white-text" on:click={async (e) => { await onRedoActionExecuted(); }}><i class="fa-solid fa-arrow-rotate-right white-text"></i><span>Redo</span></button>-->
                     </div>
                 </div>
                 <div class="canvas  ">
@@ -1811,14 +1847,17 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 
 <style>
 
-    i      { text-shadow: 0 0 3px; }
-    h6     { text-shadow: 0 0 3px; }
-    span   { text-shadow: 0 0 3px; }
-    label  { text-shadow: 0 0 3px; }
-    select { text-shadow: 0 0 3px; }
+    i        { text-shadow: 0 0 3px; }
+    h6       { text-shadow: 0 0 3px; }
+    span     { text-shadow: 0 0 3px; }
+    label    { text-shadow: 0 0 3px; }
+    input    { text-shadow: 0 0 3px; }
+    select   { text-shadow: 0 0 3px; }
+    option   { text-shadow: 0 0 3px; }
+    progress { text-shadow: 0 0 3px; }
     
-    main { overflow-x: visible; overflow-y: hidden; scroll-behavior: smooth; }
-    *    {                                          scroll-behavior: smooth; }
+    main { overflow-x: auto; overflow-y: auto; scroll-behavior: smooth; width: 100vw; height: 100vh; }
+    *    {                                     scroll-behavior: smooth;                              }
     @font-face {
      font-family:            'SF Mono Regular'                                       ;
      font-weight: normal;
@@ -1845,12 +1884,12 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 /*  .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }  */
     .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
 /*  .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }  */
-    .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : scroll; flex-grow: 1; }
-/*  .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : scroll; flex-grow: 1; }  */
+    .canvas           { width: 100% ;                                                                                                                                overflow  : auto;                 }
+/*  .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : auto; flex-grow: 1;   }  */
     .dialog           { width: 050% ;                                                                                                                                                                  }
 /*  .dialog           { width: 050% ;                                                                                                                                                                  }  */
-    .effectContainer  {               height: 100% ;                                                                                                                 overflow-y: scroll;               }
-/*  .effectContainer  {               height: 100% ;                                                                                                                 overflow-y: scroll;               }  */
+    .effectContainer  {               height: 100% ;                                                                                                                 overflow  : auto;                 }
+/*  .effectContainer  {               height: 100% ;                                                                                                                 overflow  : auto;                 }  */
     .dialogSide       { width: 030% ;                                                                                                                                                                  }
 /*  .dialogSide       { width: 030% ;                                                                                                                                                                  }  */
     .toolTip          { width: 200px;                                                                                                                                                                  }

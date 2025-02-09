@@ -31,11 +31,11 @@ export default defineConfig({
               ,          basicSsl()
               , ]
               ,
-server        : {
-          host: "192.168.1.110"
-              , //YOUR IPV4ADRR
-                }
-              ,
+
+
+
+
+
  assetsInclude: [ "**/*.glsl"
               ,   "**/*.hlsl"
               , ]

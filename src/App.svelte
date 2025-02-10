@@ -971,6 +971,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                     </nav>
                 </div>
             </div>
+        <!--<h3  style="font-style: italic; text-shadow: 0 0 3px;" class="white-text slow-ripple large-elevate small-padding">Visual Filter Editor</h3>-->
+            <h3  style="font-style: italic; text-shadow: 0 0 3px;" class="white-text slow-ripple large-elevate small-padding">Visual Filter Editor</h3>
+        <!--<h3  style="font-style: italic; text-shadow: 0 0 3px;" class="white-text slow-ripple large-elevate small-padding">Visual Filter Editor</h3>-->
 <!--        <button class="slow-ripple large-elevate" on:click={startWebCam}>START WEB CAM</button>
             <button class="slow-ripple large-elevate" on:click={ceaseWebCam}>STOP@ WEB CAM</button>        -->
             <div class="horizontal">
@@ -1009,9 +1012,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             </div>
                             <!-- svelte-ignore a11y_consider_explicit_label -->
                             <!-- svelte-ignore a11y_consider_explicit_label -->
-                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>-->
-                            <button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>
-                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate white"><span class="grey10-text">Save the current frame</span></div></button>-->
+                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate blue white-text slow-ripple medium-space" style:text-align="center"><span class="white-text">Save current frame</span></div></button>-->
+                            <button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate blue white-text slow-ripple medium-space" style:text-align="center"><span class="white-text">Save current frame</span></div></button>
+                        <!--<button class="slow-ripple center large-elevate deep-orange white-text" on:click={async (e) => { await startCaptureAsImage(); }}><i class="fas fa-camera white-text"></i><span>Capture</span><div class="tooltip left max toolTip round left-round top-round large-elevate blue white-text slow-ripple medium-space" style:text-align="center"><span class="white-text">Save current frame</span></div></button>-->
                             <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
                             <!--Đang render image/video trên canvas -> capture frame hình hiện tại-->
                         </div>
@@ -1039,12 +1042,12 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <div     class="row   center-align">
                                 <div class="field middle-align">
                                     <nav>
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>-->
-                                        <label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round"><span>Save the frames from when you press the start button until you press the stop button into a video.          </span></div></label>-->
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>-->
-                                        <label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round"><span>For the image: it's the same as a snapshot.<br>For the video: Save the entire video with the applied effect.</span></div></label>-->
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>-->
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>-->
                                     </nav>
                                 </div>
                             </div>
@@ -1520,9 +1523,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                         <!--<div class="overlay large-blur"></div>-->                            
                             <dialog  class="    responsive dialog blur" id={`c${effectIndex}`}>
                                 {#if isLoading}
-                            <!--  <progress class="circle large" transition:t.scale></progress>  -->
-                                  <progress class="circle large" transition:t.scale></progress>
-                            <!--  <progress class="circle large" transition:t.scale></progress>  -->
+                            <!--  <progress class="circle large" transition:t.fade></progress>  -->
+                                  <progress class="circle large" transition:t.fade></progress>
+                            <!--  <progress class="circle large" transition:t.fade></progress>  -->
                                 {/if}
                                 <div class="row responsive            "                       >
                                     <h6>  Ask AI for a new effect  </h6>
@@ -1546,17 +1549,26 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     </div>
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
-                                    <button class="slow-ripple circle top-round right-round large-elevate deep-orange white-text" on:click={async (e)=>{
-                                        isLoading = true;
-                                        fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
-//                                      fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
-                                        isLoading = false;
+                                    <button class="slow-ripple circle top-round right-round large-elevate deep-orange white-text" on:click={async (e) => {
+                                        try
+                                        {
+                                        isLoading =  true;
+                                        fragmentShaderSourceCode________=`#version 300 es\n` + (await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("#version 300 es")[1].split("\n").slice(+1 , -1).join("\n").replaceAll("`", "");
+//                                      fragmentShaderSourceCode________=`#version 300 es\n` + (await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("#version 300 es")[1].split("\n").slice(+1 , -1).join("\n").replaceAll("`", "");
+                                        isLoading = !true;
                                         console.log(fragmentShaderSourceCode________);
                                         fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
 //                                      fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
                                         console.log(fragmentShader______GLSLUniforms);
                                         fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
 //                                      fragmentShaderFiltering_Instance = (canvasInstance as any).createFilterShader(fragmentShaderSourceCode________!);
+                                        }
+                                        catch (err)
+                                        {
+//                                          await makeNewSnackbarFailure("LLM generate effect wrong. Please try again!");
+                                            await makeNewSnackbarFailure("LLM generate effect wrong. Please try again!");
+//                                          await makeNewSnackbarFailure("LLM generate effect wrong. Please try again!");
+                                        }
                                     }}>
                                     <!--<i class="fas fa-paper-plane white-text"></i>-->
                                         <i class="fas fa-paper-plane white-text"></i>

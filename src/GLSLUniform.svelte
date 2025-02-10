@@ -507,6 +507,12 @@
 /*i        { text-shadow: 0 0 3px; }*/
 /*h6       { text-shadow: 0 0 3px; }*/
 /*h6       { text-shadow: 0 0 3px; }*/
+  th       { text-shadow: 0 0 3px; }
+/*th       { text-shadow: 0 0 3px; }*/
+  td       { text-shadow: 0 0 3px; }
+/*td       { text-shadow: 0 0 3px; }*/
+  tr       { text-shadow: 0 0 3px; }
+/*tr       { text-shadow: 0 0 3px; }*/
   span     { text-shadow: 0 0 3px; }
 /*span     { text-shadow: 0 0 3px; }*/
   label    { text-shadow: 0 0 3px; }

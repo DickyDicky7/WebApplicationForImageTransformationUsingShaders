@@ -12,7 +12,7 @@ const promptShader = async (keywords: string[] = ["Pixelated Like Pixel Games Wi
     model          : openRouter("meta-llama/llama-3.1-70b-instruct:free") as LanguageModel
                    ,
             prompt : `
-create a glsl shader that has ${keywords.join(", ")} effect(s); please return only the .glsl code, knowing that p5.js only supports GLSL ES 3.0/WebGL2.0 ("#version 300 es"); and the glsl format is: 
+create a glsl shader that has ${keywords.join(", ")} effect(s); please return only the .glsl code (Further explanations are not necessary), knowing that p5.js only supports GLSL ES 3.0/WebGL2.0 ("#version 300 es"); and the glsl format is: 
 
 #version 300 es
 precision  lowp float;

@@ -928,6 +928,9 @@ const handleCaptureAsVideo = async(): Promise<void> => {
 
     let bigList: HTMLDivElement = null!;
 //  let bigList: HTMLDivElement = null!;
+
+    let isLoading: boolean = false;
+//  let isLoading: boolean = false;
 </script>
 
 <!--<div bind:this={canvasBG} style:position="absolute" style:z-index="-1" style:pointer-events="none"></div>-->
@@ -1516,6 +1519,11 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                             <div class="overlay large-blur"></div>
                         <!--<div class="overlay large-blur"></div>-->                            
                             <dialog  class="    responsive dialog blur" id={`c${effectIndex}`}>
+                                {#if isLoading}
+                            <!--  <progress class="circle large" transition:t.scale></progress>  -->
+                                  <progress class="circle large" transition:t.scale></progress>
+                            <!--  <progress class="circle large" transition:t.scale></progress>  -->
+                                {/if}
                                 <div class="row responsive            "                       >
                                     <h6>  Ask AI for a new effect  </h6>
                                     <div        class="max right-align">
@@ -1539,8 +1547,10 @@ const handleCaptureAsVideo = async(): Promise<void> => {
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <!-- svelte-ignore a11y_consider_explicit_label -->
                                     <button class="slow-ripple circle top-round right-round large-elevate deep-orange white-text" on:click={async (e)=>{
+                                        isLoading = true;
                                         fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
 //                                      fragmentShaderSourceCode________=(await (await promptShader(AIInputPrompts.value.split(";"))).text()).split("\n").slice(+1 , -1).join("\n");
+                                        isLoading = false;
                                         console.log(fragmentShaderSourceCode________);
                                         fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);
 //                                      fragmentShader______GLSLUniforms =                                  parseGLSL(fragmentShaderSourceCode________!);

@@ -234,9 +234,12 @@ import {   onMount   } from   "svelte";
             catchFirstTime =  false;
             startRecord    = !false;
             ceaseRecord    =  false;
-            canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
-                                        Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
-                                       );
+//          canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+//                                      Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+//                                     );
+//          canvasInstance.resizeCanvas(video.width * 3.0 * DPR, video.height * 3.0 * DPR);
+            canvasInstance.resizeCanvas(video.width * 3.0 * DPR, video.height * 3.0 * DPR);
+//          canvasInstance.resizeCanvas(video.width * 3.0 * DPR, video.height * 3.0 * DPR);
             canvasInstance.draw = () => {
 //------------------------------//
                 if (!      catchFirstTime

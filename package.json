@@ -5,9 +5,9 @@
   "type"   : "module",
   "scripts":
   {
-    "dev"    : "vite  --host",
-    "build"  : "vite build  ",
-    "preview": "vite preview",
+    "dev"    : "vite         --host",
+    "build"  : "vite build         ",
+    "preview": "vite preview --host",
     "check"  : "svelte-check --tsconfig ./tsconfig.json && tsc -p tsconfig.node.json"
   }
   ,

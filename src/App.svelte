@@ -354,6 +354,7 @@
 //      await ui("theme", "#000000");
         await ui("mode", "dark");
 //      await ui("mode", "dark");
+
         await new Promise(r => setTimeout(r, 1000)); // Yield
 //      await new Promise(r => setTimeout(r, 1000)); // Yield
 
@@ -433,6 +434,26 @@
         canvasInstance.WEBGL,        );
 //      canvasInstance.WEBGL,        );
         */
+
+        await new Promise(r => setTimeout(r, 1000)); // Yield
+//      await new Promise(r => setTimeout(r, 1000)); // Yield
+
+        global.globalState.texturesNoise     = [... global.globalState.texturesNoise    , ... await common.fetchAllTextures_Noise    (               )].sort();
+//      global.globalState.texturesNoise     = [... global.globalState.texturesNoise    , ... await common.fetchAllTextures_Noise    (               )].sort();
+        global.globalState.texturesBayer     = [... global.globalState.texturesBayer    , ... await common.fetchAllTextures_Bayer    (               )].sort();
+//      global.globalState.texturesBayer     = [... global.globalState.texturesBayer    , ... await common.fetchAllTextures_Bayer    (               )].sort();
+        global.globalState.texturesPalette   = [... global.globalState.texturesPalette  , ... await common.fetchAllTextures_Palette  (global.supabase)].sort();
+//      global.globalState.texturesPalette   = [... global.globalState.texturesPalette  , ... await common.fetchAllTextures_Palette  (global.supabase)].sort();
+        global.globalState.texturesPencil_   = [... global.globalState.texturesPencil_  , ... await common.fetchAllTextures_Pencil_  (global.supabase)].sort();
+//      global.globalState.texturesPencil_   = [... global.globalState.texturesPencil_  , ... await common.fetchAllTextures_Pencil_  (global.supabase)].sort();
+        global.globalState.texturesASCII     = [... global.globalState.texturesASCII    , ... await common.fetchAllTextures_ASCII    (global.supabase)].sort();
+//      global.globalState.texturesASCII     = [... global.globalState.texturesASCII    , ... await common.fetchAllTextures_ASCII    (global.supabase)].sort();
+        global.globalState.texturesTiled     = [... global.globalState.texturesTiled    , ... await common.fetchAllTextures_Tiled    (global.supabase)].sort();
+//      global.globalState.texturesTiled     = [... global.globalState.texturesTiled    , ... await common.fetchAllTextures_Tiled    (global.supabase)].sort();
+        global.globalState.texturesShaderToy = [... global.globalState.texturesShaderToy, ... await common.fetchAllTextures_ShaderToy(global.supabase)].sort();
+//      global.globalState.texturesShaderToy = [... global.globalState.texturesShaderToy, ... await common.fetchAllTextures_ShaderToy(global.supabase)].sort();
+        global.globalState.customFonts = [... global.globalState.customFonts, ... await common.fetchAllFonts_TTF_ITCHIO(global.supabase), ... await common.fetchAllFonts_OTF_ITCHIO(global.supabase)].sort();
+//      global.globalState.customFonts = [... global.globalState.customFonts, ... await common.fetchAllFonts_TTF_ITCHIO(global.supabase), ... await common.fetchAllFonts_OTF_ITCHIO(global.supabase)].sort();
 
         await new Promise(r => setTimeout(r, 1000)); // Final yield
 //      await new Promise(r => setTimeout(r, 1000)); // Final yield
@@ -1218,6 +1239,7 @@
     });
 //  });
 
+    /*
     svelte.onMount(async (): Promise<void> => {
 //  svelte.onMount(async (): Promise<void> => {
         global.globalState.texturesNoise     = [... global.globalState.texturesNoise    , ... await common.fetchAllTextures_Noise    (               )].sort();
@@ -1238,6 +1260,7 @@
 //      global.globalState.customFonts = [... global.globalState.customFonts, ... await common.fetchAllFonts_TTF_ITCHIO(global.supabase), ... await common.fetchAllFonts_OTF_ITCHIO(global.supabase)].sort();
     });
 //  });
+    */
 
     //imgur video/image
 //  //imgur video/image

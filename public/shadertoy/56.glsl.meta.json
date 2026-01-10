@@ -1,0 +1,11 @@
+{
+    "shaderName": "56.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "VINGETTE",
+            "uniformDisName": "VINGETTE",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        }
+    ]
+}

@@ -1,0 +1,80 @@
+{
+    "shaderName": "53.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "palette0",
+            "uniformDisName": "palette0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "screen_height",
+            "uniformDisName": "screen_height",
+            "uniformVarType": "float",
+            "uniformDefVal": 640
+        },
+        {
+            "uniformVarName": "amplitude",
+            "uniformDisName": "amplitude",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.075
+        },
+        {
+            "uniformVarName": "frequency",
+            "uniformDisName": "frequency",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "amplitude_vertical",
+            "uniformDisName": "amplitude_vertical",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "frequency_vertical",
+            "uniformDisName": "frequency_vertical",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "speed_vertical",
+            "uniformDisName": "speed_vertical",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "scrolling_direction",
+            "uniformDisName": "scrolling_direction",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "scrolling_speed",
+            "uniformDisName": "scrolling_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.08
+        },
+        {
+            "uniformVarName": "enable_palette_cycling",
+            "uniformDisName": "enable_palette_cycling",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "palette_speed",
+            "uniformDisName": "palette_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        }
+    ]
+}

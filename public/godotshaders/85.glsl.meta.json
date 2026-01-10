@@ -1,0 +1,51 @@
+{
+    "shaderName": "85.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "dithering",
+            "uniformDisName": "dithering",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "dithering_size",
+            "uniformDisName": "dithering_size",
+            "uniformVarType": "int",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "resolution_scale",
+            "uniformDisName": "resolution_scale",
+            "uniformVarType": "int",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "threshold",
+            "uniformDisName": "threshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 60
+        },
+        {
+            "uniformVarName": "white",
+            "uniformDisName": "white",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "black",
+            "uniformDisName": "black",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        }
+    ]
+}

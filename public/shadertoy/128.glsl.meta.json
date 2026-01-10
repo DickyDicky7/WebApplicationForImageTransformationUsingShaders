@@ -1,0 +1,29 @@
+{
+    "shaderName": "128.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "SAMPLES",
+            "uniformDisName": "SAMPLES",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "decay",
+            "uniformDisName": "decay",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.97
+        },
+        {
+            "uniformVarName": "density",
+            "uniformDisName": "density",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.15
+        },
+        {
+            "uniformVarName": "threshold",
+            "uniformDisName": "threshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.7
+        }
+    ]
+}

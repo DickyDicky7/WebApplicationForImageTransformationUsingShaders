@@ -1,0 +1,65 @@
+{
+    "shaderName": "9.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise0",
+            "uniformDisName": "noise0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "SPEED",
+            "uniformDisName": "SPEED",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.29
+        },
+        {
+            "uniformVarName": "TURBULENCE",
+            "uniformDisName": "TURBULENCE",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.16
+        },
+        {
+            "uniformVarName": "ADVECTION",
+            "uniformDisName": "ADVECTION",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "DEPTH",
+            "uniformDisName": "DEPTH",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.023
+        },
+        {
+            "uniformVarName": "INPUT_LIGHT",
+            "uniformDisName": "INPUT_LIGHT",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                -0.5,
+                1,
+                0.25
+            ]
+        },
+        {
+            "uniformVarName": "INPUT_COLOR_SUN",
+            "uniformDisName": "INPUT_COLOR_SUN",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                1.1,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "INPUT_COLOR_SKY",
+            "uniformDisName": "INPUT_COLOR_SKY",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0.1,
+                0.14,
+                0.2
+            ]
+        }
+    ]
+}

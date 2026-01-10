@@ -1,0 +1,17 @@
+{
+    "shaderName": "187.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "amount",
+            "uniformDisName": "amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "mode",
+            "uniformDisName": "mode",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

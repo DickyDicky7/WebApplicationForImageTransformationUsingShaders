@@ -1,0 +1,15 @@
+{
+    "shaderName": "36.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "W",
+            "uniformDisName": "W",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.2125,
+                0.7154,
+                0.0721
+            ]
+        }
+    ]
+}

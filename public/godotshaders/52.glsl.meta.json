@@ -1,0 +1,54 @@
+{
+    "shaderName": "52.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "mode",
+            "uniformDisName": "mode",
+            "uniformVarType": "int",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "linearColorSpace",
+            "uniformDisName": "linearColorSpace",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "color1",
+            "uniformDisName": "color1",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                0.5,
+                0.8,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "color2",
+            "uniformDisName": "color2",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0.4,
+                0.8,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "direction",
+            "uniformDisName": "direction",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "opacity",
+            "uniformDisName": "opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

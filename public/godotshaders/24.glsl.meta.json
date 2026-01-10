@@ -1,0 +1,23 @@
+{
+    "shaderName": "24.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "mask_softness",
+            "uniformDisName": "mask_softness",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.4
+        },
+        {
+            "uniformVarName": "mask_threshold",
+            "uniformDisName": "mask_threshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.6
+        },
+        {
+            "uniformVarName": "sort",
+            "uniformDisName": "sort",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

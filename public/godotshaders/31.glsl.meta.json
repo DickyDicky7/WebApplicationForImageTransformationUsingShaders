@@ -1,0 +1,41 @@
+{
+    "shaderName": "31.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "range",
+            "uniformDisName": "range",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "noiseQuality",
+            "uniformDisName": "noiseQuality",
+            "uniformVarType": "float",
+            "uniformDefVal": 250
+        },
+        {
+            "uniformVarName": "noiseIntensity",
+            "uniformDisName": "noiseIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.0088
+        },
+        {
+            "uniformVarName": "offsetIntensity",
+            "uniformDisName": "offsetIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "colorOffsetIntensity",
+            "uniformDisName": "colorOffsetIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.3
+        },
+        {
+            "uniformVarName": "saturation",
+            "uniformDisName": "saturation",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        }
+    ]
+}

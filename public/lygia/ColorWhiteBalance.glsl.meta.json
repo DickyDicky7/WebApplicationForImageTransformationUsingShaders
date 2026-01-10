@@ -1,0 +1,17 @@
+{
+    "shaderName": "ColorWhiteBalance.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "amountWhiteBalanceTemperature",
+            "uniformDisName": "amountWhiteBalanceTemperature",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "amountWhiteBalanceTintColours",
+            "uniformDisName": "amountWhiteBalanceTintColours",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

@@ -1,0 +1,22 @@
+{
+    "shaderName": "83.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "strength",
+            "uniformDisName": "strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "color",
+            "uniformDisName": "color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                1,
+                1,
+                1
+            ]
+        }
+    ]
+}

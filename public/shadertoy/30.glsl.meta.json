@@ -1,0 +1,32 @@
+{
+    "shaderName": "30.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "redOffset",
+            "uniformDisName": "redOffset",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                -0.1,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "greenOffset",
+            "uniformDisName": "greenOffset",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0.1,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "blueOffset",
+            "uniformDisName": "blueOffset",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0.1,
+                0
+            ]
+        }
+    ]
+}

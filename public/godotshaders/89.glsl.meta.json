@@ -1,0 +1,23 @@
+{
+    "shaderName": "89.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "brightness",
+            "uniformDisName": "brightness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "palette_source",
+            "uniformDisName": "palette_source",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "palette_target",
+            "uniformDisName": "palette_target",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

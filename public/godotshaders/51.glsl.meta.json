@@ -1,0 +1,23 @@
+{
+    "shaderName": "51.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "seed",
+            "uniformDisName": "seed",
+            "uniformVarType": "float",
+            "uniformDefVal": 81
+        },
+        {
+            "uniformVarName": "power",
+            "uniformDisName": "power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

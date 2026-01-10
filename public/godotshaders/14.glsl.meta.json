@@ -1,0 +1,35 @@
+{
+    "shaderName": "14.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "shake_power",
+            "uniformDisName": "shake_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "shake_rate",
+            "uniformDisName": "shake_rate",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "shake_speed",
+            "uniformDisName": "shake_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "shake_block_size",
+            "uniformDisName": "shake_block_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 30.5
+        },
+        {
+            "uniformVarName": "shake_color_rate",
+            "uniformDisName": "shake_color_rate",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        }
+    ]
+}

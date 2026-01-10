@@ -1,0 +1,14 @@
+{
+    "shaderName": "DistortBarrel.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "sdf",
+            "uniformDisName": "sdf",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        }
+    ]
+}

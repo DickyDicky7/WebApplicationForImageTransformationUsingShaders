@@ -1,0 +1,77 @@
+{
+    "shaderName": "ColorDaltonize.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "onProtanopees",
+            "uniformDisName": "onProtanopees",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onProtanopias",
+            "uniformDisName": "onProtanopias",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onProtanomaly",
+            "uniformDisName": "onProtanomaly",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onDeuteranopees",
+            "uniformDisName": "onDeuteranopees",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onDeuteranopias",
+            "uniformDisName": "onDeuteranopias",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onDeuteranomaly",
+            "uniformDisName": "onDeuteranomaly",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onTritanopees",
+            "uniformDisName": "onTritanopees",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onTritanopias",
+            "uniformDisName": "onTritanopias",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onTritanomaly",
+            "uniformDisName": "onTritanomaly",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onAchromatopsia",
+            "uniformDisName": "onAchromatopsia",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onAchromatomaly",
+            "uniformDisName": "onAchromatomaly",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onCorrections",
+            "uniformDisName": "onCorrections",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        }
+    ]
+}

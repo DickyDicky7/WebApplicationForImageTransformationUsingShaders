@@ -1,0 +1,23 @@
+{
+    "shaderName": "4.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "palette0",
+            "uniformDisName": "palette0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "depth",
+            "uniformDisName": "depth",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "line_thickness",
+            "uniformDisName": "line_thickness",
+            "uniformVarType": "float",
+            "uniformDefVal": 7
+        }
+    ]
+}

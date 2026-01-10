@@ -1,0 +1,29 @@
+{
+    "shaderName": "56.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "size",
+            "uniformDisName": "size",
+            "uniformVarType": "int",
+            "uniformDefVal": 64
+        },
+        {
+            "uniformVarName": "dot_size",
+            "uniformDisName": "dot_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "value_multiplier",
+            "uniformDisName": "value_multiplier",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "invert",
+            "uniformDisName": "invert",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        }
+    ]
+}

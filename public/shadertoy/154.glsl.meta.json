@@ -1,0 +1,35 @@
+{
+    "shaderName": "154.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "rotation",
+            "uniformDisName": "rotation",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "rot_freq",
+            "uniformDisName": "rot_freq",
+            "uniformVarType": "float",
+            "uniformDefVal": 7
+        },
+        {
+            "uniformVarName": "flesh_freq",
+            "uniformDisName": "flesh_freq",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "zoom_speed",
+            "uniformDisName": "zoom_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "zoom_power",
+            "uniformDisName": "zoom_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.15
+        }
+    ]
+}

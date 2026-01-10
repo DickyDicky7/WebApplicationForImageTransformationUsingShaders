@@ -1,0 +1,23 @@
+{
+    "shaderName": "42.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "_Speed",
+            "uniformDisName": "_Speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.302
+        },
+        {
+            "uniformVarName": "_Fading",
+            "uniformDisName": "_Fading",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "_LuminanceJitterThreshold",
+            "uniformDisName": "_LuminanceJitterThreshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.895
+        }
+    ]
+}

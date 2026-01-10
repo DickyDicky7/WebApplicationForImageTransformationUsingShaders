@@ -1,0 +1,57 @@
+{
+    "shaderName": "34.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "lines",
+            "uniformDisName": "lines",
+            "uniformVarType": "int",
+            "uniformDefVal": 100
+        },
+        {
+            "uniformVarName": "color1",
+            "uniformDisName": "color1",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "color2",
+            "uniformDisName": "color2",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "alpha",
+            "uniformDisName": "alpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "noise_amount",
+            "uniformDisName": "noise_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "effect_factor",
+            "uniformDisName": "effect_factor",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        }
+    ]
+}

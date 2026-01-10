@@ -1,0 +1,17 @@
+{
+    "shaderName": "59.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "MAX_ITERATION",
+            "uniformDisName": "MAX_ITERATION",
+            "uniformVarType": "float",
+            "uniformDefVal": 9
+        },
+        {
+            "uniformVarName": "LINE_THICKNESS",
+            "uniformDisName": "LINE_THICKNESS",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.0055
+        }
+    ]
+}

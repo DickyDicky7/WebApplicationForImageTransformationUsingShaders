@@ -1,0 +1,68 @@
+{
+    "shaderName": "67.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "mask_type",
+            "uniformDisName": "mask_type",
+            "uniformVarType": "int",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "bloom_type",
+            "uniformDisName": "bloom_type",
+            "uniformVarType": "int",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "hardScan",
+            "uniformDisName": "hardScan",
+            "uniformVarType": "float",
+            "uniformDefVal": -8
+        },
+        {
+            "uniformVarName": "hardPix",
+            "uniformDisName": "hardPix",
+            "uniformVarType": "float",
+            "uniformDefVal": -2
+        },
+        {
+            "uniformVarName": "hardBloomScan",
+            "uniformDisName": "hardBloomScan",
+            "uniformVarType": "float",
+            "uniformDefVal": -2
+        },
+        {
+            "uniformVarName": "hardBloomPix",
+            "uniformDisName": "hardBloomPix",
+            "uniformVarType": "float",
+            "uniformDefVal": -1.5
+        },
+        {
+            "uniformVarName": "bloomAmount",
+            "uniformDisName": "bloomAmount",
+            "uniformVarType": "float",
+            "uniformDefVal": 16
+        },
+        {
+            "uniformVarName": "warp",
+            "uniformDisName": "warp",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                64,
+                24
+            ]
+        },
+        {
+            "uniformVarName": "maskDarkk",
+            "uniformDisName": "maskDarkk",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "maskLight",
+            "uniformDisName": "maskLight",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.5
+        }
+    ]
+}

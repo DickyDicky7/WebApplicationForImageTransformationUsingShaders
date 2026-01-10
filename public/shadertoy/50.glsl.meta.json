@@ -1,0 +1,11 @@
+{
+    "shaderName": "50.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "shaderToy0",
+            "uniformDisName": "shaderToy0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

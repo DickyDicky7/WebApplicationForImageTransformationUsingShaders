@@ -1,0 +1,17 @@
+{
+    "shaderName": "11.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "stepH",
+            "uniformDisName": "stepH",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "stepV",
+            "uniformDisName": "stepV",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

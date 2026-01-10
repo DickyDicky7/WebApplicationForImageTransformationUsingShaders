@@ -1,0 +1,35 @@
+{
+    "shaderName": "66.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "crt_curve",
+            "uniformDisName": "crt_curve",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.02
+        },
+        {
+            "uniformVarName": "crt_scan_line_color",
+            "uniformDisName": "crt_scan_line_color",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.347
+        },
+        {
+            "uniformVarName": "aperture_grille_rate",
+            "uniformDisName": "aperture_grille_rate",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "rf_switch_esque_blur",
+            "uniformDisName": "rf_switch_esque_blur",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "white_noise_rate",
+            "uniformDisName": "white_noise_rate",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

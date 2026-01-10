@@ -1,0 +1,28 @@
+{
+    "shaderName": "87.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "edge_color",
+            "uniformDisName": "edge_color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "thresholds",
+            "uniformDisName": "thresholds",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "blend",
+            "uniformDisName": "blend",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        }
+    ]
+}

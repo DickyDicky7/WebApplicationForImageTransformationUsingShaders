@@ -1,0 +1,47 @@
+{
+    "shaderName": "160.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "perspective",
+            "uniformDisName": "perspective",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "samples",
+            "uniformDisName": "samples",
+            "uniformVarType": "int",
+            "uniformDefVal": 25
+        },
+        {
+            "uniformVarName": "minBlur",
+            "uniformDisName": "minBlur",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "maxBlur",
+            "uniformDisName": "maxBlur",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "rotation_ratio",
+            "uniformDisName": "rotation_ratio",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "zoom_ratio",
+            "uniformDisName": "zoom_ratio",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        }
+    ]
+}

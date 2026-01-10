@@ -1,0 +1,11 @@
+{
+    "shaderName": "ColorDesaturate.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "desaturateAmount",
+            "uniformDisName": "desaturateAmount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

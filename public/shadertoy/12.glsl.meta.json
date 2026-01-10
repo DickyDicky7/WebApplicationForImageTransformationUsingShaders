@@ -1,0 +1,69 @@
+{
+    "shaderName": "12.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "darkest",
+            "uniformDisName": "darkest",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.0588235,
+                0.219608,
+                0.0588235
+            ]
+        },
+        {
+            "uniformVarName": "lumDarkest",
+            "uniformDisName": "lumDarkest",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1392156862745098
+        },
+        {
+            "uniformVarName": "darker",
+            "uniformDisName": "darker",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.188235,
+                0.384314,
+                0.188235
+            ]
+        },
+        {
+            "uniformVarName": "lumDarker",
+            "uniformDisName": "lumDarker",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.28627450980392155
+        },
+        {
+            "uniformVarName": "lighter",
+            "uniformDisName": "lighter",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.545098,
+                0.67451,
+                0.0588235
+            ]
+        },
+        {
+            "uniformVarName": "lumLighter",
+            "uniformDisName": "lumLighter",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3666666666666667
+        },
+        {
+            "uniformVarName": "lightest",
+            "uniformDisName": "lightest",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.607843,
+                0.737255,
+                0.0588235
+            ]
+        },
+        {
+            "uniformVarName": "lumLightest",
+            "uniformDisName": "lumLightest",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.39803921568627454
+        }
+    ]
+}

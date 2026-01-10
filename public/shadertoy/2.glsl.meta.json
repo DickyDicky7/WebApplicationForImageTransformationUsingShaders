@@ -1,0 +1,11 @@
+{
+    "shaderName": "2.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "frameCount",
+            "uniformDisName": "frameCount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

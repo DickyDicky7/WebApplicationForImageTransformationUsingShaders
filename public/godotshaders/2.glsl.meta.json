@@ -1,0 +1,29 @@
+{
+    "shaderName": "2.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "wiggle",
+            "uniformDisName": "wiggle",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "wiggle_speed",
+            "uniformDisName": "wiggle_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 25
+        },
+        {
+            "uniformVarName": "smear",
+            "uniformDisName": "smear",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "blur_samples",
+            "uniformDisName": "blur_samples",
+            "uniformVarType": "int",
+            "uniformDefVal": 15
+        }
+    ]
+}

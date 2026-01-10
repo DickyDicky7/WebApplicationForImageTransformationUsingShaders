@@ -1,0 +1,22 @@
+{
+    "shaderName": "20.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "c",
+            "uniformDisName": "c",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0.2124,
+                0.7153,
+                0.0722,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "scale",
+            "uniformDisName": "scale",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        }
+    ]
+}

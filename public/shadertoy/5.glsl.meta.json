@@ -1,0 +1,23 @@
+{
+    "shaderName": "5.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uPower",
+            "uniformDisName": "uPower",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "uSpeed",
+            "uniformDisName": "uSpeed",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "uFrequency",
+            "uniformDisName": "uFrequency",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        }
+    ]
+}

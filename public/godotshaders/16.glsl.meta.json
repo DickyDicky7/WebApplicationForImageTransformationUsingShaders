@@ -1,0 +1,11 @@
+{
+    "shaderName": "16.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "resolution",
+            "uniformDisName": "resolution",
+            "uniformVarType": "float",
+            "uniformDefVal": 32
+        }
+    ]
+}

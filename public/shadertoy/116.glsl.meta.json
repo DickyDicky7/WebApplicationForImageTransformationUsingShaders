@@ -1,0 +1,23 @@
+{
+    "shaderName": "116.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "scale",
+            "uniformDisName": "scale",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.85
+        },
+        {
+            "uniformVarName": "noiseScale",
+            "uniformDisName": "noiseScale",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "rotation",
+            "uniformDisName": "rotation",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

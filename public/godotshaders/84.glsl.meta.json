@@ -1,0 +1,35 @@
+{
+    "shaderName": "84.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "shake",
+            "uniformDisName": "shake",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.015
+        },
+        {
+            "uniformVarName": "noiseQuality",
+            "uniformDisName": "noiseQuality",
+            "uniformVarType": "float",
+            "uniformDefVal": 250
+        },
+        {
+            "uniformVarName": "noiseIntensity",
+            "uniformDisName": "noiseIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.001
+        },
+        {
+            "uniformVarName": "offsetIntensity",
+            "uniformDisName": "offsetIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "colorOffsetIntensity",
+            "uniformDisName": "colorOffsetIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

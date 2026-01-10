@@ -1,0 +1,14 @@
+{
+    "shaderName": "FilterMedian.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "offset",
+            "uniformDisName": "offset",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        }
+    ]
+}

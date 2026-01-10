@@ -1,0 +1,17 @@
+{
+    "shaderName": "76.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "grain_amount",
+            "uniformDisName": "grain_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "grain_size",
+            "uniformDisName": "grain_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        }
+    ]
+}

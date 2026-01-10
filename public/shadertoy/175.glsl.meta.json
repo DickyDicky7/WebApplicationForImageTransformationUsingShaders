@@ -1,0 +1,101 @@
+{
+    "shaderName": "175.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "onEaseInOutQuad",
+            "uniformDisName": "onEaseInOutQuad",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInCubic",
+            "uniformDisName": "onEaseInCubic",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseOutCubic",
+            "uniformDisName": "onEaseOutCubic",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInOutCubic",
+            "uniformDisName": "onEaseInOutCubic",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInQuart",
+            "uniformDisName": "onEaseInQuart",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseOutQuart",
+            "uniformDisName": "onEaseOutQuart",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInOutQuart",
+            "uniformDisName": "onEaseInOutQuart",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInSine",
+            "uniformDisName": "onEaseInSine",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseOutSine",
+            "uniformDisName": "onEaseOutSine",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInOutSine",
+            "uniformDisName": "onEaseInOutSine",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInExpo",
+            "uniformDisName": "onEaseInExpo",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseOutExpo",
+            "uniformDisName": "onEaseOutExpo",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInOutExpo",
+            "uniformDisName": "onEaseInOutExpo",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInBack",
+            "uniformDisName": "onEaseInBack",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseOutBack",
+            "uniformDisName": "onEaseOutBack",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onEaseInOutBack",
+            "uniformDisName": "onEaseInOutBack",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        }
+    ]
+}

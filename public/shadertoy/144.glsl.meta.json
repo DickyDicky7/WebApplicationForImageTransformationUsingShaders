@@ -1,0 +1,23 @@
+{
+    "shaderName": "144.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "offset",
+            "uniformDisName": "offset",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.001
+        },
+        {
+            "uniformVarName": "EdgeDetection",
+            "uniformDisName": "EdgeDetection",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "Scharr",
+            "uniformDisName": "Scharr",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        }
+    ]
+}

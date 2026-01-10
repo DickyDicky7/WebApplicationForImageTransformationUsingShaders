@@ -1,0 +1,35 @@
+{
+    "shaderName": "49.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "radius_c",
+            "uniformDisName": "radius_c",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "radius_m",
+            "uniformDisName": "radius_m",
+            "uniformVarType": "float",
+            "uniformDefVal": -0.3
+        },
+        {
+            "uniformVarName": "radius_y",
+            "uniformDisName": "radius_y",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "radius_k",
+            "uniformDisName": "radius_k",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.785
+        },
+        {
+            "uniformVarName": "frequency",
+            "uniformDisName": "frequency",
+            "uniformVarType": "float",
+            "uniformDefVal": 400
+        }
+    ]
+}

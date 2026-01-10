@@ -1,0 +1,47 @@
+{
+    "shaderName": "38.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "bayer0",
+            "uniformDisName": "bayer0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "angle",
+            "uniformDisName": "angle",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        },
+        {
+            "uniformVarName": "scale",
+            "uniformDisName": "scale",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.5
+        },
+        {
+            "uniformVarName": "amount",
+            "uniformDisName": "amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "saturation",
+            "uniformDisName": "saturation",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.2
+        },
+        {
+            "uniformVarName": "greyscale",
+            "uniformDisName": "greyscale",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "colorOn",
+            "uniformDisName": "colorOn",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        }
+    ]
+}

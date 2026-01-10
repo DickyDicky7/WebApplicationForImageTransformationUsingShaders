@@ -1,0 +1,41 @@
+{
+    "shaderName": "54.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "rt",
+            "uniformDisName": "rt",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0.2
+            ]
+        },
+        {
+            "uniformVarName": "rb",
+            "uniformDisName": "rb",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0.3
+            ]
+        },
+        {
+            "uniformVarName": "rl",
+            "uniformDisName": "rl",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                -0.1,
+                0.1
+            ]
+        },
+        {
+            "uniformVarName": "rr",
+            "uniformDisName": "rr",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0.05
+            ]
+        }
+    ]
+}

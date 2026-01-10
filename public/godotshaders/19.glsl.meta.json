@@ -1,0 +1,41 @@
+{
+    "shaderName": "19.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "alpha",
+            "uniformDisName": "alpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "scale",
+            "uniformDisName": "scale",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "rred_shift",
+            "uniformDisName": "rred_shift",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "blue_shift",
+            "uniformDisName": "blue_shift",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        },
+        {
+            "uniformVarName": "green_shift",
+            "uniformDisName": "green_shift",
+            "uniformVarType": "float",
+            "uniformDefVal": 30
+        },
+        {
+            "uniformVarName": "red_mult",
+            "uniformDisName": "red_mult",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

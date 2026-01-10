@@ -1,0 +1,52 @@
+{
+    "shaderName": "91.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "spread",
+            "uniformDisName": "spread",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "size",
+            "uniformDisName": "size",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "snow_color",
+            "uniformDisName": "snow_color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "snow_transparency",
+            "uniformDisName": "snow_transparency",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "wind",
+            "uniformDisName": "wind",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "num_of_layers",
+            "uniformDisName": "num_of_layers",
+            "uniformVarType": "int",
+            "uniformDefVal": 40
+        }
+    ]
+}

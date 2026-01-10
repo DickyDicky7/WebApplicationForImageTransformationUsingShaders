@@ -1,0 +1,17 @@
+{
+    "shaderName": "169.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 6
+        },
+        {
+            "uniformVarName": "wave_count",
+            "uniformDisName": "wave_count",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        }
+    ]
+}

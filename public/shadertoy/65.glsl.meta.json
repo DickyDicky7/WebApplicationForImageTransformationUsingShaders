@@ -1,0 +1,41 @@
+{
+    "shaderName": "65.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise0",
+            "uniformDisName": "noise0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "GAMMA",
+            "uniformDisName": "GAMMA",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.65
+        },
+        {
+            "uniformVarName": "REGIONS",
+            "uniformDisName": "REGIONS",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "LINES",
+            "uniformDisName": "LINES",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "BASE",
+            "uniformDisName": "BASE",
+            "uniformVarType": "float",
+            "uniformDefVal": 2.5
+        },
+        {
+            "uniformVarName": "GREEN_BIAS",
+            "uniformDisName": "GREEN_BIAS",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.9
+        }
+    ]
+}

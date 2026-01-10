@@ -1,0 +1,17 @@
+{
+    "shaderName": "33.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "lookupSize",
+            "uniformDisName": "lookupSize",
+            "uniformVarType": "float",
+            "uniformDefVal": 64
+        },
+        {
+            "uniformVarName": "errorCarry",
+            "uniformDisName": "errorCarry",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        }
+    ]
+}

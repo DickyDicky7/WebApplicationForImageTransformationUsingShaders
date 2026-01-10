@@ -1,0 +1,23 @@
+{
+    "shaderName": "25.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "RANGE",
+            "uniformDisName": "RANGE",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.7
+        },
+        {
+            "uniformVarName": "SPEED",
+            "uniformDisName": "SPEED",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "STRENGTH",
+            "uniformDisName": "STRENGTH",
+            "uniformVarType": "float",
+            "uniformDefVal": 6
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "shaderName": "126.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uploadTex0",
+            "uniformDisName": "uploadTex0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "rotation_count",
+            "uniformDisName": "rotation_count",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        }
+    ]
+}

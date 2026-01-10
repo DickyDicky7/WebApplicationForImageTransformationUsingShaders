@@ -1,0 +1,27 @@
+{
+    "shaderName": "25.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "resX",
+            "uniformDisName": "resX",
+            "uniformVarType": "int",
+            "uniformDefVal": 32
+        },
+        {
+            "uniformVarName": "resY",
+            "uniformDisName": "resY",
+            "uniformVarType": "int",
+            "uniformDefVal": 32
+        },
+        {
+            "uniformVarName": "rgb255",
+            "uniformDisName": "rgb255",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.100392156862,
+                0.100392156862,
+                0.100392156862
+            ]
+        }
+    ]
+}

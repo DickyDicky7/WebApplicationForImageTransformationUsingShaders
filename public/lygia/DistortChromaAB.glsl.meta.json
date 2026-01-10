@@ -1,0 +1,20 @@
+{
+    "shaderName": "DistortChromaAB.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "sdf",
+            "uniformDisName": "sdf",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "pct",
+            "uniformDisName": "pct",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

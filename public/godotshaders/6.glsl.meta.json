@@ -1,0 +1,45 @@
+{
+    "shaderName": "6.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "color",
+            "uniformDisName": "color",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "density",
+            "uniformDisName": "density",
+            "uniformVarType": "float",
+            "uniformDefVal": 300
+        },
+        {
+            "uniformVarName": "compression",
+            "uniformDisName": "compression",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "trail_size",
+            "uniformDisName": "trail_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 100
+        },
+        {
+            "uniformVarName": "brightness",
+            "uniformDisName": "brightness",
+            "uniformVarType": "float",
+            "uniformDefVal": 100
+        }
+    ]
+}

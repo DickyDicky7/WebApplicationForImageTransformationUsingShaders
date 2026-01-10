@@ -1,0 +1,11 @@
+{
+    "shaderName": "188.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uploadtex0",
+            "uniformDisName": "uploadtex0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

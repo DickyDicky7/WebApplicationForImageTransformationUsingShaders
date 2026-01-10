@@ -1,0 +1,83 @@
+{
+    "shaderName": "1.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "scan_line_amount",
+            "uniformDisName": "scan_line_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "warp_amount",
+            "uniformDisName": "warp_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "noise_amount",
+            "uniformDisName": "noise_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "interference_amount",
+            "uniformDisName": "interference_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "grille_amount",
+            "uniformDisName": "grille_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "grille_size",
+            "uniformDisName": "grille_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "vignette_amount",
+            "uniformDisName": "vignette_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.6
+        },
+        {
+            "uniformVarName": "vignette_intensity",
+            "uniformDisName": "vignette_intensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "aberation_amount",
+            "uniformDisName": "aberation_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "roll_line_amount",
+            "uniformDisName": "roll_line_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "roll_speed",
+            "uniformDisName": "roll_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "scan_line_strength",
+            "uniformDisName": "scan_line_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": -8
+        },
+        {
+            "uniformVarName": "pixel_strength",
+            "uniformDisName": "pixel_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": -2
+        }
+    ]
+}

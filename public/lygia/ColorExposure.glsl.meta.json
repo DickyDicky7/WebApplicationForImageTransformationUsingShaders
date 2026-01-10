@@ -1,0 +1,11 @@
+{
+    "shaderName": "ColorExposure.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "exposureAmount",
+            "uniformDisName": "exposureAmount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

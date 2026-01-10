@@ -1,0 +1,17 @@
+{
+    "shaderName": "9.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "threshold",
+            "uniformDisName": "threshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "delta",
+            "uniformDisName": "delta",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        }
+    ]
+}

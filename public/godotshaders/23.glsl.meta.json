@@ -1,0 +1,11 @@
+{
+    "shaderName": "23.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "fisheye_strength",
+            "uniformDisName": "fisheye_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

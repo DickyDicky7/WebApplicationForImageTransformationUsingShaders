@@ -1,0 +1,11 @@
+{
+    "shaderName": "69.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "colorOn",
+            "uniformDisName": "colorOn",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        }
+    ]
+}

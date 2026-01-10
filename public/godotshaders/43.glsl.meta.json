@@ -1,0 +1,21 @@
+{
+    "shaderName": "43.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "radius",
+            "uniformDisName": "radius",
+            "uniformVarType": "int",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "offset",
+            "uniformDisName": "offset",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        }
+    ]
+}

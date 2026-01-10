@@ -1,0 +1,41 @@
+{
+    "shaderName": "125.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uploadTex0",
+            "uniformDisName": "uploadTex0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.7
+        },
+        {
+            "uniformVarName": "farthest_pos",
+            "uniformDisName": "farthest_pos",
+            "uniformVarType": "float",
+            "uniformDefVal": 25
+        },
+        {
+            "uniformVarName": "closest_pos",
+            "uniformDisName": "closest_pos",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "rotation_speed",
+            "uniformDisName": "rotation_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "speed_power",
+            "uniformDisName": "speed_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        }
+    ]
+}

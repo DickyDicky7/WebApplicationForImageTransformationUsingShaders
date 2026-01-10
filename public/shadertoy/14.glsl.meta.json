@@ -1,0 +1,23 @@
+{
+    "shaderName": "14.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "THRESHOLD",
+            "uniformDisName": "THRESHOLD",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "LEVELS",
+            "uniformDisName": "LEVELS",
+            "uniformVarType": "int",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "RADIUS",
+            "uniformDisName": "RADIUS",
+            "uniformVarType": "int",
+            "uniformDefVal": 5
+        }
+    ]
+}

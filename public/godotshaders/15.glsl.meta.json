@@ -1,0 +1,83 @@
+{
+    "shaderName": "15.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise0",
+            "uniformDisName": "noise0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "curvature",
+            "uniformDisName": "curvature",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "skip",
+            "uniformDisName": "skip",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "image_flicker",
+            "uniformDisName": "image_flicker",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "vignette_flicker_speed",
+            "uniformDisName": "vignette_flicker_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "vignette_strength",
+            "uniformDisName": "vignette_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "small_scanlines_speed",
+            "uniformDisName": "small_scanlines_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "small_scanlines_proximity",
+            "uniformDisName": "small_scanlines_proximity",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "small_scanlines_opacity",
+            "uniformDisName": "small_scanlines_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "scanlines_opacity",
+            "uniformDisName": "scanlines_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "scanlines_speed",
+            "uniformDisName": "scanlines_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "scanlines_thickness",
+            "uniformDisName": "scanlines_thickness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "scanlines_spacing",
+            "uniformDisName": "scanlines_spacing",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

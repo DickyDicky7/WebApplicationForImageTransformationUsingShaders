@@ -1,0 +1,46 @@
+{
+    "shaderName": "68.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "aspect",
+            "uniformDisName": "aspect",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "distortion",
+            "uniformDisName": "distortion",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "radius",
+            "uniformDisName": "radius",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "alpha",
+            "uniformDisName": "alpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "crop",
+            "uniformDisName": "crop",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "crop_color",
+            "uniformDisName": "crop_color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        }
+    ]
+}

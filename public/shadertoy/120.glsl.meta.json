@@ -1,0 +1,38 @@
+{
+    "shaderName": "120.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uploadTex0",
+            "uniformDisName": "uploadTex0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "rotation_count",
+            "uniformDisName": "rotation_count",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "side",
+            "uniformDisName": "side",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.19
+        },
+        {
+            "uniformVarName": "move",
+            "uniformDisName": "move",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                -0.02,
+                0.1
+            ]
+        }
+    ]
+}

@@ -1,0 +1,11 @@
+{
+    "shaderName": "64.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise0",
+            "uniformDisName": "noise0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

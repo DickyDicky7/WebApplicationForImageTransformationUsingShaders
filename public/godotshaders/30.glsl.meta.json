@@ -1,0 +1,17 @@
+{
+    "shaderName": "30.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "speedScale",
+            "uniformDisName": "speedScale",
+            "uniformVarType": "float",
+            "uniformDefVal": 16
+        },
+        {
+            "uniformVarName": "clipPosition",
+            "uniformDisName": "clipPosition",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "shaderName": "8.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "bayer0",
+            "uniformDisName": "bayer0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "less",
+            "uniformDisName": "less",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        }
+    ]
+}

@@ -1,0 +1,175 @@
+{
+    "shaderName": "0.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "value_float",
+            "uniformDisName": "value_float",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "value_int",
+            "uniformDisName": "value_int",
+            "uniformVarType": "int",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "value_uint",
+            "uniformDisName": "value_uint",
+            "uniformVarType": "uint",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "value_bool",
+            "uniformDisName": "value_bool",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "value_vec2",
+            "uniformDisName": "value_vec2",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1,
+                2
+            ]
+        },
+        {
+            "uniformVarName": "value_vec3",
+            "uniformDisName": "value_vec3",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "uniformVarName": "value_vec4",
+            "uniformDisName": "value_vec4",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "uniformVarName": "value_ivec2",
+            "uniformDisName": "value_ivec2",
+            "uniformVarType": "ivec2",
+            "uniformDefVal": [
+                1,
+                2
+            ]
+        },
+        {
+            "uniformVarName": "value_ivec3",
+            "uniformDisName": "value_ivec3",
+            "uniformVarType": "ivec3",
+            "uniformDefVal": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "uniformVarName": "value_ivec4",
+            "uniformDisName": "value_ivec4",
+            "uniformVarType": "ivec4",
+            "uniformDefVal": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "uniformVarName": "value_uvec2",
+            "uniformDisName": "value_uvec2",
+            "uniformVarType": "uvec2",
+            "uniformDefVal": [
+                1,
+                2
+            ]
+        },
+        {
+            "uniformVarName": "value_uvec3",
+            "uniformDisName": "value_uvec3",
+            "uniformVarType": "uvec3",
+            "uniformDefVal": [
+                1,
+                2,
+                3
+            ]
+        },
+        {
+            "uniformVarName": "value_uvec4",
+            "uniformDisName": "value_uvec4",
+            "uniformVarType": "uvec4",
+            "uniformDefVal": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "uniformVarName": "value_mat2",
+            "uniformDisName": "value_mat2",
+            "uniformVarType": "mat2",
+            "uniformDefVal": [
+                1,
+                2,
+                3,
+                4
+            ]
+        },
+        {
+            "uniformVarName": "value_mat3",
+            "uniformDisName": "value_mat3",
+            "uniformVarType": "mat3",
+            "uniformDefVal": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9
+            ]
+        },
+        {
+            "uniformVarName": "value_mat4",
+            "uniformDisName": "value_mat4",
+            "uniformVarType": "mat4",
+            "uniformDefVal": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14,
+                15,
+                16
+            ]
+        },
+        {
+            "uniformVarName": "noise_sampler2D",
+            "uniformDisName": "noise_sampler2D",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

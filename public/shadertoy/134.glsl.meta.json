@@ -1,0 +1,35 @@
+{
+    "shaderName": "134.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "shake_speed",
+            "uniformDisName": "shake_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 30
+        },
+        {
+            "uniformVarName": "shake_power",
+            "uniformDisName": "shake_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "zoom_power",
+            "uniformDisName": "zoom_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "motion_blur_power",
+            "uniformDisName": "motion_blur_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.005
+        },
+        {
+            "uniformVarName": "motion_blur_iters",
+            "uniformDisName": "motion_blur_iters",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        }
+    ]
+}

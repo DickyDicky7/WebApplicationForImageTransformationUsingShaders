@@ -1,0 +1,47 @@
+{
+    "shaderName": "173.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uniRotationSpeed",
+            "uniformDisName": "uniRotationSpeed",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "uniRotationSpread",
+            "uniformDisName": "uniRotationSpread",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "uniZoomSpeed",
+            "uniformDisName": "uniZoomSpeed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "uniRingsGrowthFactor",
+            "uniformDisName": "uniRingsGrowthFactor",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "uniRingsThickness",
+            "uniformDisName": "uniRingsThickness",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "uniShadowSpread",
+            "uniformDisName": "uniShadowSpread",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "uniShadowIntensity",
+            "uniformDisName": "uniShadowIntensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

@@ -1,0 +1,23 @@
+{
+    "shaderName": "46.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "wave_speed",
+            "uniformDisName": "wave_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "wave_freq",
+            "uniformDisName": "wave_freq",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "wave_width",
+            "uniformDisName": "wave_width",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

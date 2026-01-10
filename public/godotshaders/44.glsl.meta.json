@@ -1,0 +1,50 @@
+{
+    "shaderName": "44.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "shake_powers",
+            "uniformDisName": "shake_powers",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "shake_block_size",
+            "uniformDisName": "shake_block_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 30.5
+        },
+        {
+            "uniformVarName": "fade",
+            "uniformDisName": "fade",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        },
+        {
+            "uniformVarName": "direction_r",
+            "uniformDisName": "direction_r",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "direction_g",
+            "uniformDisName": "direction_g",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0.4,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "direction_b",
+            "uniformDisName": "direction_b",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                -0.7,
+                -0.3
+            ]
+        }
+    ]
+}

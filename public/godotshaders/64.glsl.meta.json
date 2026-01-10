@@ -1,0 +1,17 @@
+{
+    "shaderName": "64.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "palette0",
+            "uniformDisName": "palette0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "flip",
+            "uniformDisName": "flip",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        }
+    ]
+}

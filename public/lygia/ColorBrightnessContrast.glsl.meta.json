@@ -1,0 +1,17 @@
+{
+    "shaderName": "ColorBrightnessContrast.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "brightness",
+            "uniformDisName": "brightness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "contrastVL",
+            "uniformDisName": "contrastVL",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

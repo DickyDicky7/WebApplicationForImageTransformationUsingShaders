@@ -1,0 +1,35 @@
+{
+    "shaderName": "31.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "bayer0",
+            "uniformDisName": "bayer0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "H_STEPS",
+            "uniformDisName": "H_STEPS",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "S_STEPS",
+            "uniformDisName": "S_STEPS",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "V_STEPS",
+            "uniformDisName": "V_STEPS",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "DITHER_WIDTH",
+            "uniformDisName": "DITHER_WIDTH",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

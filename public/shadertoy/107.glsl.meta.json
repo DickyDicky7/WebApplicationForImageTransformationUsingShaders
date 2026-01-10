@@ -1,0 +1,17 @@
+{
+    "shaderName": "107.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "radius",
+            "uniformDisName": "radius",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "strength",
+            "uniformDisName": "strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        }
+    ]
+}

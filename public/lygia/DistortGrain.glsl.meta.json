@@ -1,0 +1,17 @@
+{
+    "shaderName": "DistortGrain.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "t",
+            "uniformDisName": "t",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "multiplier",
+            "uniformDisName": "multiplier",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

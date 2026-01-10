@@ -1,0 +1,17 @@
+{
+    "shaderName": "27.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "samples",
+            "uniformDisName": "samples",
+            "uniformVarType": "int",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "colorOn",
+            "uniformDisName": "colorOn",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        }
+    ]
+}

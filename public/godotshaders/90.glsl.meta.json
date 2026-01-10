@@ -1,0 +1,35 @@
+{
+    "shaderName": "90.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "palette_texture_",
+            "uniformDisName": "palette_texture_",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "mixture_strength",
+            "uniformDisName": "mixture_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "opacity_strength",
+            "uniformDisName": "opacity_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "blend_mode",
+            "uniformDisName": "blend_mode",
+            "uniformVarType": "int",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "hue_shift",
+            "uniformDisName": "hue_shift",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

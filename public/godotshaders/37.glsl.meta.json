@@ -1,0 +1,23 @@
+{
+    "shaderName": "37.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise0",
+            "uniformDisName": "noise0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "projector_power",
+            "uniformDisName": "projector_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "vvignette_param",
+            "uniformDisName": "vvignette_param",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        }
+    ]
+}

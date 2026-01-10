@@ -1,0 +1,21 @@
+{
+    "shaderName": "BlendSaturation.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "blend",
+            "uniformDisName": "blend",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "opacity",
+            "uniformDisName": "opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+{
+    "shaderName": "17.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "EdgeColor",
+            "uniformDisName": "EdgeColor",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.7,
+                0.7,
+                0.7
+            ]
+        },
+        {
+            "uniformVarName": "NumsTiles",
+            "uniformDisName": "NumsTiles",
+            "uniformVarType": "float",
+            "uniformDefVal": 40
+        },
+        {
+            "uniformVarName": "Threshhold",
+            "uniformDisName": "Threshhold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.15
+        }
+    ]
+}

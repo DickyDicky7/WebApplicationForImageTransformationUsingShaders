@@ -1,0 +1,17 @@
+{
+    "shaderName": "123.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "uploadTex0",
+            "uniformDisName": "uploadTex0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "noise0",
+            "uniformDisName": "noise0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

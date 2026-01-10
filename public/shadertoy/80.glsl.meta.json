@@ -1,0 +1,67 @@
+{
+    "shaderName": "80.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "cloudscale",
+            "uniformDisName": "cloudscale",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.1
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "clouddark",
+            "uniformDisName": "clouddark",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "cloudlight",
+            "uniformDisName": "cloudlight",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "cloudcover",
+            "uniformDisName": "cloudcover",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "cloudalpha",
+            "uniformDisName": "cloudalpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 8
+        },
+        {
+            "uniformVarName": "skytint",
+            "uniformDisName": "skytint",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "skycolour1",
+            "uniformDisName": "skycolour1",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.2,
+                0.4,
+                0.6
+            ]
+        },
+        {
+            "uniformVarName": "skycolour2",
+            "uniformDisName": "skycolour2",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.4,
+                0.7,
+                1
+            ]
+        }
+    ]
+}

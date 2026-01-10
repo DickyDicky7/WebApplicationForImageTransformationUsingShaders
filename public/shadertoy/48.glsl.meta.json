@@ -1,0 +1,23 @@
+{
+    "shaderName": "48.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "cellXCount",
+            "uniformDisName": "cellXCount",
+            "uniformVarType": "float",
+            "uniformDefVal": 200
+        },
+        {
+            "uniformVarName": "smoothRange",
+            "uniformDisName": "smoothRange",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "gamma",
+            "uniformDisName": "gamma",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.8
+        }
+    ]
+}

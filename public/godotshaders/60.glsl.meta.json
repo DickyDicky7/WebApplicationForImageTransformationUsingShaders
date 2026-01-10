@@ -1,0 +1,14 @@
+{
+    "shaderName": "60.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "size",
+            "uniformDisName": "size",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                8,
+                6
+            ]
+        }
+    ]
+}

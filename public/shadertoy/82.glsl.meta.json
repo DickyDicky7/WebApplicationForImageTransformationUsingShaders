@@ -1,0 +1,71 @@
+{
+    "shaderName": "82.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "iterations",
+            "uniformDisName": "iterations",
+            "uniformVarType": "float",
+            "uniformDefVal": 17
+        },
+        {
+            "uniformVarName": "formuparam",
+            "uniformDisName": "formuparam",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.53
+        },
+        {
+            "uniformVarName": "volsteps",
+            "uniformDisName": "volsteps",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        },
+        {
+            "uniformVarName": "stepsize",
+            "uniformDisName": "stepsize",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "zoom",
+            "uniformDisName": "zoom",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.8
+        },
+        {
+            "uniformVarName": "tile",
+            "uniformDisName": "tile",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.85
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        },
+        {
+            "uniformVarName": "brightness",
+            "uniformDisName": "brightness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.0015
+        },
+        {
+            "uniformVarName": "darkmatter",
+            "uniformDisName": "darkmatter",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "distfading",
+            "uniformDisName": "distfading",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.73
+        },
+        {
+            "uniformVarName": "saturation",
+            "uniformDisName": "saturation",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.85
+        }
+    ]
+}

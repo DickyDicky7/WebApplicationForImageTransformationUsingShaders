@@ -1,0 +1,22 @@
+{
+    "shaderName": "59.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "size",
+            "uniformDisName": "size",
+            "uniformVarType": "float",
+            "uniformDefVal": 64
+        },
+        {
+            "uniformVarName": "color",
+            "uniformDisName": "color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                0
+            ]
+        }
+    ]
+}

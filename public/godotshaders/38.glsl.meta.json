@@ -1,0 +1,17 @@
+{
+    "shaderName": "38.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "levels",
+            "uniformDisName": "levels",
+            "uniformVarType": "int",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "spread",
+            "uniformDisName": "spread",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        }
+    ]
+}

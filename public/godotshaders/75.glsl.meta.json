@@ -1,0 +1,74 @@
+{
+    "shaderName": "75.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "keep_luminance",
+            "uniformDisName": "keep_luminance",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "color_start",
+            "uniformDisName": "color_start",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "start_pos",
+            "uniformDisName": "start_pos",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "color_mid",
+            "uniformDisName": "color_mid",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0.5,
+                0.5,
+                0.5,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "mid_pos",
+            "uniformDisName": "mid_pos",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "color_end",
+            "uniformDisName": "color_end",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "end_pos",
+            "uniformDisName": "end_pos",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.99
+        },
+        {
+            "uniformVarName": "midpos_enabled",
+            "uniformDisName": "midpos_enabled",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "effect_filling",
+            "uniformDisName": "effect_filling",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

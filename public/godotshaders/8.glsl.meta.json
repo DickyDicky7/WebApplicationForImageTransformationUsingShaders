@@ -1,0 +1,23 @@
+{
+    "shaderName": "8.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "chaos",
+            "uniformDisName": "chaos",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "radius",
+            "uniformDisName": "radius",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "attenuation",
+            "uniformDisName": "attenuation",
+            "uniformVarType": "float",
+            "uniformDefVal": 8
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "shaderName": "82.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "colors",
+            "uniformDisName": "colors",
+            "uniformVarType": "float",
+            "uniformDefVal": 8
+        },
+        {
+            "uniformVarName": "dither",
+            "uniformDisName": "dither",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        }
+    ]
+}

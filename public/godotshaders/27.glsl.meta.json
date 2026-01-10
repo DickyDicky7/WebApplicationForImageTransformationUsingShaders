@@ -1,0 +1,70 @@
+{
+    "shaderName": "27.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "aspect",
+            "uniformDisName": "aspect",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "distortion",
+            "uniformDisName": "distortion",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "radius",
+            "uniformDisName": "radius",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.07
+        },
+        {
+            "uniformVarName": "alpha",
+            "uniformDisName": "alpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "crop",
+            "uniformDisName": "crop",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.943
+        },
+        {
+            "uniformVarName": "crop_color",
+            "uniformDisName": "crop_color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "crop_feathering",
+            "uniformDisName": "crop_feathering",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "base_distortion",
+            "uniformDisName": "base_distortion",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.99
+        },
+        {
+            "uniformVarName": "channel_offset",
+            "uniformDisName": "channel_offset",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.005
+        },
+        {
+            "uniformVarName": "noise_strength",
+            "uniformDisName": "noise_strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        }
+    ]
+}

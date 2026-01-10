@@ -1,0 +1,51 @@
+{
+    "shaderName": "102.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "GRID_HEIGHT",
+            "uniformDisName": "GRID_HEIGHT",
+            "uniformVarType": "float",
+            "uniformDefVal": 48
+        },
+        {
+            "uniformVarName": "MIN_RADIUS",
+            "uniformDisName": "MIN_RADIUS",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "MAX_RADIUS",
+            "uniformDisName": "MAX_RADIUS",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.2
+        },
+        {
+            "uniformVarName": "MIN_INTENSITY",
+            "uniformDisName": "MIN_INTENSITY",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "MAX_INTENSITY",
+            "uniformDisName": "MAX_INTENSITY",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "BACKGROUND",
+            "uniformDisName": "BACKGROUND",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05859375
+        },
+        {
+            "uniformVarName": "FOREGROUND",
+            "uniformDisName": "FOREGROUND",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.96875,
+                0.93359375,
+                0.8828125
+            ]
+        }
+    ]
+}

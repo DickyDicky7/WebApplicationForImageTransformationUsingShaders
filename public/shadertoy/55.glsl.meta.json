@@ -1,0 +1,23 @@
+{
+    "shaderName": "55.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "strength",
+            "uniformDisName": "strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 40
+        },
+        {
+            "uniformVarName": "distortion",
+            "uniformDisName": "distortion",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        }
+    ]
+}

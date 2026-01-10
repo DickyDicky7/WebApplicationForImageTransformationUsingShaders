@@ -1,0 +1,29 @@
+{
+    "shaderName": "108.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "NUM_ITER",
+            "uniformDisName": "NUM_ITER",
+            "uniformVarType": "int",
+            "uniformDefVal": 16
+        },
+        {
+            "uniformVarName": "RECIP_NUM_ITER",
+            "uniformDisName": "RECIP_NUM_ITER",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.0625
+        },
+        {
+            "uniformVarName": "GAMMA",
+            "uniformDisName": "GAMMA",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "amount",
+            "uniformDisName": "amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.25
+        }
+    ]
+}

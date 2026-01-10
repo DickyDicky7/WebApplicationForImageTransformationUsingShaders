@@ -1,0 +1,38 @@
+{
+    "shaderName": "58.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "max_blend",
+            "uniformDisName": "max_blend",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "rotation_offset",
+            "uniformDisName": "rotation_offset",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "intensity",
+            "uniformDisName": "intensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "invert",
+            "uniformDisName": "invert",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "rel_rect_size",
+            "uniformDisName": "rel_rect_size",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1024,
+                600
+            ]
+        }
+    ]
+}

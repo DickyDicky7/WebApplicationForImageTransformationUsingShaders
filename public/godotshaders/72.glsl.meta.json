@@ -1,0 +1,23 @@
+{
+    "shaderName": "72.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "zoom",
+            "uniformDisName": "zoom",
+            "uniformVarType": "float",
+            "uniformDefVal": 300
+        },
+        {
+            "uniformVarName": "pDir",
+            "uniformDisName": "pDir",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "noWrap",
+            "uniformDisName": "noWrap",
+            "uniformVarType": "bool",
+            "uniformDefVal": "!false"
+        }
+    ]
+}

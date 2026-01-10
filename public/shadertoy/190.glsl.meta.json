@@ -1,0 +1,75 @@
+{
+    "shaderName": "190.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "Line_Smoothness",
+            "uniformDisName": "Line_Smoothness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.045
+        },
+        {
+            "uniformVarName": "Line_Width",
+            "uniformDisName": "Line_Width",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.09
+        },
+        {
+            "uniformVarName": "Brightness",
+            "uniformDisName": "Brightness",
+            "uniformVarType": "float",
+            "uniformDefVal": 3
+        },
+        {
+            "uniformVarName": "Rotation_deg",
+            "uniformDisName": "Rotation_deg",
+            "uniformVarType": "float",
+            "uniformDefVal": 30
+        },
+        {
+            "uniformVarName": "Distortion",
+            "uniformDisName": "Distortion",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.8
+        },
+        {
+            "uniformVarName": "Speed",
+            "uniformDisName": "Speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.7
+        },
+        {
+            "uniformVarName": "Position",
+            "uniformDisName": "Position",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "Position_Min",
+            "uniformDisName": "Position_Min",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.25
+        },
+        {
+            "uniformVarName": "Position_Max",
+            "uniformDisName": "Position_Max",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "Alpha",
+            "uniformDisName": "Alpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "Glow_Color",
+            "uniformDisName": "Glow_Color",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.6,
+                0.7,
+                0.9
+            ]
+        }
+    ]
+}

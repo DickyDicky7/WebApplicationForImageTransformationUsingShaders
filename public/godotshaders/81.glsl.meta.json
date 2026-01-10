@@ -1,0 +1,29 @@
+{
+    "shaderName": "81.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "pix_num",
+            "uniformDisName": "pix_num",
+            "uniformVarType": "float",
+            "uniformDefVal": 50
+        },
+        {
+            "uniformVarName": "custom",
+            "uniformDisName": "custom",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "cus_row_num",
+            "uniformDisName": "cus_row_num",
+            "uniformVarType": "int",
+            "uniformDefVal": 30
+        },
+        {
+            "uniformVarName": "cus_col_num",
+            "uniformDisName": "cus_col_num",
+            "uniformVarType": "int",
+            "uniformDefVal": 30
+        }
+    ]
+}

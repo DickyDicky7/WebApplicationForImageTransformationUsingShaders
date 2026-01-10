@@ -1,0 +1,48 @@
+{
+    "shaderName": "57.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "MONOCHROME_SCALE",
+            "uniformDisName": "MONOCHROME_SCALE",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.298912,
+                0.586611,
+                0.114478
+            ]
+        },
+        {
+            "uniformVarName": "ascii_tex",
+            "uniformDisName": "ascii_tex",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "ascii_size",
+            "uniformDisName": "ascii_size",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                8,
+                16
+            ]
+        },
+        {
+            "uniformVarName": "available_columns",
+            "uniformDisName": "available_columns",
+            "uniformVarType": "int",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "max_columns",
+            "uniformDisName": "max_columns",
+            "uniformVarType": "int",
+            "uniformDefVal": 16
+        },
+        {
+            "uniformVarName": "colored",
+            "uniformDisName": "colored",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        }
+    ]
+}

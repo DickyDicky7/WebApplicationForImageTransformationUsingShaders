@@ -1,0 +1,11 @@
+{
+    "shaderName": "ColorContrast.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "contrastAmount",
+            "uniformDisName": "contrastAmount",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

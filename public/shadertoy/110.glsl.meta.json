@@ -1,0 +1,23 @@
+{
+    "shaderName": "110.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "tiles",
+            "uniformDisName": "tiles",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                128,
+                64
+            ]
+        },
+        {
+            "uniformVarName": "subTiles",
+            "uniformDisName": "subTiles",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                3,
+                1
+            ]
+        }
+    ]
+}

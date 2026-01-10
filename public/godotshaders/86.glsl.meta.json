@@ -1,0 +1,23 @@
+{
+    "shaderName": "86.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "h",
+            "uniformDisName": "h",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "s",
+            "uniformDisName": "s",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "v",
+            "uniformDisName": "v",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "shaderName": "3.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise1",
+            "uniformDisName": "noise1",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "noise2",
+            "uniformDisName": "noise2",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

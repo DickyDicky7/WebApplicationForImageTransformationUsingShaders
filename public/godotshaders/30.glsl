@@ -1,0 +1,104 @@
+#version 300 es
+// #version 300 es
+    precision  lowp float;
+//  precision  lowp float;
+
+    uniform         sampler2D          tex0;
+//  uniform         sampler2D          tex0;
+    in              vec2          vTexCoord;
+//  in              vec2          vTexCoord;
+    out             vec4          fragColor;
+//  out             vec4          fragColor;
+    uniform         float              time;
+//  uniform         float              time;
+    uniform         vec2         canvasSize;
+//  uniform         vec2         canvasSize;
+    uniform         vec2          texelSize;
+//  uniform         vec2          texelSize;
+    uniform         vec4      mousePosition;
+//  uniform         vec4      mousePosition;
+
+    // const float speedScale   = 16.0;
+//  // const float speedScale   = 16.0;
+    // const float clipPosition = 00.2;
+//  // const float clipPosition = 00.2;
+
+    uniform float speedScale   ; // 16.0
+//  uniform float speedScale   ; // 16.0
+    uniform float clipPosition ; // 00.2
+//  uniform float clipPosition ; // 00.2
+
+    // float round(float x) {
+//  // float round(float x) {
+    //     return floor(x + 0.5);
+//  //     return floor(x + 0.5);
+    // }
+//  // }
+
+    // vec2 round(vec2 v) {
+//  // vec2 round(vec2 v) {
+    //     return vec2(round(v.x), round(v.y));
+//  //     return vec2(round(v.x), round(v.y));
+    // }
+//  // }
+
+    // vec3 round(vec3 v) {
+//  // vec3 round(vec3 v) {
+    //     return vec3(round(v.x), round(v.y), round(v.z));
+//  //     return vec3(round(v.x), round(v.y), round(v.z));
+    // }
+//  // }
+
+    // vec4 round(vec4 v) {
+//  // vec4 round(vec4 v) {
+    //     return vec4(round(v.x), round(v.y), round(v.z), round(v.w));
+//  //     return vec4(round(v.x), round(v.y), round(v.z), round(v.w));
+    // }
+//  // }
+
+
+    float random (vec2 uv) {
+//  float random (vec2 uv) {
+    return     fract(sin(dot(uv.xy, vec2(12.9898,78.2330))) * 43758.5453123);
+//  return     fract(sin(dot(uv.xy, vec2(12.9898,78.2330))) * 43758.5453123);
+    }
+//  }
+
+    void main() {
+    fragColor.a = 0.0;
+//  fragColor.a = 0.0;
+	
+    vec2  pos   = vTexCoord  - vec2(0.5);
+//  vec2  pos   = vTexCoord  - vec2(0.5);
+    float theta = round(64.0 * atan(pos.y, pos.x));
+//  float theta = round(64.0 * atan(pos.y, pos.x));
+    float  dist = sqrt(pow(pos.x, 2.0)
+//  float  dist = sqrt(pow(pos.x, 2.0)
+    +      pow(pos.y, 2.0) );
+//  +      pow(pos.y, 2.0) );
+    //              +      pow(pos.y, 2.0) );
+//  //              +      pow(pos.y, 2.0) );
+	
+    float distValue = round(dist * 4.0 + time * -speedScale + 8.0 * random(vec2(theta)));
+//  float distValue = round(dist * 4.0 + time * -speedScale + 8.0 * random(vec2(theta)));
+    if (dist > clipPosition + random(vec2(theta           )) * 0.30
+//  if (dist > clipPosition + random(vec2(theta           )) * 0.30
+    &&                        random(vec2(theta, distValue)) < 0.02) {
+//  &&                        random(vec2(theta, distValue)) < 0.02) {
+    fragColor.a   =      1.0 ;
+//  fragColor.a   =      1.0 ;
+    //  	fragColor.a   =      1.0 ;
+//  //  	fragColor.a   =      1.0 ;
+    fragColor.rgb = vec3(1.0);
+//  fragColor.rgb = vec3(1.0);
+    //  	fragColor.rgb = vec3(1.0);
+//  //  	fragColor.rgb = vec3(1.0);
+    }
+//  }
+
+    fragColor = max(fragColor, (1.0 - fragColor) * texture(tex0, vTexCoord));
+//  fragColor = max(fragColor, (1.0 - fragColor) * texture(tex0, vTexCoord));
+    }
+
+    // https://godotshaders.com/shader/motion-lines/
+//  // https://godotshaders.com/shader/motion-lines/

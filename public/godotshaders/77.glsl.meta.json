@@ -1,0 +1,55 @@
+{
+    "shaderName": "77.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "tiled0",
+            "uniformDisName": "tiled0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "opacity",
+            "uniformDisName": "opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "pixel_size",
+            "uniformDisName": "pixel_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        },
+        {
+            "uniformVarName": "greyscale",
+            "uniformDisName": "greyscale",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "contrast",
+            "uniformDisName": "contrast",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "pixel_colors",
+            "uniformDisName": "pixel_colors",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                1,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "background_colors",
+            "uniformDisName": "background_colors",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        }
+    ]
+}

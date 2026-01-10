@@ -1,0 +1,17 @@
+{
+    "shaderName": "44.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "numberOfTiles",
+            "uniformDisName": "numberOfTiles",
+            "uniformVarType": "float",
+            "uniformDefVal": 256
+        },
+        {
+            "uniformVarName": "FadeSpeed",
+            "uniformDisName": "FadeSpeed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.75
+        }
+    ]
+}

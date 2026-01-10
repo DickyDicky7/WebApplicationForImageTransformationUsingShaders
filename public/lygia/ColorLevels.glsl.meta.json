@@ -1,0 +1,55 @@
+{
+    "shaderName": "ColorLevels.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "minInput",
+            "uniformDisName": "minInput",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "gamma",
+            "uniformDisName": "gamma",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "maxInput",
+            "uniformDisName": "maxInput",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "minOutput",
+            "uniformDisName": "minOutput",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "maxOutput",
+            "uniformDisName": "maxOutput",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0,
+                0,
+                0
+            ]
+        }
+    ]
+}

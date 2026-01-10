@@ -1,0 +1,20 @@
+{
+    "shaderName": "FilterLaplacian.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "pixels_scaling",
+            "uniformDisName": "pixels_scaling",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "pixels_padding",
+            "uniformDisName": "pixels_padding",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

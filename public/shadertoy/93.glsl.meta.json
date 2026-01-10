@@ -1,0 +1,165 @@
+{
+    "shaderName": "93.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "color0",
+            "uniformDisName": "color0",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.1098,
+                0.0314,
+                0.0627
+            ]
+        },
+        {
+            "uniformVarName": "color1",
+            "uniformDisName": "color1",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.3333,
+                0.0627,
+                0.0314
+            ]
+        },
+        {
+            "uniformVarName": "color2",
+            "uniformDisName": "color2",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.4902,
+                0.0941,
+                0.0941
+            ]
+        },
+        {
+            "uniformVarName": "color3",
+            "uniformDisName": "color3",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.4431,
+                0.2039,
+                0.0627
+            ]
+        },
+        {
+            "uniformVarName": "color4",
+            "uniformDisName": "color4",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.3961,
+                0.4431,
+                0.3137
+            ]
+        },
+        {
+            "uniformVarName": "color5",
+            "uniformDisName": "color5",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.6824,
+                0.298,
+                0.1882
+            ]
+        },
+        {
+            "uniformVarName": "color6",
+            "uniformDisName": "color6",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.7137,
+                0.0627,
+                0.1882
+            ]
+        },
+        {
+            "uniformVarName": "color7",
+            "uniformDisName": "color7",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.7922,
+                0.4431,
+                0.2353
+            ]
+        },
+        {
+            "uniformVarName": "color8",
+            "uniformDisName": "color8",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.4431,
+                0.5843,
+                0.5529
+            ]
+        },
+        {
+            "uniformVarName": "color9",
+            "uniformDisName": "color9",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.8549,
+                0.6471,
+                0.4275
+            ]
+        },
+        {
+            "uniformVarName": "color10",
+            "uniformDisName": "color10",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.9176,
+                0.8392,
+                0.6667
+            ]
+        },
+        {
+            "uniformVarName": "color11",
+            "uniformDisName": "color11",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.6471,
+                0.7294,
+                0.6824
+            ]
+        },
+        {
+            "uniformVarName": "color12",
+            "uniformDisName": "color12",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.8863,
+                0.251,
+                0.3137
+            ]
+        },
+        {
+            "uniformVarName": "color13",
+            "uniformDisName": "color13",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.9333,
+                0.4431,
+                0.4588
+            ]
+        },
+        {
+            "uniformVarName": "color14",
+            "uniformDisName": "color14",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.9647,
+                0.6157,
+                0.6157
+            ]
+        },
+        {
+            "uniformVarName": "color15",
+            "uniformDisName": "color15",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                1,
+                1,
+                0.949
+            ]
+        }
+    ]
+}

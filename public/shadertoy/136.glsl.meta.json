@@ -1,0 +1,41 @@
+{
+    "shaderName": "136.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "onType001",
+            "uniformDisName": "onType001",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "onType002",
+            "uniformDisName": "onType002",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onType003",
+            "uniformDisName": "onType003",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onType004",
+            "uniformDisName": "onType004",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onType005",
+            "uniformDisName": "onType005",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "onType006",
+            "uniformDisName": "onType006",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        }
+    ]
+}

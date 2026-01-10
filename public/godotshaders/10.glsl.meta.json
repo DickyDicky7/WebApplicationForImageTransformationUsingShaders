@@ -1,0 +1,56 @@
+{
+    "shaderName": "10.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "add",
+            "uniformDisName": "add",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.002
+        },
+        {
+            "uniformVarName": "threshold",
+            "uniformDisName": "threshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "threshold2",
+            "uniformDisName": "threshold2",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "edgeColour",
+            "uniformDisName": "edgeColour",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "edgeColour2",
+            "uniformDisName": "edgeColour2",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0.5,
+                0.5,
+                0.5,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "nonEdgeColour",
+            "uniformDisName": "nonEdgeColour",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                1,
+                1,
+                1
+            ]
+        }
+    ]
+}

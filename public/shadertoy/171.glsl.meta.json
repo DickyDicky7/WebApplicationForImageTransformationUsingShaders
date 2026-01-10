@@ -1,0 +1,23 @@
+{
+    "shaderName": "171.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "strengths",
+            "uniformDisName": "strengths",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "animateOn",
+            "uniformDisName": "animateOn",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "animateSpeed",
+            "uniformDisName": "animateSpeed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        }
+    ]
+}

@@ -1,0 +1,82 @@
+{
+    "shaderName": "3.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "rain_or_snow",
+            "uniformDisName": "rain_or_snow",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "rain_or_snow_amount",
+            "uniformDisName": "rain_or_snow_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 200
+        },
+        {
+            "uniformVarName": "near_rain_or_snow_length",
+            "uniformDisName": "near_rain_or_snow_length",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        },
+        {
+            "uniformVarName": "far_rain_or_snow_length",
+            "uniformDisName": "far_rain_or_snow_length",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        },
+        {
+            "uniformVarName": "near_rain_or_snow_width",
+            "uniformDisName": "near_rain_or_snow_width",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "far_rain_or_snow_width",
+            "uniformDisName": "far_rain_or_snow_width",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "near_rain_or_snow_transparency",
+            "uniformDisName": "near_rain_or_snow_transparency",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "far_rain_or_snow_transparency",
+            "uniformDisName": "far_rain_or_snow_transparency",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "rain_or_snow_color",
+            "uniformDisName": "rain_or_snow_color",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0.8,
+                0.8,
+                0.8,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "base_rain_or_snow_speed",
+            "uniformDisName": "base_rain_or_snow_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "additional_rain_or_snow_speed",
+            "uniformDisName": "additional_rain_or_snow_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "slant",
+            "uniformDisName": "slant",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.2
+        }
+    ]
+}

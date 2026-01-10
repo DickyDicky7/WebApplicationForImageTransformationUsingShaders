@@ -1,0 +1,26 @@
+{
+    "shaderName": "80.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "strength",
+            "uniformDisName": "strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "disp",
+            "uniformDisName": "disp",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1,
+                1
+            ]
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "shaderName": "151.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "density",
+            "uniformDisName": "density",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        }
+    ]
+}

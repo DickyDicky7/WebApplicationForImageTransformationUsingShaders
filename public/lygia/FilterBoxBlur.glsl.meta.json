@@ -1,0 +1,20 @@
+{
+    "shaderName": "FilterBoxBlur.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "offset",
+            "uniformDisName": "offset",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "kernelSize",
+            "uniformDisName": "kernelSize",
+            "uniformVarType": "int",
+            "uniformDefVal": 0
+        }
+    ]
+}

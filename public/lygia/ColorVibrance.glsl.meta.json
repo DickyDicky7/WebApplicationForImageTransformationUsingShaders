@@ -1,0 +1,11 @@
+{
+    "shaderName": "ColorVibrance.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "amountVibrance",
+            "uniformDisName": "amountVibrance",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

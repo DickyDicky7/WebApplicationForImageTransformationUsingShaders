@@ -1,0 +1,32 @@
+{
+    "shaderName": "20.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "r_displacement",
+            "uniformDisName": "r_displacement",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                3,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "g_displacement",
+            "uniformDisName": "g_displacement",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "b_displacement",
+            "uniformDisName": "b_displacement",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                -3,
+                0
+            ]
+        }
+    ]
+}

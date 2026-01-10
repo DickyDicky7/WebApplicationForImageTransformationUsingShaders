@@ -1,0 +1,29 @@
+{
+    "shaderName": "18.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "alpha",
+            "uniformDisName": "alpha",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "scale",
+            "uniformDisName": "scale",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "border_mask",
+            "uniformDisName": "border_mask",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "strength",
+            "uniformDisName": "strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 25
+        }
+    ]
+}

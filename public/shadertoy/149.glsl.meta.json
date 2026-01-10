@@ -1,0 +1,71 @@
+{
+    "shaderName": "149.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        },
+        {
+            "uniformVarName": "x_density",
+            "uniformDisName": "x_density",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        },
+        {
+            "uniformVarName": "y_density",
+            "uniformDisName": "y_density",
+            "uniformVarType": "float",
+            "uniformDefVal": 25
+        },
+        {
+            "uniformVarName": "x_randomness",
+            "uniformDisName": "x_randomness",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "y_randomness",
+            "uniformDisName": "y_randomness",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "x_in_between_thickness",
+            "uniformDisName": "x_in_between_thickness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "y_in_between_thickness",
+            "uniformDisName": "y_in_between_thickness",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "x_shift_power",
+            "uniformDisName": "x_shift_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.02
+        },
+        {
+            "uniformVarName": "y_shift_power",
+            "uniformDisName": "y_shift_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "col_shift_x_power",
+            "uniformDisName": "col_shift_x_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.02
+        },
+        {
+            "uniformVarName": "col_shift_y_power",
+            "uniformDisName": "col_shift_y_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.02
+        }
+    ]
+}

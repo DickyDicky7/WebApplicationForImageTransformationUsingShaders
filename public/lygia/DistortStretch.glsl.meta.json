@@ -1,0 +1,20 @@
+{
+    "shaderName": "DistortStretch.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "direction",
+            "uniformDisName": "direction",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "samplings",
+            "uniformDisName": "samplings",
+            "uniformVarType": "int",
+            "uniformDefVal": 0
+        }
+    ]
+}

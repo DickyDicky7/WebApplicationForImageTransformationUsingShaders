@@ -1,0 +1,17 @@
+{
+    "shaderName": "181.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "NUMBERSS",
+            "uniformDisName": "NUMBERSS",
+            "uniformVarType": "float",
+            "uniformDefVal": 100
+        },
+        {
+            "uniformVarName": "DISTANCE",
+            "uniformDisName": "DISTANCE",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        }
+    ]
+}

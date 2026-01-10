@@ -1,0 +1,11 @@
+{
+    "shaderName": "58.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "hueFactor",
+            "uniformDisName": "hueFactor",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        }
+    ]
+}

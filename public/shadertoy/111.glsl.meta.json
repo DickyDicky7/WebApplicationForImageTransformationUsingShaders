@@ -1,0 +1,25 @@
+{
+    "shaderName": "111.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "Color001",
+            "uniformDisName": "Color001",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                1,
+                0,
+                0.7
+            ]
+        },
+        {
+            "uniformVarName": "Color002",
+            "uniformDisName": "Color002",
+            "uniformVarType": "vec3",
+            "uniformDefVal": [
+                0.3,
+                1,
+                0.9
+            ]
+        }
+    ]
+}

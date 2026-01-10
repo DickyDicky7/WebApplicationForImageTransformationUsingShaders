@@ -1,0 +1,11 @@
+{
+    "shaderName": "50.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "strength",
+            "uniformDisName": "strength",
+            "uniformVarType": "float",
+            "uniformDefVal": 2
+        }
+    ]
+}

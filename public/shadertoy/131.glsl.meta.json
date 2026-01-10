@@ -1,0 +1,23 @@
+{
+    "shaderName": "131.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "shake_speed",
+            "uniformDisName": "shake_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 20
+        },
+        {
+            "uniformVarName": "shake_power",
+            "uniformDisName": "shake_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.7
+        },
+        {
+            "uniformVarName": "rot_power",
+            "uniformDisName": "rot_power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        }
+    ]
+}

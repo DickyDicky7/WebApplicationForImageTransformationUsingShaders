@@ -1,0 +1,29 @@
+{
+    "shaderName": "21.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "noise_scale",
+            "uniformDisName": "noise_scale",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        },
+        {
+            "uniformVarName": "fog_density",
+            "uniformDisName": "fog_density",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "fog_speed",
+            "uniformDisName": "fog_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "fog_opacity",
+            "uniformDisName": "fog_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

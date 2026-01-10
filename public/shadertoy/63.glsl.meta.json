@@ -1,0 +1,87 @@
+{
+    "shaderName": "63.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "u_bgColor",
+            "uniformDisName": "u_bgColor",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                1,
+                1,
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "u_bgColorFactor",
+            "uniformDisName": "u_bgColorFactor",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "u_patternColor",
+            "uniformDisName": "u_patternColor",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "u_threshold1",
+            "uniformDisName": "u_threshold1",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.75
+        },
+        {
+            "uniformVarName": "u_threshold2",
+            "uniformDisName": "u_threshold2",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        },
+        {
+            "uniformVarName": "u_threshold3",
+            "uniformDisName": "u_threshold3",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.25
+        },
+        {
+            "uniformVarName": "u_threshold4",
+            "uniformDisName": "u_threshold4",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "u_bgTiling",
+            "uniformDisName": "u_bgTiling",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "u_patternTiling",
+            "uniformDisName": "u_patternTiling",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                1,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "pencil1",
+            "uniformDisName": "pencil1",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "pencil2",
+            "uniformDisName": "pencil2",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        }
+    ]
+}

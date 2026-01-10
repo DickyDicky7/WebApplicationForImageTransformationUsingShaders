@@ -1,0 +1,11 @@
+{
+    "shaderName": "48.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "pixel_size",
+            "uniformDisName": "pixel_size",
+            "uniformVarType": "int",
+            "uniformDefVal": 16
+        }
+    ]
+}

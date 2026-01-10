@@ -1,0 +1,20 @@
+{
+    "shaderName": "FilterRadialBlur.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "direction",
+            "uniformDisName": "direction",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "strengths",
+            "uniformDisName": "strengths",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

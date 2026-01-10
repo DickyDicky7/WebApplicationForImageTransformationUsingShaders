@@ -1,0 +1,26 @@
+{
+    "shaderName": "47.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "blur_center",
+            "uniformDisName": "blur_center",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0.5,
+                0.5
+            ]
+        },
+        {
+            "uniformVarName": "blur_powers",
+            "uniformDisName": "blur_powers",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.01
+        },
+        {
+            "uniformVarName": "sampling_counts",
+            "uniformDisName": "sampling_counts",
+            "uniformVarType": "int",
+            "uniformDefVal": 6
+        }
+    ]
+}

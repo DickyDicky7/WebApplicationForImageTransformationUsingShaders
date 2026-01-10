@@ -1,0 +1,53 @@
+{
+    "shaderName": "61.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "bayer0",
+            "uniformDisName": "bayer0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "palette0",
+            "uniformDisName": "palette0",
+            "uniformVarType": "sampler2D",
+            "uniformDefVal": "null"
+        },
+        {
+            "uniformVarName": "u_bitttt_depth",
+            "uniformDisName": "u_bitttt_depth",
+            "uniformVarType": "int",
+            "uniformDefVal": 32
+        },
+        {
+            "uniformVarName": "u_contrast",
+            "uniformDisName": "u_contrast",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "u_offsettt",
+            "uniformDisName": "u_offsettt",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "u_dither_sizee",
+            "uniformDisName": "u_dither_sizee",
+            "uniformVarType": "int",
+            "uniformDefVal": 2
+        },
+        {
+            "uniformVarName": "u_repeat_off",
+            "uniformDisName": "u_repeat_off",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "u_repeat_value",
+            "uniformDisName": "u_repeat_value",
+            "uniformVarType": "float",
+            "uniformDefVal": 10
+        }
+    ]
+}

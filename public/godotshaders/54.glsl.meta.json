@@ -1,0 +1,11 @@
+{
+    "shaderName": "54.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "scanline_count",
+            "uniformDisName": "scanline_count",
+            "uniformVarType": "float",
+            "uniformDefVal": 50
+        }
+    ]
+}

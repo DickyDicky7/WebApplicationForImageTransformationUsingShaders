@@ -1,0 +1,134 @@
+{
+    "shaderName": "92.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "overlay",
+            "uniformDisName": "overlay",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "resolution",
+            "uniformDisName": "resolution",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                640,
+                480
+            ]
+        },
+        {
+            "uniformVarName": "brightness",
+            "uniformDisName": "brightness",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.4
+        },
+        {
+            "uniformVarName": "scanlines_opacity",
+            "uniformDisName": "scanlines_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "scanlines_width",
+            "uniformDisName": "scanlines_width",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.25
+        },
+        {
+            "uniformVarName": "grille_opacity",
+            "uniformDisName": "grille_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.3
+        },
+        {
+            "uniformVarName": "roll",
+            "uniformDisName": "roll",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "roll_speed",
+            "uniformDisName": "roll_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 8
+        },
+        {
+            "uniformVarName": "roll_size",
+            "uniformDisName": "roll_size",
+            "uniformVarType": "float",
+            "uniformDefVal": 15
+        },
+        {
+            "uniformVarName": "roll_variation",
+            "uniformDisName": "roll_variation",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.8
+        },
+        {
+            "uniformVarName": "distort_intensity",
+            "uniformDisName": "distort_intensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.05
+        },
+        {
+            "uniformVarName": "aberration",
+            "uniformDisName": "aberration",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.03
+        },
+        {
+            "uniformVarName": "noise_opacity",
+            "uniformDisName": "noise_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "noise_speed",
+            "uniformDisName": "noise_speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 5
+        },
+        {
+            "uniformVarName": "static_noise_intensity",
+            "uniformDisName": "static_noise_intensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.06
+        },
+        {
+            "uniformVarName": "pixelate",
+            "uniformDisName": "pixelate",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "discolor",
+            "uniformDisName": "discolor",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "warp_amount",
+            "uniformDisName": "warp_amount",
+            "uniformVarType": "float",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "clip_warp",
+            "uniformDisName": "clip_warp",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "vignette_intensity",
+            "uniformDisName": "vignette_intensity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.4
+        },
+        {
+            "uniformVarName": "vignette_opacity",
+            "uniformDisName": "vignette_opacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

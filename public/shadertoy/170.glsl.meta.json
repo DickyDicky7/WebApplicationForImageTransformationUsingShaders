@@ -1,0 +1,17 @@
+{
+    "shaderName": "170.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "speed",
+            "uniformDisName": "speed",
+            "uniformVarType": "float",
+            "uniformDefVal": 2.5
+        },
+        {
+            "uniformVarName": "power",
+            "uniformDisName": "power",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.1
+        }
+    ]
+}

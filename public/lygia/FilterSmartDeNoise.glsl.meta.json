@@ -1,0 +1,32 @@
+{
+    "shaderName": "FilterSmartDeNoise.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "pixels",
+            "uniformDisName": "pixels",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                0,
+                0
+            ]
+        },
+        {
+            "uniformVarName": "sigma",
+            "uniformDisName": "sigma",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "kSigma",
+            "uniformDisName": "kSigma",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        },
+        {
+            "uniformVarName": "threshold",
+            "uniformDisName": "threshold",
+            "uniformVarType": "float",
+            "uniformDefVal": 0
+        }
+    ]
+}

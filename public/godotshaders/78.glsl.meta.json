@@ -1,0 +1,58 @@
+{
+    "shaderName": "78.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "EnableShader",
+            "uniformDisName": "EnableShader",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "LinearGradient",
+            "uniformDisName": "LinearGradient",
+            "uniformVarType": "bool",
+            "uniformDefVal": false
+        },
+        {
+            "uniformVarName": "ClampDistances",
+            "uniformDisName": "ClampDistances",
+            "uniformVarType": "bool",
+            "uniformDefVal": true
+        },
+        {
+            "uniformVarName": "DistanceOffset",
+            "uniformDisName": "DistanceOffset",
+            "uniformVarType": "float",
+            "uniformDefVal": -0.1
+        },
+        {
+            "uniformVarName": "DistanceAddFor",
+            "uniformDisName": "DistanceAddFor",
+            "uniformVarType": "float",
+            "uniformDefVal": -0.13
+        },
+        {
+            "uniformVarName": "GridScale",
+            "uniformDisName": "GridScale",
+            "uniformVarType": "int",
+            "uniformDefVal": 1
+        },
+        {
+            "uniformVarName": "ModulatingColor",
+            "uniformDisName": "ModulatingColor",
+            "uniformVarType": "vec4",
+            "uniformDefVal": [
+                0,
+                0,
+                0,
+                1
+            ]
+        },
+        {
+            "uniformVarName": "GradientOpacity",
+            "uniformDisName": "GradientOpacity",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.5
+        }
+    ]
+}

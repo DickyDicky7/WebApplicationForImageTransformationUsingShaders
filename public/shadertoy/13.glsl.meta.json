@@ -1,0 +1,20 @@
+{
+    "shaderName": "13.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "tileSize",
+            "uniformDisName": "tileSize",
+            "uniformVarType": "vec2",
+            "uniformDefVal": [
+                16,
+                16
+            ]
+        },
+        {
+            "uniformVarName": "threads",
+            "uniformDisName": "threads",
+            "uniformVarType": "float",
+            "uniformDefVal": 4
+        }
+    ]
+}

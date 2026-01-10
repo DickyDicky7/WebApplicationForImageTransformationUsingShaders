@@ -1,0 +1,17 @@
+{
+    "shaderName": "119.glsl",
+    "shaderUniforms": [
+        {
+            "uniformVarName": "WIDTH",
+            "uniformDisName": "WIDTH",
+            "uniformVarType": "float",
+            "uniformDefVal": 1.5
+        },
+        {
+            "uniformVarName": "SPREAD",
+            "uniformDisName": "SPREAD",
+            "uniformVarType": "float",
+            "uniformDefVal": 0.33
+        }
+    ]
+}

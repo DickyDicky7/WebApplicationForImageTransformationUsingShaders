@@ -17,5 +17,11 @@
 //          nodePolyfills(),
         ],
 //      ],
+        build: {
+//      build: {
+            target: "es2020",
+//          target: "es2020",
+        },
+//      },
     });
 //  });

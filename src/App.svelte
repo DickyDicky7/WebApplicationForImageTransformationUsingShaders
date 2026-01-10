@@ -312,6 +312,12 @@
 //      };
         p.draw = (): void => {
 //      p.draw = (): void => {
+            if (isInitializing) {
+//          if (isInitializing) {
+                return;
+//              return;
+            }
+//          }
             p.background(255);
 //          p.background(255);
             for (let { fragmentShaderSourceType________, draggableText } of global.globalState.effectsUsedForFiltering) {
@@ -397,6 +403,12 @@
 //          };
             p.draw = (): void => {
 //          p.draw = (): void => {
+                if (isInitializing) {
+//              if (isInitializing) {
+                    return;
+//                  return;
+                }
+//              }
                 bgShader.setUniform("time", p.millis() / 1000);
 //              bgShader.setUniform("time", p.millis() / 1000);
                 p.filter(bgShader);
@@ -2111,12 +2123,24 @@
 <!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor></MouseCursor>
 {#if isInitializing}
-    <div out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; color: white;">
+<!--<div class="grey10 white-text large-elevate" out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; align-items: center;">-->
+    <div class="grey10 white-text large-elevate" out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; align-items: center;">
+<!--<div class="grey10 white-text large-elevate" out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; align-items: center;">-->
+    <!--<div class="row center-align">-->
         <div class="row center-align">
+    <!--<div class="row center-align">-->
+        <!--<h5 class="margin">Loading...</h5>-->
             <h5 class="margin">Loading...</h5>
-            <progress class="circle deep-orange"></progress>
+        <!--<h5 class="margin">Loading...</h5>-->
+        <!--<progress class="circle lime"></progress>-->
+            <progress class="circle lime"></progress>
+        <!--<progress class="circle lime"></progress>-->
+    <!--</div>-->
         </div>
+    <!--</div>-->
+<!--</div>-->
     </div>
+<!--</div>-->
 {/if}
 <main>
     <div class="container">

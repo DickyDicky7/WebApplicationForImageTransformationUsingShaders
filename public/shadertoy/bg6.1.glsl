@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     //  precision lowp float;
 //  //  precision lowp float;
     precision lowp float;
@@ -40,8 +40,8 @@
     const vec3 mixColor2 = vec3(0.3, 0.75, 0.69);
 //  const vec3 mixColor2 = vec3(0.3, 0.75, 0.69);
 
-#define NUM_OCTAVES 5
-// #define NUM_OCTAVES 5
+    #define NUM_OCTAVES 5
+//  #define NUM_OCTAVES 5
 
 
     // Get random value

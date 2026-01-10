@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -82,18 +82,18 @@
 
     // Choose@@@@ between test@@@@@@@ color @ or @@ texture color
 //  // Choose@@@@ between test@@@@@@@ color @ or @@ texture color
-#ifdef TEST
-// #ifdef TEST
+    #ifdef TEST
+//  #ifdef TEST
     vec3 col =
 //  vec3 col =
     vec3(uv.x);
 //  vec3(uv.x);
-#else
-// #else
+    #else
+//  #else
     vec3 col = texture(tex0, uv).xyz;
 //  vec3 col = texture(tex0, uv).xyz;
-#endif
-// #endif
+    #endif
+//  #endif
 
     // Compute luminance @@@@@@@@@@
 //  // Compute luminance @@@@@@@@@@
@@ -120,14 +120,14 @@
 
     // Additional test condition to overwrite the color if uv.y > .7
 //  // Additional test condition to overwrite the color if uv.y > .7
-#ifdef TEST
-// #ifdef TEST
+    #ifdef TEST
+//  #ifdef TEST
     if ( uv.y > 0.7 )
 //  if ( uv.y > 0.7 )
     outputColor = col;
 //  outputColor = col;
-#endif
-// #endif
+    #endif
+//  #endif
 
     // Set@@@@@@@ the@ final@@@@ @@ fragment@ @@@ color @@ @@@@ @ @@
 //  // Set@@@@@@@ the@ final@@@@ @@ fragment@ @@@ color @@ @@@@ @ @@

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -23,8 +23,8 @@
     // https://www.shadertoy.com/view/tddfRX
 //  // https://www.shadertoy.com/view/tddfRX
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
 
     float planeIntersection(vec3 N, vec3 V, vec3 pos) { float distToPlane = -dot(pos, N); float rayDotPlane = -dot(V, N); if (rayDotPlane > 0. && distToPlane > 0.) return distToPlane / rayDotPlane; else return 0.; }

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,28 +18,28 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#define S(x, y      , z) smoothstep(x, y       , z)
-// #define S(x, y      , z) smoothstep(x, y       , z)
-#define B(a, b, edge, t) S(a - edge  , a + edge, t) * S(b + edge, b - edge, t)
-// #define B(a, b, edge, t) S(a - edge  , a + edge, t) * S(b + edge, b - edge, t)
-#define sat(x) clamp(x, 0.0f, 1.0f)
-// #define sat(x) clamp(x, 0.0f, 1.0f)
+    #define S(x, y      , z) smoothstep(x, y       , z)
+//  #define S(x, y      , z) smoothstep(x, y       , z)
+    #define B(a, b, edge, t) S(a - edge  , a + edge, t) * S(b + edge, b - edge, t)
+//  #define B(a, b, edge, t) S(a - edge  , a + edge, t) * S(b + edge, b - edge, t)
+    #define sat(x) clamp(x, 0.0f, 1.0f)
+//  #define sat(x) clamp(x, 0.0f, 1.0f)
 
-#define streetLightCol vec3(1.0f, 0.7f, 0.3f)
-// #define streetLightCol vec3(1.0f, 0.7f, 0.3f)
-#define   headLightCol vec3(0.8f, 0.8f, 1.0f)
-// #define   headLightCol vec3(0.8f, 0.8f, 1.0f)
-#define   tailLightCol vec3(1.0f, 0.1f, 0.1f)
-// #define   tailLightCol vec3(1.0f, 0.1f, 0.1f)
+    #define streetLightCol vec3(1.0f, 0.7f, 0.3f)
+//  #define streetLightCol vec3(1.0f, 0.7f, 0.3f)
+    #define   headLightCol vec3(0.8f, 0.8f, 1.0f)
+//  #define   headLightCol vec3(0.8f, 0.8f, 1.0f)
+    #define   tailLightCol vec3(1.0f, 0.1f, 0.1f)
+//  #define   tailLightCol vec3(1.0f, 0.1f, 0.1f)
 
-#define HIGH_QUALITY
-// #define HIGH_QUALITY
-#define  CAM_SHAKE   1.0f
-// #define  CAM_SHAKE   1.0f
-#define LANE_BIAS    0.5f
-// #define LANE_BIAS    0.5f
-#define      RAIN
-// #define      RAIN
+    #define HIGH_QUALITY
+//  #define HIGH_QUALITY
+    #define  CAM_SHAKE   1.0f
+//  #define  CAM_SHAKE   1.0f
+    #define LANE_BIAS    0.5f
+//  #define LANE_BIAS    0.5f
+    #define      RAIN
+//  #define      RAIN
     //#define DROP_DEBUG
 //  //#define DROP_DEBUG
 

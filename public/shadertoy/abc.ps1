@@ -2,7 +2,7 @@
 # Define the content to write into the files
 # Define the content to write into the files
 $content = @"
-#version 300 es
+    #version 300 es
 precision  lowp float;
 
 uniform         sampler2D          tex0;

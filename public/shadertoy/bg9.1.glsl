@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     //  precision lowp float;
 //  //  precision lowp float;
     precision lowp float;
@@ -10,8 +10,8 @@
     out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 //  out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 
-#define TWO_PI 6.28318530718
-// #define TWO_PI 6.28318530718
+    #define TWO_PI 6.28318530718
+//  #define TWO_PI 6.28318530718
 
     vec3 random3(vec3 st) {
 //  vec3 random3(vec3 st) {

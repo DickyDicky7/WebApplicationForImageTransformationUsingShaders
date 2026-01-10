@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -22,12 +22,12 @@
 //  // Parameters
     // Parameters
 //  // Parameters
-    // #define _Speed                    0.302
-//  // #define _Speed                    0.302
-    // #define          _Fading          1.000
-//  // #define          _Fading          1.000
-    // #define _LuminanceJitterThreshold 0.895
-//  // #define _LuminanceJitterThreshold 0.895
+    //  #define _Speed                    0.302
+//  //  #define _Speed                    0.302
+    //  #define          _Fading          1.000
+//  //  #define          _Fading          1.000
+    //  #define _LuminanceJitterThreshold 0.895
+//  //  #define _LuminanceJitterThreshold 0.895
 
     uniform float _Speed                    ; // 0.302
 //  uniform float _Speed                    ; // 0.302

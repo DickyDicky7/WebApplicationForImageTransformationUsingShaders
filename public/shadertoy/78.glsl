@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -19,14 +19,14 @@
 //  uniform         vec4      mousePosition;
 
 
-#define S(a, b, t) smoothstep(a, b, t)
-// #define S(a, b, t) smoothstep(a, b, t)
+    #define S(a, b, t) smoothstep(a, b, t)
+//  #define S(a, b, t) smoothstep(a, b, t)
     //#define CHEAP_NORMALS
 //  //#define CHEAP_NORMALS
-#define HAS_HEART
-// #define HAS_HEART
-#define USE_POST_PROCESSING
-// #define USE_POST_PROCESSING
+    #define HAS_HEART
+//  #define HAS_HEART
+    #define USE_POST_PROCESSING
+//  #define USE_POST_PROCESSING
 
     vec3 N13(float p) {
 //  vec3 N13(float p) {
@@ -305,8 +305,8 @@
 
     vec2 c   = Drops(uv       , t, staticDrops, layer1, layer2)  ;
 //  vec2 c   = Drops(uv       , t, staticDrops, layer1, layer2)  ;
-   #ifdef CHEAP_NORMALS
-// #ifdef CHEAP_NORMALS
+    #ifdef CHEAP_NORMALS
+//  #ifdef CHEAP_NORMALS
     vec2 n   = vec2(dFdx(c.x)   // ---------------------------------------------------
 //  vec2 n   = vec2(dFdx(c.x)   // ---------------------------------------------------
     ,      dFdy(c.x)); // cheap normals (3x cheaper, but 2 times shittier ;))

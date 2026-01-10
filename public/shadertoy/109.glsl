@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -23,8 +23,8 @@
     // https://www.shadertoy.com/view/MXGyWD
 //  // https://www.shadertoy.com/view/MXGyWD
 
-#define PI 3.14159265359
-// #define PI 3.14159265359
+    #define PI 3.14159265359
+//  #define PI 3.14159265359
 
     uvec3 k = uvec3(0x456789abu, 0x6789ab45u, 0x89ab4567u);
 //  uvec3 k = uvec3(0x456789abu, 0x6789ab45u, 0x89ab4567u);

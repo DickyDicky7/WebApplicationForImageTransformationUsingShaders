@@ -433,4 +433,7 @@
     button   { text-shadow: 0 0 3px; }
     textarea { text-shadow: 0 0 3px; }
     textarea { text-shadow: 0 0 3px; }
+
+    table    { width: 100%; table-layout: fixed; }
+    table    { width: 100%; table-layout: fixed; }
 </style>

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -27,18 +27,18 @@
 //  // Control constants
     // Control constants
 //  // Control constants
-#define DITHER
-// #define DITHER
-#define     COLORDEPTH   1.0
-// #define     COLORDEPTH   1.0
-#define GREYSCALEINPUT
-// #define GREYSCALEINPUT
-#define               GREYSCALEOUTPUT
-// #define               GREYSCALEOUTPUT
-#define RESOLUTIONFACTOR 2.0
-// #define RESOLUTIONFACTOR 2.0
-#define     TRUETRIANGLE
-// #define     TRUETRIANGLE
+    #define DITHER
+//  #define DITHER
+    #define     COLORDEPTH   1.0
+//  #define     COLORDEPTH   1.0
+    #define GREYSCALEINPUT
+//  #define GREYSCALEINPUT
+    #define               GREYSCALEOUTPUT
+//  #define               GREYSCALEOUTPUT
+    #define RESOLUTIONFACTOR 2.0
+//  #define RESOLUTIONFACTOR 2.0
+    #define     TRUETRIANGLE
+//  #define     TRUETRIANGLE
 
     // Triangular function-based noise remapping
 //  // Triangular function-based noise remapping

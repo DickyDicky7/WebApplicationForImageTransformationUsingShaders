@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     //  precision lowp float;
 //  //  precision lowp float;
     precision lowp float;
@@ -10,8 +10,8 @@
     out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 //  out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 
-    // #define DEBUG_PALETTE
-//  // #define DEBUG_PALETTE
+    //  #define DEBUG_PALETTE
+//  //  #define DEBUG_PALETTE
 
     float hash21(vec2 v) {
 //  float hash21(vec2 v) {
@@ -74,12 +74,12 @@
     void main() {
     vec2 uv = vec4(vTexCoord * canvasSize, 0.0, 1.0).xy / canvasSize.yy; uv.y = 1.0f - uv.y; float scale = 5.f; vec3 col = vec3(.1f); float n; vec2 q; vec2 r; n = fbmPattern(scale * uv, q, r); vec3 baseCol = basePalette(r.x); vec3 smokeCol = smokePalette(n); col = mix(baseCol, smokeCol, pow(q.y, 1.3f));
 //  vec2 uv = vec4(vTexCoord * canvasSize, 0.0, 1.0).xy / canvasSize.yy; uv.y = 1.0f - uv.y; float scale = 5.f; vec3 col = vec3(.1f); float n; vec2 q; vec2 r; n = fbmPattern(scale * uv, q, r); vec3 baseCol = basePalette(r.x); vec3 smokeCol = smokePalette(n); col = mix(baseCol, smokeCol, pow(q.y, 1.3f));
-#ifdef DEBUG_PALETTE
-// #ifdef DEBUG_PALETTE
+    #ifdef DEBUG_PALETTE
+//  #ifdef DEBUG_PALETTE
     float x = vec4(vTexCoord * canvasSize, 0.0, 1.0).x / canvasSize.x; col = mix(col, basePalette(x), step(abs(uv.y - .03f), .02f)); col = mix(col, smokePalette(x), step(abs(uv.y - .08f), .02f));
 //  float x = vec4(vTexCoord * canvasSize, 0.0, 1.0).x / canvasSize.x; col = mix(col, basePalette(x), step(abs(uv.y - .03f), .02f)); col = mix(col, smokePalette(x), step(abs(uv.y - .08f), .02f));
-#endif
-// #endif
+    #endif
+//  #endif
 
     fragColor = vec4(col, 1);
 //  fragColor = vec4(col, 1);

@@ -1,16 +1,10 @@
-#version 300 es
-// #version 300 es
-    //  precision lowp float;
-//  //  precision lowp float;
+    #version 300 es
+//  #version 300 es
     precision lowp float;
 //  precision lowp float;
 
-    //  out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
-//  //  out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
     out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 //  out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
-
-
 
     float hash (vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
 //  float hash (vec2 p) { return fract(1e4 * sin(17.0 * p.x + p.y * 0.1) * (0.1 + abs(sin(p.y * 13.0 + p.x)))); }
@@ -35,8 +29,8 @@
     }
 //  }
 
-#define octaves 14
-// #define octaves 14
+    #define octaves 14
+//  #define octaves 14
     float fbm    (in vec2 p) { float value = 0.0; float freq = 1.0; float amp = 0.5; for (int i = 0; i < octaves; i++) { value += amp * (noise((p - vec2(1.0)) * freq)); freq *= 1.9; amp *= 0.6; } return value; }
 //  float fbm    (in vec2 p) { float value = 0.0; float freq = 1.0; float amp = 0.5; for (int i = 0; i < octaves; i++) { value += amp * (noise((p - vec2(1.0)) * freq)); freq *= 1.9; amp *= 0.6; } return value; }
     float pattern(in vec2 p) {
@@ -70,13 +64,7 @@
 //  }
 
     void main () { vec2 p = vTexCoord; p.x = 1.0 - p.x; p.x *= canvasSize.x / canvasSize.y; float value = pow(pattern(p), 2.); vec3 color = palette(value); fragColor = vec4(color, 1.0); }
-    //  void main () { vec2 p = vTexCoord; p.x = 1.0 - p.x; p.x *= canvasSize.x / canvasSize.y; float value = pow(pattern(p), 2.); vec3 color = palette(value); fragColor = vec4(color, 1.0); }
-//  //  void main () { vec2 p = vTexCoord; p.x = 1.0 - p.x; p.x *= canvasSize.x / canvasSize.y; float value = pow(pattern(p), 2.); vec3 color = palette(value); fragColor = vec4(color, 1.0); }
+//  void main () { vec2 p = vTexCoord; p.x = 1.0 - p.x; p.x *= canvasSize.x / canvasSize.y; float value = pow(pattern(p), 2.); vec3 color = palette(value); fragColor = vec4(color, 1.0); }
 
     // https://www.shadertoy.com/view/3lf3z2
 //  // https://www.shadertoy.com/view/3lf3z2
-    // https://www.shadertoy.com/view/3lf3z2
-//  // https://www.shadertoy.com/view/3lf3z2
-    // https://www.shadertoy.com/view/3lf3z2
-//  // https://www.shadertoy.com/view/3lf3z2
-

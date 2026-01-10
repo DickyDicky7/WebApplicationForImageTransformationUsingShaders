@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,8 +18,8 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#define PI 3.14159265359
-// #define PI 3.14159265359
+    #define PI 3.14159265359
+//  #define PI 3.14159265359
 
     // const   int  samples = 4;
 //  // const   int  samples = 4;

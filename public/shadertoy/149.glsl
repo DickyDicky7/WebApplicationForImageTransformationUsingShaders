@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,8 +21,8 @@
     // https://www.shadertoy.com/view/DtlXW8
 //  // https://www.shadertoy.com/view/DtlXW8
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
     float random2d(vec2 n) { return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }
 //  float random2d(vec2 n) { return fract(sin(dot(n, vec2(12.9898, 4.1414))) * 43758.5453); }

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -23,8 +23,8 @@
     // https://www.shadertoy.com/view/wdKyDt
 //  // https://www.shadertoy.com/view/wdKyDt
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
     mat2 get_rotation_matirx(float rot) { return mat2( cos(rot), -sin(rot), sin(rot), cos(rot) ); }
 //  mat2 get_rotation_matirx(float rot) { return mat2( cos(rot), -sin(rot), sin(rot), cos(rot) ); }

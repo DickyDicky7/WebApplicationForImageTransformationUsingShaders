@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,8 +18,8 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#include "lygia/color/blend/softLight.glsl"
-// #include "lygia/color/blend/softLight.glsl"
+    #include "lygia/color/blend/softLight.glsl"
+//  #include "lygia/color/blend/softLight.glsl"
 
     uniform  vec3   blend; // 0.0, 0.0, 0.0
 //  uniform  vec3   blend; // 0.0, 0.0, 0.0

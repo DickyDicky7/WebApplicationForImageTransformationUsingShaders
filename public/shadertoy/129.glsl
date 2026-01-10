@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,8 +21,8 @@
     // https://www.shadertoy.com/view/fdsXzM
 //  // https://www.shadertoy.com/view/fdsXzM
 
-#define pi 3.141592653589793
-// #define pi 3.141592653589793
+    #define pi 3.141592653589793
+//  #define pi 3.141592653589793
 
 
     float hash(in vec2 uv) {

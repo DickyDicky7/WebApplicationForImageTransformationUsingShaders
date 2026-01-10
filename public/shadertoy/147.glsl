@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,8 +21,8 @@
     // https://www.shadertoy.com/view/Wdtyzj
 //  // https://www.shadertoy.com/view/Wdtyzj
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
 
     float rand(vec2 co) { return fract(sin(dot(co.xy, vec2(12.9898f, 78.233f))) * 43758.5453f); }

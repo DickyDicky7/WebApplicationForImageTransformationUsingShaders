@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -27,8 +27,8 @@
 //  //#define TEST
     //#define TEST
 //  //#define TEST
-#define SMOOTH
-// #define SMOOTH
+    #define SMOOTH
+//  #define SMOOTH
 
     float checkerDisplay( vec2 uv, float intens, float offset)
 //  float checkerDisplay( vec2 uv, float intens, float offset)
@@ -97,8 +97,8 @@
     power = mix(power, 0.0, smoothstep( 00.66, 00.50, lum     ));
 //  power = mix(power, 0.0, smoothstep( 00.66, 00.50, lum     ));
     
-#ifdef SMOOTH
-// #ifdef SMOOTH
+    #ifdef SMOOTH
+//  #ifdef SMOOTH
     vec2  delta = vec2(0.0, 0.2);
 //  vec2  delta = vec2(0.0, 0.2);
     float color = checkerDisplay(uv2           , power, offset)
@@ -109,12 +109,12 @@
 //  + checkerDisplay(uv2 + delta.yx, power, offset);
     color =                                color  /  3.0  * lum_scale;
 //  color =                                color  /  3.0  * lum_scale;
-#else
-// #else
+    #else
+//  #else
     float color = checkerDisplay(uv2           , power, offset) * lum_scale;
 //  float color = checkerDisplay(uv2           , power, offset) * lum_scale;
-#endif
-// #endif
+    #endif
+//  #endif
 
     if ( lum_orig < 0.5 )
 //  if ( lum_orig < 0.5 )
@@ -138,16 +138,16 @@
     vec2 uv  = vTexCoord;
 //  vec2 uv  = vTexCoord;
 
-#ifdef TEST
-// #ifdef TEST
+    #ifdef TEST
+//  #ifdef TEST
     vec3 col =    vec3( uv.x     )    ;
 //  vec3 col =    vec3( uv.x     )    ;
-#else
-// #else
+    #else
+//  #else
     vec3 col = texture( tex0, uv ).xyz;
 //  vec3 col = texture( tex0, uv ).xyz;
-#endif
-// #endif
+    #endif
+//  #endif
     float                          luminance = dot(col, W);
 //  float                          luminance = dot(col, W);
     float color = processLum( uv , luminance )            ;
@@ -164,14 +164,14 @@
     , color);
 //  , color);
 
-#ifdef TEST
-// #ifdef TEST
+    #ifdef TEST
+//  #ifdef TEST
     if (uv.y > 0.7)
 //  if (uv.y > 0.7)
     outputColor = col ;
 //  outputColor = col ;
-#endif
-// #endif
+    #endif
+//  #endif
     fragColor = vec4(outputColor , 1.0);
 //  fragColor = vec4(outputColor , 1.0);
     }

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,10 +21,10 @@
     // https://www.shadertoy.com/view/4fGfzR
 //  // https://www.shadertoy.com/view/4fGfzR
 
-#define Pi         3.1415926535897932384626433832795
-// #define Pi         3.1415926535897932384626433832795
-#define Distortion 0.5 * 1.0 * (sin(time - 0.5 * Pi) + 1.0)
-// #define Distortion 0.5 * 1.0 * (sin(time - 0.5 * Pi) + 1.0)
+    #define Pi         3.1415926535897932384626433832795
+//  #define Pi         3.1415926535897932384626433832795
+    #define Distortion 0.5 * 1.0 * (sin(time - 0.5 * Pi) + 1.0)
+//  #define Distortion 0.5 * 1.0 * (sin(time - 0.5 * Pi) + 1.0)
 
     float GetRot(vec2 uv, vec2 a) { vec2 b = uv - a; b.x *= canvasSize.x / canvasSize.y; vec2 j = vec2(0.0, 1.0); return acos(dot(b, j) / length(b)) * (abs(mod(b.x, 4.0 * Pi) - 2.0 * Pi) / (2.0 * Pi - mod(b.x, 4.0 * Pi))); }
 //  float GetRot(vec2 uv, vec2 a) { vec2 b = uv - a; b.x *= canvasSize.x / canvasSize.y; vec2 j = vec2(0.0, 1.0); return acos(dot(b, j) / length(b)) * (abs(mod(b.x, 4.0 * Pi) - 2.0 * Pi) / (2.0 * Pi - mod(b.x, 4.0 * Pi))); }

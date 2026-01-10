@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -16,8 +16,8 @@
     uniform vec2           texelSize;
 //  uniform vec2           texelSize;
 
-#define COLORED 1
-// #define COLORED 1
+    #define COLORED 1
+//  #define COLORED 1
 
     void main() {
     vec2 center = floor(vec4(vTexCoord * canvasSize, 0.0, 1.0).xy / 16.0) * 16.0 + 8.0;

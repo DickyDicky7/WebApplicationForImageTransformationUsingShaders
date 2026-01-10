@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -25,8 +25,8 @@
     // https://www.shadertoy.com/view/wd3fR8
 //  // https://www.shadertoy.com/view/wd3fR8
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
     float get_ratio(float ratio, float start, float finish, float power) { return pow((step(start, ratio) * step(-finish, -ratio) * (ratio - start) / (finish - start)), power); }
 //  float get_ratio(float ratio, float start, float finish, float power) { return pow((step(start, ratio) * step(-finish, -ratio) * (ratio - start) / (finish - start)), power); }

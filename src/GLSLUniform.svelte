@@ -316,7 +316,6 @@
         {@const uniformType: string = uniform.thisUniformType ?? ""}
         <div class="container">
             <span>{uniform.thisUniformNameJustForDisplay ?? uniform.thisUniformName} ({uniform.thisUniformType}):</span>
-            <div class="space"></div>
             <!-- Render inputs based on type -->
             {#if (
                 uniformType.startsWith( "vec") ||
@@ -361,7 +360,6 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="space"></div>
             {:else if uniformType.startsWith("mat") && uniform.thisUniformDefaultValue instanceof Array}
                 {#if uniform.thisUniformDefaultValue.length === 4}
                     <table class="center-align large-elevate">
@@ -507,7 +505,6 @@
                         </tbody>
                     </table>
                 {/if}
-                <div class="space"></div>
             {:else if uniformType === "bool" && typeof uniform.thisUniformDefaultValue === "boolean"}
                 <label class="switch center-align icon">
                     <input type="checkbox"
@@ -518,7 +515,6 @@
                         <i class="blue        white-text"></i>
                     </span>
                 </label>
-                <div class="space"></div>
             {:else if uniformType === "float" || uniformType === "int" || uniformType === "uint"}
                 <div class="row center-align middle-align">
                     <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
@@ -542,7 +538,6 @@
                         <i class="fa-solid fa-caret-right white-text"></i>
                     </button>
                 </div>
-                <div class="space"></div>
             {:else if (uniformType === "sampler2D" || uniformType  === "sampler3D") && typeof uniform.thisUniformDefaultValue === "string"}
                 <div class="max center-align">
                     <img class="max center-align small-width small-height no-round"
@@ -578,7 +573,6 @@
                         <i class="fa-solid fa-chevron-down"></i>
                     </div>
                 {/if}
-                <div class="space"></div>
             {:else}
                 <span>Unsupported type</span>
                 <span>Unsupported type</span>
@@ -589,8 +583,8 @@
 </div>
 
 <style>
-    .container{ display: flex; flex-direction: column; }
-    .container{ display: flex; flex-direction: column; }
+    .container { display: flex; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem; }
+    .container { display: flex; flex-direction: row; justify-content: space-between; align-items: center; flex-wrap: wrap; margin-bottom: 0.5rem; }
 
     i        { text-shadow: 0 0 3px; }
     i        { text-shadow: 0 0 3px; }

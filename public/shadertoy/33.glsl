@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,12 +18,12 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#define   scale  12.00
-// #define   scale  12.00
-#define amp     (00.02 + sin(time) * 00.02)
-// #define amp     (00.02 + sin(time) * 00.02)
-#define rgbDiff  00.15
-// #define rgbDiff  00.15
+    #define   scale  12.00
+//  #define   scale  12.00
+    #define amp     (00.02 + sin(time) * 00.02)
+//  #define amp     (00.02 + sin(time) * 00.02)
+    #define rgbDiff  00.15
+//  #define rgbDiff  00.15
 
     // Simplex noise implementation
 //  // Simplex noise implementation

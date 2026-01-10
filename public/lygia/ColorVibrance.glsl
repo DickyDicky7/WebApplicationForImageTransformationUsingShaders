@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,8 +18,8 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#include "lygia/color/vibrance.glsl"
-// #include "lygia/color/vibrance.glsl"
+    #include "lygia/color/vibrance.glsl"
+//  #include "lygia/color/vibrance.glsl"
 
 
     //const float amountVibrance; // 0.0

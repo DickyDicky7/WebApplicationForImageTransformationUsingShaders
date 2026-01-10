@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     //  precision lowp float;
 //  //  precision lowp float;
     precision lowp float;
@@ -48,8 +48,8 @@
     }
 //  }
 
-#define OCTAVES 16
-// #define OCTAVES 16
+    #define OCTAVES 16
+//  #define OCTAVES 16
     float fbm(in vec2 st) {
 //  float fbm(in vec2 st) {
     // Initial values

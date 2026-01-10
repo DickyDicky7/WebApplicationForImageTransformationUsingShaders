@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -29,8 +29,8 @@
 //  float size  ; // 6.0
     float angle ; // 0.0
 //  float angle ; // 0.0
-#define SEPERATE_CHANNELS
-// #define SEPERATE_CHANNELS
+    #define SEPERATE_CHANNELS
+//  #define SEPERATE_CHANNELS
 
     const float sin30 =      0.5          ;
 //  const float sin30 =      0.5          ;
@@ -202,8 +202,8 @@
     
     vec3                          ratio  ;
 //  vec3                          ratio  ;
-#ifdef SEPERATE_CHANNELS
-// #ifdef SEPERATE_CHANNELS
+    #ifdef SEPERATE_CHANNELS
+//  #ifdef SEPERATE_CHANNELS
     mat2 mr = rotm(radians(15.0 + angle));
 //  mat2 mr = rotm(radians(15.0 + angle));
     mat2 mg = rotm(radians(45.0 + angle));
@@ -217,12 +217,12 @@
 //  ratio.g = halftone_dist(vec4(vTexCoord * canvasSize, 0.0, 1.0).xy, mg).g;
     ratio.b = halftone_dist(vec4(vTexCoord * canvasSize, 0.0, 1.0).xy, mb).b;
 //  ratio.b = halftone_dist(vec4(vTexCoord * canvasSize, 0.0, 1.0).xy, mb).b;
-#else
-// #else
+    #else
+//  #else
     ratio   = halftone_dist(vec4(vTexCoord * canvasSize, 0.0, 1.0).xy, mb)  ;
 //  ratio   = halftone_dist(vec4(vTexCoord * canvasSize, 0.0, 1.0).xy, mb)  ;
-#endif
-// #endif
+    #endif
+//  #endif
     
     vec3               col = vec3(1.);
 //  vec3               col = vec3(1.);

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -24,39 +24,39 @@
 //  // Enabling glitch effects
     // Enabling glitch effects
 //  // Enabling glitch effects
-#define ANALOG
-// #define ANALOG
-#define DIGITAL
-// #define DIGITAL
-#define     CRT
-// #define     CRT
+    #define ANALOG
+//  #define ANALOG
+    #define DIGITAL
+//  #define DIGITAL
+    #define     CRT
+//  #define     CRT
 
     // Duration of glitch loop and activation percentage
 //  // Duration of glitch loop and activation percentage
     // Duration of glitch loop and activation percentage
 //  // Duration of glitch loop and activation percentage
-#define DURATION 5.0
-// #define DURATION 5.0
-#define AMT      0.5 
-// #define AMT      0.5 
+    #define DURATION 5.0
+//  #define DURATION 5.0
+    #define AMT      0.5 
+//  #define AMT      0.5 
 
     // Smoothstep function
 //  // Smoothstep function
     // Smoothstep function
 //  // Smoothstep function
-#define SS(a, b, x) (smoothstep(a, b, x) * smoothstep(b, a, x))
-// #define SS(a, b, x) (smoothstep(a, b, x) * smoothstep(b, a, x))
+    #define SS(a, b, x) (smoothstep(a, b, x) * smoothstep(b, a, x))
+//  #define SS(a, b, x) (smoothstep(a, b, x) * smoothstep(b, a, x))
 
-#define UI0 1597334673U
-// #define UI0 1597334673U
-#define UI1 3812015801U
-// #define UI1 3812015801U
-#define UI2 uvec2(UI0, UI1)
-// #define UI2 uvec2(UI0, UI1)
-#define UI3 uvec3(UI0, UI1, 2798796415U)
-// #define UI3 uvec3(UI0, UI1, 2798796415U)
-#define UIF (1. / float(0xffffffffU))
-// #define UIF (1. / float(0xffffffffU))
+    #define UI0 1597334673U
+//  #define UI0 1597334673U
+    #define UI1 3812015801U
+//  #define UI1 3812015801U
+    #define UI2 uvec2(UI0, UI1)
+//  #define UI2 uvec2(UI0, UI1)
+    #define UI3 uvec3(UI0, UI1, 2798796415U)
+//  #define UI3 uvec3(UI0, UI1, 2798796415U)
+    #define UIF (1. / float(0xffffffffU))
+//  #define UIF (1. / float(0xffffffffU))
 
     // Hash by David_Hoskins - adapted for GLSL ES
 //  // Hash by David_Hoskins - adapted for GLSL ES
@@ -217,14 +217,14 @@
     vec2           st  = vec2(0.0                    );
 //  vec2           st  = vec2(0.0                    );
 
-#ifdef CRT
-// #ifdef CRT
+    #ifdef CRT
+//  #ifdef CRT
     uv            = crt(uv * 2.0 - 1.0);
 //  uv            = crt(uv * 2.0 - 1.0);
     displayNoise +=                1.0 ;
 //  displayNoise +=                1.0 ;
-#endif
-// #endif
+    #endif
+//  #endif
 
     // Analog distortion
 //  // Analog distortion
@@ -237,8 +237,8 @@
     distortion *= gnoise(vec3(0.0, y * 0.02, t * 250.0)) * (glitchAmount * 2.0 + 0.025);
 //  distortion *= gnoise(vec3(0.0, y * 0.02, t * 250.0)) * (glitchAmount * 2.0 + 0.025);
 
-#ifdef ANALOG
-// #ifdef ANALOG
+    #ifdef ANALOG
+//  #ifdef ANALOG
     displayNoise += 1.0;
 //  displayNoise += 1.0;
     distortion += smoothstep(0.999, 1.0, sin((uv.y + t * 1.6) * 2.0)) * 0.02;
@@ -253,15 +253,15 @@
 //  col.g += texture(tex0, st                   ).g;
     col.b += texture(tex0, st - eps - distortion).b;
 //  col.b += texture(tex0, st - eps - distortion).b;
-#else
-// #else
+    #else
+//  #else
     col   += texture(tex0, uv).xyz;
 //  col   += texture(tex0, uv).xyz;
-#endif
-// #endif
+    #endif
+//  #endif
 
-#ifdef DIGITAL
-// #ifdef DIGITAL
+    #ifdef DIGITAL
+//  #ifdef DIGITAL
     // Digital blocky distortion
 //  // Digital blocky distortion
     // Digital blocky distortion
@@ -300,8 +300,8 @@
 //  col.g += texture(tex0, st      ).g * block;
     col.b += texture(tex0, st - eps).b * block;
 //  col.b += texture(tex0, st - eps).b * block;
-#endif
-// #endif
+    #endif
+//  #endif
 
     // White noise + scanlines
 //  // White noise + scanlines
@@ -314,8 +314,8 @@
     col -= (0.25 + 0.75 * glitchAmount) * (sin   (4.0    *   t + uv.y * canvasSize.y * 1.750)             ) * displayNoise;
 //  col -= (0.25 + 0.75 * glitchAmount) * (sin   (4.0    *   t + uv.y * canvasSize.y * 1.750)             ) * displayNoise;
 
-#ifdef CRT
-// #ifdef CRT
+    #ifdef CRT
+//  #ifdef CRT
     // CRT vignette effect
 //  // CRT vignette effect
     // CRT vignette effect
@@ -332,8 +332,8 @@
 //  if (uv.x < 0.0
     ||  uv.x > 1.0)  col *= 0.0 ;
 //  ||  uv.x > 1.0)  col *= 0.0 ;
-#endif
-// #endif
+    #endif
+//  #endif
 
     fragColor = vec4(col ,  1.0);
 //  fragColor = vec4(col ,  1.0);

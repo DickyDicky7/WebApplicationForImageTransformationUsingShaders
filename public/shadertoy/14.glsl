@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,12 +18,12 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-    // #define THRESHOLD .5 // @@edge@@ threshold
-//  // #define THRESHOLD .5 // @@edge@@ threshold
-    // #define LEVELS    10 // @number@ @@@of@@@@ posterization levels
-//  // #define LEVELS    10 // @number@ @@@of@@@@ posterization levels
-    // #define RADIUS     5 // kuwahara @@@window
-//  // #define RADIUS     5 // kuwahara @@@window
+    //  #define THRESHOLD .5 // @@edge@@ threshold
+//  //  #define THRESHOLD .5 // @@edge@@ threshold
+    //  #define LEVELS    10 // @number@ @@@of@@@@ posterization levels
+//  //  #define LEVELS    10 // @number@ @@@of@@@@ posterization levels
+    //  #define RADIUS     5 // kuwahara @@@window
+//  //  #define RADIUS     5 // kuwahara @@@window
 
     uniform float THRESHOLD ; // 0.5
 //  uniform float THRESHOLD ; // 0.5

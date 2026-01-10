@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,8 +21,8 @@
     // https://www.shadertoy.com/view/43GcDD
 //  // https://www.shadertoy.com/view/43GcDD
 
-#define SPEED_MULT 0.8f
-// #define SPEED_MULT 0.8f
+    #define SPEED_MULT 0.8f
+//  #define SPEED_MULT 0.8f
 
     void main()
     {

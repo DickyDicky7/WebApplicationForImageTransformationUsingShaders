@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,10 +18,10 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#define t       time
-// #define t       time
-#define r canvasSize.xy
-// #define r canvasSize.xy
+    #define t       time
+//  #define t       time
+    #define r canvasSize.xy
+//  #define r canvasSize.xy
 
     void main(  ) {
     vec3  c       ;

@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -58,17 +58,17 @@
     vec3  COLOR_SKY = INPUT_COLOR_SKY * 0.9;
 //  vec3  COLOR_SKY = INPUT_COLOR_SKY * 0.9;
 
-    // #define DEBUG_NORMAL
-//  // #define DEBUG_NORMAL
-    // #define DEBUG_LIGHT@
-//  // #define DEBUG_LIGHT@
+    //  #define DEBUG_NORMAL
+//  //  #define DEBUG_NORMAL
+    //  #define DEBUG_LIGHT@
+//  //  #define DEBUG_LIGHT@
 
-#define PHI 1.61803399
-// #define PHI 1.61803399
-#define TAU 6.28318531
-// #define TAU 6.28318531
-#define ASPECT (canvasSize.x / canvasSize.y)
-// #define ASPECT (canvasSize.x / canvasSize.y)
+    #define PHI 1.61803399
+//  #define PHI 1.61803399
+    #define TAU 6.28318531
+//  #define TAU 6.28318531
+    #define ASPECT (canvasSize.x / canvasSize.y)
+//  #define ASPECT (canvasSize.x / canvasSize.y)
 
     // Helper functions
 //  // Helper functions

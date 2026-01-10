@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -22,15 +22,15 @@
 //  // Maximum number of cells a ripple can cross.
     // Maximum number of cells a ripple can cross.
 //  // Maximum number of cells a ripple can cross.
-#define    MAX_RADIUS 2
-// #define    MAX_RADIUS 2
+    #define    MAX_RADIUS 2
+//  #define    MAX_RADIUS 2
 
     // Set to 1 to hash twice. Slower, but less patterns.
 //  // Set to 1 to hash twice. Slower, but less patterns.
     // Set to 1 to hash twice. Slower, but less patterns.
 //  // Set to 1 to hash twice. Slower, but less patterns.
-#define DOUBLE_HASH   0
-// #define DOUBLE_HASH   0
+    #define DOUBLE_HASH   0
+//  #define DOUBLE_HASH   0
 
     // Hash functions shamefully stolen from:
 //  // Hash functions shamefully stolen from:
@@ -40,10 +40,10 @@
 //  // https://www.shadertoy.com/view/4djSRW
     // https://www.shadertoy.com/view/4djSRW
 //  // https://www.shadertoy.com/view/4djSRW
-#define HASHSCALE1      .1031
-// #define HASHSCALE1      .1031
-#define HASHSCALE3 vec3(.1031, .1030, .0973)
-// #define HASHSCALE3 vec3(.1031, .1030, .0973)
+    #define HASHSCALE1      .1031
+//  #define HASHSCALE1      .1031
+    #define HASHSCALE3 vec3(.1031, .1030, .0973)
+//  #define HASHSCALE3 vec3(.1031, .1030, .0973)
 
     float hash12(vec2 p)
 //  float hash12(vec2 p)
@@ -101,11 +101,11 @@
 //  vec2 hsh =      hash22(
     pi         );
 //  pi         );
-            #else
+    #else
 //          #else
     vec2 hsh = pi          ;
 //  vec2 hsh = pi          ;
-            #endif
+    #endif
 //          #endif
     vec2   p = pi + hash22(
 //  vec2   p = pi + hash22(

@@ -203,6 +203,8 @@
 //  let isLoading = $state(false);
     //  let isLoading: boolean = false;
 //  //  let isLoading: boolean = false;
+    let isInitializing: boolean = $state(true);
+//  let isInitializing: boolean = $state(true);
 
     const p5Logic = (p: p5): void => {
 //  const p5Logic = (p: p5): void => {
@@ -337,10 +339,26 @@
 
     svelte.onMount(async (): Promise<void> => {
 //  svelte.onMount(async (): Promise<void> => {
+        isInitializing = true;
+//      isInitializing = true;
+        await new Promise(r => setTimeout(r, 100)); // Yield to render initial loading state
+//      await new Promise(r => setTimeout(r, 100)); // Yield to render initial loading state
+
+        await ui("theme", "#000000");
+//      await ui("theme", "#000000");
+        await ui("mode", "dark");
+//      await ui("mode", "dark");
+        await new Promise(r => setTimeout(r, 0)); // Yield
+//      await new Promise(r => setTimeout(r, 0)); // Yield
+
         let bgShader: p5.Shader = null!;
 //      let bgShader: p5.Shader = null!;
         let chosenBG: string = await loadAsset(bgURLs[Math.floor(Math.random() * 5)]);
 //      let chosenBG: string = await loadAsset(bgURLs[Math.floor(Math.random() * 5)]);
+
+        await new Promise(r => setTimeout(r, 0)); // Yield
+//      await new Promise(r => setTimeout(r, 0)); // Yield
+
         let bgCanvasInstance: p5 = new p5((p: p5): void => {
 //      let bgCanvasInstance: p5 = new p5((p: p5): void => {
             p.setup = async (): Promise<void> => {
@@ -387,6 +405,10 @@
 //          };
         }, canvasBG);
 //      }, canvasBG);
+
+        await new Promise(r => setTimeout(r, 50)); // Yield for BG canvas init
+//      await new Promise(r => setTimeout(r, 50)); // Yield for BG canvas init
+
         canvasInstance = new p5(p5Logic, canvas);
 //      canvasInstance = new p5(p5Logic, canvas);
         /*
@@ -399,10 +421,11 @@
         canvasInstance.WEBGL,        );
 //      canvasInstance.WEBGL,        );
         */
-        await ui("theme", "#000000");
-//      await ui("theme", "#000000");
-        await ui("mode", "dark");
-//      await ui("mode", "dark");
+
+        await new Promise(r => setTimeout(r, 50)); // Final yield
+//      await new Promise(r => setTimeout(r, 50)); // Final yield
+        isInitializing = false;
+//      isInitializing = false;
     });
 //  });
 
@@ -2087,6 +2110,14 @@
 <!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
 <MouseCursor></MouseCursor>
+{#if isInitializing}
+    <div out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: #000; z-index: 9999; display: flex; justify-content: center; align-items: center; color: white;">
+        <div class="row center-align">
+            <h5 class="margin">Loading...</h5>
+            <progress class="circle deep-orange"></progress>
+        </div>
+    </div>
+{/if}
 <main>
     <div class="container">
     <!--<div class="headerContainer"></div>-->
@@ -2300,9 +2331,9 @@
                     <!--<div class="tiny-space"></div>-->
                         <div class="tiny-space"></div>
                     <!--<div class="tiny-space"></div>-->
-                    <!--<div class="medium-padding" in:t.fade out:t.blur>-->
-                        <div class="medium-padding" in:t.fade out:t.blur>
-                    <!--<div class="medium-padding" in:t.fade out:t.blur>-->
+                    <!--<div class="medium-padding" in:t.fly={{x: -100}} out:t.fly={{x: +100}}>-->
+                        <div class="medium-padding" in:t.fly={{x: -100}} out:t.fly={{x: +100}}>
+                    <!--<div class="medium-padding" in:t.fly={{x: -100}} out:t.fly={{x: +100}}>-->
                         {#if effect.fragmentShaderSourceType________ === "NI"}
                             <div class="row">
                                 <div class="field label suffix round max large-elevate white-text slow-ripple">
@@ -2467,20 +2498,28 @@
                             {#if effectIndex > 0}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple max large-elevate grey10 white-text" onclick={async (e) => await handleMoveEffectUp(effectIndex)}>-->
                                 <button class="slow-ripple max large-elevate grey10 white-text" onclick={async (e) => await handleMoveEffectUp(effectIndex)}>
+                            <!--<button class="slow-ripple max large-elevate grey10 white-text" onclick={async (e) => await handleMoveEffectUp(effectIndex)}>-->
                                 <!--<i class="fa-solid fa-chevron-up white-text"></i>-->
                                     <i class="fa-solid fa-chevron-up white-text"></i>
                                 <!--<i class="fa-solid fa-chevron-up white-text"></i>-->
+                            <!--</button>-->
                                 </button>
+                            <!--</button>-->
                             {/if}
                             {#if effectIndex < global.globalState.effectsUsedForFiltering.length - 1}
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
+                            <!--<button class="slow-ripple max large-elevate grey10 white-text" onclick={async (e) => await handleMoveEffectDown(effectIndex)}>-->
                                 <button class="slow-ripple max large-elevate grey10 white-text" onclick={async (e) => await handleMoveEffectDown(effectIndex)}>
+                            <!--<button class="slow-ripple max large-elevate grey10 white-text" onclick={async (e) => await handleMoveEffectDown(effectIndex)}>-->
                                 <!--<i class="fa-solid fa-chevron-down white-text"></i>-->
                                     <i class="fa-solid fa-chevron-down white-text"></i>
                                 <!--<i class="fa-solid fa-chevron-down white-text"></i>-->
+                            <!--</button>-->
                                 </button>
+                            <!--</button>-->
                             {/if}
                         </div>
                     </div>
@@ -2588,61 +2627,60 @@
 
 <style>
 
-    i        { text-shadow: 0 0 3px; }
-    i        { text-shadow: 0 0 3px; }
-    h6       { text-shadow: 0 0 3px; }
-    h6       { text-shadow: 0 0 3px; }
-    span     { text-shadow: 0 0 3px; }
-    span     { text-shadow: 0 0 3px; }
-    label    { text-shadow: 0 0 3px; }
-    label    { text-shadow: 0 0 3px; }
-    input    { text-shadow: 0 0 3px; }
-    input    { text-shadow: 0 0 3px; }
-    select   { text-shadow: 0 0 3px; }
-    select   { text-shadow: 0 0 3px; }
-    option   { text-shadow: 0 0 3px; }
-    option   { text-shadow: 0 0 3px; }
+    i { text-shadow: 0 0 3px; }
+    i { text-shadow: 0 0 3px; }
+    h6 { text-shadow: 0 0 3px; }
+    h6 { text-shadow: 0 0 3px; }
+    span { text-shadow: 0 0 3px; }
+    span { text-shadow: 0 0 3px; }
+    label { text-shadow: 0 0 3px; }
+    label { text-shadow: 0 0 3px; }
+    input { text-shadow: 0 0 3px; }
+    input { text-shadow: 0 0 3px; }
+    select { text-shadow: 0 0 3px; }
+    select { text-shadow: 0 0 3px; }
+    option { text-shadow: 0 0 3px; }
+    option { text-shadow: 0 0 3px; }
     progress { text-shadow: 0 0 3px; }
     progress { text-shadow: 0 0 3px; }
-
-    main { overflow-x: auto; overflow-y: auto; scroll-behavior: smooth; width: 100vw; height: 100vh; }
-    main { overflow-x: auto; overflow-y: auto; scroll-behavior: smooth; width: 100vw; height: 100vh; }
-    *    {                                     scroll-behavior: smooth;                              }
-    *    {                                     scroll-behavior: smooth;                              }
-    @font-face { font-family: 'SF Mono Regular'; font-weight: normal; font-style: normal; src: url('./assets/fonts/SF-Mono-Regular.otf') format('opentype'); }
-    @font-face { font-family: 'SF Mono Regular'; font-weight: normal; font-style: normal; src: url('./assets/fonts/SF-Mono-Regular.otf') format('opentype'); }
-    *          { font-family: 'SF Mono Regular', 'fontawesome'; }
-    *          { font-family: 'SF Mono Regular', 'fontawesome'; }
-
-    .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }
-    .container        { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column;                                                                                        }
+    main { overflow: hidden; width: 100vw; height: 100vh; }
+    main { overflow: hidden; width: 100vw; height: 100vh; }
+    * { scroll-behavior: smooth; }
+    * { scroll-behavior: smooth; }
+    @font-face { font-family: "SF Mono Regular"; font-weight: normal; font-style: normal; src: url("./assets/fonts/SF-Mono-Regular.otf") format("opentype"); }
+    @font-face { font-family: "SF Mono Regular"; font-weight: normal; font-style: normal; src: url("./assets/fonts/SF-Mono-Regular.otf") format("opentype"); }
+    * { font-family: "SF Mono Regular", "fontawesome"; }
+    * { font-family: "SF Mono Regular", "fontawesome"; }
+    .container { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column; }
+    .container { width: 100vw; height: 100vh; position: relative; display: flex; flex-direction: column; }
     /*
-    .headerContainer  { width: 100% ;                                                                                                                                                                  }
-    .headerContainer  { width: 100% ;                                                                                                                                                                  }
-    .footerContainer  { width: 100% ;                                                                                                                                                                  }
-    .footerContainer  { width: 100% ;                                                                                                                                                                  }
+    .headerContainer { width: 100% ; }
+    .headerContainer { width: 100% ; }
+    .footerContainer { width: 100% ; }
+    .footerContainer { width: 100% ; }
     */
-    .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
-    .topBarContainer  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between;                                                        }
-    .mainBarContainer { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }
-    .mainBarContainer { width: 100% ; height: 100% ;                     display: flex; flex-direction: row   ;                                                                                        }
-    .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
-    .sideBarContainer { width: 030% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
-    .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
-    .canvasContainer  { width: 070% ; height: 100% ;                     display: flex; flex-direction: column;                                                                                        }
-    .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
-    .canvasToolBoxes  { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: space-between; align-items: center;                                   }
-    .canvas           { width: 100% ;                                                                                                                                overflow  : auto;                 }
-    .canvas           { width: 100% ;                                    display: flex; flex-direction: row   ; justify-content: center       ; align-items: center; overflow  : auto; flex-grow: 1;   }
-    .dialog           { width: 050% ;                                                                                                                                                                  }
-    .dialog           { width: 050% ;                                                                                                                                                                  }
-    .effectContainer  {               height: 100% ;                                                                                                                 overflow  : auto;                 }
-    .effectContainer  {               height: 100% ;                                                                                                                 overflow  : auto;                 }
-    .dialogSide       { width: 030% ;                                                                                                                                                                  }
-    .dialogSide       { width: 030% ;                                                                                                                                                                  }
-    .toolTip          { width: 200px;                                                                                                                                                                  }
-    .toolTip          { width: 200px;                                                                                                                                                                  }
-
+    .topBarContainer { width: 100% ; display: flex; flex-direction: row; justify-content: space-between; }
+    .topBarContainer { width: 100% ; display: flex; flex-direction: row; justify-content: space-between; }
+    .mainBarContainer { width: 100% ; height: 100% ; display: flex; flex-direction: row; }
+    .mainBarContainer { width: 100% ; height: 100% ; display: flex; flex-direction: row; }
+    .sideBarContainer { width: 025% ; height: 100% ; display: flex; flex-direction: column; order: 2; overflow: hidden; }
+    .sideBarContainer { width: 025% ; height: 100% ; display: flex; flex-direction: column; order: 2; overflow: hidden; }
+    .canvasContainer { width: 075% ; height: 100% ; display: flex; flex-direction: column; order: 1; }
+    .canvasContainer { width: 075% ; height: 100% ; display: flex; flex-direction: column; order: 1; }
+    .canvasToolBoxes { width: 100% ; display: flex; flex-direction: row; justify-content: space-between; align-items: center; }
+    .canvasToolBoxes { width: 100% ; display: flex; flex-direction: row; justify-content: space-between; align-items: center; }
+    .canvas { width: 100% ; height: 100%; display: flex; overflow: auto; flex-grow: 1; }
+    .canvas { width: 100% ; height: 100%; display: flex; overflow: auto; flex-grow: 1; }
+    .canvas > div { margin: auto; }
+    .canvas > div { margin: auto; }
+    .dialog { width: 050%; }
+    .dialog { width: 050%; }
+    .effectContainer { height: auto; min-height: 0; flex-grow: 1; overflow-y: auto; }
+    .effectContainer { height: auto; min-height: 0; flex-grow: 1; overflow-y: auto; }
+    .dialogSide { width: 030%; }
+    .dialogSide { width: 030%; }
+    .toolTip { width: 200px; }
+    .toolTip { width: 200px; }
     .switch > input:checked + span:after { border: none; background-color: #222222           ;                          box-shadow: 0 0 10px #222222;                               }
     .switch > input:checked + span:after { border: none; background-color: #222222           ;                          box-shadow: 0 0 10px #222222;                               }
     .switch >                 span:after {                   border-color: #222222 !important; background: #ffffff22; box-shadow: 0 0 10px #222222; border-width: 3px !important; }

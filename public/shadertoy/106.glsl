@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -29,25 +29,25 @@
 //  // Quick way to toggle filter using the preprocessor. Just set to 0 to disable or anything else to enable.
     // Quick way to toggle filter using the preprocessor. Just set to 0 to disable or anything else to enable.
 //  // Quick way to toggle filter using the preprocessor. Just set to 0 to disable or anything else to enable.
-#define FILTERED 1
-// #define FILTERED 1
+    #define FILTERED 1
+//  #define FILTERED 1
     // Define how large the entire Kuwahara kernel is. Don't set these to 0! Odd values work best.
 //  // Define how large the entire Kuwahara kernel is. Don't set these to 0! Odd values work best.
     // Define how large the entire Kuwahara kernel is. Don't set these to 0! Odd values work best.
 //  // Define how large the entire Kuwahara kernel is. Don't set these to 0! Odd values work best.
-#define KERNEL_WIDTH  5
-// #define KERNEL_WIDTH  5
-#define KERNEL_HEIGHT 5
-// #define KERNEL_HEIGHT 5
+    #define KERNEL_WIDTH  5
+//  #define KERNEL_WIDTH  5
+    #define KERNEL_HEIGHT 5
+//  #define KERNEL_HEIGHT 5
 
     // Need to initialize quadrants here, since float arrays need constants
 //  // Need to initialize quadrants here, since float arrays need constants
     // Need to initialize quadrants here, since float arrays need constants
 //  // Need to initialize quadrants here, since float arrays need constants
-#define QUADRANT_WIDTH  int(ceil(float(KERNEL_WIDTH ) / 2.0))
-// #define QUADRANT_WIDTH  int(ceil(float(KERNEL_WIDTH ) / 2.0))
-#define QUADRANT_HEIGHT int(ceil(float(KERNEL_HEIGHT) / 2.0))
-// #define QUADRANT_HEIGHT int(ceil(float(KERNEL_HEIGHT) / 2.0))
+    #define QUADRANT_WIDTH  int(ceil(float(KERNEL_WIDTH ) / 2.0))
+//  #define QUADRANT_WIDTH  int(ceil(float(KERNEL_WIDTH ) / 2.0))
+    #define QUADRANT_HEIGHT int(ceil(float(KERNEL_HEIGHT) / 2.0))
+//  #define QUADRANT_HEIGHT int(ceil(float(KERNEL_HEIGHT) / 2.0))
 
     // Helper struct to store info about each of the quadrants
 //  // Helper struct to store info about each of the quadrants

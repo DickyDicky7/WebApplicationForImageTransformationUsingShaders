@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,8 +21,8 @@
     // https://www.shadertoy.com/view/ddVyzG
 //  // https://www.shadertoy.com/view/ddVyzG
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
 
     uniform float speed   ; // 0.3

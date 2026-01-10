@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -25,22 +25,22 @@
 
     // conf
 //  // conf
-#define COLOR_MODE 2
-// #define COLOR_MODE 2
-#define  MOVE_MODE 1
-// #define  MOVE_MODE 1
-#define PULSE_MODE 1
-// #define PULSE_MODE 1
+    #define COLOR_MODE 2
+//  #define COLOR_MODE 2
+    #define  MOVE_MODE 1
+//  #define  MOVE_MODE 1
+    #define PULSE_MODE 1
+//  #define PULSE_MODE 1
 
-#define     INVERT_RATE      (3.5      )
-// #define     INVERT_RATE      (3.5      )
-#define COLORSHIFT_INTENSITY (0.5 / 15.)
-// #define COLORSHIFT_INTENSITY (0.5 / 15.)
+    #define     INVERT_RATE      (3.5      )
+//  #define     INVERT_RATE      (3.5      )
+    #define COLORSHIFT_INTENSITY (0.5 / 15.)
+//  #define COLORSHIFT_INTENSITY (0.5 / 15.)
 
     // const
 //  // const
-#define PI (3.14159)
-// #define PI (3.14159)
+    #define PI (3.14159)
+//  #define PI (3.14159)
 
     // code
 //  // code
@@ -103,8 +103,8 @@
 //  // Use smoothstep to create a soft-edged dot:
     // Use smoothstep to create a soft-edged dot:
 //  // Use smoothstep to create a soft-edged dot:
-#if COLOR_MODE==2
-// #if COLOR_MODE==2
+    #if COLOR_MODE==2
+//  #if COLOR_MODE==2
     dotSize *= dot(texC.rgb, vec3(1. / 3.)); float intensity = smoothstep(dotSize, dotSize * 0.8, dist);
 //  dotSize *= dot(texC.rgb, vec3(1. / 3.)); float intensity = smoothstep(dotSize, dotSize * 0.8, dist);
 
@@ -117,20 +117,20 @@
     if (gID == 3.) return vec4(1. * intensity,0.            ,0.            , 1.);
 //  if (gID == 3.) return vec4(1. * intensity,0.            ,0.            , 1.);
 
-#endif
-// #endif
-#if COLOR_MODE == 1
-// #if COLOR_MODE == 1
+    #endif
+//  #endif
+    #if COLOR_MODE == 1
+//  #if COLOR_MODE == 1
     float intensity = smoothstep(dotSize, dotSize * 0.8, dist); return vec4(vec3(intensity) * texC, 1.0);
 //  float intensity = smoothstep(dotSize, dotSize * 0.8, dist); return vec4(vec3(intensity) * texC, 1.0);
-#endif
-// #endif
-#if COLOR_MODE == 0
-// #if COLOR_MODE == 0
+    #endif
+//  #endif
+    #if COLOR_MODE == 0
+//  #if COLOR_MODE == 0
     dotSize *= dot(texC.rgb, vec3(1. / 3.)); float intensity = smoothstep(dotSize, dotSize * 0.8, dist); return vec4(vec3(intensity)       , 1.0);
 //  dotSize *= dot(texC.rgb, vec3(1. / 3.)); float intensity = smoothstep(dotSize, dotSize * 0.8, dist); return vec4(vec3(intensity)       , 1.0);
-#endif
-// #endif
+    #endif
+//  #endif
     }
 //  }
 
@@ -167,8 +167,8 @@
 
     vec2 off;
 //  vec2 off;
-#if MOVE_MODE
-// #if MOVE_MODE
+    #if MOVE_MODE
+//  #if MOVE_MODE
     off = vec2(sin(remapTime * moveSpeed)
 //  off = vec2(sin(remapTime * moveSpeed)
     ,      cos(remapTime * moveSpeed)) * moveDist;
@@ -177,8 +177,8 @@
 //  //if (fract(remapTime / INVERT_RATE * 2.) < 0.1) off = vec2(0.);
     //if (fract(remapTime / INVERT_RATE * 2.) < 0.1) off = vec2(0.);
 //  //if (fract(remapTime / INVERT_RATE * 2.) < 0.1) off = vec2(0.);
-#endif
-// #endif
+    #endif
+//  #endif
     vec2 m = (mousePosition.z > 0.) ? (mousePosition.xy / canvasSize.xy) * 2.0 - 1.0 : off;
 //  vec2 m = (mousePosition.z > 0.) ? (mousePosition.xy / canvasSize.xy) * 2.0 - 1.0 : off;
 
@@ -191,12 +191,12 @@
 //  float dotCount  = 30.000;
     float dotRadius = 00.055;
 //  float dotRadius = 00.055;
-#if PULSE_MODE
-// #if PULSE_MODE
+    #if PULSE_MODE
+//  #if PULSE_MODE
     dotRadius = mix(0.02, .055, (sin(remapTime / 2.) + 1.) / 2.);
 //  dotRadius = mix(0.02, .055, (sin(remapTime / 2.) + 1.) / 2.);
-#endif
-// #endif
+    #endif
+//  #endif
     float nGroups = 4.;
 //  float nGroups = 4.;
     vec3

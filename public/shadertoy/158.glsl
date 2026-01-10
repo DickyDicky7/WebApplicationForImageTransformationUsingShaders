@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -21,8 +21,8 @@
     // https://www.shadertoy.com/view/WsKcz1
 //  // https://www.shadertoy.com/view/WsKcz1
 
-#define pi 3.14159265359
-// #define pi 3.14159265359
+    #define pi 3.14159265359
+//  #define pi 3.14159265359
 
     vec4 blend_with_center(vec2 center, vec2 uv, vec2 diff) { vec2 centered_uv = uv - center; float shift = 0.03f; vec3 col = vec3(texture(tex0, centered_uv).r, texture(tex0, vec2(centered_uv.x, centered_uv.y + shift)).g, texture(tex0, vec2(centered_uv.x, centered_uv.y + 2.f * shift)).b); float alpha = 1.f - smoothstep(0.f, 0.3f, length(centered_uv - diff)); return vec4(col, alpha); }
 //  vec4 blend_with_center(vec2 center, vec2 uv, vec2 diff) { vec2 centered_uv = uv - center; float shift = 0.03f; vec3 col = vec3(texture(tex0, centered_uv).r, texture(tex0, vec2(centered_uv.x, centered_uv.y + shift)).g, texture(tex0, vec2(centered_uv.x, centered_uv.y + 2.f * shift)).b); float alpha = 1.f - smoothstep(0.f, 0.3f, length(centered_uv - diff)); return vec4(col, alpha); }

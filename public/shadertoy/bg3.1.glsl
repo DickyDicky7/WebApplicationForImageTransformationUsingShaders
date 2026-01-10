@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     //  precision lowp float;
 //  //  precision lowp float;
     precision lowp float;
@@ -10,8 +10,8 @@
     out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 //  out vec4 fragColor; in vec2 vTexCoord; uniform sampler2D tex0; uniform float time; uniform vec2 canvasSize; uniform vec2 texelSize; uniform vec4 mousePosition;
 
-#define N_DELTA 0.015625
-// #define N_DELTA 0.015625
+    #define N_DELTA 0.015625
+//  #define N_DELTA 0.015625
     float rand(vec3 n) {
 //  float rand(vec3 n) {
     return fract(sin(dot(n, vec3(95.43583f, 93.323197f, 94.993431f))) * 65536.32f);

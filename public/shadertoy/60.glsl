@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -18,8 +18,8 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-#define PI 3.14159265
-// #define PI 3.14159265
+    #define PI 3.14159265
+//  #define PI 3.14159265
 
     vec3 tex2D( sampler2D _tex, vec2 _p ) {
 //  vec3 tex2D( sampler2D _tex, vec2 _p ) {

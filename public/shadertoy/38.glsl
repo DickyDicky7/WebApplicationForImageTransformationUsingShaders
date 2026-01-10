@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -46,12 +46,12 @@
     uniform bool   colorOn   ; // true
 //  uniform bool   colorOn   ; // true
 
-#define   LINE
-// #define   LINE
-#define DOT
-// #define DOT
-#define DITHER
-// #define DITHER
+    #define   LINE
+//  #define   LINE
+    #define DOT
+//  #define DOT
+    #define DITHER
+//  #define DITHER
 
     float greyScale(in    vec3 col) {
 //  float greyScale(in    vec3 col) {

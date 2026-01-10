@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -26,8 +26,8 @@
 //  // Constants
     // Constants
 //  // Constants
-#define pi 3.1415926
-// #define pi 3.1415926
+    #define pi 3.1415926
+//  #define pi 3.1415926
 
     // Uniiforms
 //  // Uniiforms

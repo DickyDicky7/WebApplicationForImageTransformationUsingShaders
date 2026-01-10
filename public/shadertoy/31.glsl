@@ -1,5 +1,5 @@
-#version 300 es
-// #version 300 es
+    #version 300 es
+//  #version 300 es
     precision  lowp float;
 //  precision  lowp float;
 
@@ -20,16 +20,16 @@
     uniform         vec4      mousePosition;
 //  uniform         vec4      mousePosition;
 
-    // #define H_STEPS 10.0
-//  // #define H_STEPS 10.0
-    // #define S_STEPS 03.0
-//  // #define S_STEPS 03.0
-    // #define V_STEPS 03.0
-//  // #define V_STEPS 03.0
-    // #define DITHER_WIDTH 0.5
-//  // #define DITHER_WIDTH 0.5
-    // #define TIME (time * 0.2)
-//  // #define TIME (time * 0.2)
+    //  #define H_STEPS 10.0
+//  //  #define H_STEPS 10.0
+    //  #define S_STEPS 03.0
+//  //  #define S_STEPS 03.0
+    //  #define V_STEPS 03.0
+//  //  #define V_STEPS 03.0
+    //  #define DITHER_WIDTH 0.5
+//  //  #define DITHER_WIDTH 0.5
+    //  #define TIME (time * 0.2)
+//  //  #define TIME (time * 0.2)
 
     uniform float H_STEPS      ; // 10.0
 //  uniform float H_STEPS      ; // 10.0
@@ -39,8 +39,8 @@
 //  uniform float V_STEPS      ; // 03.0
     uniform float DITHER_WIDTH ; // 00.5
 //  uniform float DITHER_WIDTH ; // 00.5
-#define TIME (time * 0.2)
-// #define TIME (time * 0.2)
+    #define TIME (time * 0.2)
+//  #define TIME (time * 0.2)
 
 
 

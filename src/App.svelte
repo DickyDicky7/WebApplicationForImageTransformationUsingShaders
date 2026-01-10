@@ -347,23 +347,23 @@
 //  svelte.onMount(async (): Promise<void> => {
         isInitializing = true;
 //      isInitializing = true;
-        await new Promise(r => setTimeout(r, 100)); // Yield to render initial loading state
-//      await new Promise(r => setTimeout(r, 100)); // Yield to render initial loading state
+        await new Promise(r => setTimeout(r, 300)); // Yield to render initial loading state
+//      await new Promise(r => setTimeout(r, 300)); // Yield to render initial loading state
 
         await ui("theme", "#000000");
 //      await ui("theme", "#000000");
         await ui("mode", "dark");
 //      await ui("mode", "dark");
-        await new Promise(r => setTimeout(r, 0)); // Yield
-//      await new Promise(r => setTimeout(r, 0)); // Yield
+        await new Promise(r => setTimeout(r, 300)); // Yield
+//      await new Promise(r => setTimeout(r, 300)); // Yield
 
         let bgShader: p5.Shader = null!;
 //      let bgShader: p5.Shader = null!;
         let chosenBG: string = await loadAsset(bgURLs[Math.floor(Math.random() * 5)]);
 //      let chosenBG: string = await loadAsset(bgURLs[Math.floor(Math.random() * 5)]);
 
-        await new Promise(r => setTimeout(r, 0)); // Yield
-//      await new Promise(r => setTimeout(r, 0)); // Yield
+        await new Promise(r => setTimeout(r, 300)); // Yield
+//      await new Promise(r => setTimeout(r, 300)); // Yield
 
         let bgCanvasInstance: p5 = new p5((p: p5): void => {
 //      let bgCanvasInstance: p5 = new p5((p: p5): void => {
@@ -418,8 +418,8 @@
         }, canvasBG);
 //      }, canvasBG);
 
-        await new Promise(r => setTimeout(r, 50)); // Yield for BG canvas init
-//      await new Promise(r => setTimeout(r, 50)); // Yield for BG canvas init
+        await new Promise(r => setTimeout(r, 300)); // Yield for BG canvas init
+//      await new Promise(r => setTimeout(r, 300)); // Yield for BG canvas init
 
         canvasInstance = new p5(p5Logic, canvas);
 //      canvasInstance = new p5(p5Logic, canvas);
@@ -434,8 +434,8 @@
 //      canvasInstance.WEBGL,        );
         */
 
-        await new Promise(r => setTimeout(r, 50)); // Final yield
-//      await new Promise(r => setTimeout(r, 50)); // Final yield
+        await new Promise(r => setTimeout(r, 300)); // Final yield
+//      await new Promise(r => setTimeout(r, 300)); // Final yield
         isInitializing = false;
 //      isInitializing = false;
     });

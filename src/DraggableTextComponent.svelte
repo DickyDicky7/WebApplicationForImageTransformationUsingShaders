@@ -4,8 +4,8 @@
 //  import p5 from "p5";
     import * as types from "./types";
 //  import * as types from "./types";
-    import * as state from "./state";
-//  import * as state from "./state";
+    import * as STATE from "./state";
+//  import * as STATE from "./state";
     import * as common from "./common";
 //  import * as common from "./common";
     import * as global from "./state/global.svelte";
@@ -72,8 +72,8 @@
 
     // State
 //  // State
-    const draggableTextState: state.DraggableTextState = new state.DraggableTextState(draggableText.font);
-//  const draggableTextState: state.DraggableTextState = new state.DraggableTextState(draggableText.font);
+    const draggableTextState: STATE.DraggableTextState = new STATE.DraggableTextState(draggableText.font);
+//  const draggableTextState: STATE.DraggableTextState = new STATE.DraggableTextState(draggableText.font);
 
     // Handlers
 //  // Handlers

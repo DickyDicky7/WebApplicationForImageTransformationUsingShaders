@@ -8,8 +8,8 @@
 //  import p5 from "p5";
     import * as types from "./types";
 //  import * as types from "./types";
-    import * as state from "./state";
-//  import * as state from "./state";
+    import * as STATE from "./state";
+//  import * as STATE from "./state";
     import * as svelte from "svelte";
 //  import * as svelte from "svelte";
     import * as common from "./common";
@@ -32,8 +32,8 @@
 
     // State
 //  // State
-    const glslUniformState: state.GLSLUniformState = new state.GLSLUniformState();
-//  const glslUniformState: state.GLSLUniformState = new state.GLSLUniformState();
+    const glslUniformState: STATE.GLSLUniformState = new STATE.GLSLUniformState();
+//  const glslUniformState: STATE.GLSLUniformState = new STATE.GLSLUniformState();
 
     // Helper for matrix indices
 //  // Helper for matrix indices

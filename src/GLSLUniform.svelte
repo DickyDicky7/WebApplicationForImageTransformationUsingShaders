@@ -12,8 +12,8 @@
 //  import * as svelte from "svelte";
     import * as common from "./common";
 //  import * as common from "./common";
-    import * as global from "./global.svelte";
-//  import * as global from "./global.svelte";
+    import * as global from "./state/global.svelte";
+//  import * as global from "./state/global.svelte";
     import svelteSvg from "./assets/svelte.svg";
 //  import svelteSvg from "./assets/svelte.svg";
 
@@ -42,16 +42,16 @@
 
     // Update uniforms when a value is changed
 //  // Update uniforms when a value is changed
-    const updateUniform = async (
-//  const updateUniform = async (
+    async function updateUniform(
+//  async function updateUniform(
         uniformIndex: number,
 //      uniformIndex: number,
         elementIndex: number | null,
 //      elementIndex: number | null,
         newValue: number | boolean | string,
 //      newValue: number | boolean | string,
-    ): Promise<void> => {
-//  ): Promise<void> => {
+    ): Promise<void> {
+//  ): Promise<void> {
         let editorSnapshot: types.EditorSnapshot = {
 //      let editorSnapshot: types.EditorSnapshot = {
             undo          : null,
@@ -180,8 +180,8 @@
 
     // Handlers
 //  // Handlers
-    const handleColorInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> => {
-//  const handleColorInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> => {
+    async function handleColorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
+//  async function handleColorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         const { r, g, b } = await common.doHexToRgbNormalized(ele.value);
@@ -195,8 +195,8 @@
     }
 //  }
 
-    const handleVectorInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> => {
-//  const handleVectorInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> => {
+    async function handleVectorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> {
+//  async function handleVectorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
@@ -224,8 +224,8 @@
     }
 //  }
 
-    const handleMatrixInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> => {
-//  const handleMatrixInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> => {
+    async function handleMatrixInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> {
+//  async function handleMatrixInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
@@ -233,8 +233,8 @@
     }
 //  }
 
-    const handleBooleanInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> => {
-//  const handleBooleanInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> => {
+    async function handleBooleanInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
+//  async function handleBooleanInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, null, ele.checked);
@@ -242,8 +242,8 @@
     }
 //  }
 
-    const startDecrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
-//  const startDecrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
+    function startDecrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
+//  function startDecrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
         interval = setInterval(async (): Promise<void> => {
 //      interval = setInterval(async (): Promise<void> => {
             if (typeof uniform.thisUniformDefaultValue === "number") {
@@ -257,8 +257,8 @@
     }
 //  }
 
-    const startIncrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
-//  const startIncrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
+    function startIncrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
+//  function startIncrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
         interval = setInterval(async (): Promise<void> => {
 //      interval = setInterval(async (): Promise<void> => {
             if (typeof uniform.thisUniformDefaultValue === "number") {
@@ -272,15 +272,15 @@
     }
 //  }
 
-    const stopInterval = (): void => {
-//  const stopInterval = (): void => {
+    function stopInterval(): void {
+//  function stopInterval(): void {
         clearInterval(interval);
 //      clearInterval(interval);
     }
 //  }
 
-    const handleNumberInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> => {
-//  const handleNumberInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> => {
+    async function handleNumberInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> {
+//  async function handleNumberInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, null, uniformType === "int" || uniformType === "uint" ? parseInt(ele.value) : parseFloat(ele.value));
@@ -288,8 +288,8 @@
     }
 //  }
 
-    const handleTextureSelect = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> => {
-//  const handleTextureSelect = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> => {
+    async function handleTextureSelect(e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> {
+//  async function handleTextureSelect(e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> {
         const ele: HTMLSelectElement = e.target as HTMLSelectElement;
 //      const ele: HTMLSelectElement = e.target as HTMLSelectElement;
         let chosen = ele.options[ele.selectedIndex].value;

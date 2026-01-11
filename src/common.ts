@@ -1,7 +1,7 @@
     import type { SupabaseClient } from "@supabase/supabase-js";
 //  import type { SupabaseClient } from "@supabase/supabase-js";
-    import * as global from "./global.svelte";
-//  import * as global from "./global.svelte";
+    import * as global from "./state/global.svelte";
+//  import * as global from "./state/global.svelte";
     import * as types from "./types";
 //  import * as types from "./types";
     import p5 from "p5";
@@ -3014,8 +3014,8 @@
     ]);
 //  ]);
 
-    const shareImage = async (
-//  const shareImage = async (
+    async function shareImage(
+//  async function shareImage(
         htmlCanvasElement: HTMLCanvasElement,
 //      htmlCanvasElement: HTMLCanvasElement,
         name: string = "image_name.png",
@@ -3026,8 +3026,8 @@
 //      description: string = "image_description",
         text: string = "image_text",
 //      text: string = "image_text",
-    ): Promise<void> => {
-//  ): Promise<void> => {
+    ): Promise<void> {
+//  ): Promise<void> {
         const uploadResult = await global.imgurClient.upload({
 //      const uploadResult = await global.imgurClient.upload({
             image: htmlCanvasElement.toDataURL("image/png", 1.0).split(",")[1],
@@ -3063,8 +3063,8 @@
     }
 //  }
 
-    const shareVideo = async (
-//  const shareVideo = async (
+    async function shareVideo(
+//  async function shareVideo(
         shareVideoBlob: Blob,
 //      shareVideoBlob: Blob,
         htmlCanvasElement: HTMLCanvasElement,
@@ -3077,8 +3077,8 @@
 //      description: string = "video_description",
         text: string = "video_text",
 //      text: string = "video_text",
-    ): Promise<void> => {
-//  ): Promise<void> => {
+    ): Promise<void> {
+//  ): Promise<void> {
         const uploadResult = await global.imgurClient.upload({
 //      const uploadResult = await global.imgurClient.upload({
             image: await blobToBase64(shareVideoBlob),
@@ -3114,8 +3114,8 @@
     }
 //  }
 
-    const shareWebcam = async (
-//  const shareWebcam = async (
+    async function shareWebcam(
+//  async function shareWebcam(
         shareWebcamBlob: Blob,
 //      shareWebcamBlob: Blob,
         htmlCanvasElement: HTMLCanvasElement,
@@ -3128,8 +3128,8 @@
 //      description: string = "video_description",
         text: string = "video_text",
 //      text: string = "video_text",
-    ): Promise<void> => {
-//  ): Promise<void> => {
+    ): Promise<void> {
+//  ): Promise<void> {
         const uploadResult = await global.imgurClient.upload({
 //      const uploadResult = await global.imgurClient.upload({
             image: await blobToBase64(shareWebcamBlob),
@@ -3467,8 +3467,8 @@
     }
 //  }
 
-    const fetchAllTextures_Bayer = (): types.TextureForShader[] => {
-//  const fetchAllTextures_Bayer = (): types.TextureForShader[] => {
+    function fetchAllTextures_Bayer(): types.TextureForShader[] {
+//  function fetchAllTextures_Bayer(): types.TextureForShader[] {
         let ns: number[] = [2, 4, 8, 16];
 //      let ns: number[] = [2, 4, 8, 16];
         let result: types.TextureForShader[] = [];
@@ -3510,8 +3510,8 @@
     }
 //  }
 
-    const fetchAllTextures_Noise = (): types.TextureForShader[] => {
-//  const fetchAllTextures_Noise = (): types.TextureForShader[] => {
+    function fetchAllTextures_Noise(): types.TextureForShader[] {
+//  function fetchAllTextures_Noise(): types.TextureForShader[] {
         let pathsA: {
 //      let pathsA: {
             path1: string,
@@ -3608,8 +3608,8 @@
 //  }
 
 
-    const fetchAllTextures_Palette = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
-//  const fetchAllTextures_Palette = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
+    async function fetchAllTextures_Palette(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
+//  async function fetchAllTextures_Palette(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
         let { data, error, } = await supabase.storage.from("palette_textures").list("lospec");
 //      let { data, error, } = await supabase.storage.from("palette_textures").list("lospec");
         if (error) {
@@ -3643,8 +3643,8 @@
     }
 //  }
 
-    const fetchAllTextures_Pencil_ = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
-//  const fetchAllTextures_Pencil_ = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
+    async function fetchAllTextures_Pencil_(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
+//  async function fetchAllTextures_Pencil_(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
         let { data, error, } = await supabase.storage.from("pencil_textures").list("godot");
 //      let { data, error, } = await supabase.storage.from("pencil_textures").list("godot");
         if (error) {
@@ -3678,8 +3678,8 @@
     }
 //  }
 
-    const fetchAllTextures_ASCII = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
-//  const fetchAllTextures_ASCII = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
+    async function fetchAllTextures_ASCII(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
+//  async function fetchAllTextures_ASCII(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
         let { data, error, } = await supabase.storage.from("ascii_textures").list("godot");
 //      let { data, error, } = await supabase.storage.from("ascii_textures").list("godot");
         if (error) {
@@ -3713,8 +3713,8 @@
     }
 //  }
 
-    const fetchAllTextures_Tiled = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
-//  const fetchAllTextures_Tiled = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
+    async function fetchAllTextures_Tiled(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
+//  async function fetchAllTextures_Tiled(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
         let { data, error, } = await supabase.storage.from("tiled_textures").list("godot");
 //      let { data, error, } = await supabase.storage.from("tiled_textures").list("godot");
         if (error) {
@@ -3748,8 +3748,8 @@
     }
 //  }
 
-    const fetchAllTextures_ShaderToy = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
-//  const fetchAllTextures_ShaderToy = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
+    async function fetchAllTextures_ShaderToy(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
+//  async function fetchAllTextures_ShaderToy(supabase: SupabaseClient): Promise<types.TextureForShader[]> {
         let { data, error, } = await supabase.storage.from("shader_toy_textures").list("shader_toy");
 //      let { data, error, } = await supabase.storage.from("shader_toy_textures").list("shader_toy");
         if (error) {
@@ -3783,8 +3783,8 @@
     }
 //  }
 
-    const onRedoActionExecuted = async (): Promise<void> => {
-//  const onRedoActionExecuted = async (): Promise<void> => {
+    async function onRedoActionExecuted(): Promise<void> {
+//  async function onRedoActionExecuted(): Promise<void> {
         let redoEditorSnapshot: types.EditorSnapshot | undefined = global.globalState.editorSnapshotsRedoStack.pop();
 //      let redoEditorSnapshot: types.EditorSnapshot | undefined = global.globalState.editorSnapshotsRedoStack.pop();
         if (redoEditorSnapshot) {
@@ -3802,8 +3802,8 @@
     }
 //  }
 
-    const onUndoActionExecuted = async (): Promise<void> => {
-//  const onUndoActionExecuted = async (): Promise<void> => {
+    async function onUndoActionExecuted(): Promise<void> {
+//  async function onUndoActionExecuted(): Promise<void> {
         let undoEditorSnapshot: types.EditorSnapshot | undefined = global.globalState.editorSnapshotsUndoStack.pop();
 //      let undoEditorSnapshot: types.EditorSnapshot | undefined = global.globalState.editorSnapshotsUndoStack.pop();
         if (undoEditorSnapshot) {
@@ -3821,8 +3821,8 @@
     }
 //  }
 
-    const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
-//  const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
+    async function doHexToRgbNormalized(hex: string): Promise<{ r: number, g: number, b: number, }> {
+//  async function doHexToRgbNormalized(hex: string): Promise<{ r: number, g: number, b: number, }> {
         hex = hex.replace(/^#/, "");
 //      hex = hex.replace(/^#/, "");
         const r: number = parseInt(hex.substring(0, 2), 16) / 255;
@@ -3836,8 +3836,8 @@
     }
 //  }
 
-    const noHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
-//  const noHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
+    async function noHexToRgbNormalized(hex: string): Promise<{ r: number, g: number, b: number, }> {
+//  async function noHexToRgbNormalized(hex: string): Promise<{ r: number, g: number, b: number, }> {
         hex = hex.replace(/^#/, "");
 //      hex = hex.replace(/^#/, "");
         const r: number = parseInt(hex.substring(0, 2), 16);
@@ -3851,8 +3851,8 @@
     }
 //  }
 
-    const rgba_ToHexNormalized = async (r: number, g: number, b: number, a: number): Promise<string> => {
-//  const rgba_ToHexNormalized = async (r: number, g: number, b: number, a: number): Promise<string> => {
+    async function rgba_ToHexNormalized(r: number, g: number, b: number, a: number): Promise<string> {
+//  async function rgba_ToHexNormalized(r: number, g: number, b: number, a: number): Promise<string> {
         r = Math.round(Math.max(0, Math.min(255, r)));
 //      r = Math.round(Math.max(0, Math.min(255, r)));
         g = Math.round(Math.max(0, Math.min(255, g)));
@@ -3868,8 +3868,8 @@
     }
 //  }
 
-    const display = (draggableText: types.DraggableText, canvasInstance: p5): void => {
-//  const display = (draggableText: types.DraggableText, canvasInstance: p5): void => {
+    function display(draggableText: types.DraggableText, canvasInstance: p5): void {
+//  function display(draggableText: types.DraggableText, canvasInstance: p5): void {
         canvasInstance.push();
 //      canvasInstance.push();
         canvasInstance.textLeading(draggableText.spacings);
@@ -3921,8 +3921,8 @@
     }
 //  }
 
-    const onMousePressed = (draggableText: types.DraggableText, canvasInstance: p5): void => {
-//  const onMousePressed = (draggableText: types.DraggableText, canvasInstance: p5): void => {
+    function onMousePressed(draggableText: types.DraggableText, canvasInstance: p5): void {
+//  function onMousePressed(draggableText: types.DraggableText, canvasInstance: p5): void {
         if (canvasInstance.mouseX - canvasInstance.width / 2 > draggableText.positionX &&
 //      if (canvasInstance.mouseX - canvasInstance.width / 2 > draggableText.positionX &&
             canvasInstance.mouseX - canvasInstance.width / 2 < draggableText.positionX + draggableText.dimensionW &&
@@ -3938,8 +3938,8 @@
     }
 //  }
 
-    const startDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
-//  const startDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
+    function startDragging(draggableText: types.DraggableText, canvasInstance: p5): void {
+//  function startDragging(draggableText: types.DraggableText, canvasInstance: p5): void {
         if (draggableText.isDragging) {
 //      if (draggableText.isDragging) {
             draggableText.positionX = canvasInstance.mouseX - canvasInstance.width  / 2;
@@ -3951,20 +3951,20 @@
     }
 //  }
 
-    const ceaseDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
-//  const ceaseDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
+    function ceaseDragging(draggableText: types.DraggableText, canvasInstance: p5): void {
+//  function ceaseDragging(draggableText: types.DraggableText, canvasInstance: p5): void {
         draggableText.isDragging = false;
 //      draggableText.isDragging = false;
     }
 //  }
 
-    const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; }
-//  const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; }
-    const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; }
-//  const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; }
+    async function fetchAllFonts_TTF_ITCHIO(supabase: SupabaseClient): Promise<types.CustomFont[]> { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; }
+//  async function fetchAllFonts_TTF_ITCHIO(supabase: SupabaseClient): Promise<types.CustomFont[]> { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; }
+    async function fetchAllFonts_OTF_ITCHIO(supabase: SupabaseClient): Promise<types.CustomFont[]> { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; }
+//  async function fetchAllFonts_OTF_ITCHIO(supabase: SupabaseClient): Promise<types.CustomFont[]> { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; }
 
-    const fetchShaderMetadata = async (shaderPath: string): Promise<types.GLSLUniforms> => {
-//  const fetchShaderMetadata = async (shaderPath: string): Promise<types.GLSLUniforms> => {
+    async function fetchShaderMetadata(shaderPath: string): Promise<types.GLSLUniforms> {
+//  async function fetchShaderMetadata(shaderPath: string): Promise<types.GLSLUniforms> {
         try {
 //      try {
             const response: Response = await fetch(`${shaderPath}.meta.json`);
@@ -4012,10 +4012,10 @@
     }
 //  }
 
-    const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); }
-//  const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); }
-    const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); }
-//  const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); }
+    async function makeNewSnackbarSuccess(newSuccessScript: string): Promise<void> { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); }
+//  async function makeNewSnackbarSuccess(newSuccessScript: string): Promise<void> { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); }
+    async function makeNewSnackbarFailure(newFailureScript: string): Promise<void> { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); }
+//  async function makeNewSnackbarFailure(newFailureScript: string): Promise<void> { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); }
 
     export {
 //  export {

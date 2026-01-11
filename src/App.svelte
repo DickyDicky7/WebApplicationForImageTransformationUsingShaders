@@ -9,14 +9,16 @@
 //  import "material-dynamic-colors";
     import * as t from "svelte/transition";
 //  import * as t from "svelte/transition";
-    import * as global from "./global.svelte";
-//  import * as global from "./global.svelte";
+    import * as global from "./state/global.svelte";
+//  import * as global from "./state/global.svelte";
     import * as common from "./common";
 //  import * as common from "./common";
     import * as svelte from "svelte";
 //  import * as svelte from "svelte";
     import * as types from "./types";
 //  import * as types from "./types";
+    import * as state from "./state";
+//  import * as state from "./state";
     import * as lygia from "./lygia";
 //  import * as lygia from "./lygia";
     import p5 from "p5";
@@ -35,6 +37,9 @@
 //  import SnackbarSuccess from "./SnackbarSuccess.svelte";
     import SnackbarFailure from "./SnackbarFailure.svelte";
 //  import SnackbarFailure from "./SnackbarFailure.svelte";
+
+    const appState: state.AppState = new state.AppState();
+//  const appState: state.AppState = new state.AppState();
 
     // Global Variables & Constants
 //  // Global Variables & Constants
@@ -76,21 +81,6 @@
     type ImageFormat = typeof imageFormats[number];
 //  type ImageFormat = typeof imageFormats[number];
 
-
-    let defaultFont: p5.Font = $state<p5.Font>(null!);
-//  let defaultFont: p5.Font = $state<p5.Font>(null!);
-    let canvasBG: HTMLElement = $state<HTMLElement>(null!);
-//  let canvasBG: HTMLElement = $state<HTMLElement>(null!);
-    let canvas: HTMLElement = $state<HTMLElement>(null!);
-//  let canvas: HTMLElement = $state<HTMLElement>(null!);
-    let canvasInstanceBG: p5 = $state<p5>(null!);
-//  let canvasInstanceBG: p5 = $state<p5>(null!);
-    let canvasInstance: p5 = $state<p5>(null!);
-//  let canvasInstance: p5 = $state<p5>(null!);
-    /*
-    let bufferInstance: p5.Graphics = $state<p5.Graphics>(null!);
-//  let bufferInstance: p5.Graphics = $state<p5.Graphics>(null!);
-    */
     let bgURLs: string[] = [
 //  let bgURLs: string[] = [
         "/shadertoy/bg1.1.glsl",
@@ -125,95 +115,9 @@
 //      "/shadertoy/bg13.1.glsl",
     ];
 //  ];
-    let input: HTMLInputElement = $state<HTMLInputElement>(null!);
-//  let input: HTMLInputElement = $state<HTMLInputElement>(null!);
-    let fps: number = $state<number>(120);
-//  let fps: number = $state<number>(120);
-    let downloadStream: MediaStream = $state<MediaStream>(null!);
-//  let downloadStream: MediaStream = $state<MediaStream>(null!);
-    /*
-    let downloadStreamWebCam: MediaStream = $state<MediaStream>(null!);
-//  let downloadStreamWebCam: MediaStream = $state<MediaStream>(null!);
-    let videoStream: MediaStream = $state<MediaStream>(null!);
-//  let videoStream: MediaStream = $state<MediaStream>(null!);
-    let audioStream: MediaStream = $state<MediaStream>(null!);
-//  let audioStream: MediaStream = $state<MediaStream>(null!);
-    */
-    let mediaRecorder: MediaRecorder = $state<MediaRecorder>(null!);
-//  let mediaRecorder: MediaRecorder = $state<MediaRecorder>(null!);
-    let mediaRecorderWebCam: MediaRecorder = $state<MediaRecorder>(null!);
-//  let mediaRecorderWebCam: MediaRecorder = $state<MediaRecorder>(null!);
-    let video_FileBLOB: string = $state<string>(null!);
-//  let video_FileBLOB: string = $state<string>(null!);
-    /*
-    let image_FileBLOB: string = $state<string>(null!);
-//  let image_FileBLOB: string = $state<string>(null!);
-    */
-    let video: p5.MediaElement = $state<p5.MediaElement>(null!);
-//  let video: p5.MediaElement = $state<p5.MediaElement>(null!);
-    /*
-    let image: p5.MediaElement = $state<p5.MediaElement>(null!);
-//  let image: p5.MediaElement = $state<p5.MediaElement>(null!);
-    */
-    let catchFirstTime: boolean = $state<boolean>(false);
-//  let catchFirstTime: boolean = $state<boolean>(false);
-    let startRecord: boolean = $state<boolean>(!false);
-//  let startRecord: boolean = $state<boolean>(!false);
-    let ceaseRecord: boolean = $state<boolean>(false);
-//  let ceaseRecord: boolean = $state<boolean>(false);
-    let fshotRecord: boolean = $state<boolean>(false);
-//  let fshotRecord: boolean = $state<boolean>(false);
-    let sshotRecord: boolean = $state<boolean>(false);
-//  let sshotRecord: boolean = $state<boolean>(false);
-    /*
-    let graphicsObj: p5.Graphics = $state<p5.Graphics>(null!);
-//  let graphicsObj: p5.Graphics = $state<p5.Graphics>(null!);
-    */
-    let webcamCapture: p5.Element = $state<p5.Element>(null!);
-//  let webcamCapture: p5.Element = $state<p5.Element>(null!);
-    let imageFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
-//  let imageFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
-    let videoFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
-//  let videoFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
-    let videoProgressSlider_: HTMLProgressElement = $state<HTMLProgressElement>(null!);
-//  let videoProgressSlider_: HTMLProgressElement = $state<HTMLProgressElement>(null!);
-    let videoToShare: Blob = $state<Blob>(null!);
-//  let videoToShare: Blob = $state<Blob>(null!);
-    let imageToShare: Blob = $state<Blob>(null!);
-//  let imageToShare: Blob = $state<Blob>(null!);
-    let mode: types.MODE = $state<types.MODE>(types.MODE.IMAGE);
-//  let mode: types.MODE = $state<types.MODE>(types.MODE.IMAGE);
-    /*
-    let modeCaptureImage: types.MODE_CAPTURE_IMAGE = $state<types.MODE_CAPTURE_IMAGE>(types.MODE_CAPTURE_IMAGE.AS_IMAGE);
-//  let modeCaptureImage: types.MODE_CAPTURE_IMAGE = $state<types.MODE_CAPTURE_IMAGE>(types.MODE_CAPTURE_IMAGE.AS_IMAGE);
-    let modeCaptureVideo: types.MODE_CAPTURE_VIDEO = $state<types.MODE_CAPTURE_VIDEO>(types.MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT);
-//  let modeCaptureVideo: types.MODE_CAPTURE_VIDEO = $state<types.MODE_CAPTURE_VIDEO>(types.MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT);
-    */
-    let videoIsPlaying: boolean = $state<boolean>(false);
-//  let videoIsPlaying: boolean = $state<boolean>(false);
-    let imageIsPlaying: boolean = $state<boolean>(false);
-//  let imageIsPlaying: boolean = $state<boolean>(false);
-    let AIInputPrompts: HTMLInputElement = $state<HTMLInputElement>(null!);
-//  let AIInputPrompts: HTMLInputElement = $state<HTMLInputElement>(null!);
-    let cachedSelectedIndex: number = $state<number>(0);
-//  let cachedSelectedIndex: number = $state<number>(0);
-    /*
-    let draggableText: types.DraggableText = $state<types.DraggableText>(null!);
-//  let draggableText: types.DraggableText = $state<types.DraggableText>(null!);
-    */
-    let recording: boolean = $state<boolean>(false);
-//  let recording: boolean = $state<boolean>(false);
-    let selectedCaptureOption: string = $state<string>("Snapshot");
-//  let selectedCaptureOption: string = $state<string>("Snapshot");
-    let bigList: HTMLDivElement = $state<HTMLDivElement>(null!);
-//  let bigList: HTMLDivElement = $state<HTMLDivElement>(null!);
-    let isLoading: boolean = $state<boolean>(false);
-//  let isLoading: boolean = $state<boolean>(false);
-    let isInitializing: boolean = $state<boolean>(true);
-//  let isInitializing: boolean = $state<boolean>(true);
 
-    const canvasP5Logic = (p: p5): void => {
-//  const canvasP5Logic = (p: p5): void => {
+    function canvasP5Logic(p: p5): void {
+//  function canvasP5Logic(p: p5): void {
         p.mousePressed = (e?: object): void => {
 //      p.mousePressed = (e?: object): void => {
             for (let { fragmentShaderSourceType________, draggableText } of global.globalState.effectsUsedForFiltering) {
@@ -282,11 +186,11 @@
 //      };
         p.setup = async (): Promise<void> => {
 //      p.setup = async (): Promise<void> => {
-            defaultFont = await p.loadFont(SFMonoRegularURL);
-//          defaultFont = await p.loadFont(SFMonoRegularURL);
+            appState.canvasState.defaultFont = await p.loadFont(SFMonoRegularURL);
+//          appState.canvasState.defaultFont = await p.loadFont(SFMonoRegularURL);
             /*
-            draggableText.font = defaultFont;
-//          draggableText.font = defaultFont;
+            appState.draggableText.font = appState.canvasState.defaultFont;
+//          appState.draggableText.font = appState.canvasState.defaultFont;
             */
             p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: true, perPixelLighting: true, });
 //          p.setAttributes({ antialias: false, alpha: false, depth: false, stencil: false, premultipliedAlpha: false, preserveDrawingBuffer: true, perPixelLighting: true, });
@@ -300,8 +204,8 @@
 //          p.background(255);
             p.imageMode(p.CENTER);
 //          p.imageMode(p.CENTER);
-            p.frameRate(fps);
-//          p.frameRate(fps);
+            p.frameRate(appState.settingsState.fps);
+//          p.frameRate(appState.settingsState.fps);
             p.disableFriendlyErrors = true;
 //          p.disableFriendlyErrors = true;
     //EXPERIMENT
@@ -318,8 +222,8 @@
 //      };
         p.draw = (): void => {
 //      p.draw = (): void => {
-            if (isInitializing) {
-//          if (isInitializing) {
+            if (appState.uiState.isInitializing) {
+//          if (appState.uiState.isInitializing) {
                 return;
 //              return;
             }
@@ -351,8 +255,8 @@
 
     svelte.onMount(async (): Promise<void> => {
 //  svelte.onMount(async (): Promise<void> => {
-        isInitializing = true;
-//      isInitializing = true;
+        appState.uiState.isInitializing = true;
+//      appState.uiState.isInitializing = true;
         await new Promise(r => setTimeout(r, 1000)); // Yield to render initial loading state
 //      await new Promise(r => setTimeout(r, 1000)); // Yield to render initial loading state
 
@@ -372,8 +276,8 @@
         await new Promise(r => setTimeout(r, 1000)); // Yield
 //      await new Promise(r => setTimeout(r, 1000)); // Yield
 
-        canvasInstanceBG = new p5((p: p5): void => {
-//      canvasInstanceBG = new p5((p: p5): void => {
+        appState.canvasState.canvasInstanceBG = new p5((p: p5): void => {
+//      appState.canvasState.canvasInstanceBG = new p5((p: p5): void => {
             p.setup = async (): Promise<void> => {
 //          p.setup = async (): Promise<void> => {
                 p.setAttributes({
@@ -410,8 +314,8 @@
 //          };
             p.draw = (): void => {
 //          p.draw = (): void => {
-                if (isInitializing) {
-//              if (isInitializing) {
+                if (appState.uiState.isInitializing) {
+//              if (appState.uiState.isInitializing) {
                     return;
 //                  return;
                 }
@@ -422,24 +326,24 @@
 //              p.filter(bgShader);
             };
 //          };
-        }, canvasBG);
-//      }, canvasBG);
+        }, appState.canvasState.canvasBG);
+//      }, appState.canvasState.canvasBG);
 
         await new Promise(r => setTimeout(r, 1000)); // Yield for BG canvas init
 //      await new Promise(r => setTimeout(r, 1000)); // Yield for BG canvas init
 
-        canvasInstance = new p5(canvasP5Logic, canvas);
-//      canvasInstance = new p5(canvasP5Logic, canvas);
+        appState.canvasState.canvasInstance = new p5(canvasP5Logic, appState.canvasState.canvas);
+//      appState.canvasState.canvasInstance = new p5(canvasP5Logic, appState.canvasState.canvas);
 
         /*
         bufferInstance =
 //      bufferInstance =
-        canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
-//      canvasInstance.createGraphics(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
-                                      Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
-//                                    Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
-        canvasInstance.WEBGL,        );
-//      canvasInstance.WEBGL,        );
+        appState.canvasState.canvasInstance.createGraphics( Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+//      appState.canvasState.canvasInstance.createGraphics( Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+                                                            Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+//                                                          Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+        appState.canvasState.canvasInstance.WEBGL,        );
+//      appState.canvasState.canvasInstance.WEBGL,        );
         */
 
         await new Promise(r => setTimeout(r, 1000)); // Yield
@@ -464,31 +368,31 @@
 
         await new Promise(r => setTimeout(r, 1000)); // Final yield
 //      await new Promise(r => setTimeout(r, 1000)); // Final yield
-        isInitializing = false;
-//      isInitializing = false;
+        appState.uiState.isInitializing = false;
+//      appState.uiState.isInitializing = false;
     });
 //  });
 
-    const successCallback = (image_Instance: p5.Image): void => {
-//  const successCallback = (image_Instance: p5.Image): void => {
-        if (video) {
-//      if (video) {
-            video.remove();
-//          video.remove();
+    function successCallback(image_Instance: p5.Image): void {
+//  function successCallback(image_Instance: p5.Image): void {
+        if (appState.mediaState.video) {
+//      if (appState.mediaState.video) {
+            appState.mediaState.video.remove();
+//          appState.mediaState.video.remove();
         }
 //      }
         let imageRatio: number = 1.0;
 //      let imageRatio: number = 1.0;
-        canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
-//      canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
-        image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
-//      image_Instance.resize      (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
-        canvasInstance.draw = (): void => {
-//      canvasInstance.draw = (): void => {
-            canvasInstance.textureWrap("repeat");
-//          canvasInstance.textureWrap("repeat");
-            canvasInstance.image(image_Instance, 0.0, 0.0);
-//          canvasInstance.image(image_Instance, 0.0, 0.0);
+        appState.canvasState.canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
+//      appState.canvasState.canvasInstance.resizeCanvas(image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
+        image_Instance.resize                           (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
+//      image_Instance.resize                           (image_Instance.width * imageRatio * DPR, image_Instance.height * imageRatio * DPR);
+        appState.canvasState.canvasInstance.draw = (): void => {
+//      appState.canvasState.canvasInstance.draw = (): void => {
+            appState.canvasState.canvasInstance.textureWrap("repeat");
+//          appState.canvasState.canvasInstance.textureWrap("repeat");
+            appState.canvasState.canvasInstance.image(image_Instance, 0.0, 0.0);
+//          appState.canvasState.canvasInstance.image(image_Instance, 0.0, 0.0);
             for (let {  fragmentShaderSourceType________,
 //          for (let {  fragmentShaderSourceType________,
                         fragmentShaderSourceCode________,
@@ -503,8 +407,8 @@
 //              if (!fragmentShaderSourceType________) {
                     if (!draggableText) { continue; }
 //                  if (!draggableText) { continue; }
-                    common.display(draggableText, canvasInstance);
-//                  common.display(draggableText, canvasInstance);
+                    common.display(draggableText, appState.canvasState.canvasInstance);
+//                  common.display(draggableText, appState.canvasState.canvasInstance);
                     continue;
 //                  continue;
                 }
@@ -541,121 +445,121 @@
 //                  }
                 }
 //              }
-                canvasInstance.filter(fragmentShaderFiltering_Instance);
-//              canvasInstance.filter(fragmentShaderFiltering_Instance);
+                appState.canvasState.canvasInstance.filter(fragmentShaderFiltering_Instance);
+//              appState.canvasState.canvasInstance.filter(fragmentShaderFiltering_Instance);
             }
 //          }
         };
 //      };
-        mode = types.MODE.IMAGE;
-//      mode = types.MODE.IMAGE;
+        appState.settingsState.mode = types.MODE.IMAGE;
+//      appState.settingsState.mode = types.MODE.IMAGE;
     }
 //  }
 
-    const failureCallback = (event_Instance: Event): void => {
-//  const failureCallback = (event_Instance: Event): void => {
-        if (canvas.children.length === 2) {
-//      if (canvas.children.length === 2) {
+    function failureCallback(event_Instance: Event): void {
+//  function failureCallback(event_Instance: Event): void {
+        if (appState.canvasState.canvas.children.length === 2) {
+//      if (appState.canvasState.canvas.children.length === 2) {
             /*
-            canvas.children[1].remove();
-//          canvas.children[1].remove();
-            canvas.children[2].remove();
-//          canvas.children[2].remove();
+            appState.canvasState.canvas.children[1].remove();
+//          appState.canvasState.canvas.children[1].remove();
+            appState.canvasState.canvas.children[2].remove();
+//          appState.canvasState.canvas.children[2].remove();
             */
-            if (video) { video.remove(); } // the same as the above line of code
-//          if (video) { video.remove(); } // the same as the above line of code
+            if (appState.mediaState.video) { appState.mediaState.video.remove(); } // the same as the above line of code
+//          if (appState.mediaState.video) { appState.mediaState.video.remove(); } // the same as the above line of code
         }
 //      }
-        if (input.files) {
-//      if (input.files) {
-            if (video_FileBLOB) { window.URL.revokeObjectURL(video_FileBLOB); }
-//          if (video_FileBLOB) { window.URL.revokeObjectURL(video_FileBLOB); }
-            video_FileBLOB  = window.URL.createObjectURL(input.files[0]);
-//          video_FileBLOB  = window.URL.createObjectURL(input.files[0]);
-            video = canvasInstance.createVideo(video_FileBLOB);
-//          video = canvasInstance.createVideo(video_FileBLOB);
-            video?.volume(1.0);
-//          video?.volume(1.0);
-            video?.hide();
-//          video?.hide();
-            video?.loop();
-//          video?.loop();
+        if (appState.uiState.input.files) {
+//      if (appState.uiState.input.files) {
+            if (appState.mediaState.video_FileBLOB) { window.URL.revokeObjectURL(appState.mediaState.video_FileBLOB); }
+//          if (appState.mediaState.video_FileBLOB) { window.URL.revokeObjectURL(appState.mediaState.video_FileBLOB); }
+            appState.mediaState.video_FileBLOB  = window.URL.createObjectURL(appState.uiState.input.files[0]);
+//          appState.mediaState.video_FileBLOB  = window.URL.createObjectURL(appState.uiState.input.files[0]);
+            appState.mediaState.video = appState.canvasState.canvasInstance.createVideo(appState.mediaState.video_FileBLOB);
+//          appState.mediaState.video = appState.canvasState.canvasInstance.createVideo(appState.mediaState.video_FileBLOB);
+            appState.mediaState.video?.volume(1.0);
+//          appState.mediaState.video?.volume(1.0);
+            appState.mediaState.video?.hide();
+//          appState.mediaState.video?.hide();
+            appState.mediaState.video?.loop();
+//          appState.mediaState.video?.loop();
             /*
-            video?.play();
-//          video?.play();
+            appState.mediaState.video?.play();
+//          appState.mediaState.video?.play();
             */
-            videoIsPlaying = true;
-//          videoIsPlaying = true;
-            imageIsPlaying = true;
-//          imageIsPlaying = true;
-            catchFirstTime =  false;
-//          catchFirstTime =  false;
-            startRecord    = !false;
-//          startRecord    = !false;
-            ceaseRecord    =  false;
-//          ceaseRecord    =  false;
+            appState.mediaState.videoIsPlaying = true;
+//          appState.mediaState.videoIsPlaying = true;
+            appState.mediaState.imageIsPlaying = true;
+//          appState.mediaState.imageIsPlaying = true;
+            appState.mediaState.catchFirstTime =  false;
+//          appState.mediaState.catchFirstTime =  false;
+            appState.mediaState.startRecord    = !false;
+//          appState.mediaState.startRecord    = !false;
+            appState.mediaState.ceaseRecord    =  false;
+//          appState.mediaState.ceaseRecord    =  false;
             /*
-            canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
-//          canvasInstance.resizeCanvas(Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
-                                        Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
-//                                      Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
-                                       );
-//                                     );
+            appState.canvasState.canvasInstance.resizeCanvas(   Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+//          appState.canvasState.canvasInstance.resizeCanvas(   Math.floor(DEFAULT_CANVAS_SIZE.WIDTH_ * DPR),
+                                                                Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+//                                                              Math.floor(DEFAULT_CANVAS_SIZE.HEIGHT * DPR),
+                                                            );
+//                                                          );
             */
-            canvasInstance.resizeCanvas(video.width * 3.0 * DPR, video.height * 3.0 * DPR);
-//          canvasInstance.resizeCanvas(video.width * 3.0 * DPR, video.height * 3.0 * DPR);
-            canvasInstance.draw = (): void => {
-//          canvasInstance.draw = (): void => {
-                if (!catchFirstTime
-//              if (!catchFirstTime
-                &&  !isNaN(video.duration()))
-//              &&  !isNaN(video.duration()))
+            appState.canvasState.canvasInstance.resizeCanvas(appState.mediaState.video.width * 3.0 * DPR, appState.mediaState.video.height * 3.0 * DPR);
+//          appState.canvasState.canvasInstance.resizeCanvas(appState.mediaState.video.width * 3.0 * DPR, appState.mediaState.video.height * 3.0 * DPR);
+            appState.canvasState.canvasInstance.draw = (): void => {
+//          appState.canvasState.canvasInstance.draw = (): void => {
+                if (!appState.mediaState.catchFirstTime
+//              if (!appState.mediaState.catchFirstTime
+                &&  !isNaN(appState.mediaState.video.duration()))
+//              &&  !isNaN(appState.mediaState.video.duration()))
                 {
 //              {
-                    videoProgressSlider_.max = video.duration();
-//                  videoProgressSlider_.max = video.duration();
-                    catchFirstTime = true;
-//                  catchFirstTime = true;
+                    appState.uiState.videoProgressSlider_.max = appState.mediaState.video.duration();
+//                  appState.uiState.videoProgressSlider_.max = appState.mediaState.video.duration();
+                    appState.mediaState.catchFirstTime = true;
+//                  appState.mediaState.catchFirstTime = true;
                 }
 //              }
-                canvasInstance.textureWrap("repeat");
-//              canvasInstance.textureWrap("repeat");
+                appState.canvasState.canvasInstance.textureWrap("repeat");
+//              appState.canvasState.canvasInstance.textureWrap("repeat");
                 /*
-                canvasInstance.background(255);
-//              canvasInstance.background(255);
+                appState.canvasState.canvasInstance.background(255);
+//              appState.canvasState.canvasInstance.background(255);
                 */
-                canvasInstance.push();
-//              canvasInstance.push();
-                canvasInstance.imageMode(canvasInstance.CENTER);
-//              canvasInstance.imageMode(canvasInstance.CENTER);
-                canvasInstance.image(
-//              canvasInstance.image(
-                    video,
-//                  video,
+                appState.canvasState.canvasInstance.push();
+//              appState.canvasState.canvasInstance.push();
+                appState.canvasState.canvasInstance.imageMode(appState.canvasState.canvasInstance.CENTER);
+//              appState.canvasState.canvasInstance.imageMode(appState.canvasState.canvasInstance.CENTER);
+                appState.canvasState.canvasInstance.image(
+//              appState.canvasState.canvasInstance.image(
+                    appState.mediaState.video,
+//                  appState.mediaState.video,
                     0.0,
 //                  0.0,
                     0.0,
 //                  0.0,
-                    canvasInstance.width ,
-//                  canvasInstance.width ,
-                    canvasInstance.height,
-//                  canvasInstance.height,
+                    appState.canvasState.canvasInstance.width ,
+//                  appState.canvasState.canvasInstance.width ,
+                    appState.canvasState.canvasInstance.height,
+//                  appState.canvasState.canvasInstance.height,
                     0.0,
 //                  0.0,
                     0.0,
 //                  0.0,
-                    video.width,
-//                  video.width,
-                    video.height,
-//                  video.height,
-                    canvasInstance.COVER,
-//                  canvasInstance.COVER,
+                    appState.mediaState.video.width,
+//                  appState.mediaState.video.width,
+                    appState.mediaState.video.height,
+//                  appState.mediaState.video.height,
+                    appState.canvasState.canvasInstance.COVER,
+//                  appState.canvasState.canvasInstance.COVER,
                 );
 //              );
-                canvasInstance.pop();
-//              canvasInstance.pop();
-                videoProgressSlider_.value = video.time();
-//              videoProgressSlider_.value = video.time();
+                appState.canvasState.canvasInstance.pop();
+//              appState.canvasState.canvasInstance.pop();
+                appState.uiState.videoProgressSlider_.value = appState.mediaState.video.time();
+//              appState.uiState.videoProgressSlider_.value = appState.mediaState.video.time();
                 for (let {  fragmentShaderSourceType________,
 //              for (let {  fragmentShaderSourceType________,
                             fragmentShaderSourceCode________,
@@ -670,8 +574,8 @@
 //                  if (!fragmentShaderSourceType________) {
                         if (!draggableText) { continue; }
 //                      if (!draggableText) { continue; }
-                        common.display(draggableText, canvasInstance);
-//                      common.display(draggableText, canvasInstance);
+                        common.display(draggableText, appState.canvasState.canvasInstance);
+//                      common.display(draggableText, appState.canvasState.canvasInstance);
                         continue;
 //                      continue;
                     }
@@ -708,47 +612,47 @@
 //                      }
                     }
 //                  }
-                    canvasInstance.filter(fragmentShaderFiltering_Instance);
-//                  canvasInstance.filter(fragmentShaderFiltering_Instance);
+                    appState.canvasState.canvasInstance.filter(fragmentShaderFiltering_Instance);
+//                  appState.canvasState.canvasInstance.filter(fragmentShaderFiltering_Instance);
                 }
 //              }
-                if (!ceaseRecord
-//              if (!ceaseRecord
-                &&   fshotRecord
-//              &&   fshotRecord
-                &&  !isNaN           (video.duration())
-//              &&  !isNaN           (video.duration())
-                &&   video.time() === video.duration()) {
-//              &&   video.time() === video.duration()) {
-                    ceaseRecord = true;
-//                  ceaseRecord = true;
-                    fshotRecord = true;
-//                  fshotRecord = true;
+                if (!appState.mediaState.ceaseRecord
+//              if (!appState.mediaState.ceaseRecord
+                &&   appState.mediaState.fshotRecord
+//              &&   appState.mediaState.fshotRecord
+                &&  !isNaN(appState.mediaState.video.duration())
+//              &&  !isNaN(appState.mediaState.video.duration())
+                &&   appState.mediaState.video.time() === appState.mediaState.video.duration()) {
+//              &&   appState.mediaState.video.time() === appState.mediaState.video.duration()) {
+                    appState.mediaState.ceaseRecord = true;
+//                  appState.mediaState.ceaseRecord = true;
+                    appState.mediaState.fshotRecord = true;
+//                  appState.mediaState.fshotRecord = true;
                     ceaseCaptureAsVideoFullshot();
 //                  ceaseCaptureAsVideoFullshot();
-                    recording = false;
-//                  recording = false;
+                    appState.mediaState.recording = false;
+//                  appState.mediaState.recording = false;
                 }
 //              }
             };
 //          };
-            mode = types.MODE.VIDEO;
-//          mode = types.MODE.VIDEO;
+            appState.settingsState.mode = types.MODE.VIDEO;
+//          appState.settingsState.mode = types.MODE.VIDEO;
         }
 //      }
     }
 //  }
 
-    const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
-//  const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
+    async function onChange(e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> {
+//  async function onChange(e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> {
         const reader: FileReader = new FileReader();
 //      const reader: FileReader = new FileReader();
         reader.addEventListener("load", async (): Promise<void> => {
 //      reader.addEventListener("load", async (): Promise<void> => {
             if (typeof reader.result === "string") {
 //          if (typeof reader.result === "string") {
-                await canvasInstance.loadImage(reader.result, successCallback, failureCallback);
-//              await canvasInstance.loadImage(reader.result, successCallback, failureCallback);
+                await appState.canvasState.canvasInstance.loadImage(reader.result, successCallback, failureCallback);
+//              await appState.canvasState.canvasInstance.loadImage(reader.result, successCallback, failureCallback);
                 /*
                 console.log(reader.result);
 //              console.log(reader.result);
@@ -767,12 +671,12 @@
 //      });
         let file: File | null = null;
 //      let file: File | null = null;
-        if (input.files && input.files.length >= 1)
-//      if (input.files && input.files.length >= 1)
+        if (appState.uiState.input.files && appState.uiState.input.files.length >= 1)
+//      if (appState.uiState.input.files && appState.uiState.input.files.length >= 1)
         {
 //      {
-            file = input.files[0];
-//          file = input.files[0];
+            file = appState.uiState.input.files[0];
+//          file = appState.uiState.input.files[0];
         }
 //      }
         if (file) { reader.readAsDataURL(file); }
@@ -805,55 +709,55 @@
     // DeepAR Beauty
 //  // DeepAR Beauty
 
-    const shaderSetNecessaryUniforms = (shader: p5.Shader): void => {
-//  const shaderSetNecessaryUniforms = (shader: p5.Shader): void => {
-        shader.setUniform("time", canvasInstance.millis() / 1000);
-//      shader.setUniform("time", canvasInstance.millis() / 1000);
-        shader.setUniform("canvasSize", [ canvasInstance.width, canvasInstance.height ]);
-//      shader.setUniform("canvasSize", [ canvasInstance.width, canvasInstance.height ]);
-        shader.setUniform("texelSize", [ 1.0 / (canvasInstance.width * canvasInstance.pixelDensity()), 1.0 / (canvasInstance.height * canvasInstance.pixelDensity()) ]);
-//      shader.setUniform("texelSize", [ 1.0 / (canvasInstance.width * canvasInstance.pixelDensity()), 1.0 / (canvasInstance.height * canvasInstance.pixelDensity()) ]);
+    function shaderSetNecessaryUniforms(shader: p5.Shader): void {
+//  function shaderSetNecessaryUniforms(shader: p5.Shader): void {
+        shader.setUniform("time", appState.canvasState.canvasInstance.millis() / 1000);
+//      shader.setUniform("time", appState.canvasState.canvasInstance.millis() / 1000);
+        shader.setUniform("canvasSize", [ appState.canvasState.canvasInstance.width, appState.canvasState.canvasInstance.height ]);
+//      shader.setUniform("canvasSize", [ appState.canvasState.canvasInstance.width, appState.canvasState.canvasInstance.height ]);
+        shader.setUniform("texelSize", [ 1.0 / (appState.canvasState.canvasInstance.width * appState.canvasState.canvasInstance.pixelDensity()), 1.0 / (appState.canvasState.canvasInstance.height * appState.canvasState.canvasInstance.pixelDensity()) ]);
+//      shader.setUniform("texelSize", [ 1.0 / (appState.canvasState.canvasInstance.width * appState.canvasState.canvasInstance.pixelDensity()), 1.0 / (appState.canvasState.canvasInstance.height * appState.canvasState.canvasInstance.pixelDensity()) ]);
         /*
         shader.setUniform("mousePosition", [ 0.0, 0.0, 0.0, 0.0 ]);
 //      shader.setUniform("mousePosition", [ 0.0, 0.0, 0.0, 0.0 ]);
         */
-        shader.setUniform("mousePosition", [ canvasInstance.mouseX, canvasInstance.mouseY, canvasInstance.mouseIsPressed ? 1.0 : 0.0, canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
-//      shader.setUniform("mousePosition", [ canvasInstance.mouseX, canvasInstance.mouseY, canvasInstance.mouseIsPressed ? 1.0 : 0.0, canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
-        shader.setUniform("frameCount", canvasInstance.frameCount);
-//      shader.setUniform("frameCount", canvasInstance.frameCount);
+        shader.setUniform("mousePosition", [ appState.canvasState.canvasInstance.mouseX, appState.canvasState.canvasInstance.mouseY, appState.canvasState.canvasInstance.mouseIsPressed ? 1.0 : 0.0, appState.canvasState.canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
+//      shader.setUniform("mousePosition", [ appState.canvasState.canvasInstance.mouseX, appState.canvasState.canvasInstance.mouseY, appState.canvasState.canvasInstance.mouseIsPressed ? 1.0 : 0.0, appState.canvasState.canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
+        shader.setUniform("frameCount", appState.canvasState.canvasInstance.frameCount);
+//      shader.setUniform("frameCount", appState.canvasState.canvasInstance.frameCount);
     }
 //  }
 
-    const startCaptureAsVideoFullshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: N | WEBCAM: N
-//  const startCaptureAsVideoFullshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: N | WEBCAM: N
-        fshotRecord = !false;
-//      fshotRecord = !false;
-        sshotRecord =  false;
-//      sshotRecord =  false;
-        if (video) {
-//      if (video) {
-            video.stop();
-//          video.stop();
-            video.noLoop();
-//          video.noLoop();
-            video.volume(1.0);
-//          video.volume(1.0);
-            video.play();
-//          video.play();
+    async function startCaptureAsVideoFullshot(): Promise<void> { // VIDEO: Y | IMAGE: N | WEBCAM: N
+//  async function startCaptureAsVideoFullshot(): Promise<void> { // VIDEO: Y | IMAGE: N | WEBCAM: N
+        appState.mediaState.fshotRecord = !false;
+//      appState.mediaState.fshotRecord = !false;
+        appState.mediaState.sshotRecord =  false;
+//      appState.mediaState.sshotRecord =  false;
+        if (appState.mediaState.video) {
+//      if (appState.mediaState.video) {
+            appState.mediaState.video.stop();
+//          appState.mediaState.video.stop();
+            appState.mediaState.video.noLoop();
+//          appState.mediaState.video.noLoop();
+            appState.mediaState.video.volume(1.0);
+//          appState.mediaState.video.volume(1.0);
+            appState.mediaState.video.play();
+//          appState.mediaState.video.play();
         }
 //      }
-        let htmlCanvasElement: HTMLCanvasElement = canvas.children[0] as HTMLCanvasElement;
-//      let htmlCanvasElement: HTMLCanvasElement = canvas.children[0] as HTMLCanvasElement;
-        let videoElement: HTMLVideoElement = canvas.children[1] as HTMLVideoElement;
-//      let videoElement: HTMLVideoElement = canvas.children[1] as HTMLVideoElement;
+        let htmlCanvasElement: HTMLCanvasElement = appState.canvasState.canvas.children[0] as HTMLCanvasElement;
+//      let htmlCanvasElement: HTMLCanvasElement = appState.canvasState.canvas.children[0] as HTMLCanvasElement;
+        let videoElement: HTMLVideoElement = appState.canvasState.canvas.children[1] as HTMLVideoElement;
+//      let videoElement: HTMLVideoElement = appState.canvasState.canvas.children[1] as HTMLVideoElement;
         let audioContext: AudioContext = new AudioContext();
 //      let audioContext: AudioContext = new AudioContext();
         let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
 //      let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
         let mediaStreamAudioDestination: MediaStream = mediaStreamAudioDestinationNode.stream;
 //      let mediaStreamAudioDestination: MediaStream = mediaStreamAudioDestinationNode.stream;
-        if (mode === types.MODE.VIDEO) {
-//      if (mode === types.MODE.VIDEO) {
+        if (appState.settingsState.mode === types.MODE.VIDEO) {
+//      if (appState.settingsState.mode === types.MODE.VIDEO) {
             let mediaElementAudioSourceNode: MediaElementAudioSourceNode = audioContext.createMediaElementSource(videoElement);
 //          let mediaElementAudioSourceNode: MediaElementAudioSourceNode = audioContext.createMediaElementSource(videoElement);
             mediaElementAudioSourceNode.connect(mediaStreamAudioDestinationNode);
@@ -862,26 +766,26 @@
 //          mediaElementAudioSourceNode.connect(audioContext.destination);
         }
 //      }
-        downloadStream = null!;
-//      downloadStream = null!;
-        downloadStream = htmlCanvasElement.captureStream(fps);
-//      downloadStream = htmlCanvasElement.captureStream(fps);
-        if (mode === types.MODE.VIDEO) {
-//      if (mode === types.MODE.VIDEO) {
-            downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
-//          downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
+        appState.mediaState.downloadStream = null!;
+//      appState.mediaState.downloadStream = null!;
+        appState.mediaState.downloadStream = htmlCanvasElement.captureStream(appState.settingsState.fps);
+//      appState.mediaState.downloadStream = htmlCanvasElement.captureStream(appState.settingsState.fps);
+        if (appState.settingsState.mode === types.MODE.VIDEO) {
+//      if (appState.settingsState.mode === types.MODE.VIDEO) {
+            appState.mediaState.downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
+//          appState.mediaState.downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
         }
 //      }
         const recordedChunkes: BlobPart[] = [];
 //      const recordedChunkes: BlobPart[] = [];
-        const recordedOptions = { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
-//      const recordedOptions = { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+        const recordedOptions = { mimeType: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].mimeType,
+//      const recordedOptions = { mimeType: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].mimeType,
         };
 //      };
-        mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
-//      mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
-        mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
-//      mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+        appState.mediaState.mediaRecorder = new MediaRecorder(appState.mediaState.downloadStream, recordedOptions);
+//      appState.mediaState.mediaRecorder = new MediaRecorder(appState.mediaState.downloadStream, recordedOptions);
+        appState.mediaState.mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+//      appState.mediaState.mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
             if (blobEvent.data.size > 0) {
 //          if (blobEvent.data.size > 0) {
                 recordedChunkes.push(blobEvent.data);
@@ -890,8 +794,8 @@
 //              const blob: Blob = new Blob(recordedChunkes,
                     {
 //                  {
-                        type: videoFormats[videoFormatSelection.selectedIndex].blobType,
-//                      type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+                        type: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].blobType,
+//                      type: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].blobType,
                     },
 //                  },
                 );
@@ -904,58 +808,58 @@
 //              document.body.appendChild(anchor);
                 anchor.href = url;
 //              anchor.href = url;
-                anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
-//              anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+                anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[appState.uiState.videoFormatSelection.selectedIndex].extension}`;
+//              anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[appState.uiState.videoFormatSelection.selectedIndex].extension}`;
                 anchor.click();
 //              anchor.click();
                 window.URL.revokeObjectURL(url);
 //              window.URL.revokeObjectURL(url);
-                videoToShare = blob;
-//              videoToShare = blob;
+                appState.mediaState.videoToShare = blob;
+//              appState.mediaState.videoToShare = blob;
                 anchor.remove();
 //              anchor.remove();
             }
 //          }
         };
 //      };
-        mediaRecorder.start();
-//      mediaRecorder.start();
+        appState.mediaState.mediaRecorder.start();
+//      appState.mediaState.mediaRecorder.start();
     }
 //  }
-    const startCaptureAsVideoSnapshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
-//  const startCaptureAsVideoSnapshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
-        fshotRecord =  false;
-//      fshotRecord =  false;
-        sshotRecord = !false;
-//      sshotRecord = !false;
-        if (video) {
-//      if (video) {
+    async function startCaptureAsVideoSnapshot(): Promise<void> { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
+//  async function startCaptureAsVideoSnapshot(): Promise<void> { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
+        appState.mediaState.fshotRecord =  false;
+//      appState.mediaState.fshotRecord =  false;
+        appState.mediaState.sshotRecord = !false;
+//      appState.mediaState.sshotRecord = !false;
+        if (appState.mediaState.video) {
+//      if (appState.mediaState.video) {
             /*
-            video.stop();
-//          video.stop();
-            video.noLoop();
-//          video.noLoop();
+            appState.mediaState.video.stop();
+//          appState.mediaState.video.stop();
+            appState.mediaState.video.noLoop();
+//          appState.mediaState.video.noLoop();
             */
-            video.loop();
-//          video.loop();
-            video.volume(1.0);
-//          video.volume(1.0);
-            video.play();
-//          video.play();
+            appState.mediaState.video.loop();
+//          appState.mediaState.video.loop();
+            appState.mediaState.video.volume(1.0);
+//          appState.mediaState.video.volume(1.0);
+            appState.mediaState.video.play();
+//          appState.mediaState.video.play();
         }
 //      }
-        let htmlCanvasElement: HTMLCanvasElement = canvas.children[0] as HTMLCanvasElement;
-//      let htmlCanvasElement: HTMLCanvasElement = canvas.children[0] as HTMLCanvasElement;
-        let videoElement: HTMLVideoElement = canvas.children[1] as HTMLVideoElement;
-//      let videoElement: HTMLVideoElement = canvas.children[1] as HTMLVideoElement;
+        let htmlCanvasElement: HTMLCanvasElement = appState.canvasState.canvas.children[0] as HTMLCanvasElement;
+//      let htmlCanvasElement: HTMLCanvasElement = appState.canvasState.canvas.children[0] as HTMLCanvasElement;
+        let videoElement: HTMLVideoElement = appState.canvasState.canvas.children[1] as HTMLVideoElement;
+//      let videoElement: HTMLVideoElement = appState.canvasState.canvas.children[1] as HTMLVideoElement;
         let audioContext: AudioContext = new AudioContext();
 //      let audioContext: AudioContext = new AudioContext();
         let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
 //      let mediaStreamAudioDestinationNode: MediaStreamAudioDestinationNode = audioContext.createMediaStreamDestination();
         let mediaStreamAudioDestination: MediaStream = mediaStreamAudioDestinationNode.stream;
 //      let mediaStreamAudioDestination: MediaStream = mediaStreamAudioDestinationNode.stream;
-        if (mode === types.MODE.VIDEO) {
-//      if (mode === types.MODE.VIDEO) {
+        if (appState.settingsState.mode === types.MODE.VIDEO) {
+//      if (appState.settingsState.mode === types.MODE.VIDEO) {
             let mediaElementAudioSourceNode: MediaElementAudioSourceNode = audioContext.createMediaElementSource(videoElement);
 //          let mediaElementAudioSourceNode: MediaElementAudioSourceNode = audioContext.createMediaElementSource(videoElement);
             mediaElementAudioSourceNode.connect(mediaStreamAudioDestinationNode);
@@ -964,26 +868,26 @@
 //          mediaElementAudioSourceNode.connect(audioContext.destination);
         }
 //      }
-        downloadStream = null!;
-//      downloadStream = null!;
-        downloadStream = htmlCanvasElement.captureStream(fps);
-//      downloadStream = htmlCanvasElement.captureStream(fps);
-        if (mode === types.MODE.VIDEO) {
-//      if (mode === types.MODE.VIDEO) {
-            downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
-//          downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
+        appState.mediaState.downloadStream = null!;
+//      appState.mediaState.downloadStream = null!;
+        appState.mediaState.downloadStream = htmlCanvasElement.captureStream(appState.settingsState.fps);
+//      appState.mediaState.downloadStream = htmlCanvasElement.captureStream(appState.settingsState.fps);
+        if (appState.settingsState.mode === types.MODE.VIDEO) {
+//      if (appState.settingsState.mode === types.MODE.VIDEO) {
+            appState.mediaState.downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
+//          appState.mediaState.downloadStream.addTrack(mediaStreamAudioDestination.getAudioTracks()[0]);
         }
 //      }
         const recordedChunkes: BlobPart[] = [];
 //      const recordedChunkes: BlobPart[] = [];
-        const recordedOptions = { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
-//      const recordedOptions = { mimeType: videoFormats[videoFormatSelection.selectedIndex].mimeType,
+        const recordedOptions = { mimeType: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].mimeType,
+//      const recordedOptions = { mimeType: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].mimeType,
         };
 //      };
-        mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
-//      mediaRecorder = new MediaRecorder(downloadStream, recordedOptions);
-        mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
-//      mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+        appState.mediaState.mediaRecorder = new MediaRecorder(appState.mediaState.downloadStream, recordedOptions);
+//      appState.mediaState.mediaRecorder = new MediaRecorder(appState.mediaState.downloadStream, recordedOptions);
+        appState.mediaState.mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
+//      appState.mediaState.mediaRecorder.ondataavailable = async (blobEvent: BlobEvent): Promise<void> => {
             if (blobEvent.data.size > 0) {
 //          if (blobEvent.data.size > 0) {
                 recordedChunkes.push(blobEvent.data);
@@ -992,8 +896,8 @@
 //              const blob: Blob = new Blob(recordedChunkes,
                     {
 //                  {
-                        type: videoFormats[videoFormatSelection.selectedIndex].blobType,
-//                      type: videoFormats[videoFormatSelection.selectedIndex].blobType,
+                        type: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].blobType,
+//                      type: videoFormats[appState.uiState.videoFormatSelection.selectedIndex].blobType,
                     },
 //                  },
                 );
@@ -1006,87 +910,87 @@
 //              document.body.appendChild(anchor);
                 anchor.href = url;
 //              anchor.href = url;
-                anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
-//              anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[videoFormatSelection.selectedIndex].extension}`;
+                anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[appState.uiState.videoFormatSelection.selectedIndex].extension}`;
+//              anchor.download = `test_video_${new Date().toLocaleString()}.${videoFormats[appState.uiState.videoFormatSelection.selectedIndex].extension}`;
                 anchor.click();
 //              anchor.click();
                 window.URL.revokeObjectURL(url);
 //              window.URL.revokeObjectURL(url);
-                videoToShare = blob;
-//              videoToShare = blob;
+                appState.mediaState.videoToShare = blob;
+//              appState.mediaState.videoToShare = blob;
                 anchor.remove();
 //              anchor.remove();
             }
 //          }
         };
 //      };
-        mediaRecorder.start();
-//      mediaRecorder.start();
+        appState.mediaState.mediaRecorder.start();
+//      appState.mediaState.mediaRecorder.start();
     }
 //  }
-    const startCaptureAsImage = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
-//  const startCaptureAsImage = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
-        canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
-//      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+    async function startCaptureAsImage(): Promise<void> { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
+//  async function startCaptureAsImage(): Promise<void> { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
+        appState.canvasState.canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[appState.uiState.imageFormatSelection.selectedIndex].extension);
+//      appState.canvasState.canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[appState.uiState.imageFormatSelection.selectedIndex].extension);
     }
 //  }
-    const ceaseCaptureAsVideoFullshot = async (): Promise<void> => {
-//  const ceaseCaptureAsVideoFullshot = async (): Promise<void> => {
-        video?.stop();
-//      video?.stop();
-        mediaRecorder?.stop();
-//      mediaRecorder?.stop();
-        mediaRecorder = null!;
-//      mediaRecorder = null!;
-        mediaRecorderWebCam?.stop();
-//      mediaRecorderWebCam?.stop();
-        mediaRecorderWebCam = null!;
-//      mediaRecorderWebCam = null!;
+    async function ceaseCaptureAsVideoFullshot(): Promise<void> {
+//  async function ceaseCaptureAsVideoFullshot(): Promise<void> {
+        appState.mediaState.video?.stop();
+//      appState.mediaState.video?.stop();
+        appState.mediaState.mediaRecorder?.stop();
+//      appState.mediaState.mediaRecorder?.stop();
+        appState.mediaState.mediaRecorder = null!;
+//      appState.mediaState.mediaRecorder = null!;
+        appState.mediaState.mediaRecorderWebCam?.stop();
+//      appState.mediaState.mediaRecorderWebCam?.stop();
+        appState.mediaState.mediaRecorderWebCam = null!;
+//      appState.mediaState.mediaRecorderWebCam = null!;
     }
 //  }
-    const ceaseCaptureAsVideoSnapshot = async (): Promise<void> => {
-//  const ceaseCaptureAsVideoSnapshot = async (): Promise<void> => {
+    async function ceaseCaptureAsVideoSnapshot(): Promise<void> {
+//  async function ceaseCaptureAsVideoSnapshot(): Promise<void> {
         /*
-        video?.stop();
-//      video?.stop();
+        appState.mediaState.video?.stop();
+//      appState.mediaState.video?.stop();
         */
-        mediaRecorder?.stop();
-//      mediaRecorder?.stop();
-        mediaRecorder = null!;
-//      mediaRecorder = null!;
-        mediaRecorderWebCam?.stop();
-//      mediaRecorderWebCam?.stop();
-        mediaRecorderWebCam = null!;
-//      mediaRecorderWebCam = null!;
+        appState.mediaState.mediaRecorder?.stop();
+//      appState.mediaState.mediaRecorder?.stop();
+        appState.mediaState.mediaRecorder = null!;
+//      appState.mediaState.mediaRecorder = null!;
+        appState.mediaState.mediaRecorderWebCam?.stop();
+//      appState.mediaState.mediaRecorderWebCam?.stop();
+        appState.mediaState.mediaRecorderWebCam = null!;
+//      appState.mediaState.mediaRecorderWebCam = null!;
     }
 //  }
-    const ceaseCaptureAsImage = async (): Promise<void> => {
-//  const ceaseCaptureAsImage = async (): Promise<void> => {
-        canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
-//      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
+    async function ceaseCaptureAsImage(): Promise<void> {
+//  async function ceaseCaptureAsImage(): Promise<void> {
+        appState.canvasState.canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[appState.uiState.imageFormatSelection.selectedIndex].extension);
+//      appState.canvasState.canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[appState.uiState.imageFormatSelection.selectedIndex].extension);
     }
 //  }
 
-    const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): Promise<void> => {
-//  const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): Promise<void> => {
-        webcamCapture = canvasInstance.createCapture({ video: { mandatory: { minWidth: 1280, minHeight: 720, }, optional: [{ maxFrameRate: 120, }] }, audio: true, });
-//      webcamCapture = canvasInstance.createCapture({ video: { mandatory: { minWidth: 1280, minHeight: 720, }, optional: [{ maxFrameRate: 120, }] }, audio: true, });
-        canvasInstance.resizeCanvas(1280 * 2 / 3, 720 * 2 / 3);
-//      canvasInstance.resizeCanvas(1280 * 2 / 3, 720 * 2 / 3);
+    async function startWebCam(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): Promise<void> {
+//  async function startWebCam(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): Promise<void> {
+        appState.mediaState.webcamCapture = appState.canvasState.canvasInstance.createCapture({ video: { mandatory: { minWidth: 1280, minHeight: 720, }, optional: [{ maxFrameRate: 120, }] }, audio: true, });
+//      appState.mediaState.webcamCapture = appState.canvasState.canvasInstance.createCapture({ video: { mandatory: { minWidth: 1280, minHeight: 720, }, optional: [{ maxFrameRate: 120, }] }, audio: true, });
+        appState.canvasState.canvasInstance.resizeCanvas(1280 * 2 / 3, 720 * 2 / 3);
+//      appState.canvasState.canvasInstance.resizeCanvas(1280 * 2 / 3, 720 * 2 / 3);
         /*
-        canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH_, DEFAULT_CANVAS_SIZE.HEIGHT);
-//      canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH_, DEFAULT_CANVAS_SIZE.HEIGHT);
+        appState.canvasState.canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH_, DEFAULT_CANVAS_SIZE.HEIGHT);
+//      appState.canvasState.canvasInstance.resizeCanvas(DEFAULT_CANVAS_SIZE.WIDTH_, DEFAULT_CANVAS_SIZE.HEIGHT);
         */
-        webcamCapture.size(canvasInstance.width, canvasInstance.height);
-//      webcamCapture.size(canvasInstance.width, canvasInstance.height);
-        webcamCapture.hide();
-//      webcamCapture.hide();
-        canvasInstance.draw = (): void => {
-//      canvasInstance.draw = (): void => {
-            canvasInstance.textureWrap("repeat");
-//          canvasInstance.textureWrap("repeat");
-            canvasInstance.image(webcamCapture, 0.0, 0.0);
-//          canvasInstance.image(webcamCapture, 0.0, 0.0);
+        appState.mediaState.webcamCapture.size(appState.canvasState.canvasInstance.width, appState.canvasState.canvasInstance.height);
+//      appState.mediaState.webcamCapture.size(appState.canvasState.canvasInstance.width, appState.canvasState.canvasInstance.height);
+        appState.mediaState.webcamCapture.hide();
+//      appState.mediaState.webcamCapture.hide();
+        appState.canvasState.canvasInstance.draw = (): void => {
+//      appState.canvasState.canvasInstance.draw = (): void => {
+            appState.canvasState.canvasInstance.textureWrap("repeat");
+//          appState.canvasState.canvasInstance.textureWrap("repeat");
+            appState.canvasState.canvasInstance.image(appState.mediaState.webcamCapture, 0.0, 0.0);
+//          appState.canvasState.canvasInstance.image(appState.mediaState.webcamCapture, 0.0, 0.0);
             for (let {  fragmentShaderSourceType________,
 //          for (let {  fragmentShaderSourceType________,
                         fragmentShaderSourceCode________,
@@ -1101,8 +1005,8 @@
 //              if (!fragmentShaderSourceType________) {
                     if (!draggableText) { continue; }
 //                  if (!draggableText) { continue; }
-                    common.display(draggableText, canvasInstance);
-//                  common.display(draggableText, canvasInstance);
+                    common.display(draggableText, appState.canvasState.canvasInstance);
+//                  common.display(draggableText, appState.canvasState.canvasInstance);
                     continue;
 //                  continue;
                 }
@@ -1139,35 +1043,35 @@
 //                  }
                 }
 //              }
-                canvasInstance.filter(fragmentShaderFiltering_Instance);
-//              canvasInstance.filter(fragmentShaderFiltering_Instance);
+                appState.canvasState.canvasInstance.filter(fragmentShaderFiltering_Instance);
+//              appState.canvasState.canvasInstance.filter(fragmentShaderFiltering_Instance);
             }
 //          }
         };
 //      };
-        mode = types.MODE.WEBCAM;
-//      mode = types.MODE.WEBCAM;
+        appState.settingsState.mode = types.MODE.WEBCAM;
+//      appState.settingsState.mode = types.MODE.WEBCAM;
     }
 //  }
 
-    const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): void => {
-//  const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): void => {
-        mediaRecorder?.stop();
-//      mediaRecorder?.stop();
-        mediaRecorder = null!;
-//      mediaRecorder = null!;
-        mediaRecorderWebCam?.stop();
-//      mediaRecorderWebCam?.stop();
-        mediaRecorderWebCam = null!;
-//      mediaRecorderWebCam = null!;
-        webcamCapture.remove();
-//      webcamCapture.remove();
-        webcamCapture = null!;
-//      webcamCapture = null!;
-        canvasInstance.draw = (): void => {
-//      canvasInstance.draw = (): void => {
-            canvasInstance.background(255);
-//          canvasInstance.background(255);
+    function ceaseWebCam(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): void {
+//  function ceaseWebCam(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): void {
+        appState.mediaState.mediaRecorder?.stop();
+//      appState.mediaState.mediaRecorder?.stop();
+        appState.mediaState.mediaRecorder = null!;
+//      appState.mediaState.mediaRecorder = null!;
+        appState.mediaState.mediaRecorderWebCam?.stop();
+//      appState.mediaState.mediaRecorderWebCam?.stop();
+        appState.mediaState.mediaRecorderWebCam = null!;
+//      appState.mediaState.mediaRecorderWebCam = null!;
+        appState.mediaState.webcamCapture.remove();
+//      appState.mediaState.webcamCapture.remove();
+        appState.mediaState.webcamCapture = null!;
+//      appState.mediaState.webcamCapture = null!;
+        appState.canvasState.canvasInstance.draw = (): void => {
+//      appState.canvasState.canvasInstance.draw = (): void => {
+            appState.canvasState.canvasInstance.background(255);
+//          appState.canvasState.canvasInstance.background(255);
         };
 //      };
     }
@@ -1283,8 +1187,8 @@
     //GIF
 //  //GIF
 
-    const loadAsset = async(assetPath: string): Promise<string> => {
-//  const loadAsset = async(assetPath: string): Promise<string> => {
+    async function loadAsset(assetPath: string): Promise<string> {
+//  async function loadAsset(assetPath: string): Promise<string> {
         return (await fetch(assetPath)).text();
 //      return (await fetch(assetPath)).text();
     }
@@ -1292,32 +1196,32 @@
 
     svelte.onDestroy(async (): Promise<void> => {
 //  svelte.onDestroy(async (): Promise<void> => {
-        canvasInstance.remove();
-//      canvasInstance.remove();
+        appState.canvasState.canvasInstance.remove();
+//      appState.canvasState.canvasInstance.remove();
     });
 //  });
 
-    const handleUpdate = (updatedUniforms: types.GLSLUniforms): void => {
-//  const handleUpdate = (updatedUniforms: types.GLSLUniforms): void => {
+    function handleUpdate(updatedUniforms: types.GLSLUniforms): void {
+//  function handleUpdate(updatedUniforms: types.GLSLUniforms): void {
     }
 //  }
 
-    const handleCaptureAsVideo = async(): Promise<void> => {
-//  const handleCaptureAsVideo = async(): Promise<void> => {
-        if (recording === false) {
-//      if (recording === false) {
-            recording = true;
-//          recording = true;
-            if (selectedCaptureOption === "Snapshot") {
-//          if (selectedCaptureOption === "Snapshot") {
+    async function handleCaptureAsVideo(): Promise<void> {
+//  async function handleCaptureAsVideo(): Promise<void> {
+        if (appState.mediaState.recording === false) {
+//      if (appState.mediaState.recording === false) {
+            appState.mediaState.recording = true;
+//          appState.mediaState.recording = true;
+            if (appState.settingsState.selectedCaptureOption === "Snapshot") {
+//          if (appState.settingsState.selectedCaptureOption === "Snapshot") {
                 await startCaptureAsVideoSnapshot();
 //              await startCaptureAsVideoSnapshot();
             }
 //          }
             else
 //          else
-            if (selectedCaptureOption === "Fullshot") {
-//          if (selectedCaptureOption === "Fullshot") {
+            if (appState.settingsState.selectedCaptureOption === "Fullshot") {
+//          if (appState.settingsState.selectedCaptureOption === "Fullshot") {
                 await startCaptureAsVideoFullshot();
 //              await startCaptureAsVideoFullshot();
             }
@@ -1326,18 +1230,18 @@
 //      }
         else {
 //      else {
-            recording = false;
-//          recording = false;
-            if (selectedCaptureOption === "Snapshot") {
-//          if (selectedCaptureOption === "Snapshot") {
+            appState.mediaState.recording = false;
+//          appState.mediaState.recording = false;
+            if (appState.settingsState.selectedCaptureOption === "Snapshot") {
+//          if (appState.settingsState.selectedCaptureOption === "Snapshot") {
                 await ceaseCaptureAsVideoSnapshot();
 //              await ceaseCaptureAsVideoSnapshot();
             }
 //          }
             else
 //          else
-            if (selectedCaptureOption === "Fullshot") {
-//          if (selectedCaptureOption === "Fullshot") {
+            if (appState.settingsState.selectedCaptureOption === "Fullshot") {
+//          if (appState.settingsState.selectedCaptureOption === "Fullshot") {
                 await ceaseCaptureAsVideoFullshot();
 //              await ceaseCaptureAsVideoFullshot();
             }
@@ -1347,8 +1251,8 @@
     }
 //  }
 
-    const toggleWebCam = (e: Event & { currentTarget: EventTarget & HTMLInputElement }): void => {
-//  const toggleWebCam = (e: Event & { currentTarget: EventTarget & HTMLInputElement }): void => {
+    function toggleWebCam(e: Event & { currentTarget: EventTarget & HTMLInputElement }): void {
+//  function toggleWebCam(e: Event & { currentTarget: EventTarget & HTMLInputElement }): void {
         const fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
 //      const fakeMouseEvent: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement } = new MouseEvent("click", { bubbles: true, cancelable: true, }) as MouseEvent & { currentTarget: EventTarget & HTMLButtonElement };
         const ele: HTMLInputElement = e.target as HTMLInputElement;
@@ -1368,49 +1272,49 @@
     }
 //  }
 
-    const handleStartCaptureAsImage = async (e: MouseEvent): Promise<void> => {
-//  const handleStartCaptureAsImage = async (e: MouseEvent): Promise<void> => {
+    async function handleStartCaptureAsImage(e: MouseEvent): Promise<void> {
+//  async function handleStartCaptureAsImage(e: MouseEvent): Promise<void> {
         await startCaptureAsImage();
 //      await startCaptureAsImage();
     }
 //  }
 
-    const handleVideoToggle = async (e: MouseEvent): Promise<void> => {
-//  const handleVideoToggle = async (e: MouseEvent): Promise<void> => {
+    async function handleVideoToggle(e: MouseEvent): Promise<void> {
+//  async function handleVideoToggle(e: MouseEvent): Promise<void> {
         await handleCaptureAsVideo();
 //      await handleCaptureAsVideo();
     }
 //  }
 
-    const handleShare = async (e: MouseEvent): Promise<void> => {
-//  const handleShare = async (e: MouseEvent): Promise<void> => {
-        if (mode === types.MODE.IMAGE) {
-//      if (mode === types.MODE.IMAGE) {
-            await common.shareImage(canvas.children[0] as HTMLCanvasElement);
-//          await common.shareImage(canvas.children[0] as HTMLCanvasElement);
+    async function handleShare(e: MouseEvent): Promise<void> {
+//  async function handleShare(e: MouseEvent): Promise<void> {
+        if (appState.settingsState.mode === types.MODE.IMAGE) {
+//      if (appState.settingsState.mode === types.MODE.IMAGE) {
+            await common.shareImage(appState.canvasState.canvas.children[0] as HTMLCanvasElement);
+//          await common.shareImage(appState.canvasState.canvas.children[0] as HTMLCanvasElement);
         }
 //      }
         else
 //      else
-        if (mode === types.MODE.VIDEO && videoToShare) {
-//      if (mode === types.MODE.VIDEO && videoToShare) {
-            await common.shareVideo(videoToShare, canvas.children[0] as HTMLCanvasElement);
-//          await common.shareVideo(videoToShare, canvas.children[0] as HTMLCanvasElement);
+        if (appState.settingsState.mode === types.MODE.VIDEO && appState.mediaState.videoToShare) {
+//      if (appState.settingsState.mode === types.MODE.VIDEO && appState.mediaState.videoToShare) {
+            await common.shareVideo(appState.mediaState.videoToShare, appState.canvasState.canvas.children[0] as HTMLCanvasElement);
+//          await common.shareVideo(appState.mediaState.videoToShare, appState.canvasState.canvas.children[0] as HTMLCanvasElement);
         }
 //      }
         else
 //      else
-        if (mode === types.MODE.WEBCAM && videoToShare) {
-//      if (mode === types.MODE.WEBCAM && videoToShare) {
-            await common.shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement);
-//          await common.shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement);
+        if (appState.settingsState.mode === types.MODE.WEBCAM && appState.mediaState.videoToShare) {
+//      if (appState.settingsState.mode === types.MODE.WEBCAM && appState.mediaState.videoToShare) {
+            await common.shareWebcam(appState.mediaState.videoToShare, appState.canvasState.canvas.children[0] as HTMLCanvasElement);
+//          await common.shareWebcam(appState.mediaState.videoToShare, appState.canvasState.canvas.children[0] as HTMLCanvasElement);
         }
 //      }
     }
 //  }
 
-    const handleAddEffectNI = async (e: MouseEvent): Promise<void> => {
-//  const handleAddEffectNI = async (e: MouseEvent): Promise<void> => {
+    async function handleAddEffectNI(e: MouseEvent): Promise<void> {
+//  async function handleAddEffectNI(e: MouseEvent): Promise<void> {
         global.globalState.effectsUsedForFiltering = [ ...
 //      global.globalState.effectsUsedForFiltering = [ ...
             global.globalState.effectsUsedForFiltering  , { fragmentShaderSourceType________: "NI"
@@ -1476,16 +1380,16 @@
 
         await svelte.tick();
 //      await svelte.tick();
-        bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth", });
-//      bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth", });
+        appState.uiState.bigList.scroll({ top: appState.uiState.bigList.scrollHeight, behavior: "smooth", });
+//      appState.uiState.bigList.scroll({ top: appState.uiState.bigList.scrollHeight, behavior: "smooth", });
 
         await common.makeNewSnackbarSuccess(`A new NI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
 //      await common.makeNewSnackbarSuccess(`A new NI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
     }
 //  }
 
-    const handleAddEffectAI = async (e: MouseEvent): Promise<void> => {
-//  const handleAddEffectAI = async (e: MouseEvent): Promise<void> => {
+    async function handleAddEffectAI(e: MouseEvent): Promise<void> {
+//  async function handleAddEffectAI(e: MouseEvent): Promise<void> {
         global.globalState.effectsUsedForFiltering = [ ...
 //      global.globalState.effectsUsedForFiltering = [ ...
             global.globalState.effectsUsedForFiltering  , { fragmentShaderSourceType________: "AI"
@@ -1551,16 +1455,16 @@
 
         await svelte.tick();
 //      await svelte.tick();
-        bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth", });
-//      bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth", });
+        appState.uiState.bigList.scroll({ top: appState.uiState.bigList.scrollHeight, behavior: "smooth", });
+//      appState.uiState.bigList.scroll({ top: appState.uiState.bigList.scrollHeight, behavior: "smooth", });
 
         await common.makeNewSnackbarSuccess(`A new AI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
 //      await common.makeNewSnackbarSuccess(`A new AI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
     }
 //  }
 
-    const handleInsertText = async (e: MouseEvent): Promise<void> => {
-//  const handleInsertText = async (e: MouseEvent): Promise<void> => {
+    async function handleInsertText(e: MouseEvent): Promise<void> {
+//  async function handleInsertText(e: MouseEvent): Promise<void> {
         global.globalState.effectsUsedForFiltering = [ ...
 //      global.globalState.effectsUsedForFiltering = [ ...
             global.globalState.effectsUsedForFiltering  , { fragmentShaderSourceType________: null
@@ -1575,40 +1479,40 @@
 //                                                      ,   fragmentShader_HTMLSelectElement: null
                                                         ,   draggableText                   : {
 //                                                      ,   draggableText                   : {
-                                                                colorFilling: { r: 0, g: 0, b: 0, a: 255 },
-//                                                              colorFilling: { r: 0, g: 0, b: 0, a: 255 },
-                                                                colorOutline: { r: 0, g: 0, b: 0, a: 255 },
-//                                                              colorOutline: { r: 0, g: 0, b: 0, a: 255 },
-                                                                fontSize    : 24                          ,
-//                                                              fontSize    : 24                          ,
-                                                                contents    : "Text"                      ,
-//                                                              contents    : "Text"                      ,
-                                                                alignHOption: "center"                    ,
-//                                                              alignHOption: "center"                    ,
-                                                                alignVOption: "center"                    ,
-//                                                              alignVOption: "center"                    ,
-                                                                font        : defaultFont!                ,
-//                                                              font        : defaultFont!                ,
-                                                                stylesOption: "normal"                    ,
-//                                                              stylesOption: "normal"                    ,
-                                                                positionX   : 0                           ,
-//                                                              positionX   : 0                           ,
-                                                                positionY   : 0                           ,
-//                                                              positionY   : 0                           ,
-                                                                dimensionW  : 24 * 4                      ,
-//                                                              dimensionW  : 24 * 4                      ,
-                                                                dimensionH  : 24 * 1                      ,
-//                                                              dimensionH  : 24 * 1                      ,
-                                                                isDragging  : false                       ,
-//                                                              isDragging  : false                       ,
-                                                                offsetX     : 0                           ,
-//                                                              offsetX     : 0                           ,
-                                                                offsetY     : 0                           ,
-//                                                              offsetY     : 0                           ,
-                                                                spacings    : 24                          ,
-//                                                              spacings    : 24                          ,
-                                                                wrapMode    : null!                       ,
-//                                                              wrapMode    : null!                       ,
+                                                                colorFilling: { r: 0, g: 0, b: 0, a: 255 }     ,
+//                                                              colorFilling: { r: 0, g: 0, b: 0, a: 255 }     ,
+                                                                colorOutline: { r: 0, g: 0, b: 0, a: 255 }     ,
+//                                                              colorOutline: { r: 0, g: 0, b: 0, a: 255 }     ,
+                                                                fontSize    : 24                               ,
+//                                                              fontSize    : 24                               ,
+                                                                contents    : "Text"                           ,
+//                                                              contents    : "Text"                           ,
+                                                                alignHOption: "center"                         ,
+//                                                              alignHOption: "center"                         ,
+                                                                alignVOption: "center"                         ,
+//                                                              alignVOption: "center"                         ,
+                                                                font        : appState.canvasState.defaultFont!,
+//                                                              font        : appState.canvasState.defaultFont!,
+                                                                stylesOption: "normal"                         ,
+//                                                              stylesOption: "normal"                         ,
+                                                                positionX   : 0                                ,
+//                                                              positionX   : 0                                ,
+                                                                positionY   : 0                                ,
+//                                                              positionY   : 0                                ,
+                                                                dimensionW  : 24 * 4                           ,
+//                                                              dimensionW  : 24 * 4                           ,
+                                                                dimensionH  : 24 * 1                           ,
+//                                                              dimensionH  : 24 * 1                           ,
+                                                                isDragging  : false                            ,
+//                                                              isDragging  : false                            ,
+                                                                offsetX     : 0                                ,
+//                                                              offsetX     : 0                                ,
+                                                                offsetY     : 0                                ,
+//                                                              offsetY     : 0                                ,
+                                                                spacings    : 24                               ,
+//                                                              spacings    : 24                               ,
+                                                                wrapMode    : null!                            ,
+//                                                              wrapMode    : null!                            ,
                                                             }
 //                                                          }
                                                         , }
@@ -1647,40 +1551,40 @@
 //                                                              ,   fragmentShader_HTMLSelectElement: null
                                                                 ,   draggableText                   : {
 //                                                              ,   draggableText                   : {
-                                                                        colorFilling: { r: 0, g: 0, b: 0, a: 255 },
-//                                                                      colorFilling: { r: 0, g: 0, b: 0, a: 255 },
-                                                                        colorOutline: { r: 0, g: 0, b: 0, a: 255 },
-//                                                                      colorOutline: { r: 0, g: 0, b: 0, a: 255 },
-                                                                        fontSize    : 24                          ,
-//                                                                      fontSize    : 24                          ,
-                                                                        contents    : "Text"                      ,
-//                                                                      contents    : "Text"                      ,
-                                                                        alignHOption: "center"                    ,
-//                                                                      alignHOption: "center"                    ,
-                                                                        alignVOption: "center"                    ,
-//                                                                      alignVOption: "center"                    ,
-                                                                        font        : defaultFont!                ,
-//                                                                      font        : defaultFont!                ,
-                                                                        stylesOption: "normal"                    ,
-//                                                                      stylesOption: "normal"                    ,
-                                                                        positionX   : 0                           ,
-//                                                                      positionX   : 0                           ,
-                                                                        positionY   : 0                           ,
-//                                                                      positionY   : 0                           ,
-                                                                        dimensionW  : 24 * 4                      ,
-//                                                                      dimensionW  : 24 * 4                      ,
-                                                                        dimensionH  : 24 * 1                      ,
-//                                                                      dimensionH  : 24 * 1                      ,
-                                                                        isDragging  : false                       ,
-//                                                                      isDragging  : false                       ,
-                                                                        offsetX     : 0                           ,
-//                                                                      offsetX     : 0                           ,
-                                                                        offsetY     : 0                           ,
-//                                                                      offsetY     : 0                           ,
-                                                                        spacings    : 24                          ,
-//                                                                      spacings    : 24                          ,
-                                                                        wrapMode    : null!                       ,
-//                                                                      wrapMode    : null!                       ,
+                                                                        colorFilling: { r: 0, g: 0, b: 0, a: 255 }     ,
+//                                                                      colorFilling: { r: 0, g: 0, b: 0, a: 255 }     ,
+                                                                        colorOutline: { r: 0, g: 0, b: 0, a: 255 }     ,
+//                                                                      colorOutline: { r: 0, g: 0, b: 0, a: 255 }     ,
+                                                                        fontSize    : 24                               ,
+//                                                                      fontSize    : 24                               ,
+                                                                        contents    : "Text"                           ,
+//                                                                      contents    : "Text"                           ,
+                                                                        alignHOption: "center"                         ,
+//                                                                      alignHOption: "center"                         ,
+                                                                        alignVOption: "center"                         ,
+//                                                                      alignVOption: "center"                         ,
+                                                                        font        : appState.canvasState.defaultFont!,
+//                                                                      font        : appState.canvasState.defaultFont!,
+                                                                        stylesOption: "normal"                         ,
+//                                                                      stylesOption: "normal"                         ,
+                                                                        positionX   : 0                                ,
+//                                                                      positionX   : 0                                ,
+                                                                        positionY   : 0                                ,
+//                                                                      positionY   : 0                                ,
+                                                                        dimensionW  : 24 * 4                           ,
+//                                                                      dimensionW  : 24 * 4                           ,
+                                                                        dimensionH  : 24 * 1                           ,
+//                                                                      dimensionH  : 24 * 1                           ,
+                                                                        isDragging  : false                            ,
+//                                                                      isDragging  : false                            ,
+                                                                        offsetX     : 0                                ,
+//                                                                      offsetX     : 0                                ,
+                                                                        offsetY     : 0                                ,
+//                                                                      offsetY     : 0                                ,
+                                                                        spacings    : 24                               ,
+//                                                                      spacings    : 24                               ,
+                                                                        wrapMode    : null!                            ,
+//                                                                      wrapMode    : null!                            ,
                                                                     }
 //                                                                  }
                                                                 , }
@@ -1700,16 +1604,16 @@
 
         await svelte.tick();
 //      await svelte.tick();
-        bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth", });
-//      bigList.scroll({ top: bigList.scrollHeight, behavior: "smooth", });
+        appState.uiState.bigList.scroll({ top: appState.uiState.bigList.scrollHeight, behavior: "smooth", });
+//      appState.uiState.bigList.scroll({ top: appState.uiState.bigList.scrollHeight, behavior: "smooth", });
 
         await common.makeNewSnackbarSuccess(`A new text effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
 //      await common.makeNewSnackbarSuccess(`A new text effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
     }
 //  }
 
-    const handleEffectNIChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
-//  const handleEffectNIChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
+    async function handleEffectNIChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }, effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> {
+//  async function handleEffectNIChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }, effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> {
         const ele: HTMLSelectElement = e.target as HTMLSelectElement;
 //      const ele: HTMLSelectElement = e.target as HTMLSelectElement;
         let editorSnapshot: types.EditorSnapshot = {
@@ -1760,10 +1664,10 @@
 //      editorSnapshot.dynamicStorage.set("undoFragmentShader______GLSLUniforms", effect.fragmentShader______GLSLUniforms);
         editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", effect.fragmentShaderFiltering_Instance);
 //      editorSnapshot.dynamicStorage.set("undoFragmentShaderFiltering_Instance", effect.fragmentShaderFiltering_Instance);
-        editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex", cachedSelectedIndex);
-//      editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex", cachedSelectedIndex);
-        cachedSelectedIndex = ele.selectedIndex;
-//      cachedSelectedIndex = ele.selectedIndex;
+        editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex", appState.uiState.cachedSelectedIndex);
+//      editorSnapshot.dynamicStorage.set("undoCachedSelectedIndex", appState.uiState.cachedSelectedIndex);
+        appState.uiState.cachedSelectedIndex = ele.selectedIndex;
+//      appState.uiState.cachedSelectedIndex = ele.selectedIndex;
         let shaderName = ele.options[ele.selectedIndex].value;
 //      let shaderName = ele.options[ele.selectedIndex].value;
         if (shaderName === "none") {
@@ -1784,8 +1688,8 @@
 //          editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", effect.fragmentShader______GLSLUniforms);
             editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", effect.fragmentShaderFiltering_Instance);
 //          editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", effect.fragmentShaderFiltering_Instance);
-            editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", cachedSelectedIndex);
-//          editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", cachedSelectedIndex);
+            editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", appState.uiState.cachedSelectedIndex);
+//          editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", appState.uiState.cachedSelectedIndex);
         }
 //      }
         else {
@@ -1844,8 +1748,8 @@
 //          effect.fragmentShader______GLSLUniforms = await common.fetchShaderMetadata(shaderPath); // common.parseGLSL(effect.fragmentShaderSourceCode________);
             console.log($state.snapshot(effect.fragmentShader______GLSLUniforms));
 //          console.log($state.snapshot(effect.fragmentShader______GLSLUniforms));
-            effect.fragmentShaderFiltering_Instance = canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________);
-//          effect.fragmentShaderFiltering_Instance = canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________);
+            effect.fragmentShaderFiltering_Instance = appState.canvasState.canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________);
+//          effect.fragmentShaderFiltering_Instance = appState.canvasState.canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________);
             editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", effect.fragmentShaderSourceType________);
 //          editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceType________", effect.fragmentShaderSourceType________);
             editorSnapshot.dynamicStorage.set("redoFragmentShaderSourceCode________", effect.fragmentShaderSourceCode________);
@@ -1854,8 +1758,8 @@
 //          editorSnapshot.dynamicStorage.set("redoFragmentShader______GLSLUniforms", effect.fragmentShader______GLSLUniforms);
             editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", effect.fragmentShaderFiltering_Instance);
 //          editorSnapshot.dynamicStorage.set("redoFragmentShaderFiltering_Instance", effect.fragmentShaderFiltering_Instance);
-            editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", cachedSelectedIndex);
-//          editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", cachedSelectedIndex);
+            editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", appState.uiState.cachedSelectedIndex);
+//          editorSnapshot.dynamicStorage.set("redoCachedSelectedIndex", appState.uiState.cachedSelectedIndex);
         }
 //      }
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
@@ -1863,8 +1767,8 @@
     }
 //  }
 
-    const handleRemoveEffect = async (effectIndex: number, type: string): Promise<void> => {
-//  const handleRemoveEffect = async (effectIndex: number, type: string): Promise<void> => {
+    async function handleRemoveEffect(effectIndex: number, type: string): Promise<void> {
+//  async function handleRemoveEffect(effectIndex: number, type: string): Promise<void> {
         global.globalState.effectsUsedForFiltering = global.globalState.effectsUsedForFiltering.filter((otherEffect: types.EffectUsedForFiltering, otherEffectIndex: number): boolean => otherEffectIndex !== effectIndex);
 //      global.globalState.effectsUsedForFiltering = global.globalState.effectsUsedForFiltering.filter((otherEffect: types.EffectUsedForFiltering, otherEffectIndex: number): boolean => otherEffectIndex !== effectIndex);
         await svelte.tick();
@@ -1874,26 +1778,26 @@
     }
 //  }
 
-    const handleAskAI = async (effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
-//  const handleAskAI = async (effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
+    async function handleAskAI(effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> {
+//  async function handleAskAI(effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> {
         try
 //      try
         {
 //      {
-            isLoading =  true;
-//          isLoading =  true;
-            effect.fragmentShaderSourceCode________=`#version 300 es\n` + (await (await ai.promptShader(AIInputPrompts!.value.split(";"))).text()).split("#version 300 es")[1].split("\n").slice(+1 , -1).join("\n").replaceAll("`", "");
-//          effect.fragmentShaderSourceCode________=`#version 300 es\n` + (await (await ai.promptShader(AIInputPrompts!.value.split(";"))).text()).split("#version 300 es")[1].split("\n").slice(+1 , -1).join("\n").replaceAll("`", "");
-            isLoading = !true;
-//          isLoading = !true;
+            appState.uiState.isLoading =  true;
+//          appState.uiState.isLoading =  true;
+            effect.fragmentShaderSourceCode________=`#version 300 es\n` + (await (await ai.promptShader(appState.uiState.AIInputPrompts!.value.split(";"))).text()).split("#version 300 es")[1].split("\n").slice(+1 , -1).join("\n").replaceAll("`", "");
+//          effect.fragmentShaderSourceCode________=`#version 300 es\n` + (await (await ai.promptShader(appState.uiState.AIInputPrompts!.value.split(";"))).text()).split("#version 300 es")[1].split("\n").slice(+1 , -1).join("\n").replaceAll("`", "");
+            appState.uiState.isLoading = !true;
+//          appState.uiState.isLoading = !true;
             console.log($state.snapshot(effect.fragmentShaderSourceCode________));
 //          console.log($state.snapshot(effect.fragmentShaderSourceCode________));
             effect.fragmentShader______GLSLUniforms = common.parseGLSL(effect.fragmentShaderSourceCode________!);
 //          effect.fragmentShader______GLSLUniforms = common.parseGLSL(effect.fragmentShaderSourceCode________!);
             console.log($state.snapshot(effect.fragmentShader______GLSLUniforms));
 //          console.log($state.snapshot(effect.fragmentShader______GLSLUniforms));
-            effect.fragmentShaderFiltering_Instance = canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________!);
-//          effect.fragmentShaderFiltering_Instance = canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________!);
+            effect.fragmentShaderFiltering_Instance = appState.canvasState.canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________!);
+//          effect.fragmentShaderFiltering_Instance = appState.canvasState.canvasInstance.createFilterShader(effect.fragmentShaderSourceCode________!);
         }
 //      }
         catch (err: unknown)
@@ -1907,8 +1811,8 @@
     }
 //  }
 
-    const handleMoveEffectUp = async (effectIndex: number): Promise<void> => {
-//  const handleMoveEffectUp = async (effectIndex: number): Promise<void> => {
+    async function handleMoveEffectUp(effectIndex: number): Promise<void> {
+//  async function handleMoveEffectUp(effectIndex: number): Promise<void> {
         let index1: number | undefined = global.globalState.effectsUsedForFiltering[effectIndex].fragmentShader_HTMLSelectElement?.selectedIndex;
 //      let index1: number | undefined = global.globalState.effectsUsedForFiltering[effectIndex].fragmentShader_HTMLSelectElement?.selectedIndex;
         let index2: number | undefined = global.globalState.effectsUsedForFiltering[effectIndex - 1].fragmentShader_HTMLSelectElement?.selectedIndex;
@@ -2002,8 +1906,8 @@
     }
 //  }
 
-    const handleMoveEffectDown = async (effectIndex: number): Promise<void> => {
-//  const handleMoveEffectDown = async (effectIndex: number): Promise<void> => {
+    async function handleMoveEffectDown(effectIndex: number): Promise<void> {
+//  async function handleMoveEffectDown(effectIndex: number): Promise<void> {
         let index1: number | undefined = global.globalState.effectsUsedForFiltering[effectIndex].fragmentShader_HTMLSelectElement?.selectedIndex;
 //      let index1: number | undefined = global.globalState.effectsUsedForFiltering[effectIndex].fragmentShader_HTMLSelectElement?.selectedIndex;
         let index2: number | undefined = global.globalState.effectsUsedForFiltering[effectIndex + 1].fragmentShader_HTMLSelectElement?.selectedIndex;
@@ -2097,47 +2001,47 @@
     }
 //  }
 
-    const handleVideoRewind = async (): Promise<void> => {
-//  const handleVideoRewind = async (): Promise<void> => {
-        video?.time(video?.time() - 10);
-//      video?.time(video?.time() - 10);
+    async function handleVideoRewind(): Promise<void> {
+//  async function handleVideoRewind(): Promise<void> {
+        appState.mediaState.video?.time(appState.mediaState.video?.time() - 10);
+//      appState.mediaState.video?.time(appState.mediaState.video?.time() - 10);
     }
 //  }
 
-    const handleVideoPlayPause = async (): Promise<void> => {
-//  const handleVideoPlayPause = async (): Promise<void> => {
-        if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
-//      if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
-        videoIsPlaying = !videoIsPlaying;
-//      videoIsPlaying = !videoIsPlaying;
+    async function handleVideoPlayPause(): Promise<void> {
+//  async function handleVideoPlayPause(): Promise<void> {
+        if (!appState.mediaState.videoIsPlaying) { appState.mediaState.video?.play(); } else { appState.mediaState.video?.pause(); }
+//      if (!appState.mediaState.videoIsPlaying) { appState.mediaState.video?.play(); } else { appState.mediaState.video?.pause(); }
+        appState.mediaState.videoIsPlaying = !appState.mediaState.videoIsPlaying;
+//      appState.mediaState.videoIsPlaying = !appState.mediaState.videoIsPlaying;
     }
 //  }
 
-    const handleVideoForward = async (): Promise<void> => {
-//  const handleVideoForward = async (): Promise<void> => {
-        video?.time(video?.time() + 10);
-//      video?.time(video?.time() + 10);
+    async function handleVideoForward(): Promise<void> {
+//  async function handleVideoForward(): Promise<void> {
+        appState.mediaState.video?.time(appState.mediaState.video?.time() + 10);
+//      appState.mediaState.video?.time(appState.mediaState.video?.time() + 10);
     }
 //  }
 
-    const handleVideoVolumeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleVideoVolumeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleVideoVolumeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleVideoVolumeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        video?.volume(ele.valueAsNumber);
-//      video?.volume(ele.valueAsNumber);
+        appState.mediaState.video?.volume(ele.valueAsNumber);
+//      appState.mediaState.video?.volume(ele.valueAsNumber);
     }
 //  }
 
-    const handleUndo = async (): Promise<void> => {
-//  const handleUndo = async (): Promise<void> => {
+    async function handleUndo(): Promise<void> {
+//  async function handleUndo(): Promise<void> {
         await common.onUndoActionExecuted();
 //      await common.onUndoActionExecuted();
     }
 //  }
 
-    const handleRedo = async (): Promise<void> => {
-//  const handleRedo = async (): Promise<void> => {
+    async function handleRedo(): Promise<void> {
+//  async function handleRedo(): Promise<void> {
         await common.onRedoActionExecuted();
 //      await common.onRedoActionExecuted();
     }
@@ -2145,14 +2049,14 @@
 
 </script>
 
-<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="0" style:pointer-events="none"></div>-->
-    <div bind:this={canvasBG} style:position="absolute" style:z-index="0" style:pointer-events="none"></div>
-<!--<div bind:this={canvasBG} style:position="absolute" style:z-index="0" style:pointer-events="none"></div>-->
-<!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
-<!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
-<!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={draggableText}></DraggableTextComponent>-->
+<!--<div bind:this={appState.canvasState.canvasBG} style:position="absolute" style:z-index="0" style:pointer-events="none"></div>-->
+    <div bind:this={appState.canvasState.canvasBG} style:position="absolute" style:z-index="0" style:pointer-events="none"></div>
+<!--<div bind:this={appState.canvasState.canvasBG} style:position="absolute" style:z-index="0" style:pointer-events="none"></div>-->
+<!--<DraggableTextComponent bind:canvasInstance={appState.canvasState.canvasInstance} bind:draggableText={appState.draggableText}></DraggableTextComponent>-->
+<!--<DraggableTextComponent bind:canvasInstance={appState.canvasState.canvasInstance} bind:draggableText={appState.draggableText}></DraggableTextComponent>-->
+<!--<DraggableTextComponent bind:canvasInstance={appState.canvasState.canvasInstance} bind:draggableText={appState.draggableText}></DraggableTextComponent>-->
 <MouseCursor></MouseCursor>
-{#if isInitializing}
+{#if appState.uiState.isInitializing}
 <!--<div class="grey10 white-text large-elevate" out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; align-items: center;">-->
     <div class="grey10 white-text large-elevate" out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; align-items: center;">
 <!--<div class="grey10 white-text large-elevate" out:t.fade style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 9999; display: flex; justify-content: center; align-items: center;">-->
@@ -2178,9 +2082,9 @@
     <!--<div class="headerContainer"></div>-->
         <div class="topBarContainer small-padding">
             <div class="row">
-            <!--<button class="slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} onchange={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
-                <button class="slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} onchange={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
-            <!--<button class="slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={input} onchange={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+            <!--<button class="slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={appState.uiState.input} onchange={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
+                <button class="slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={appState.uiState.input} onchange={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>
+            <!--<button class="slow-ripple large-elevate margin grey10 white-text"><i class="fa-solid fa-paperclip white-text white-text"></i><span class="white-text">Load Image Or Video</span><input bind:this={appState.uiState.input} onchange={onChange} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /></button>-->
                 <div class="field middle-align">
                     <nav>
                     <!--<div class="max margin"><i class="fa-solid fa-face-grin-tongue white-text tiny-padding"></i><span class="white-text">WEBCAM</span><i class="fa-solid fa-hand-peace white-text tiny-padding"></i></div>-->
@@ -2218,7 +2122,7 @@
                         <div class="column">
                             <h6  class="                         white-text                          ">Save as image</h6>
                             <div class="field label suffix round white-text large-elevate slow-ripple">
-                                <select bind:this={imageFormatSelection}>
+                                <select bind:this={appState.uiState.imageFormatSelection}>
                                     {#each imageFormats as imageFormat (imageFormat)}
                                         <option class="grey10 white-text">
                                             {imageFormat.extension}
@@ -2246,7 +2150,7 @@
                         <div class="column">
                             <h6  class="                         white-text                          ">Save as video</h6>
                             <div class="field label suffix round white-text large-elevate slow-ripple">
-                                <select bind:this={videoFormatSelection}>
+                                <select bind:this={appState.uiState.videoFormatSelection}>
                                     {#each videoFormats as videoFormat (videoFormat)}
                                         <option class="grey10 white-text">
                                             {videoFormat.mimeType}
@@ -2265,18 +2169,18 @@
                             <div class="row center-align">
                                 <div class="middle-align field">
                                     <nav>
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>-->
-                                        <label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>-->
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>-->
-                                        <label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>
-                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>-->
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={appState.settingsState.selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={appState.settingsState.selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Snapshot" bind:group={appState.settingsState.selectedCaptureOption}><span>Snapshot</span><div class="tooltip right max toolTip round blue white-text large-elevate slow-ripple top-round right-round medium-space" style:text-align="center"><span class="white-text">Save frames (ACut)</span></div></label>-->
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={appState.settingsState.selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>-->
+                                        <label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={appState.settingsState.selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>
+                                    <!--<label class="radio"><input type="radio" name="radio4_" value="Fullshot" bind:group={appState.settingsState.selectedCaptureOption}><span>Fullshot</span><div class="tooltip left  max toolTip round blue white-text large-elevate slow-ripple top-round  left-round medium-space" style:text-align="center"><span class="white-text">Save frames (Full)</span></div></label>-->
                                     </nav>
                                 </div>
                             </div>
                             <div class="middle-align row">
                                 <button class="slow-ripple large-elevate deep-orange white-text" onclick={handleVideoToggle}>
-                                    {#if !recording}
+                                    {#if !appState.mediaState.recording}
                                     <!--<i class="fa-solid fa-bolt  white-text"></i>-->
                                         <i class="fa-solid fa-bolt  white-text"></i>
                                     <!--<i class="fa-solid fa-bolt  white-text"></i>-->
@@ -2292,7 +2196,7 @@
                                     <!--<span>Stop </span>-->
                                     {/if}
                                 </button>
-                                {#if recording}
+                                {#if appState.mediaState.recording}
                                     <div>
                                     <!--<i class="fa-solid fa-record-vinyl white-text"></i>-->
                                         <i class="fa-solid fa-record-vinyl white-text"></i>
@@ -2380,7 +2284,9 @@
                 <!--<div class="space"></div>-->
                 <!--<div class="space"></div>-->
                 </div>
-                <div class="effectContainer margin" bind:this={bigList}>
+            <!--<div class="effectContainer margin" bind:this={appState.uiState.bigList}>-->
+                <div class="effectContainer margin" bind:this={appState.uiState.bigList}>
+            <!--<div class="effectContainer margin" bind:this={appState.uiState.bigList}>-->
                     {#each global.globalState.effectsUsedForFiltering as effect, effectIndex}
                     <!--<div class="tiny-space"></div>-->
                         <div class="tiny-space"></div>
@@ -2442,7 +2348,7 @@
                             <!--<div class="medium-space"></div>-->
                                 {#if effect.fragmentShader______GLSLUniforms}
                                     <GlslUniform
-                                        bind:canvasInstance={canvasInstance}
+                                        bind:canvasInstance={appState.canvasState.canvasInstance}
                                         bind:uniforms={effect.fragmentShader______GLSLUniforms}
                                         onUpdate={handleUpdate}>
                                     </GlslUniform>
@@ -2469,7 +2375,7 @@
                             <div class="overlay large-blur"></div>
                         <!--<div class="overlay large-blur"></div>-->
                             <dialog class="responsive dialog blur" id={`c${effectIndex}`}>
-                                {#if isLoading}
+                                {#if appState.uiState.isLoading}
                                 <!--<progress class="circle large" transition:t.fade></progress>-->
                                     <progress class="circle large" transition:t.fade></progress>
                                 <!--<progress class="circle large" transition:t.fade></progress>-->
@@ -2487,7 +2393,7 @@
                             <!--<div class="medium-space"></div>-->
                                 <div class="row">
                                     <div class="field round label max suffix white-text large-elevate slow-ripple">
-                                        <input type="text" bind:this={AIInputPrompts}>
+                                        <input type="text" bind:this={appState.uiState.AIInputPrompts}>
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                         <!-- svelte-ignore a11y_label_has_associated_control -->
                                     <!--<label>Describe the effect you want</label>-->
@@ -2507,7 +2413,7 @@
                             <!--<div class="space"></div>-->
                                 {#if effect.fragmentShader______GLSLUniforms}
                                     <GlslUniform
-                                        bind:canvasInstance={canvasInstance}
+                                        bind:canvasInstance={appState.canvasState.canvasInstance}
                                         bind:uniforms={effect.fragmentShader______GLSLUniforms}
                                         onUpdate={handleUpdate}>
                                     </GlslUniform>
@@ -2543,9 +2449,9 @@
                             <!--<div class="medium-space"></div>-->
                                 <div class="medium-space"></div>
                             <!--<div class="medium-space"></div>-->
-                            <!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={effect.draggableText!}></DraggableTextComponent>-->
-                                <DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={effect.draggableText!}></DraggableTextComponent>
-                            <!--<DraggableTextComponent bind:canvasInstance={canvasInstance} bind:draggableText={effect.draggableText!}></DraggableTextComponent>-->
+                            <!--<DraggableTextComponent bind:canvasInstance={appState.canvasState.canvasInstance} bind:draggableText={effect.draggableText!}></DraggableTextComponent>-->
+                                <DraggableTextComponent bind:canvasInstance={appState.canvasState.canvasInstance} bind:draggableText={effect.draggableText!}></DraggableTextComponent>
+                            <!--<DraggableTextComponent bind:canvasInstance={appState.canvasState.canvasInstance} bind:draggableText={effect.draggableText!}></DraggableTextComponent>-->
                             </dialog>
                         {/if}
                         <div class="row max">
@@ -2590,7 +2496,7 @@
                 <!--<div class="row">-->
                     <div class="row">
                 <!--<div class="row">-->
-                        {#if mode === types.MODE.VIDEO}
+                        {#if appState.settingsState.mode === types.MODE.VIDEO}
                             <div class="column">
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
@@ -2604,7 +2510,7 @@
                             <!--<button class="slow-ripple square large-elevate grey10 white-text margin" onclick={handleVideoPlayPause}>-->
                                 <button class="slow-ripple square large-elevate grey10 white-text margin" onclick={handleVideoPlayPause}>
                             <!--<button class="slow-ripple square large-elevate grey10 white-text margin" onclick={handleVideoPlayPause}>-->
-                                    {#if videoIsPlaying}
+                                    {#if appState.mediaState.videoIsPlaying}
                                     <!--<i class="fas fa-pause white-text"></i>-->
                                         <i class="fas fa-pause white-text"></i>
                                     <!--<i class="fas fa-pause white-text"></i>-->
@@ -2623,7 +2529,7 @@
                                     <i class="fas fa-forward white-text"></i>
                                 <!--<i class="fas fa-forward white-text"></i>-->
                                 </button>
-                                <progress value="0" max="100" class="white-text blue large-elevate" bind:this={videoProgressSlider_}></progress>
+                                <progress value="0" max="100" class="white-text blue large-elevate" bind:this={appState.uiState.videoProgressSlider_}></progress>
                             </div>
                             <nav class="no-space">
                             <!--<i class="fas fa-volume-off padding-tiny white-text"></i>-->
@@ -2662,9 +2568,9 @@
                     </div>
                 </div>
                 <div class="canvas">
-                <!--<div bind:this={canvas} onchange={async (e) => { console.log("change"); }}></div>-->
-                    <div bind:this={canvas} onchange={async (e) => { console.log("change"); }}></div>
-                <!--<div bind:this={canvas} onchange={async (e) => { console.log("change"); }}></div>-->
+                <!--<div bind:this={appState.canvasState.canvas} onchange={async (e) => { console.log("change"); }}></div>-->
+                    <div bind:this={appState.canvasState.canvas} onchange={async (e) => { console.log("change"); }}></div>
+                <!--<div bind:this={appState.canvasState.canvas} onchange={async (e) => { console.log("change"); }}></div>-->
                 </div>
             </div>
         </div>

@@ -2,8 +2,8 @@
 //  import { createClient } from "@supabase/supabase-js";
     import ImgurClient from "imgur";
 //  import ImgurClient from "imgur";
-    import * as types from "./types";
-//  import * as types from "./types";
+    import * as types from "../types";
+//  import * as types from "../types";
 
     const supabase = createClient(
 //  const supabase = createClient(
@@ -167,5 +167,7 @@
 //      imgurClient,
         globalState,
 //      globalState,
+        GlobalState,
+//      GlobalState,
     }
 //  }

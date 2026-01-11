@@ -6,8 +6,8 @@
 //  import * as types from "./types";
     import * as common from "./common";
 //  import * as common from "./common";
-    import * as global from "./global.svelte";
-//  import * as global from "./global.svelte";
+    import * as global from "./state/global.svelte";
+//  import * as global from "./state/global.svelte";
 
     let {
 //  let {
@@ -77,8 +77,8 @@
 
     // Handlers
 //  // Handlers
-    const handleContentChange = async (e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }): Promise<void> => {
-//  const handleContentChange = async (e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }): Promise<void> => {
+    async function handleContentChange(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }): Promise<void> {
+//  async function handleContentChange(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }): Promise<void> {
         const ele: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
 //      const ele: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
         let oldContents: string = draggableText.contents;
@@ -109,8 +109,8 @@
     }
 //  }
 
-    const handleColorFillingChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleColorFillingChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleColorFillingChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleColorFillingChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         const { r, g, b, } = await common.noHexToRgbNormalized(ele.value);
@@ -138,8 +138,8 @@
     }
 //  }
 
-    const handleColorOutlineChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleColorOutlineChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleColorOutlineChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleColorOutlineChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         const { r, g, b, } = await common.noHexToRgbNormalized(ele.value);
@@ -167,8 +167,8 @@
     }
 //  }
 
-    const handleFontChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> => {
-//  const handleFontChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> => {
+    async function handleFontChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> {
+//  async function handleFontChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> {
         const ele: HTMLSelectElement = e.target as HTMLSelectElement;
 //      const ele: HTMLSelectElement = e.target as HTMLSelectElement;
         if (ele.options[ele.selectedIndex].value === "none") {
@@ -244,8 +244,8 @@
     }
 //  }
 
-    const handleFontSizeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleFontSizeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleFontSizeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleFontSizeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         let oldFontSize: number = draggableText.fontSize;
@@ -275,8 +275,8 @@
     }
 //  }
 
-    const handleSpacingsChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleSpacingsChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleSpacingsChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleSpacingsChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         let oldSpacings: number = draggableText.spacings;
@@ -302,8 +302,8 @@
     }
 //  }
 
-    const handleAlignHChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleAlignHChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleAlignHChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleAlignHChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         draggableText.alignHOption = ele.value as types.TextAlignHOption;
@@ -311,8 +311,8 @@
     }
 //  }
 
-    const handleAlignVChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleAlignVChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleAlignVChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleAlignVChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         draggableText.alignVOption = ele.value as types.TextAlignVOption;
@@ -320,8 +320,8 @@
     }
 //  }
 
-    const handleWrapModeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleWrapModeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleWrapModeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleWrapModeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         if (ele.value === "none") {
@@ -337,8 +337,8 @@
     }
 //  }
 
-    const handleStyleChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
-//  const handleStyleChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
+    async function handleStyleChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
+//  async function handleStyleChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
         const ele: HTMLInputElement = e.target as HTMLInputElement;
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         draggableText.stylesOption = ele.value as types.TextStyleOption;

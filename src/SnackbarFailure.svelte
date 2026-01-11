@@ -1,6 +1,6 @@
 <script lang="ts">
-    import * as global from "./global.svelte";
-//  import * as global from "./global.svelte";
+    import * as global from "./state/global.svelte";
+//  import * as global from "./state/global.svelte";
 </script>
 
 <!--<div class="snackbar red10 white-text slow-ripple" id="snackbar-failure"><div class="max white-text">{global.globalState.failureScript}</div><i class="fa-solid fa-lightbulb white-text"></i></div>-->

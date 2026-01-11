@@ -19,8 +19,6 @@
 //  import * as types from "./types";
     import * as xtate from "./state";
 //  import * as xtate from "./state";
-    import * as lygia from "./lygia";
-//  import * as lygia from "./lygia";
     import p5 from "p5";
 //  import p5 from "p5";
     import * as worker from "./worker";
@@ -1712,8 +1710,8 @@
 //          if (shaderName.toLowerCase()
                                 .trim().includes("lygia")) {
 //                              .trim().includes("lygia")) {
-                effect.fragmentShaderSourceCode________ = await lygia.resolveLygiaAsync(shaderRawSourceCode);
-//              effect.fragmentShaderSourceCode________ = await lygia.resolveLygiaAsync(shaderRawSourceCode);
+                effect.fragmentShaderSourceCode________ = await common.resolveLygiaAsync(shaderRawSourceCode);
+//              effect.fragmentShaderSourceCode________ = await common.resolveLygiaAsync(shaderRawSourceCode);
                 if (shaderName.includes("LYGIA ColorDitherTriangleNoise")) {
 //              if (shaderName.includes("LYGIA ColorDitherTriangleNoise")) {
                     effect.fragmentShaderSourceCode________ = effect.fragmentShaderSourceCode________.replaceAll("HIGHP", "     ", );

@@ -4,6 +4,8 @@
 //  import p5 from "p5";
     import * as types from "./types";
 //  import * as types from "./types";
+    import * as state from "./state";
+//  import * as state from "./state";
     import * as common from "./common";
 //  import * as common from "./common";
     import * as global from "./state/global.svelte";
@@ -70,10 +72,8 @@
 
     // State
 //  // State
-    let fontFaceSelectedIndex: number = $state<number>(0);
-//  let fontFaceSelectedIndex: number = $state<number>(0);
-    let defaultFont: p5.Font = $state<p5.Font>(draggableText.font);
-//  let defaultFont: p5.Font = $state<p5.Font>(draggableText.font);
+    const draggableTextState: state.DraggableTextState = new state.DraggableTextState(draggableText.font);
+//  const draggableTextState: state.DraggableTextState = new state.DraggableTextState(draggableText.font);
 
     // Handlers
 //  // Handlers
@@ -173,8 +173,8 @@
 //      const ele: HTMLSelectElement = e.target as HTMLSelectElement;
         if (ele.options[ele.selectedIndex].value === "none") {
 //      if (ele.options[ele.selectedIndex].value === "none") {
-            global.globalState.customFonts[ele.selectedIndex].customFontFace = defaultFont;
-//          global.globalState.customFonts[ele.selectedIndex].customFontFace = defaultFont;
+            global.globalState.customFonts[ele.selectedIndex].customFontFace = draggableTextState.defaultFont;
+//          global.globalState.customFonts[ele.selectedIndex].customFontFace = draggableTextState.defaultFont;
         }
 //      }
         if (!global.globalState.customFonts[ele.selectedIndex].customFontFace) {
@@ -188,12 +188,12 @@
         draggableText.font = global.globalState.customFonts[ele.selectedIndex].customFontFace!;
 //      draggableText.font = global.globalState.customFonts[ele.selectedIndex].customFontFace!;
 
-        let oldFontFaceSelectedIndex: number = fontFaceSelectedIndex;
-//      let oldFontFaceSelectedIndex: number = fontFaceSelectedIndex;
-        fontFaceSelectedIndex = ele.selectedIndex;
-//      fontFaceSelectedIndex = ele.selectedIndex;
-        let newFontFaceSelectedIndex: number = fontFaceSelectedIndex;
-//      let newFontFaceSelectedIndex: number = fontFaceSelectedIndex;
+        let oldFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
+//      let oldFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
+        draggableTextState.fontFaceSelectedIndex = ele.selectedIndex;
+//      draggableTextState.fontFaceSelectedIndex = ele.selectedIndex;
+        let newFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
+//      let newFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
 
         let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
 //      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
@@ -209,8 +209,8 @@
 //          if (dynamicStorage) {
                 if (!global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace) {
 //              if (!global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace) {
-                    global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = defaultFont;
-//                  global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = defaultFont;
+                    global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
+//                  global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
                 }
 //              }
                 draggableText.font = global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace!;
@@ -227,8 +227,8 @@
 //          if (dynamicStorage) {
                 if (!global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace) {
 //              if (!global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace) {
-                    global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = defaultFont;
-//                  global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = defaultFont;
+                    global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
+//                  global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
                 }
 //              }
                 draggableText.font = global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace!;

@@ -8,6 +8,8 @@
 //  import p5 from "p5";
     import * as types from "./types";
 //  import * as types from "./types";
+    import * as state from "./state";
+//  import * as state from "./state";
     import * as svelte from "svelte";
 //  import * as svelte from "svelte";
     import * as common from "./common";
@@ -30,10 +32,8 @@
 
     // State
 //  // State
-    let interval: NodeJS.Timeout | undefined = $state<NodeJS.Timeout>();
-//  let interval: NodeJS.Timeout | undefined = $state<NodeJS.Timeout>();
-    let input: HTMLInputElement | undefined = $state<HTMLInputElement>();
-//  let input: HTMLInputElement | undefined = $state<HTMLInputElement>();
+    const glslUniformState: state.GLSLUniformState = new state.GLSLUniformState();
+//  const glslUniformState: state.GLSLUniformState = new state.GLSLUniformState();
 
     // Helper for matrix indices
 //  // Helper for matrix indices
@@ -121,10 +121,10 @@
 //  const successCallback = (key: number) => (image_Instance: p5.Image): void => {
         uniforms[key].thisUniformSampler2DImg = image_Instance;
 //      uniforms[key].thisUniformSampler2DImg = image_Instance;
-        if (!input || !input.files || !input.files[0]) { return; }
-//      if (!input || !input.files || !input.files[0]) { return; }
-        let imageObjectURL: string = window.URL.createObjectURL(input.files[0]);
-//      let imageObjectURL: string = window.URL.createObjectURL(input.files[0]);
+        if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
+//      if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
+        let imageObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
+//      let imageObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
         if (!uniforms[key].thisUniformSampler2DEle) { return; }
 //      if (!uniforms[key].thisUniformSampler2DEle) { return; }
         uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;
@@ -134,10 +134,10 @@
 
     const failureCallback = (key: number) => (event_Instance: Event): void => {
 //  const failureCallback = (key: number) => (event_Instance: Event): void => {
-        if (!input || !input.files || !input.files[0]) { return; }
-//      if (!input || !input.files || !input.files[0]) { return; }
-        let videoObjectURL: string = window.URL.createObjectURL(input.files[0]);
-//      let videoObjectURL: string = window.URL.createObjectURL(input.files[0]);
+        if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
+//      if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
+        let videoObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
+//      let videoObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
         uniforms[key].thisUniformSampler2DImg = canvasInstance.createVideo(videoObjectURL);
 //      uniforms[key].thisUniformSampler2DImg = canvasInstance.createVideo(videoObjectURL);
         uniforms[key].thisUniformSampler2DImg.hide();
@@ -167,8 +167,8 @@
 //          }
         }, false);
 //      }, false);
-        const file = input?.files?.[0];
-//      const file = input?.files?.[0];
+        const file = glslUniformState.input?.files?.[0];
+//      const file = glslUniformState.input?.files?.[0];
         if (file) {
 //      if (file) {
             reader.readAsDataURL(file);
@@ -244,8 +244,8 @@
 
     function startDecrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
 //  function startDecrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
-        interval = setInterval(async (): Promise<void> => {
-//      interval = setInterval(async (): Promise<void> => {
+        glslUniformState.interval = setInterval(async (): Promise<void> => {
+//      glslUniformState.interval = setInterval(async (): Promise<void> => {
             if (typeof uniform.thisUniformDefaultValue === "number") {
 //          if (typeof uniform.thisUniformDefaultValue === "number") {
                 await updateUniform(uniformIndex, null, uniform.thisUniformDefaultValue - 0.00001);
@@ -259,8 +259,8 @@
 
     function startIncrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
 //  function startIncrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
-        interval = setInterval(async (): Promise<void> => {
-//      interval = setInterval(async (): Promise<void> => {
+        glslUniformState.interval = setInterval(async (): Promise<void> => {
+//      glslUniformState.interval = setInterval(async (): Promise<void> => {
             if (typeof uniform.thisUniformDefaultValue === "number") {
 //          if (typeof uniform.thisUniformDefaultValue === "number") {
                 await updateUniform(uniformIndex, null, uniform.thisUniformDefaultValue + 0.00001);
@@ -274,8 +274,8 @@
 
     function stopInterval(): void {
 //  function stopInterval(): void {
-        clearInterval(interval);
-//      clearInterval(interval);
+        clearInterval(glslUniformState.interval);
+//      clearInterval(glslUniformState.interval);
     }
 //  }
 
@@ -546,9 +546,9 @@
                     />
                 </div>
                 {#if uniformName.startsWith("upload")}
-                <!--<form action=""><input bind:this={input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
-                    <form action=""><input bind:this={input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>
-                <!--<form action=""><input bind:this={input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
+                <!--<form action=""><input bind:this={glslUniformState.input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
+                    <form action=""><input bind:this={glslUniformState.input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>
+                <!--<form action=""><input bind:this={glslUniformState.input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
                 {:else}
                     <div class="field label suffix round white-text large-elevate slow-ripple">
                         <!-- svelte-ignore a11y_label_has_associated_control -->

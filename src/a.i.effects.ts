@@ -34,7 +34,7 @@
         create a glsl shader that has ${keywords.join(", ")} effect(s); please return only the .glsl code (Further explanations are not necessary) and just the code (Nothing else that could lead to a GLSL compile-time error), knowing that p5.js only supports GLSL ES 3.0/WebGL2.0 ("#version 300 es"); and the glsl format is:
 //      create a glsl shader that has ${keywords.join(", ")} effect(s); please return only the .glsl code (Further explanations are not necessary) and just the code (Nothing else that could lead to a GLSL compile-time error), knowing that p5.js only supports GLSL ES 3.0/WebGL2.0 ("#version 300 es"); and the glsl format is:
 
-    #version 300 es
+        #version 300 es
 //      #version 300 es
         precision  lowp float;
 //      precision  lowp float;
@@ -98,12 +98,12 @@
 //      });
         return result.toTextStreamResponse();
 //      return result.toTextStreamResponse();
-    };
-//  };
+    }
+//  }
 
     export {
 //  export {
         promptShader,
 //      promptShader,
-    };
-//  };
+    }
+//  }

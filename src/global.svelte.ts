@@ -167,5 +167,5 @@
 //      imgurClient,
         globalState,
 //      globalState,
-    };
-//  };
+    }
+//  }

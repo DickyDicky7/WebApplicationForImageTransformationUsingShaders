@@ -10,8 +10,8 @@
 //      if (httpRequest.status === 200) { return httpRequest.responseText; }
         else { return ""; }
 //      else { return ""; }
-    };
-//  };
+    }
+//  }
 
     function resolveLygia(lines: string | string[]): string {
 //  function resolveLygia(lines: string | string[]): string {
@@ -45,8 +45,8 @@
 //      });
         return src;
 //      return src;
-    };
-//  };
+    }
+//  }
 
     async function resolveLygiaAsync(lines: string | string[]): Promise<string> {
 //  async function resolveLygiaAsync(lines: string | string[]): Promise<string> {
@@ -80,8 +80,8 @@
 //      );
         return response.join("\n");
 //      return response.join("\n");
-    };
-//  };
+    }
+//  }
 
     export {
 //  export {
@@ -91,5 +91,5 @@
 //      resolveLygia,
         resolveLygiaAsync,
 //      resolveLygiaAsync,
-    };
-//  };
+    }
+//  }

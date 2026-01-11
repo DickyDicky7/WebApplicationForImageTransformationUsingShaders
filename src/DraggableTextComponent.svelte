@@ -70,10 +70,10 @@
 
     // State
 //  // State
-    let fontFaceSelectedIndex = $state(0);
-//  let fontFaceSelectedIndex = $state(0);
-    let defaultFont = $state<p5.Font>(draggableText.font);
-//  let defaultFont = $state<p5.Font>(draggableText.font);
+    let fontFaceSelectedIndex: number = $state<number>(0);
+//  let fontFaceSelectedIndex: number = $state<number>(0);
+    let defaultFont: p5.Font = $state<p5.Font>(draggableText.font);
+//  let defaultFont: p5.Font = $state<p5.Font>(draggableText.font);
 
     // Handlers
 //  // Handlers
@@ -106,8 +106,8 @@
 //      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("newContents"); } };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleColorFillingChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleColorFillingChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -135,8 +135,8 @@
 //      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("newColorFilling"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleColorOutlineChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleColorOutlineChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -164,8 +164,8 @@
 //      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorOutline = dynamicStorage.get("newColorOutline"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a)).slice(0, -2); } };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleFontChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> => {
 //  const handleFontChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> => {
@@ -241,8 +241,8 @@
 //      };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleFontSizeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleFontSizeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -272,8 +272,8 @@
 //      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("newFontSize"); } };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleSpacingsChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleSpacingsChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -299,8 +299,8 @@
 //      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("newSpacings"); } };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleAlignHChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleAlignHChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -308,8 +308,8 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         draggableText.alignHOption = ele.value as types.TextAlignHOption;
 //      draggableText.alignHOption = ele.value as types.TextAlignHOption;
-    };
-//  };
+    }
+//  }
 
     const handleAlignVChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleAlignVChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -317,8 +317,8 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         draggableText.alignVOption = ele.value as types.TextAlignVOption;
 //      draggableText.alignVOption = ele.value as types.TextAlignVOption;
-    };
-//  };
+    }
+//  }
 
     const handleWrapModeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleWrapModeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -334,8 +334,8 @@
 //          draggableText.wrapMode = ele.value as types.TextWrapModeOption;
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const handleStyleChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleStyleChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -343,8 +343,8 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         draggableText.stylesOption = ele.value as types.TextStyleOption;
 //      draggableText.stylesOption = ele.value as types.TextStyleOption;
-    };
-//  };
+    }
+//  }
 
 </script>
 

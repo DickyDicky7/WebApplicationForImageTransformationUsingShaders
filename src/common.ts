@@ -3060,8 +3060,8 @@
             */
         });
 //      });
-    };
-//  };
+    }
+//  }
 
     const shareVideo = async (
 //  const shareVideo = async (
@@ -3111,8 +3111,8 @@
             */
         });
 //      });
-    };
-//  };
+    }
+//  }
 
     const shareWebcam = async (
 //  const shareWebcam = async (
@@ -3162,8 +3162,8 @@
             */
         });
 //      });
-    };
-//  };
+    }
+//  }
 
     function blobToBase64(blob: Blob): Promise<string> {
 //  function blobToBase64(blob: Blob): Promise<string> {
@@ -3193,8 +3193,8 @@
 //          reader.readAsDataURL(blob); /* Starts to read the blob as a Data URL */
         });
 //      });
-    };
-//  };
+    }
+//  }
 
     let exampleGLSLUniforms: types.GLSLUniforms = [
 //  let exampleGLSLUniforms: types.GLSLUniforms = [
@@ -3445,8 +3445,8 @@
 //      }
         return uniforms;
 //      return uniforms;
-    };
-//  };
+    }
+//  }
 
     function splitArrayIntoGroups(array: number[], groupSize: number): number[][] {
 //  function splitArrayIntoGroups(array: number[], groupSize: number): number[][] {
@@ -3464,8 +3464,8 @@
 //          return result;
         }, []);
 //      }, []);
-    };
-//  };
+    }
+//  }
 
     const fetchAllTextures_Bayer = (): types.TextureForShader[] => {
 //  const fetchAllTextures_Bayer = (): types.TextureForShader[] => {
@@ -3507,8 +3507,8 @@
 //      });
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
     const fetchAllTextures_Noise = (): types.TextureForShader[] => {
 //  const fetchAllTextures_Noise = (): types.TextureForShader[] => {
@@ -3604,8 +3604,8 @@
 //      }
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
 
     const fetchAllTextures_Palette = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
@@ -3640,8 +3640,8 @@
 //      }
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
     const fetchAllTextures_Pencil_ = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
 //  const fetchAllTextures_Pencil_ = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
@@ -3675,8 +3675,8 @@
 //      }
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
     const fetchAllTextures_ASCII = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
 //  const fetchAllTextures_ASCII = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
@@ -3710,8 +3710,8 @@
 //      }
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
     const fetchAllTextures_Tiled = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
 //  const fetchAllTextures_Tiled = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
@@ -3745,8 +3745,8 @@
 //      }
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
     const fetchAllTextures_ShaderToy = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
 //  const fetchAllTextures_ShaderToy = async (supabase: SupabaseClient): Promise<types.TextureForShader[]> => {
@@ -3780,8 +3780,8 @@
 //      }
         return result;
 //      return result;
-    };
-//  };
+    }
+//  }
 
     const onRedoActionExecuted = async (): Promise<void> => {
 //  const onRedoActionExecuted = async (): Promise<void> => {
@@ -3799,8 +3799,8 @@
 //          global.globalState.editorSnapshotsUndoStack.push(redoEditorSnapshot);
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const onUndoActionExecuted = async (): Promise<void> => {
 //  const onUndoActionExecuted = async (): Promise<void> => {
@@ -3818,8 +3818,8 @@
 //          global.globalState.editorSnapshotsRedoStack.push(undoEditorSnapshot);
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
 //  const doHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
@@ -3833,8 +3833,8 @@
 //      const b: number = parseInt(hex.substring(4, 6), 16) / 255;
         return { r: r, g: g, b: b, };
 //      return { r: r, g: g, b: b, };
-    };
-//  };
+    }
+//  }
 
     const noHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
 //  const noHexToRgbNormalized = async (hex: string): Promise<{ r: number, g: number, b: number, }> => {
@@ -3848,8 +3848,8 @@
 //      const b: number = parseInt(hex.substring(4, 6), 16);
         return { r: r, g: g, b: b, };
 //      return { r: r, g: g, b: b, };
-    };
-//  };
+    }
+//  }
 
     const rgba_ToHexNormalized = async (r: number, g: number, b: number, a: number): Promise<string> => {
 //  const rgba_ToHexNormalized = async (r: number, g: number, b: number, a: number): Promise<string> => {
@@ -3865,8 +3865,8 @@
 //      const hex = `#${r.toString(16).padStart(2, "0")}${g.toString(16).padStart(2, "0")}${b.toString(16).padStart(2, "0")}${a.toString(16).padStart(2, "0")}`;
         return hex;
 //      return hex;
-    };
-//  };
+    }
+//  }
 
     const display = (draggableText: types.DraggableText, canvasInstance: p5): void => {
 //  const display = (draggableText: types.DraggableText, canvasInstance: p5): void => {
@@ -3918,8 +3918,8 @@
 //          );
         canvasInstance.pop();
 //      canvasInstance.pop();
-    };
-//  };
+    }
+//  }
 
     const onMousePressed = (draggableText: types.DraggableText, canvasInstance: p5): void => {
 //  const onMousePressed = (draggableText: types.DraggableText, canvasInstance: p5): void => {
@@ -3935,8 +3935,8 @@
 //          draggableText.isDragging = true;
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const startDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
 //  const startDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
@@ -3948,20 +3948,20 @@
 //          draggableText.positionY = canvasInstance.mouseY - canvasInstance.height / 2;
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const ceaseDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
 //  const ceaseDragging = (draggableText: types.DraggableText, canvasInstance: p5): void => {
         draggableText.isDragging = false;
 //      draggableText.isDragging = false;
-    };
-//  };
+    }
+//  }
 
-    const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; };
-//  const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; };
-    const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; };
-//  const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; };
+    const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; }
+//  const fetchAllFonts_TTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/ttf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `TTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/ttf/${item.name}`, customFontFace: null, }); } return result; }
+    const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; }
+//  const fetchAllFonts_OTF_ITCHIO = async (supabase: SupabaseClient): Promise<types.CustomFont[]> => { let { data } = await supabase.storage.from("fonts").list("itchio/otf", { limit: 1000 }); let result: types.CustomFont[] = []; for (let item of data ?? []) { if (item.name === ".emptyFolderPlaceholder") { continue; } if (item.name === "Divinity_Regular_1.ttf" || item.name === "Divinity_Italic_1.ttf" || item.name === "Divinity_Regular_1.otf") { continue; } result.push({ customFontName: `OTF Font: ${item.name}`, customFontPath: `https://exuzuqkplqstsakskcrv.supabase.co/storage/v1/object/public/fonts/itchio/otf/${item.name}`, customFontFace: null, }); } return result; }
 
     const fetchShaderMetadata = async (shaderPath: string): Promise<types.GLSLUniforms> => {
 //  const fetchShaderMetadata = async (shaderPath: string): Promise<types.GLSLUniforms> => {
@@ -4009,13 +4009,13 @@
 //          return [];
         }
 //      }
-    };
-//  };
+    }
+//  }
 
-    const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); };
-//  const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); };
-    const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); };
-//  const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); };
+    const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); }
+//  const makeNewSnackbarSuccess = async (newSuccessScript: string): Promise<void> => { global.globalState.successScript = newSuccessScript; await ui("#snackbar-success"); }
+    const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); }
+//  const makeNewSnackbarFailure = async (newFailureScript: string): Promise<void> => { global.globalState.failureScript = newFailureScript; await ui("#snackbar-failure"); }
 
     export {
 //  export {
@@ -4075,6 +4075,5 @@
 //      makeNewSnackbarSuccess,
         makeNewSnackbarFailure,
 //      makeNewSnackbarFailure,
-    };
-//  };
-
+    }
+//  }

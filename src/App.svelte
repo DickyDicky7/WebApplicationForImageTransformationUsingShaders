@@ -21,6 +21,8 @@
 //  import * as lygia from "./lygia";
     import p5 from "p5";
 //  import p5 from "p5";
+    import * as worker from "./worker";
+//  import * as worker from "./worker";
     import SFMonoRegularURL from "./assets/fonts/SF-Mono-Regular.otf";
 //  import SFMonoRegularURL from "./assets/fonts/SF-Mono-Regular.otf";
     import GlslUniform from "./GLSLUniform.svelte";
@@ -36,12 +38,12 @@
 
     // Global Variables & Constants
 //  // Global Variables & Constants
-    const DEFAULT_CANVAS_SIZE = { WIDTH_: 500, HEIGHT: 500 };
-//  const DEFAULT_CANVAS_SIZE = { WIDTH_: 500, HEIGHT: 500 };
-    const DPR = window.devicePixelRatio || 1;
-//  const DPR = window.devicePixelRatio || 1;
-    //  const DPR = window.devicePixelRatio || 2 ;
-//  //  const DPR = window.devicePixelRatio || 2 ;
+    const DEFAULT_CANVAS_SIZE = { WIDTH_: 500, HEIGHT: 500, };
+//  const DEFAULT_CANVAS_SIZE = { WIDTH_: 500, HEIGHT: 500, };
+    const DPR: number = window.devicePixelRatio || 1;
+//  const DPR: number = window.devicePixelRatio || 1;
+    //  const DPR: number = window.devicePixelRatio || 2 ;
+//  //  const DPR: number = window.devicePixelRatio || 2 ;
 
     const videoFormats = [
 //  const videoFormats = [
@@ -75,18 +77,20 @@
 //  type ImageFormat = typeof imageFormats[number];
 
 
-    let defaultFont = $state<p5.Font>(null!);
-//  let defaultFont = $state<p5.Font>(null!);
-    //  let defaultFont = $state<p5.Font>();
-//  //  let defaultFont = $state<p5.Font>();
-    let canvasBG = $state<HTMLElement>(null!);
-//  let canvasBG = $state<HTMLElement>(null!);
-    let canvas = $state<HTMLElement>(null!);
-//  let canvas = $state<HTMLElement>(null!);
-    let canvasInstance = $state<p5>(null!);
-//  let canvasInstance = $state<p5>(null!);
-    let bufferInstance = $state<p5.Graphics>(null!);
-//  let bufferInstance = $state<p5.Graphics>(null!);
+    let defaultFont: p5.Font = $state<p5.Font>(null!);
+//  let defaultFont: p5.Font = $state<p5.Font>(null!);
+    let canvasBG: HTMLElement = $state<HTMLElement>(null!);
+//  let canvasBG: HTMLElement = $state<HTMLElement>(null!);
+    let canvas: HTMLElement = $state<HTMLElement>(null!);
+//  let canvas: HTMLElement = $state<HTMLElement>(null!);
+    let canvasInstanceBG: p5 = $state<p5>(null!);
+//  let canvasInstanceBG: p5 = $state<p5>(null!);
+    let canvasInstance: p5 = $state<p5>(null!);
+//  let canvasInstance: p5 = $state<p5>(null!);
+    /*
+    let bufferInstance: p5.Graphics = $state<p5.Graphics>(null!);
+//  let bufferInstance: p5.Graphics = $state<p5.Graphics>(null!);
+    */
     let bgURLs: string[] = [
 //  let bgURLs: string[] = [
         "/shadertoy/bg1.1.glsl",
@@ -121,93 +125,95 @@
 //      "/shadertoy/bg13.1.glsl",
     ];
 //  ];
-    let input = $state<HTMLInputElement>(null!);
-//  let input = $state<HTMLInputElement>(null!);
-    //  let input = $state<HTMLInputElement>();
-//  //  let input = $state<HTMLInputElement>();
-    let fps = $state(120);
-//  let fps = $state(120);
-    let downloadStream = $state<MediaStream>(null!);
-//  let downloadStream = $state<MediaStream>(null!);
-    let downloadStreamWebCam = $state<MediaStream>(null!);
-//  let downloadStreamWebCam = $state<MediaStream>(null!);
-    let videoStream = $state<MediaStream>(null!);
-//  let videoStream = $state<MediaStream>(null!);
-    let audioStream = $state<MediaStream>(null!);
-//  let audioStream = $state<MediaStream>(null!);
-    let mediaRecorder = $state<MediaRecorder>(null!);
-//  let mediaRecorder = $state<MediaRecorder>(null!);
-    let mediaRecorderWebCam = $state<MediaRecorder>(null!);
-//  let mediaRecorderWebCam = $state<MediaRecorder>(null!);
-    let video_FileBLOB = $state<string>(null!);
-//  let video_FileBLOB = $state<string>(null!);
-    let image_FileBLOB = $state<string>(null!);
-//  let image_FileBLOB = $state<string>(null!);
-    let video = $state<p5.MediaElement>(null!);
-//  let video = $state<p5.MediaElement>(null!);
-    let image = $state<p5.MediaElement>(null!);
-//  let image = $state<p5.MediaElement>(null!);
-    let catchFirstTime = $state<boolean>(false);
-//  let catchFirstTime = $state<boolean>(false);
-    let startRecord = $state<boolean>(!false);
-//  let startRecord = $state<boolean>(!false);
-    let ceaseRecord = $state<boolean>(false);
-//  let ceaseRecord = $state<boolean>(false);
-    let fshotRecord = $state<boolean>(false);
-//  let fshotRecord = $state<boolean>(false);
-    let sshotRecord = $state<boolean>(false);
-//  let sshotRecord = $state<boolean>(false);
-    let graphicsObj = $state<p5.Graphics>();
-//  let graphicsObj = $state<p5.Graphics>();
-    let webcamCapture = $state<p5.Element>(null!);
-//  let webcamCapture = $state<p5.Element>(null!);
-    let imageFormatSelection = $state<HTMLSelectElement>(null!);
-//  let imageFormatSelection = $state<HTMLSelectElement>(null!);
-    let videoFormatSelection = $state<HTMLSelectElement>(null!);
-//  let videoFormatSelection = $state<HTMLSelectElement>(null!);
-    let videoProgressSlider_ = $state<HTMLProgressElement>(null!);
-//  let videoProgressSlider_ = $state<HTMLProgressElement>(null!);
-    let videoToShare = $state<Blob>();
-//  let videoToShare = $state<Blob>();
-    let imageToShare = $state<Blob>();
-//  let imageToShare = $state<Blob>();
-    let mode = $state<types.MODE>(types.MODE.IMAGE);
-//  let mode = $state<types.MODE>(types.MODE.IMAGE);
-    let modeCaptureImage = $state<types.MODE_CAPTURE_IMAGE>(types.MODE_CAPTURE_IMAGE.AS_IMAGE);
-//  let modeCaptureImage = $state<types.MODE_CAPTURE_IMAGE>(types.MODE_CAPTURE_IMAGE.AS_IMAGE);
-    let modeCAptureVideo = $state<types.MODE_CAPTURE_VIDEO>(types.MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT);
-//  let modeCAptureVideo = $state<types.MODE_CAPTURE_VIDEO>(types.MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT);
-    let videoIsPlaying = $state(false);
-//  let videoIsPlaying = $state(false);
-    let imageIsPlaying = $state(false);
-//  let imageIsPlaying = $state(false);
-    let AIInputPrompts = $state<HTMLInputElement>(null!);
-//  let AIInputPrompts = $state<HTMLInputElement>(null!);
-    let cachedSelectedIndex = $state(0);
-//  let cachedSelectedIndex = $state(0);
-    let draggableText = $state<types.DraggableText>(null!);
-//  let draggableText = $state<types.DraggableText>(null!);
-    let recording = $state(false);
-//  let recording = $state(false);
-    //  let recording: boolean = false;
-//  //  let recording: boolean = false;
-    let selectedCaptureOption = $state("Snapshot");
-//  let selectedCaptureOption = $state("Snapshot");
-    //  let selectedCaptureOption: string = "Snapshot";
-//  //  let selectedCaptureOption: string = "Snapshot";
-    let bigList = $state<HTMLDivElement>(null!);
-//  let bigList = $state<HTMLDivElement>(null!);
-    //  let bigList: HTMLDivElement = null!;
-//  //  let bigList: HTMLDivElement = null!;
-    let isLoading = $state(false);
-//  let isLoading = $state(false);
-    //  let isLoading: boolean = false;
-//  //  let isLoading: boolean = false;
-    let isInitializing: boolean = $state(true);
-//  let isInitializing: boolean = $state(true);
+    let input: HTMLInputElement = $state<HTMLInputElement>(null!);
+//  let input: HTMLInputElement = $state<HTMLInputElement>(null!);
+    let fps: number = $state<number>(120);
+//  let fps: number = $state<number>(120);
+    let downloadStream: MediaStream = $state<MediaStream>(null!);
+//  let downloadStream: MediaStream = $state<MediaStream>(null!);
+    /*
+    let downloadStreamWebCam: MediaStream = $state<MediaStream>(null!);
+//  let downloadStreamWebCam: MediaStream = $state<MediaStream>(null!);
+    let videoStream: MediaStream = $state<MediaStream>(null!);
+//  let videoStream: MediaStream = $state<MediaStream>(null!);
+    let audioStream: MediaStream = $state<MediaStream>(null!);
+//  let audioStream: MediaStream = $state<MediaStream>(null!);
+    */
+    let mediaRecorder: MediaRecorder = $state<MediaRecorder>(null!);
+//  let mediaRecorder: MediaRecorder = $state<MediaRecorder>(null!);
+    let mediaRecorderWebCam: MediaRecorder = $state<MediaRecorder>(null!);
+//  let mediaRecorderWebCam: MediaRecorder = $state<MediaRecorder>(null!);
+    let video_FileBLOB: string = $state<string>(null!);
+//  let video_FileBLOB: string = $state<string>(null!);
+    /*
+    let image_FileBLOB: string = $state<string>(null!);
+//  let image_FileBLOB: string = $state<string>(null!);
+    */
+    let video: p5.MediaElement = $state<p5.MediaElement>(null!);
+//  let video: p5.MediaElement = $state<p5.MediaElement>(null!);
+    /*
+    let image: p5.MediaElement = $state<p5.MediaElement>(null!);
+//  let image: p5.MediaElement = $state<p5.MediaElement>(null!);
+    */
+    let catchFirstTime: boolean = $state<boolean>(false);
+//  let catchFirstTime: boolean = $state<boolean>(false);
+    let startRecord: boolean = $state<boolean>(!false);
+//  let startRecord: boolean = $state<boolean>(!false);
+    let ceaseRecord: boolean = $state<boolean>(false);
+//  let ceaseRecord: boolean = $state<boolean>(false);
+    let fshotRecord: boolean = $state<boolean>(false);
+//  let fshotRecord: boolean = $state<boolean>(false);
+    let sshotRecord: boolean = $state<boolean>(false);
+//  let sshotRecord: boolean = $state<boolean>(false);
+    /*
+    let graphicsObj: p5.Graphics = $state<p5.Graphics>(null!);
+//  let graphicsObj: p5.Graphics = $state<p5.Graphics>(null!);
+    */
+    let webcamCapture: p5.Element = $state<p5.Element>(null!);
+//  let webcamCapture: p5.Element = $state<p5.Element>(null!);
+    let imageFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
+//  let imageFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
+    let videoFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
+//  let videoFormatSelection: HTMLSelectElement = $state<HTMLSelectElement>(null!);
+    let videoProgressSlider_: HTMLProgressElement = $state<HTMLProgressElement>(null!);
+//  let videoProgressSlider_: HTMLProgressElement = $state<HTMLProgressElement>(null!);
+    let videoToShare: Blob = $state<Blob>(null!);
+//  let videoToShare: Blob = $state<Blob>(null!);
+    let imageToShare: Blob = $state<Blob>(null!);
+//  let imageToShare: Blob = $state<Blob>(null!);
+    let mode: types.MODE = $state<types.MODE>(types.MODE.IMAGE);
+//  let mode: types.MODE = $state<types.MODE>(types.MODE.IMAGE);
+    /*
+    let modeCaptureImage: types.MODE_CAPTURE_IMAGE = $state<types.MODE_CAPTURE_IMAGE>(types.MODE_CAPTURE_IMAGE.AS_IMAGE);
+//  let modeCaptureImage: types.MODE_CAPTURE_IMAGE = $state<types.MODE_CAPTURE_IMAGE>(types.MODE_CAPTURE_IMAGE.AS_IMAGE);
+    let modeCaptureVideo: types.MODE_CAPTURE_VIDEO = $state<types.MODE_CAPTURE_VIDEO>(types.MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT);
+//  let modeCaptureVideo: types.MODE_CAPTURE_VIDEO = $state<types.MODE_CAPTURE_VIDEO>(types.MODE_CAPTURE_VIDEO.AS_VIDEO_FULLSHOT);
+    */
+    let videoIsPlaying: boolean = $state<boolean>(false);
+//  let videoIsPlaying: boolean = $state<boolean>(false);
+    let imageIsPlaying: boolean = $state<boolean>(false);
+//  let imageIsPlaying: boolean = $state<boolean>(false);
+    let AIInputPrompts: HTMLInputElement = $state<HTMLInputElement>(null!);
+//  let AIInputPrompts: HTMLInputElement = $state<HTMLInputElement>(null!);
+    let cachedSelectedIndex: number = $state<number>(0);
+//  let cachedSelectedIndex: number = $state<number>(0);
+    /*
+    let draggableText: types.DraggableText = $state<types.DraggableText>(null!);
+//  let draggableText: types.DraggableText = $state<types.DraggableText>(null!);
+    */
+    let recording: boolean = $state<boolean>(false);
+//  let recording: boolean = $state<boolean>(false);
+    let selectedCaptureOption: string = $state<string>("Snapshot");
+//  let selectedCaptureOption: string = $state<string>("Snapshot");
+    let bigList: HTMLDivElement = $state<HTMLDivElement>(null!);
+//  let bigList: HTMLDivElement = $state<HTMLDivElement>(null!);
+    let isLoading: boolean = $state<boolean>(false);
+//  let isLoading: boolean = $state<boolean>(false);
+    let isInitializing: boolean = $state<boolean>(true);
+//  let isInitializing: boolean = $state<boolean>(true);
 
-    const p5Logic = (p: p5): void => {
-//  const p5Logic = (p: p5): void => {
+    const canvasP5Logic = (p: p5): void => {
+//  const canvasP5Logic = (p: p5): void => {
         p.mousePressed = (e?: object): void => {
 //      p.mousePressed = (e?: object): void => {
             for (let { fragmentShaderSourceType________, draggableText } of global.globalState.effectsUsedForFiltering) {
@@ -340,8 +346,8 @@
 //          }
         };
 //      };
-    };
-//  };
+    }
+//  }
 
     svelte.onMount(async (): Promise<void> => {
 //  svelte.onMount(async (): Promise<void> => {
@@ -366,8 +372,8 @@
         await new Promise(r => setTimeout(r, 1000)); // Yield
 //      await new Promise(r => setTimeout(r, 1000)); // Yield
 
-        let bgCanvasInstance: p5 = new p5((p: p5): void => {
-//      let bgCanvasInstance: p5 = new p5((p: p5): void => {
+        canvasInstanceBG = new p5((p: p5): void => {
+//      canvasInstanceBG = new p5((p: p5): void => {
             p.setup = async (): Promise<void> => {
 //          p.setup = async (): Promise<void> => {
                 p.setAttributes({
@@ -422,8 +428,9 @@
         await new Promise(r => setTimeout(r, 1000)); // Yield for BG canvas init
 //      await new Promise(r => setTimeout(r, 1000)); // Yield for BG canvas init
 
-        canvasInstance = new p5(p5Logic, canvas);
-//      canvasInstance = new p5(p5Logic, canvas);
+        canvasInstance = new p5(canvasP5Logic, canvas);
+//      canvasInstance = new p5(canvasP5Logic, canvas);
+
         /*
         bufferInstance =
 //      bufferInstance =
@@ -542,8 +549,8 @@
 //      };
         mode = types.MODE.IMAGE;
 //      mode = types.MODE.IMAGE;
-    };
-//  };
+    }
+//  }
 
     const failureCallback = (event_Instance: Event): void => {
 //  const failureCallback = (event_Instance: Event): void => {
@@ -721,16 +728,16 @@
 //                  ceaseCaptureAsVideoFullshot();
                     recording = false;
 //                  recording = false;
-                };
-//              };
+                }
+//              }
             };
 //          };
             mode = types.MODE.VIDEO;
 //          mode = types.MODE.VIDEO;
-        };
-//      };
-    };
-//  };
+        }
+//      }
+    }
+//  }
 
     const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
 //  const onChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
@@ -770,8 +777,8 @@
 //      }
         if (file) { reader.readAsDataURL(file); }
 //      if (file) { reader.readAsDataURL(file); }
-    };
-//  };
+    }
+//  }
 
     // video/webm; codecs=vp9
 //  // video/webm; codecs=vp9
@@ -814,8 +821,8 @@
 //      shader.setUniform("mousePosition", [ canvasInstance.mouseX, canvasInstance.mouseY, canvasInstance.mouseIsPressed ? 1.0 : 0.0, canvasInstance.mouseIsPressed ? 1.0 : 0.0 ]);
         shader.setUniform("frameCount", canvasInstance.frameCount);
 //      shader.setUniform("frameCount", canvasInstance.frameCount);
-    };
-//  };
+    }
+//  }
 
     const startCaptureAsVideoFullshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: N | WEBCAM: N
 //  const startCaptureAsVideoFullshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: N | WEBCAM: N
@@ -907,14 +914,14 @@
 //              videoToShare = blob;
                 anchor.remove();
 //              anchor.remove();
-            };
-//          };
+            }
+//          }
         };
 //      };
         mediaRecorder.start();
 //      mediaRecorder.start();
-    };
-//  };
+    }
+//  }
     const startCaptureAsVideoSnapshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
 //  const startCaptureAsVideoSnapshot = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
         fshotRecord =  false;
@@ -1009,20 +1016,20 @@
 //              videoToShare = blob;
                 anchor.remove();
 //              anchor.remove();
-            };
-//          };
+            }
+//          }
         };
 //      };
         mediaRecorder.start();
 //      mediaRecorder.start();
-    };
-//  };
+    }
+//  }
     const startCaptureAsImage = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
 //  const startCaptureAsImage = async (): Promise<void> => { // VIDEO: Y | IMAGE: Y | WEBCAM: Y
         canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
 //      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
-    };
-//  };
+    }
+//  }
     const ceaseCaptureAsVideoFullshot = async (): Promise<void> => {
 //  const ceaseCaptureAsVideoFullshot = async (): Promise<void> => {
         video?.stop();
@@ -1035,8 +1042,8 @@
 //      mediaRecorderWebCam?.stop();
         mediaRecorderWebCam = null!;
 //      mediaRecorderWebCam = null!;
-    };
-//  };
+    }
+//  }
     const ceaseCaptureAsVideoSnapshot = async (): Promise<void> => {
 //  const ceaseCaptureAsVideoSnapshot = async (): Promise<void> => {
         /*
@@ -1051,14 +1058,14 @@
 //      mediaRecorderWebCam?.stop();
         mediaRecorderWebCam = null!;
 //      mediaRecorderWebCam = null!;
-    };
-//  };
+    }
+//  }
     const ceaseCaptureAsImage = async (): Promise<void> => {
 //  const ceaseCaptureAsImage = async (): Promise<void> => {
         canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
 //      canvasInstance.saveCanvas(`test_image_${new Date().toLocaleString()}`, imageFormats[imageFormatSelection.selectedIndex].extension);
-    };
-//  };
+    }
+//  }
 
     const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): Promise<void> => {
 //  const startWebCam = async(e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): Promise<void> => {
@@ -1140,8 +1147,8 @@
 //      };
         mode = types.MODE.WEBCAM;
 //      mode = types.MODE.WEBCAM;
-    };
-//  };
+    }
+//  }
 
     const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): void => {
 //  const ceaseWebCam = (e: MouseEvent & { currentTarget: EventTarget & HTMLButtonElement; }): void => {
@@ -1163,8 +1170,8 @@
 //          canvasInstance.background(255);
         };
 //      };
-    };
-//  };
+    }
+//  }
 
     //sbs_-_noise_texture_pack_-_128x128
 //  //sbs_-_noise_texture_pack_-_128x128
@@ -1280,8 +1287,8 @@
 //  const loadAsset = async(assetPath: string): Promise<string> => {
         return (await fetch(assetPath)).text();
 //      return (await fetch(assetPath)).text();
-    };
-//  };
+    }
+//  }
 
     svelte.onDestroy(async (): Promise<void> => {
 //  svelte.onDestroy(async (): Promise<void> => {
@@ -1292,8 +1299,8 @@
 
     const handleUpdate = (updatedUniforms: types.GLSLUniforms): void => {
 //  const handleUpdate = (updatedUniforms: types.GLSLUniforms): void => {
-    };
-//  };
+    }
+//  }
 
     const handleCaptureAsVideo = async(): Promise<void> => {
 //  const handleCaptureAsVideo = async(): Promise<void> => {
@@ -1337,8 +1344,8 @@
 //          }
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const toggleWebCam = (e: Event & { currentTarget: EventTarget & HTMLInputElement }): void => {
 //  const toggleWebCam = (e: Event & { currentTarget: EventTarget & HTMLInputElement }): void => {
@@ -1358,22 +1365,22 @@
 //          ceaseWebCam(fakeMouseEvent);
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const handleStartCaptureAsImage = async (e: MouseEvent): Promise<void> => {
 //  const handleStartCaptureAsImage = async (e: MouseEvent): Promise<void> => {
         await startCaptureAsImage();
 //      await startCaptureAsImage();
-    };
-//  };
+    }
+//  }
 
     const handleVideoToggle = async (e: MouseEvent): Promise<void> => {
 //  const handleVideoToggle = async (e: MouseEvent): Promise<void> => {
         await handleCaptureAsVideo();
 //      await handleCaptureAsVideo();
-    };
-//  };
+    }
+//  }
 
     const handleShare = async (e: MouseEvent): Promise<void> => {
 //  const handleShare = async (e: MouseEvent): Promise<void> => {
@@ -1399,8 +1406,8 @@
 //          await common.shareWebcam(videoToShare, canvas.children[0] as HTMLCanvasElement);
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const handleAddEffectNI = async (e: MouseEvent): Promise<void> => {
 //  const handleAddEffectNI = async (e: MouseEvent): Promise<void> => {
@@ -1474,8 +1481,8 @@
 
         await common.makeNewSnackbarSuccess(`A new NI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
 //      await common.makeNewSnackbarSuccess(`A new NI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
-    };
-//  };
+    }
+//  }
 
     const handleAddEffectAI = async (e: MouseEvent): Promise<void> => {
 //  const handleAddEffectAI = async (e: MouseEvent): Promise<void> => {
@@ -1549,8 +1556,8 @@
 
         await common.makeNewSnackbarSuccess(`A new AI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
 //      await common.makeNewSnackbarSuccess(`A new AI effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
-    };
-//  };
+    }
+//  }
 
     const handleInsertText = async (e: MouseEvent): Promise<void> => {
 //  const handleInsertText = async (e: MouseEvent): Promise<void> => {
@@ -1698,8 +1705,8 @@
 
         await common.makeNewSnackbarSuccess(`A new text effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
 //      await common.makeNewSnackbarSuccess(`A new text effect has been added - ${global.globalState.effectsUsedForFiltering.length} so far`);
-    };
-//  };
+    }
+//  }
 
     const handleEffectNIChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
 //  const handleEffectNIChange = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
@@ -1853,8 +1860,8 @@
 //      }
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleRemoveEffect = async (effectIndex: number, type: string): Promise<void> => {
 //  const handleRemoveEffect = async (effectIndex: number, type: string): Promise<void> => {
@@ -1864,8 +1871,8 @@
 //      await svelte.tick();
         await common.makeNewSnackbarFailure(`An old ${type} effect has been removed - ${global.globalState.effectsUsedForFiltering.length} left`);
 //      await common.makeNewSnackbarFailure(`An old ${type} effect has been removed - ${global.globalState.effectsUsedForFiltering.length} left`);
-    };
-//  };
+    }
+//  }
 
     const handleAskAI = async (effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
 //  const handleAskAI = async (effect: types.EffectUsedForFiltering, effectIndex: number): Promise<void> => {
@@ -1897,8 +1904,8 @@
 //          await common.makeNewSnackbarFailure("LLM generate effect wrong. Please try again!");
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const handleMoveEffectUp = async (effectIndex: number): Promise<void> => {
 //  const handleMoveEffectUp = async (effectIndex: number): Promise<void> => {
@@ -1992,8 +1999,8 @@
 //      };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleMoveEffectDown = async (effectIndex: number): Promise<void> => {
 //  const handleMoveEffectDown = async (effectIndex: number): Promise<void> => {
@@ -2087,15 +2094,15 @@
 //      };
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const handleVideoRewind = async (): Promise<void> => {
 //  const handleVideoRewind = async (): Promise<void> => {
         video?.time(video?.time() - 10);
 //      video?.time(video?.time() - 10);
-    };
-//  };
+    }
+//  }
 
     const handleVideoPlayPause = async (): Promise<void> => {
 //  const handleVideoPlayPause = async (): Promise<void> => {
@@ -2103,15 +2110,15 @@
 //      if (!videoIsPlaying) { video?.play(); } else { video?.pause(); }
         videoIsPlaying = !videoIsPlaying;
 //      videoIsPlaying = !videoIsPlaying;
-    };
-//  };
+    }
+//  }
 
     const handleVideoForward = async (): Promise<void> => {
 //  const handleVideoForward = async (): Promise<void> => {
         video?.time(video?.time() + 10);
 //      video?.time(video?.time() + 10);
-    };
-//  };
+    }
+//  }
 
     const handleVideoVolumeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
 //  const handleVideoVolumeChange = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> => {
@@ -2119,22 +2126,22 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         video?.volume(ele.valueAsNumber);
 //      video?.volume(ele.valueAsNumber);
-    };
-//  };
+    }
+//  }
 
     const handleUndo = async (): Promise<void> => {
 //  const handleUndo = async (): Promise<void> => {
         await common.onUndoActionExecuted();
 //      await common.onUndoActionExecuted();
-    };
-//  };
+    }
+//  }
 
     const handleRedo = async (): Promise<void> => {
 //  const handleRedo = async (): Promise<void> => {
         await common.onRedoActionExecuted();
 //      await common.onRedoActionExecuted();
-    };
-//  };
+    }
+//  }
 
 </script>
 

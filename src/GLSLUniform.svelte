@@ -114,8 +114,8 @@
 //      onUpdate?.(uniforms);
         global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
 //      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    };
-//  };
+    }
+//  }
 
     const successCallback = (key: number) => (image_Instance: p5.Image): void => {
 //  const successCallback = (key: number) => (image_Instance: p5.Image): void => {
@@ -129,8 +129,8 @@
 //      if (!uniforms[key].thisUniformSampler2DEle) { return; }
         uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;
 //      uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;
-    };
-//  };
+    }
+//  }
 
     const failureCallback = (key: number) => (event_Instance: Event): void => {
 //  const failureCallback = (key: number) => (event_Instance: Event): void => {
@@ -150,8 +150,8 @@
 //      if (!uniforms[key].thisUniformSampler2DEle) { return; }
         uniforms[key].thisUniformSampler2DEle.src = videoObjectURL;
 //      uniforms[key].thisUniformSampler2DEle.src = videoObjectURL;
-    };
-//  };
+    }
+//  }
 
     const onChange = (key: number) => async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
 //  const onChange = (key: number) => async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
@@ -175,8 +175,8 @@
 //          reader.readAsDataURL(file);
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     // Handlers
 //  // Handlers
@@ -192,8 +192,8 @@
 //      await updateUniform(uniformIndex, 1, g);
         await updateUniform(uniformIndex, 2, b);
 //      await updateUniform(uniformIndex, 2, b);
-    };
-//  };
+    }
+//  }
 
     const handleVectorInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> => {
 //  const handleVectorInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> => {
@@ -221,8 +221,8 @@
 //          )).slice(0, -2);
         }
 //      }
-    };
-//  };
+    }
+//  }
 
     const handleMatrixInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> => {
 //  const handleMatrixInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> => {
@@ -230,8 +230,8 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
 //      await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
-    };
-//  };
+    }
+//  }
 
     const handleBooleanInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> => {
 //  const handleBooleanInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> => {
@@ -239,8 +239,8 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, null, ele.checked);
 //      await updateUniform(uniformIndex, null, ele.checked);
-    };
-//  };
+    }
+//  }
 
     const startDecrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
 //  const startDecrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
@@ -254,8 +254,8 @@
 //          }
         }, 75);
 //      }, 75);
-    };
-//  };
+    }
+//  }
 
     const startIncrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
 //  const startIncrement = (uniformIndex: number, uniform: types.GLSLUniform_): void => {
@@ -269,15 +269,15 @@
 //          }
         }, 75);
 //      }, 75);
-    };
-//  };
+    }
+//  }
 
     const stopInterval = (): void => {
 //  const stopInterval = (): void => {
         clearInterval(interval);
 //      clearInterval(interval);
-    };
-//  };
+    }
+//  }
 
     const handleNumberInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> => {
 //  const handleNumberInput = async (e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> => {
@@ -285,8 +285,8 @@
 //      const ele: HTMLInputElement = e.target as HTMLInputElement;
         await updateUniform(uniformIndex, null, uniformType === "int" || uniformType === "uint" ? parseInt(ele.value) : parseFloat(ele.value));
 //      await updateUniform(uniformIndex, null, uniformType === "int" || uniformType === "uint" ? parseInt(ele.value) : parseFloat(ele.value));
-    };
-//  };
+    }
+//  }
 
     const handleTextureSelect = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> => {
 //  const handleTextureSelect = async (e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> => {
@@ -306,8 +306,8 @@
 //      }
         await updateUniform(uniformIndex, null, chosen);
 //      await updateUniform(uniformIndex, null, chosen);
-    };
-//  };
+    }
+//  }
 </script>
 
 <div>

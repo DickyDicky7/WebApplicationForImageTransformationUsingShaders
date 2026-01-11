@@ -26,8 +26,8 @@
 //      thisUniformSampler2DImg: p5.Image | p5.MediaElement | null;
         thisUniformSampler2DEle: HTMLImageElement | HTMLVideoElement | null;
 //      thisUniformSampler2DEle: HTMLImageElement | HTMLVideoElement | null;
-    };
-//  };
+    }
+//  }
 
     type GLSLUniforms = Array<GLSLUniform_>;
 //  type GLSLUniforms = Array<GLSLUniform_>;
@@ -49,8 +49,8 @@
 //      name: string;
         path: string;
 //      path: string;
-    };
-//  };
+    }
+//  }
 
     enum MODE_CAPTURE_IMAGE {
 //  enum MODE_CAPTURE_IMAGE {
@@ -82,8 +82,8 @@
 //      redo: ((dynamicStorage: Map<string, any> | null) => Promise<void>) | null;
         dynamicStorage: Map<string, any> | null;
 //      dynamicStorage: Map<string, any> | null;
-    };
-//  };
+    }
+//  }
 
     type DraggableText = {
 //  type DraggableText = {
@@ -121,8 +121,8 @@
 //      offsetX: number;
         offsetY: number;
 //      offsetY: number;
-    };
-//  };
+    }
+//  }
 
     type CustomFont = {
 //  type CustomFont = {
@@ -132,8 +132,8 @@
 //      customFontPath: string | null;
         customFontFace: p5.Font | null;
 //      customFontFace: p5.Font | null;
-    };
-//  };
+    }
+//  }
 
     type TextAlignHOption = typeof p5.LEFT | typeof p5.CENTER | typeof p5.RIGHT;
 //  type TextAlignHOption = typeof p5.LEFT | typeof p5.CENTER | typeof p5.RIGHT;
@@ -158,8 +158,8 @@
 //      fragmentShader_HTMLSelectElement: HTMLSelectElement | null;
         draggableText: DraggableText | null;
 //      draggableText: DraggableText | null;
-    };
-//  };
+    }
+//  }
 
     type ShaderName = string;
 //  type ShaderName = string;
@@ -196,8 +196,8 @@
 //      ShaderName,
         ShaderPath,
 //      ShaderPath,
-    };
-//  };
+    }
+//  }
 
     export {
 //  export {
@@ -207,5 +207,5 @@
 //      MODE_CAPTURE_IMAGE,
         MODE_CAPTURE_VIDEO,
 //      MODE_CAPTURE_VIDEO,
-    };
-//  };
+    }
+//  }

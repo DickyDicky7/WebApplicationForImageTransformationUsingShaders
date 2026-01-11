@@ -72,8 +72,8 @@
 //              types: "./dist/index.d.ts",
                 ...currentExports
 //              ...currentExports
-            };
-//          };
+            }
+//          }
 
             fs.writeFileSync(targetPath, JSON.stringify(pkg, null, 2));
 //          fs.writeFileSync(targetPath, JSON.stringify(pkg, null, 2));

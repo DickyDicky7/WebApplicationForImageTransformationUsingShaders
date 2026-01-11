@@ -4,8 +4,8 @@
 //  import p5 from "p5";
     import * as types from "./types";
 //  import * as types from "./types";
-    import * as STATE from "./state";
-//  import * as STATE from "./state";
+    import * as controller from "./controller";
+//  import * as controller from "./controller";
     import * as common from "./common";
 //  import * as common from "./common";
     import * as global from "./state/global.svelte";
@@ -70,300 +70,35 @@
     }>();
 //  }>();
 
-    // State
-//  // State
-    const draggableTextState: STATE.DraggableTextState = new STATE.DraggableTextState(draggableText.font);
-//  const draggableTextState: STATE.DraggableTextState = new STATE.DraggableTextState(draggableText.font);
+    const draggableTextController: controller.DraggableTextController = new controller.DraggableTextController();
+//  const draggableTextController: controller.DraggableTextController = new controller.DraggableTextController();
 
-    // Handlers
-//  // Handlers
-    async function handleContentChange(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }): Promise<void> {
-//  async function handleContentChange(e: Event & { currentTarget: EventTarget & HTMLTextAreaElement }): Promise<void> {
-        const ele: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
-//      const ele: HTMLTextAreaElement = e.target as HTMLTextAreaElement;
-        let oldContents: string = draggableText.contents;
-//      let oldContents: string = draggableText.contents;
-        draggableText.contents = ele.value;
-//      draggableText.contents = ele.value;
-        let newContents: string = draggableText.contents;
-//      let newContents: string = draggableText.contents;
-        draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length;
-//      draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length;
-        draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length;
-//      draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length;
-
-        let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        editorSnapshot.dynamicStorage.set("oldContents", oldContents);
-//      editorSnapshot.dynamicStorage.set("oldContents", oldContents);
-        editorSnapshot.dynamicStorage.set("newContents", newContents);
-//      editorSnapshot.dynamicStorage.set("newContents", newContents);
-        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("oldContents"); } };
-//      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("oldContents"); } };
-        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("newContents"); } };
-//      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.contents = dynamicStorage.get("newContents"); } };
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    async function handleColorFillingChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleColorFillingChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        const { r, g, b, } = await common.noHexToRgbNormalized(ele.value);
-//      const { r, g, b, } = await common.noHexToRgbNormalized(ele.value);
-        let oldColorFilling = structuredClone($state.snapshot(draggableText.colorFilling));
-//      let oldColorFilling = structuredClone($state.snapshot(draggableText.colorFilling));
-        draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, };
-//      draggableText.colorFilling = { r, g, b, a: draggableText.colorFilling.a, };
-        let newColorFilling = structuredClone($state.snapshot(draggableText.colorFilling));
-//      let newColorFilling = structuredClone($state.snapshot(draggableText.colorFilling));
-        let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        editorSnapshot.dynamicStorage.set("oldColorFilling", oldColorFilling);
-//      editorSnapshot.dynamicStorage.set("oldColorFilling", oldColorFilling);
-        editorSnapshot.dynamicStorage.set("newColorFilling", newColorFilling);
-//      editorSnapshot.dynamicStorage.set("newColorFilling", newColorFilling);
-        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("oldColorFilling"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
-//      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("oldColorFilling"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
-        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("newColorFilling"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
-//      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorFilling = dynamicStorage.get("newColorFilling"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorFilling.r, draggableText.colorFilling.g, draggableText.colorFilling.b, draggableText.colorFilling.a)).slice(0, -2); } };
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    async function handleColorOutlineChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleColorOutlineChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        const { r, g, b, } = await common.noHexToRgbNormalized(ele.value);
-//      const { r, g, b, } = await common.noHexToRgbNormalized(ele.value);
-        let oldColorOutline = structuredClone($state.snapshot(draggableText.colorOutline));
-//      let oldColorOutline = structuredClone($state.snapshot(draggableText.colorOutline));
-        draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, };
-//      draggableText.colorOutline = { r, g, b, a: draggableText.colorOutline.a, };
-        let newColorOutline = structuredClone($state.snapshot(draggableText.colorOutline));
-//      let newColorOutline = structuredClone($state.snapshot(draggableText.colorOutline));
-        let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        editorSnapshot.dynamicStorage.set("oldColorOutline", oldColorOutline);
-//      editorSnapshot.dynamicStorage.set("oldColorOutline", oldColorOutline);
-        editorSnapshot.dynamicStorage.set("newColorOutline", newColorOutline);
-//      editorSnapshot.dynamicStorage.set("newColorOutline", newColorOutline);
-        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorOutline = dynamicStorage.get("oldColorOutline"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a)).slice(0, -2); } };
-//      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorOutline = dynamicStorage.get("oldColorOutline"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a)).slice(0, -2); } };
-        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorOutline = dynamicStorage.get("newColorOutline"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a)).slice(0, -2); } };
-//      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.colorOutline = dynamicStorage.get("newColorOutline"); ele.value = (await common.rgba_ToHexNormalized(draggableText.colorOutline.r, draggableText.colorOutline.g, draggableText.colorOutline.b, draggableText.colorOutline.a)).slice(0, -2); } };
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    async function handleFontChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> {
-//  async function handleFontChange(e: Event & { currentTarget: EventTarget & HTMLSelectElement }): Promise<void> {
-        const ele: HTMLSelectElement = e.target as HTMLSelectElement;
-//      const ele: HTMLSelectElement = e.target as HTMLSelectElement;
-        if (ele.options[ele.selectedIndex].value === "none") {
-//      if (ele.options[ele.selectedIndex].value === "none") {
-            global.globalState.customFonts[ele.selectedIndex].customFontFace = draggableTextState.defaultFont;
-//          global.globalState.customFonts[ele.selectedIndex].customFontFace = draggableTextState.defaultFont;
-        }
-//      }
-        if (!global.globalState.customFonts[ele.selectedIndex].customFontFace) {
-//      if (!global.globalState.customFonts[ele.selectedIndex].customFontFace) {
-            global.globalState.customFonts[ele.selectedIndex].customFontFace = await canvasInstance.loadFont(
-//          global.globalState.customFonts[ele.selectedIndex].customFontFace = await canvasInstance.loadFont(
-            global.globalState.customFonts[ele.selectedIndex].customFontPath!);
-//          global.globalState.customFonts[ele.selectedIndex].customFontPath!);
-        }
-//      }
-        draggableText.font = global.globalState.customFonts[ele.selectedIndex].customFontFace!;
-//      draggableText.font = global.globalState.customFonts[ele.selectedIndex].customFontFace!;
-
-        let oldFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
-//      let oldFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
-        draggableTextState.fontFaceSelectedIndex = ele.selectedIndex;
-//      draggableTextState.fontFaceSelectedIndex = ele.selectedIndex;
-        let newFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
-//      let newFontFaceSelectedIndex: number = draggableTextState.fontFaceSelectedIndex;
-
-        let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        editorSnapshot.dynamicStorage.set("oldFontFaceSelectedIndex", oldFontFaceSelectedIndex);
-//      editorSnapshot.dynamicStorage.set("oldFontFaceSelectedIndex", oldFontFaceSelectedIndex);
-        editorSnapshot.dynamicStorage.set("newFontFaceSelectedIndex", newFontFaceSelectedIndex);
-//      editorSnapshot.dynamicStorage.set("newFontFaceSelectedIndex", newFontFaceSelectedIndex);
-        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => {
-//      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => {
-            if (dynamicStorage) {
-//          if (dynamicStorage) {
-                if (!global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace) {
-//              if (!global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace) {
-                    global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
-//                  global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
-                }
-//              }
-                draggableText.font = global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace!;
-//              draggableText.font = global.globalState.customFonts[dynamicStorage.get("oldFontFaceSelectedIndex")].customFontFace!;
-                ele.selectedIndex = dynamicStorage.get("oldFontFaceSelectedIndex");
-//              ele.selectedIndex = dynamicStorage.get("oldFontFaceSelectedIndex");
-            }
-//          }
-        };
-//      };
-        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => {
-//      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => {
-            if (dynamicStorage) {
-//          if (dynamicStorage) {
-                if (!global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace) {
-//              if (!global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace) {
-                    global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
-//                  global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace = draggableTextState.defaultFont;
-                }
-//              }
-                draggableText.font = global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace!;
-//              draggableText.font = global.globalState.customFonts[dynamicStorage.get("newFontFaceSelectedIndex")].customFontFace!;
-                ele.selectedIndex = dynamicStorage.get("newFontFaceSelectedIndex");
-//              ele.selectedIndex = dynamicStorage.get("newFontFaceSelectedIndex");
-            }
-//          }
-        };
-//      };
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    async function handleFontSizeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleFontSizeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        let oldFontSize: number = draggableText.fontSize;
-//      let oldFontSize: number = draggableText.fontSize;
-        draggableText.fontSize = ele.valueAsNumber;
-//      draggableText.fontSize = ele.valueAsNumber;
-        let newFontSize: number = draggableText.fontSize;
-//      let newFontSize: number = draggableText.fontSize;
-        draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length;
-//      draggableText.dimensionW = draggableText.fontSize * draggableText.contents.length;
-        draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length;
-//      draggableText.dimensionH = draggableText.fontSize * draggableText.contents.split("\n").length;
-        let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        editorSnapshot.dynamicStorage.set("oldFontSize", oldFontSize);
-//      editorSnapshot.dynamicStorage.set("oldFontSize", oldFontSize);
-        editorSnapshot.dynamicStorage.set("newFontSize", newFontSize);
-//      editorSnapshot.dynamicStorage.set("newFontSize", newFontSize);
-        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("oldFontSize"); } };
-//      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("oldFontSize"); } };
-        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("newFontSize"); } };
-//      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.fontSize = dynamicStorage.get("newFontSize"); } };
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    async function handleSpacingsChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleSpacingsChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        let oldSpacings: number = draggableText.spacings;
-//      let oldSpacings: number = draggableText.spacings;
-        draggableText.spacings = ele.valueAsNumber;
-//      draggableText.spacings = ele.valueAsNumber;
-        let newSpacings: number = draggableText.spacings;
-//      let newSpacings: number = draggableText.spacings;
-        let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-//      let editorSnapshot: types.EditorSnapshot = { undo: null, redo: null, dynamicStorage: null, };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        editorSnapshot.dynamicStorage.set("oldSpacings", oldSpacings);
-//      editorSnapshot.dynamicStorage.set("oldSpacings", oldSpacings);
-        editorSnapshot.dynamicStorage.set("newSpacings", newSpacings);
-//      editorSnapshot.dynamicStorage.set("newSpacings", newSpacings);
-        editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("oldSpacings"); } };
-//      editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("oldSpacings"); } };
-        editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("newSpacings"); } };
-//      editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { if (dynamicStorage) { draggableText.spacings = dynamicStorage.get("newSpacings"); } };
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    async function handleAlignHChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleAlignHChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        draggableText.alignHOption = ele.value as types.TextAlignHOption;
-//      draggableText.alignHOption = ele.value as types.TextAlignHOption;
-    }
-//  }
-
-    async function handleAlignVChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleAlignVChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        draggableText.alignVOption = ele.value as types.TextAlignVOption;
-//      draggableText.alignVOption = ele.value as types.TextAlignVOption;
-    }
-//  }
-
-    async function handleWrapModeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleWrapModeChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        if (ele.value === "none") {
-//      if (ele.value === "none") {
-            draggableText.wrapMode = null!;
-//          draggableText.wrapMode = null!;
-        } else {
-//      } else {
-            draggableText.wrapMode = ele.value as types.TextWrapModeOption;
-//          draggableText.wrapMode = ele.value as types.TextWrapModeOption;
-        }
-//      }
-    }
-//  }
-
-    async function handleStyleChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-//  async function handleStyleChange(e: Event & { currentTarget: EventTarget & HTMLInputElement }): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        draggableText.stylesOption = ele.value as types.TextStyleOption;
-//      draggableText.stylesOption = ele.value as types.TextStyleOption;
-    }
-//  }
-
+    $effect((): void => {
+//  $effect((): void => {
+        draggableTextController.canvasInstance = canvasInstance;
+//      draggableTextController.canvasInstance = canvasInstance;
+        draggableTextController.draggableText = draggableText;
+//      draggableTextController.draggableText = draggableText;
+    });
+//  });
 </script>
 
 <div>
     <div class="row responsive">
         <div class="field textarea round label max responsive suffix white-text large-elevate slow-ripple">
-            <textarea onchange={handleContentChange} value={draggableText.contents}></textarea>
+            <textarea onchange={async (e) => await draggableTextController.handleContentChange(e)} value={draggableText.contents}></textarea>
             <!-- svelte-ignore a11y_label_has_associated_control -->
             <label>Content</label>
         </div>
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle slow-ripple large-elevate deep-orange white-text top-round right-round">
             <i class="fa-solid fa-palette"></i>
-            <input type="color" onchange={handleColorFillingChange}/>
+            <input type="color" onchange={async (e) => await draggableTextController.handleColorFillingChange(e)}/>
         </button>
         <!-- svelte-ignore a11y_consider_explicit_label -->
         <button class="circle slow-ripple large-elevate deep-orange white-text top-round right-round">
             <i class="fa-solid fa-palette"></i>
-            <input type="color" onchange={handleColorOutlineChange}/>
+            <input type="color" onchange={async (e) => await draggableTextController.handleColorOutlineChange(e)}/>
         </button>
     </div>
     <table>
@@ -375,7 +110,7 @@
             <tr>
                 <td>
                     <div class="field label suffix round white-text large-elevate slow-ripple">
-                        <select oninput={handleFontChange}>
+                        <select oninput={async (e) => await draggableTextController.handleFontChange(e)}>
                             {#each global.globalState.customFonts as customFont (customFont)}
                                 <option
                                     value={customFont.customFontPath}
@@ -397,14 +132,14 @@
                 </td>
                 <td>
                     <div class="field label suffix round white-text large-elevate slow-ripple">
-                        <input type="number" value={draggableText.fontSize} oninput={handleFontSizeChange} />
+                        <input type="number" value={draggableText.fontSize} oninput={async (e) => await draggableTextController.handleFontSizeChange(e)} />
                         <!-- svelte-ignore a11y_label_has_associated_control -->
                         <label>FontSize</label>
                     </div>
                 </td>
                 <td>
                     <div class="field label suffix round white-text large-elevate slow-ripple">
-                        <input type="number" value={draggableText.spacings} oninput={handleSpacingsChange} />
+                        <input type="number" value={draggableText.spacings} oninput={async (e) => await draggableTextController.handleSpacingsChange(e)} />
                         <!-- svelte-ignore a11y_label_has_associated_control -->
                         <label>Spacings</label>
                     </div>

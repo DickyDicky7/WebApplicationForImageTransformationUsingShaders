@@ -8,8 +8,8 @@
 //  import p5 from "p5";
     import * as types from "./types";
 //  import * as types from "./types";
-    import * as STATE from "./state";
-//  import * as STATE from "./state";
+    import * as controller from "./controller";
+//  import * as controller from "./controller";
     import * as svelte from "svelte";
 //  import * as svelte from "svelte";
     import * as common from "./common";
@@ -30,284 +30,19 @@
     }>();
 //  }>();
 
-    // State
-//  // State
-    const glslUniformState: STATE.GLSLUniformState = new STATE.GLSLUniformState();
-//  const glslUniformState: STATE.GLSLUniformState = new STATE.GLSLUniformState();
+    const glslUniformController: controller.GLSLUniformController = new controller.GLSLUniformController();
+//  const glslUniformController: controller.GLSLUniformController = new controller.GLSLUniformController();
 
-    // Helper for matrix indices
-//  // Helper for matrix indices
-    const getMatrixIndex = (rowIndex: number, colIndex: number, colCount: number) => rowIndex * colCount + colIndex;
-//  const getMatrixIndex = (rowIndex: number, colIndex: number, colCount: number) => rowIndex * colCount + colIndex;
-
-    // Update uniforms when a value is changed
-//  // Update uniforms when a value is changed
-    async function updateUniform(
-//  async function updateUniform(
-        uniformIndex: number,
-//      uniformIndex: number,
-        elementIndex: number | null,
-//      elementIndex: number | null,
-        newValue: number | boolean | string,
-//      newValue: number | boolean | string,
-    ): Promise<void> {
-//  ): Promise<void> {
-        let editorSnapshot: types.EditorSnapshot = {
-//      let editorSnapshot: types.EditorSnapshot = {
-            undo          : null,
-//          undo          : null,
-            redo          : null,
-//          redo          : null,
-            dynamicStorage: null,
-//          dynamicStorage: null,
-        };
-//      };
-        editorSnapshot.dynamicStorage = new Map<string, any>();
-//      editorSnapshot.dynamicStorage = new Map<string, any>();
-        if (Array.isArray(uniforms[uniformIndex].thisUniformDefaultValue)) {
-//      if (Array.isArray(uniforms[uniformIndex].thisUniformDefaultValue)) {
-            if (elementIndex) {
-//          if (elementIndex) {
-                editorSnapshot.dynamicStorage.set(`undo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`, (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex]);
-//              editorSnapshot.dynamicStorage.set(`undo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`, (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex]);
-                (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex] = newValue as number;
-//              (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex] = newValue as number;
-                editorSnapshot.dynamicStorage.set(`redo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`, (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex]);
-//              editorSnapshot.dynamicStorage.set(`redo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`, (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex]);
-                editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex] = dynamicStorage?.get(`undo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`); };
-//              editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex] = dynamicStorage?.get(`undo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`); };
-                editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex] = dynamicStorage?.get(`redo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`); };
-//              editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { (uniforms[uniformIndex].thisUniformDefaultValue as number[])[elementIndex] = dynamicStorage?.get(`redo(uniforms[${uniformIndex}].thisUniformDefaultValue as number[])[${elementIndex}]`); };
-            }
-//          }
-        } else {
-//      } else {
-            editorSnapshot.dynamicStorage.set(`undoUniforms[${uniformIndex}].thisUniformDefaultValue`, uniforms[uniformIndex].thisUniformDefaultValue);
-//          editorSnapshot.dynamicStorage.set(`undoUniforms[${uniformIndex}].thisUniformDefaultValue`, uniforms[uniformIndex].thisUniformDefaultValue);
-            uniforms[uniformIndex].thisUniformDefaultValue = newValue;
-//          uniforms[uniformIndex].thisUniformDefaultValue = newValue;
-            editorSnapshot.dynamicStorage.set(`redoUniforms[${uniformIndex}].thisUniformDefaultValue`, uniforms[uniformIndex].thisUniformDefaultValue);
-//          editorSnapshot.dynamicStorage.set(`redoUniforms[${uniformIndex}].thisUniformDefaultValue`, uniforms[uniformIndex].thisUniformDefaultValue);
-            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`undoUniforms[${uniformIndex}].thisUniformDefaultValue`); };
-//          editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`undoUniforms[${uniformIndex}].thisUniformDefaultValue`); };
-            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformDefaultValue`); };
-//          editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformDefaultValue`); };
-        }
-//      }
-        if (canvasInstance && uniforms[uniformIndex].thisUniformType === "sampler2D") {
-//      if (canvasInstance && uniforms[uniformIndex].thisUniformType === "sampler2D") {
-            editorSnapshot.dynamicStorage.set(`undoUniforms[${uniformIndex}].thisUniformSampler2DImg`, uniforms[uniformIndex].thisUniformSampler2DImg);
-//          editorSnapshot.dynamicStorage.set(`undoUniforms[${uniformIndex}].thisUniformSampler2DImg`, uniforms[uniformIndex].thisUniformSampler2DImg);
-            uniforms[uniformIndex].thisUniformSampler2DImg = await canvasInstance.loadImage(uniforms[uniformIndex].thisUniformDefaultValue as string);
-//          uniforms[uniformIndex].thisUniformSampler2DImg = await canvasInstance.loadImage(uniforms[uniformIndex].thisUniformDefaultValue as string);
-            editorSnapshot.dynamicStorage.set(`redoUniforms[${uniformIndex}].thisUniformSampler2DImg`, uniforms[uniformIndex].thisUniformSampler2DImg);
-//          editorSnapshot.dynamicStorage.set(`redoUniforms[${uniformIndex}].thisUniformSampler2DImg`, uniforms[uniformIndex].thisUniformSampler2DImg);
-            editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`undoUniforms[${uniformIndex}].thisUniformDefaultValue`); uniforms[uniformIndex].thisUniformSampler2DImg = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformSampler2DImg`); };
-//          editorSnapshot.undo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`undoUniforms[${uniformIndex}].thisUniformDefaultValue`); uniforms[uniformIndex].thisUniformSampler2DImg = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformSampler2DImg`); };
-            editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformDefaultValue`); uniforms[uniformIndex].thisUniformSampler2DImg = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformSampler2DImg`); };
-//          editorSnapshot.redo = async (dynamicStorage: Map<string, any> | null): Promise<void> => { uniforms[uniformIndex].thisUniformDefaultValue = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformDefaultValue`); uniforms[uniformIndex].thisUniformSampler2DImg = dynamicStorage?.get(`redoUniforms[${uniformIndex}].thisUniformSampler2DImg`); };
-        }
-//      }
-        // Trigger callback
-//      // Trigger callback
-        onUpdate?.(uniforms);
-//      onUpdate?.(uniforms);
-        global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-//      global.globalState.editorSnapshotsUndoStack.push(editorSnapshot);
-    }
-//  }
-
-    const successCallback = (key: number) => (image_Instance: p5.Image): void => {
-//  const successCallback = (key: number) => (image_Instance: p5.Image): void => {
-        uniforms[key].thisUniformSampler2DImg = image_Instance;
-//      uniforms[key].thisUniformSampler2DImg = image_Instance;
-        if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
-//      if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
-        let imageObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
-//      let imageObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
-        if (!uniforms[key].thisUniformSampler2DEle) { return; }
-//      if (!uniforms[key].thisUniformSampler2DEle) { return; }
-        uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;
-//      uniforms[key].thisUniformSampler2DEle.src = imageObjectURL;
-    }
-//  }
-
-    const failureCallback = (key: number) => (event_Instance: Event): void => {
-//  const failureCallback = (key: number) => (event_Instance: Event): void => {
-        if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
-//      if (!glslUniformState.input || !glslUniformState.input.files || !glslUniformState.input.files[0]) { return; }
-        let videoObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
-//      let videoObjectURL: string = window.URL.createObjectURL(glslUniformState.input.files[0]);
-        uniforms[key].thisUniformSampler2DImg = canvasInstance.createVideo(videoObjectURL);
-//      uniforms[key].thisUniformSampler2DImg = canvasInstance.createVideo(videoObjectURL);
-        uniforms[key].thisUniformSampler2DImg.hide();
-//      uniforms[key].thisUniformSampler2DImg.hide();
-        uniforms[key].thisUniformSampler2DImg.loop();
-//      uniforms[key].thisUniformSampler2DImg.loop();
-        uniforms[key].thisUniformSampler2DImg.volume(0);
-//      uniforms[key].thisUniformSampler2DImg.volume(0);
-        if (!uniforms[key].thisUniformSampler2DEle) { return; }
-//      if (!uniforms[key].thisUniformSampler2DEle) { return; }
-        uniforms[key].thisUniformSampler2DEle.src = videoObjectURL;
-//      uniforms[key].thisUniformSampler2DEle.src = videoObjectURL;
-    }
-//  }
-
-    const onChange = (key: number) => async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
-//  const onChange = (key: number) => async (e: Event & { currentTarget: EventTarget & HTMLInputElement; }): Promise<void> => {
-        const reader = new FileReader();
-//      const reader = new FileReader();
-        reader.addEventListener("load", async (): Promise<void> => {
-//      reader.addEventListener("load", async (): Promise<void> => {
-            if (typeof reader.result === "string") {
-//          if (typeof reader.result === "string") {
-                await canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key));
-//              await canvasInstance.loadImage(reader.result, successCallback(key), failureCallback(key));
-            }
-//          }
-        }, false);
-//      }, false);
-        const file = glslUniformState.input?.files?.[0];
-//      const file = glslUniformState.input?.files?.[0];
-        if (file) {
-//      if (file) {
-            reader.readAsDataURL(file);
-//          reader.readAsDataURL(file);
-        }
-//      }
-    }
-//  }
-
-    // Handlers
-//  // Handlers
-    async function handleColorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
-//  async function handleColorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        const { r, g, b } = await common.doHexToRgbNormalized(ele.value);
-//      const { r, g, b } = await common.doHexToRgbNormalized(ele.value);
-        await updateUniform(uniformIndex, 0, r);
-//      await updateUniform(uniformIndex, 0, r);
-        await updateUniform(uniformIndex, 1, g);
-//      await updateUniform(uniformIndex, 1, g);
-        await updateUniform(uniformIndex, 2, b);
-//      await updateUniform(uniformIndex, 2, b);
-    }
-//  }
-
-    async function handleVectorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> {
-//  async function handleVectorInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number, uniformName: string | null, uniformDefault: number[]): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
-//      await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
-        if (!uniformName) { return; }
-//      if (!uniformName) { return; }
-        const colorInput: HTMLInputElement = document.getElementById(`${uniformName}-color-button`) as HTMLInputElement;
-//      const colorInput: HTMLInputElement = document.getElementById(`${uniformName}-color-button`) as HTMLInputElement;
-        if (colorInput) {
-//      if (colorInput) {
-            colorInput.value = (await common.rgba_ToHexNormalized(
-//          colorInput.value = (await common.rgba_ToHexNormalized(
-                255 * (uniformDefault[0] ?? 1.0),
-//              255 * (uniformDefault[0] ?? 1.0),
-                255 * (uniformDefault[1] ?? 1.0),
-//              255 * (uniformDefault[1] ?? 1.0),
-                255 * (uniformDefault[2] ?? 1.0),
-//              255 * (uniformDefault[2] ?? 1.0),
-                255 * (uniformDefault[3] ?? 1.0),
-//              255 * (uniformDefault[3] ?? 1.0),
-            )).slice(0, -2);
-//          )).slice(0, -2);
-        }
-//      }
-    }
-//  }
-
-    async function handleMatrixInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> {
-//  async function handleMatrixInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, elementIndex: number): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
-//      await updateUniform(uniformIndex, elementIndex, parseFloat(ele.value));
-    }
-//  }
-
-    async function handleBooleanInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
-//  async function handleBooleanInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        await updateUniform(uniformIndex, null, ele.checked);
-//      await updateUniform(uniformIndex, null, ele.checked);
-    }
-//  }
-
-    function startDecrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
-//  function startDecrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
-        glslUniformState.interval = setInterval(async (): Promise<void> => {
-//      glslUniformState.interval = setInterval(async (): Promise<void> => {
-            if (typeof uniform.thisUniformDefaultValue === "number") {
-//          if (typeof uniform.thisUniformDefaultValue === "number") {
-                await updateUniform(uniformIndex, null, uniform.thisUniformDefaultValue - 0.00001);
-//              await updateUniform(uniformIndex, null, uniform.thisUniformDefaultValue - 0.00001);
-            }
-//          }
-        }, 75);
-//      }, 75);
-    }
-//  }
-
-    function startIncrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
-//  function startIncrement(uniformIndex: number, uniform: types.GLSLUniform_): void {
-        glslUniformState.interval = setInterval(async (): Promise<void> => {
-//      glslUniformState.interval = setInterval(async (): Promise<void> => {
-            if (typeof uniform.thisUniformDefaultValue === "number") {
-//          if (typeof uniform.thisUniformDefaultValue === "number") {
-                await updateUniform(uniformIndex, null, uniform.thisUniformDefaultValue + 0.00001);
-//              await updateUniform(uniformIndex, null, uniform.thisUniformDefaultValue + 0.00001);
-            }
-//          }
-        }, 75);
-//      }, 75);
-    }
-//  }
-
-    function stopInterval(): void {
-//  function stopInterval(): void {
-        clearInterval(glslUniformState.interval);
-//      clearInterval(glslUniformState.interval);
-    }
-//  }
-
-    async function handleNumberInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> {
-//  async function handleNumberInput(e: Event & { currentTarget: EventTarget & HTMLInputElement }, uniformIndex: number, uniformType: string): Promise<void> {
-        const ele: HTMLInputElement = e.target as HTMLInputElement;
-//      const ele: HTMLInputElement = e.target as HTMLInputElement;
-        await updateUniform(uniformIndex, null, uniformType === "int" || uniformType === "uint" ? parseInt(ele.value) : parseFloat(ele.value));
-//      await updateUniform(uniformIndex, null, uniformType === "int" || uniformType === "uint" ? parseInt(ele.value) : parseFloat(ele.value));
-    }
-//  }
-
-    async function handleTextureSelect(e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> {
-//  async function handleTextureSelect(e: Event & { currentTarget: EventTarget & HTMLSelectElement }, uniformIndex: number): Promise<void> {
-        const ele: HTMLSelectElement = e.target as HTMLSelectElement;
-//      const ele: HTMLSelectElement = e.target as HTMLSelectElement;
-        let chosen = ele.options[ele.selectedIndex].value;
-//      let chosen = ele.options[ele.selectedIndex].value;
-        if (chosen === "none") {
-//      if (chosen === "none") {
-            uniforms[uniformIndex].thisUniformDefaultValue = "none";
-//          uniforms[uniformIndex].thisUniformDefaultValue = "none";
-        } else {
-//      } else {
-            uniforms[uniformIndex].thisUniformDefaultValue = chosen;
-//          uniforms[uniformIndex].thisUniformDefaultValue = chosen;
-        }
-//      }
-        await updateUniform(uniformIndex, null, chosen);
-//      await updateUniform(uniformIndex, null, chosen);
-    }
-//  }
+    $effect((): void => {
+//  $effect((): void => {
+        glslUniformController.canvasInstance = canvasInstance;
+//      glslUniformController.canvasInstance = canvasInstance;
+        glslUniformController.uniforms = uniforms;
+//      glslUniformController.uniforms = uniforms;
+        glslUniformController.onUpdate = onUpdate;
+//      glslUniformController.onUpdate = onUpdate;
+    });
+//  });
 </script>
 
 <div>
@@ -343,7 +78,7 @@
                             <td class="border white-text slow-ripple">
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
                                 <!-- svelte-ignore a11y_consider_explicit_label -->
-                                <button class="circle slow-ripple large-elevate blue white-text top-round right-round"><i class="fa-solid fa-palette white-text"></i><input id={`${uniform.thisUniformName}-color-button`} type="color" oninput={async (e) => await handleColorInput(e, uniformIndex)}></button>
+                                <button class="circle slow-ripple large-elevate blue white-text top-round right-round"><i class="fa-solid fa-palette white-text"></i><input id={`${uniform.thisUniformName}-color-button`} type="color" oninput={async (e) => await glslUniformController.handleColorInput(e, uniformIndex)}></button>
                             </td>
                             {#each uniform.thisUniformDefaultValue as value, index}
                                 <td class="border white-text  slow-ripple">
@@ -352,7 +87,7 @@
                                             type="number"
                                             step="0.0100"
                                             value={value}
-                                            oninput={async (e) => await handleVectorInput(e, uniformIndex, index, uniform.thisUniformName, uniform.thisUniformDefaultValue as number[])}
+                                            oninput={async (e) => await glslUniformController.handleVectorInput(e, uniformIndex, index, uniform.thisUniformName, uniform.thisUniformDefaultValue as number[])}
                                         />
                                     </div>
                                 </td>
@@ -392,7 +127,7 @@
                                                     type="number"
                                                     step="0.0100"
                                                     value={col}
-                                                    oninput={async (e) => await handleMatrixInput(e, uniformIndex, rowIndex * 2 + colIndex)}
+                                                    oninput={async (e) => await glslUniformController.handleMatrixInput(e, uniformIndex, rowIndex * 2 + colIndex)}
                                                 />
                                             </div>
                                         </td>
@@ -440,7 +175,7 @@
                                                     type="number"
                                                     step="0.0100"
                                                     value={col}
-                                                    oninput={async (e) => await handleMatrixInput(e, uniformIndex, rowIndex * 3 + colIndex)}
+                                                    oninput={async (e) => await glslUniformController.handleMatrixInput(e, uniformIndex, rowIndex * 3 + colIndex)}
                                                 />
                                             </div>
                                         </td>
@@ -495,7 +230,7 @@
                                                     type="number"
                                                     step="0.0100"
                                                     value={col}
-                                                    oninput={async (e) => await handleMatrixInput(e, uniformIndex, rowIndex * 4 + colIndex)}
+                                                    oninput={async (e) => await glslUniformController.handleMatrixInput(e, uniformIndex, rowIndex * 4 + colIndex)}
                                                 />
                                             </div>
                                         </td>
@@ -508,7 +243,7 @@
             {:else if uniformType === "bool" && typeof uniform.thisUniformDefaultValue === "boolean"}
                 <label class="switch center-align icon">
                     <input type="checkbox"
-                        checked={uniform.thisUniformDefaultValue} onchange={async (e) => await handleBooleanInput(e, uniformIndex)}
+                        checked={uniform.thisUniformDefaultValue} onchange={async (e) => await glslUniformController.handleBooleanInput(e, uniformIndex)}
                     />
                     <span>
                         <i class="deep-orange white-text"></i>
@@ -518,59 +253,72 @@
             {:else if uniformType === "float" || uniformType === "int" || uniformType === "uint"}
                 <div class="row center-align middle-align">
                     <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-                    <button class="circle small large-elevate deep-orange white-text top-round right-round"
-                        onmousedown={() => startDecrement(uniformIndex, uniform)} onmouseout={stopInterval} onmouseup={stopInterval} onmouseleave={stopInterval}
-                    >
-                        <i class="fa-solid fa-caret-left white-text"></i>
+                <!--<button class="circle small large-elevate deep-orange white-text    top-round right-round" onmousedown={(e) => glslUniformController.startDecrement(uniformIndex, uniform)} onmouseout={(e) => glslUniformController.stopInterval()} onmouseup={(e) => glslUniformController.stopInterval()} onmouseleave={(e) => glslUniformController.stopInterval()}>-->
+                    <button class="circle small large-elevate deep-orange white-text    top-round right-round" onmousedown={(e) => glslUniformController.startDecrement(uniformIndex, uniform)} onmouseout={(e) => glslUniformController.stopInterval()} onmouseup={(e) => glslUniformController.stopInterval()} onmouseleave={(e) => glslUniformController.stopInterval()}>
+                <!--<button class="circle small large-elevate deep-orange white-text    top-round right-round" onmousedown={(e) => glslUniformController.startDecrement(uniformIndex, uniform)} onmouseout={(e) => glslUniformController.stopInterval()} onmouseup={(e) => glslUniformController.stopInterval()} onmouseleave={(e) => glslUniformController.stopInterval()}>-->
+                    <!--<i class="fa-solid fa-caret-left  white-text"></i>-->
+                        <i class="fa-solid fa-caret-left  white-text"></i>
+                    <!--<i class="fa-solid fa-caret-left  white-text"></i>-->
+                <!--</button>-->
                     </button>
+                <!--</button>-->
                     <div class="s2 field small min suffix round white-text large-elevate slow-ripple">
                         <input
                             type="number"
                             step="1.0000"
                             value={uniform.thisUniformDefaultValue}
-                            oninput={async (e) => await handleNumberInput(e, uniformIndex, uniformType)}
+                            oninput={async (e) => await glslUniformController.handleNumberInput(e, uniformIndex, uniformType)}
                         />
                     </div>
                     <!-- svelte-ignore a11y_consider_explicit_label --><!-- svelte-ignore a11y_mouse_events_have_key_events -->
-                    <button class="circle small large-elevate blue white-text bottom-round left-round"
-                        onmousedown={() => startIncrement(uniformIndex, uniform)} onmouseout={stopInterval} onmouseup={stopInterval} onmouseleave={stopInterval}
-                    >
+                <!--<button class="circle small large-elevate blue        white-text bottom-round  left-round" onmousedown={(e) => glslUniformController.startIncrement(uniformIndex, uniform)} onmouseout={(e) => glslUniformController.stopInterval()} onmouseup={(e) => glslUniformController.stopInterval()} onmouseleave={(e) => glslUniformController.stopInterval()}>-->
+                    <button class="circle small large-elevate blue        white-text bottom-round  left-round" onmousedown={(e) => glslUniformController.startIncrement(uniformIndex, uniform)} onmouseout={(e) => glslUniformController.stopInterval()} onmouseup={(e) => glslUniformController.stopInterval()} onmouseleave={(e) => glslUniformController.stopInterval()}>
+                <!--<button class="circle small large-elevate blue        white-text bottom-round  left-round" onmousedown={(e) => glslUniformController.startIncrement(uniformIndex, uniform)} onmouseout={(e) => glslUniformController.stopInterval()} onmouseup={(e) => glslUniformController.stopInterval()} onmouseleave={(e) => glslUniformController.stopInterval()}>-->
+                    <!--<i class="fa-solid fa-caret-right white-text"></i>-->
                         <i class="fa-solid fa-caret-right white-text"></i>
+                    <!--<i class="fa-solid fa-caret-right white-text"></i>-->
+                <!--</button>-->
                     </button>
+                <!--</button>-->
                 </div>
-            {:else if (uniformType === "sampler2D" || uniformType  === "sampler3D") && typeof uniform.thisUniformDefaultValue === "string"}
-                <div class="max center-align">
-                    <img class="max center-align small-width small-height no-round"
-                        src={ uniform.thisUniformDefaultValue === "null".trim() ? svelteSvg : uniform.thisUniformDefaultValue }
-                        alt="" bind:this={uniforms[uniformIndex].thisUniformSampler2DEle} style:box-shadow="0 0 5px #222222" style:object-fit="content"
-                    />
-                </div>
+            {:else if (uniformType === "sampler2D" || uniformType === "sampler3D") && typeof uniform.thisUniformDefaultValue === "string"}
+            <!--<div class="max center-align"><img class="max center-align small-width small-height no-round" src={uniform.thisUniformDefaultValue === "null".trim() ? svelteSvg : uniform.thisUniformDefaultValue} alt="" bind:this={uniforms[uniformIndex].thisUniformSampler2DEle} style:box-shadow="0 0 5px #222222" style:object-fit="content" /></div>-->
+                <div class="max center-align"><img class="max center-align small-width small-height no-round" src={uniform.thisUniformDefaultValue === "null".trim() ? svelteSvg : uniform.thisUniformDefaultValue} alt="" bind:this={uniforms[uniformIndex].thisUniformSampler2DEle} style:box-shadow="0 0 5px #222222" style:object-fit="content" /></div>
+            <!--<div class="max center-align"><img class="max center-align small-width small-height no-round" src={uniform.thisUniformDefaultValue === "null".trim() ? svelteSvg : uniform.thisUniformDefaultValue} alt="" bind:this={uniforms[uniformIndex].thisUniformSampler2DEle} style:box-shadow="0 0 5px #222222" style:object-fit="content" /></div>-->
                 {#if uniformName.startsWith("upload")}
-                <!--<form action=""><input bind:this={glslUniformState.input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
-                    <form action=""><input bind:this={glslUniformState.input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>
-                <!--<form action=""><input bind:this={glslUniformState.input} onchange={onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
+                <!--<form action=""><input bind:this={glslUniformController.glslUniformState.input} onchange={glslUniformController.onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
+                    <form action=""><input bind:this={glslUniformController.glslUniformState.input} onchange={glslUniformController.onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>
+                <!--<form action=""><input bind:this={glslUniformController.glslUniformState.input} onchange={glslUniformController.onChange(uniformIndex)} type="file" accept="image/png, image/jpeg, image/webp, image/jpg, video/mp4, video/webm" /><button class="slow-ripple large-elevate deep-orange white-text"><i class="fas fa-paperclip white-text"></i><span>Load Image Or Video</span></button></form>-->
                 {:else}
                     <div class="field label suffix round white-text large-elevate slow-ripple">
                         <!-- svelte-ignore a11y_label_has_associated_control -->
                         <!-- svelte-ignore a11y_label_has_associated_control -->
+                    <!--<label class="active">Texture</label>-->
                         <label class="active">Texture</label>
-                        <select
-                            onchange={async (e) => await handleTextureSelect(e, uniformIndex)}
-                        >
-                            {#each (uniformName.startsWith("noise") ? global.globalState.texturesNoise :
-                                    uniformName.startsWith("bayer") ? global.globalState.texturesBayer :
-                                    uniformName.startsWith("palette") ? global.globalState.texturesPalette : uniformName.startsWith("pencil") ? global.globalState.texturesPencil_ :
-                                    uniformName.startsWith("ascii") ? global.globalState.texturesASCII :
-                                    uniformName.startsWith("tiled") ? global.globalState.texturesTiled :
-                                    uniformName.startsWith("shaderToy") ? global.globalState.texturesShaderToy : []) as textureForShader (textureForShader)
-                            }
+                    <!--<label class="active">Texture</label>-->
+                    <!--<select onchange={async (e) => await glslUniformController.handleTextureSelect(e, uniformIndex)}>-->
+                        <select onchange={async (e) => await glslUniformController.handleTextureSelect(e, uniformIndex)}>
+                    <!--<select onchange={async (e) => await glslUniformController.handleTextureSelect(e, uniformIndex)}>-->
+                        <!--{#each (uniformName.startsWith("noise") ? global.globalState.texturesNoise : uniformName.startsWith("bayer") ? global.globalState.texturesBayer : uniformName.startsWith("palette") ? global.globalState.texturesPalette : uniformName.startsWith("pencil") ? global.globalState.texturesPencil_ : uniformName.startsWith("ascii") ? global.globalState.texturesASCII : uniformName.startsWith("tiled") ? global.globalState.texturesTiled : uniformName.startsWith("shaderToy") ? global.globalState.texturesShaderToy : []) as textureForShader (textureForShader)}-->
+                            {#each (uniformName.startsWith("noise") ? global.globalState.texturesNoise : uniformName.startsWith("bayer") ? global.globalState.texturesBayer : uniformName.startsWith("palette") ? global.globalState.texturesPalette : uniformName.startsWith("pencil") ? global.globalState.texturesPencil_ : uniformName.startsWith("ascii") ? global.globalState.texturesASCII : uniformName.startsWith("tiled") ? global.globalState.texturesTiled : uniformName.startsWith("shaderToy") ? global.globalState.texturesShaderToy : []) as textureForShader (textureForShader)}
+                        <!--{#each (uniformName.startsWith("noise") ? global.globalState.texturesNoise : uniformName.startsWith("bayer") ? global.globalState.texturesBayer : uniformName.startsWith("palette") ? global.globalState.texturesPalette : uniformName.startsWith("pencil") ? global.globalState.texturesPencil_ : uniformName.startsWith("ascii") ? global.globalState.texturesASCII : uniformName.startsWith("tiled") ? global.globalState.texturesTiled : uniformName.startsWith("shaderToy") ? global.globalState.texturesShaderToy : []) as textureForShader (textureForShader)}-->
+                            <!--<option value={textureForShader.path} class="grey10 white-text">{textureForShader.name}</option>-->
                                 <option value={textureForShader.path} class="grey10 white-text">{textureForShader.name}</option>
+                            <!--<option value={textureForShader.path} class="grey10 white-text">{textureForShader.name}</option>-->
+                        <!--{/each}-->
                             {/each}
+                        <!--{/each}-->
+                    <!--</select>-->
                         </select>
+                    <!--</select>-->
                         <!-- svelte-ignore a11y_label_has_associated_control -->
                         <!-- svelte-ignore a11y_label_has_associated_control -->
+                    <!--<label>Texture For Shader</label>-->
                         <label>Texture For Shader</label>
+                    <!--<label>Texture For Shader</label>-->
+                    <!--<i class="fa-solid fa-chevron-down"></i>-->
                         <i class="fa-solid fa-chevron-down"></i>
+                    <!--<i class="fa-solid fa-chevron-down"></i>-->
                     </div>
                 {/if}
             {:else}

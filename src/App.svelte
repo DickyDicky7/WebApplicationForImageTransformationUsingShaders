@@ -17,8 +17,8 @@
 //  import * as svelte from "svelte";
     import * as types from "./types";
 //  import * as types from "./types";
-    import * as STATE from "./state";
-//  import * as STATE from "./state";
+    import * as xtate from "./state";
+//  import * as xtate from "./state";
     import * as lygia from "./lygia";
 //  import * as lygia from "./lygia";
     import p5 from "p5";
@@ -38,8 +38,8 @@
     import SnackbarFailure from "./SnackbarFailure.svelte";
 //  import SnackbarFailure from "./SnackbarFailure.svelte";
 
-    const appState: STATE.AppState = new STATE.AppState();
-//  const appState: STATE.AppState = new STATE.AppState();
+    const appState: xtate.AppState = new xtate.AppState();
+//  const appState: xtate.AppState = new xtate.AppState();
 
     // Global Variables & Constants
 //  // Global Variables & Constants
@@ -2589,6 +2589,8 @@
 
     i { text-shadow: 0 0 3px; }
     i { text-shadow: 0 0 3px; }
+    h5 { text-shadow: 0 0 3px; }
+    h5 { text-shadow: 0 0 3px; }
     h6 { text-shadow: 0 0 3px; }
     h6 { text-shadow: 0 0 3px; }
     span { text-shadow: 0 0 3px; }

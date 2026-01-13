@@ -372,3 +372,10 @@
 //      }
     }
 //  }
+
+    export async function loadAsset(assetPath: string): Promise<string> {
+//  export async function loadAsset(assetPath: string): Promise<string> {
+        return (await fetch(assetPath)).text();
+//      return (await fetch(assetPath)).text();
+    }
+//  }

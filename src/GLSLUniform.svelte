@@ -1,4 +1,6 @@
-<svelte:options runes={true}></svelte:options>
+<!--<svelte:options runes={true}></svelte:options>-->
+    <svelte:options runes={true}></svelte:options>
+<!--<svelte:options runes={true}></svelte:options>-->
 <script lang="ts">
     import "beercss";
 //  import "beercss";
